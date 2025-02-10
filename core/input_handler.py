@@ -12,6 +12,7 @@ ghost_image = pygame.image.load("assets/sprites/sprite_ghost.png")
 ghost_image = pygame.transform.scale(ghost_image, (100, 100))
 
 is_possessing = False
+click_ready = True
 
 
 run = True
@@ -37,9 +38,13 @@ while run :
             run = False
             
             
-        # Détecter quand l'utilisateur relâche le clic gauche
-        if event.type == pygame.MOUSEBUTTONUP and event.button == 1:
-            is_possessing = not is_possessing  # Inverser l'état seulement au relâchement
+        # At the pressure of left click, possession state changes
+        if event.type == pygame.MOUSEBUTTONDOWN and left_clicked == True and click_ready: # "DOWN" = button pressed ; "button == 1" = left click is pressed
+            is_possessing = not is_possessing  # possession state change
+            click_ready = False  # if left click is maintained, the possession state cannot be changed until the release of it
+
+        if event.type == pygame.MOUSEBUTTONUP and left_clicked == True: # "UP" = release of the button
+            click_ready = True  # once left click is released, give the permission to change the state of possession again
     
     pygame.display.flip()
 pygame.quit()
