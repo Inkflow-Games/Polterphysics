@@ -1,38 +1,49 @@
 from pygame.math import Vector2
 
-GRAVITY = 9.81
-FRICTION_COEFFICIENT = 10 # Maybe we could replace it later with a more realistic system
-
 class PhysicsEngine:
+    """
+    A class responsible for managing and updating all physical objects in the game.
+
+    Attributes:
+        objects (list): A list of all objects currently being simulated by the engine.
+
+    Methods:
+        add_object(obj: Object): Adds an object to the physics engine.
+        remove_object(obj: Object): Removes an object from the physics engine.
+        update(dt: float): Updates all objects within the engine, calling their `update` method.
+    """
+
     def __init__(self):
-        self.objects = [] 
+        """
+        Initializes the PhysicsEngine instance, with an empty list of objects.
+        """
+        self.objects = []
 
     def add_object(self, obj):
-        """Adds an object to the physics simulation"""
-        self.objects.append(obj)
+        """
+        Adds an object to the physics engine.
 
-    def apply_force_to_object(self, obj, force):
-        """Applies a force to an object"""
-        obj.apply_force(force)
+        Args:
+            obj (Object): The object to be added to the engine.
+        """
+        self.objects.append(obj)
+    
+    def remove_object(self, obj):
+        """
+        Removes an object from the physics engine.
+        
+        Args:
+            obj (Object): The object to be removed from the engine.
+        """
+        if obj in self.objects:
+            self.objects.remove(obj)
 
     def update(self, dt):
-        """Updates the position of all the objects and the time interval"""
+        """
+        Updates all objects in the engine, calling their `update` method.
+
+        Args:
+            dt (float): The time step, representing the time passed since the last frame.
+        """
         for obj in self.objects:
-            self.update_object(obj, dt)
-
-    def update_object(self, obj, dt):
-        """Updates an object with the applied forces"""
-        if obj.mass > 0:
-            total_force = sum(obj.forces, Vector2(0, 0)) + Vector2(0, GRAVITY * obj.mass)
-            friction = -obj.velocity * FRICTION_COEFFICIENT
-            total_force += friction
-            acceleration = total_force / obj.mass
-            obj.velocity += acceleration * dt
-            obj.position += obj.velocity * dt
-
-        if obj.inertia > 0:
-            # Rotation handling to be implemented
-            pass
-
-        obj.forces.clear()
-        obj.torques.clear()
+            obj.update(dt)
