@@ -24,6 +24,8 @@ while run :
     mouse_x = mouse_position[0] #can be deleted if not necessary for the calculations of the forces
     mouse_y = mouse_position[1] #can be deleted if not necessary for the calculations of the forces
     
+    
+    # not useful at the moment (--> use of an event for possession)
     left_clicked = pygame.mouse.get_pressed()[0] #return a boolean : if left click is pressed or not (maintaining keep returning True)  
     
     
@@ -39,11 +41,11 @@ while run :
             
             
         # At the pressure of left click, possession state changes
-        if event.type == pygame.MOUSEBUTTONDOWN and left_clicked == True and click_ready: # "DOWN" = button pressed ; "button == 1" = left click is pressed
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and click_ready: # "DOWN" = button pressed ; "button == 1" = left click is pressed
             is_possessing = not is_possessing  # possession state change
             click_ready = False  # if left click is maintained, the possession state cannot be changed until the release of it
 
-        if event.type == pygame.MOUSEBUTTONUP and left_clicked == True: # "UP" = release of the button
+        if event.type == pygame.MOUSEBUTTONUP and event.button == 1: # "UP" = release of the button
             click_ready = True  # once left click is released, give the permission to change the state of possession again
     
     pygame.display.flip()
