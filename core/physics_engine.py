@@ -1,18 +1,4 @@
-from pygame.math import Vector2
-
 class PhysicsEngine:
-    """
-    A class responsible for managing and updating all physical objects in the game.
-
-    Attributes:
-        objects (list): A list of all objects currently being simulated by the engine.
-
-    Methods:
-        add_object(obj: Object): Adds an object to the physics engine.
-        remove_object(obj: Object): Removes an object from the physics engine.
-        update(dt: float): Updates all objects within the engine, calling their `update` method.
-    """
-
     def __init__(self):
         """
         Initializes the PhysicsEngine instance, with an empty list of objects.
@@ -38,12 +24,13 @@ class PhysicsEngine:
         if obj in self.objects:
             self.objects.remove(obj)
 
-    def update(self, dt):
+    def update(self, dt, ground_level):
         """
         Updates all objects in the engine, calling their `update` method.
 
         Args:
             dt (float): The time step, representing the time passed since the last frame.
+            ground_level (float): The y-coordinate representing the ground level.
         """
         for obj in self.objects:
-            obj.update(dt)
+            obj.update(dt, ground_level)  # Pass the ground_level to update() of each object
