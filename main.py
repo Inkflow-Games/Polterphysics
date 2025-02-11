@@ -1,7 +1,9 @@
 import pygame
+from pygame.math import Vector2
 from ui.main_menu import *
-from core.input_handler import *
-from Data.Buttons import *
+from utils.math_utils import WIDTH, HEIGHT, FPS
+import json
+
 
 pygame.init()
 
@@ -9,27 +11,46 @@ pygame.init()
 timer = pygame.time.Clock()
 screen = pygame.display.set_mode([WIDTH, HEIGHT])
 
+# Charger les boutons depuis le fichier JSON
+with open("data/buttons.json", "r") as file:
+    buttons = json.load(file)
+
+# Accéder aux boutons du menu principal
+main_menu_buttons = buttons["main_menu"]
+
+# Liste pour stocker les objets Button
+button_list = []
+
+# Créer les instances de Button et les ajouter à la liste
+for button in main_menu_buttons.values():
+    new_button = Button(
+        size=button["size"],
+        position = Vector2(button["position"][0], button["position"][1]),
+        height=button["height"],
+        width=button["width"],
+        action=button["action"]
+    )
+    button_list.append(new_button)
+
+
 run = True
 while run:
     # Clear the screen with a white background just once at the beginning of the loop
     screen.fill('white')
     
     # Draw all buttons in the correct order
-    for button in buttons.values():
-        button.Button.draw()
+    for button in button_list:
+        button.draw(screen)
 
     # Event handling
     for event in pygame.event.get():
-        if (event.type == pygame.QUIT) or stop_running:
+        if (event.type == pygame.QUIT) :
             run = False
 
     # Flip the display to update the screen after everything has been drawn
     pygame.display.flip()
 
     # Control the frame rate
-    timer.tick(fps)
+    timer.tick(FPS)
 
 pygame.quit()
-
-def StopRunning():
-    pygame.quit()

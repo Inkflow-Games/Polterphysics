@@ -1,0 +1,25 @@
+{
+    "main_menu": {
+        "Play": {
+            "size": 1,
+            "position": [960, 500],
+            "height": 50,
+            "width": 100,
+            "action": "Play"
+        },
+        "Pause": {
+            "size": 1,
+            "position": [960, 420],
+            "height": 50,
+            "width": 100,
+            "action": "Pause"
+        },
+        "Stop": {
+            "size": 1,
+            "position": [960, 580],
+            "height": 50,
+            "width": 100,
+            "action": "Stop"
+        }
+    }
+}

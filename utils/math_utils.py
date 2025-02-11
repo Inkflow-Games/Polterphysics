@@ -1,3 +1,3 @@
 WIDTH = 1000
 HEIGHT = 500
-fps = 60
+FPS = 60
