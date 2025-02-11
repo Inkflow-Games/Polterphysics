@@ -1,4 +1,5 @@
 import pygame 
+from Data.Buttons import *
 pygame.init()
 
 WIDTH = 1000
@@ -8,8 +9,8 @@ timer = pygame.time.Clock()
 screen = pygame.display.set_mode([WIDTH,HEIGHT])
 
 
-ghost_image = pygame.image.load("assets/sprites/sprite_ghost.png")
-ghost_image = pygame.transform.scale(ghost_image, (100, 100))
+#ghost_image = pygame.image.load("assets/sprites/sprite_ghost.png")
+#ghost_image = pygame.transform.scale(ghost_image, (100, 100))
 
 is_possessing = False
 click_ready = True
@@ -31,8 +32,8 @@ while run :
     
     
     
-    if is_possessing is False:
-        screen.blit(ghost_image, (mouse_x - ghost_image.get_width() // 2, mouse_y - ghost_image.get_height() // 2))  #display the ghost sprite such that the mouse is the center of the sprite
+    # if is_possessing is False:
+    #     screen.blit(ghost_image, (mouse_x - ghost_image.get_width() // 2, mouse_y - ghost_image.get_height() // 2))  #display the ghost sprite such that the mouse is the center of the sprite
     
     
     for event in pygame.event.get():
@@ -42,6 +43,13 @@ while run :
             
         # At the pressure of left click, possession state changes
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and click_ready: # "DOWN" = button pressed ; "button == 1" = left click is pressed
+            # boucler dans une liste qui contient tous les boutons dès qu'on clique pour vérifier si l'un a été cliqué, il ne faut le faire que si on est dans le main menu
+            for button in buttons.values :
+                if (button.x - button.width / 2) < mouse_position[0] < (button.x + button.width / 2) and  \
+               (button.y - button.height / 2) < mouse_position[1] < (button.y + button.height / 2) : # Check if the mouse is on the button
+                   button.is_pressed()
+
+            clickPress = True
             is_possessing = not is_possessing  # possession state change
             click_ready = False  # if left click is maintained, the possession state cannot be changed until the release of it
 
