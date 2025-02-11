@@ -63,4 +63,5 @@ class PhysicsEngine:
                                    collision detection (e.g., objects cannot fall below this).
         """
         for obj1 in self.objects:
-            obj1.update(dt, ground_level)  # Update object state
+            if not obj1.static :
+                obj1.update(dt, ground_level) # Update object state

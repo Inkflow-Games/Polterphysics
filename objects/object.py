@@ -2,7 +2,7 @@ import math
 from pygame.math import Vector2
 
 class Object:
-    def __init__(self, mass, position, radius=15, max_speed=70, bounciness=0.8):
+    def __init__(self, mass, position, radius=0, max_speed=70, bounciness=0.8, damping_coefficient = 0, static = False):
         self.mass = mass
         self.position = Vector2(position)
         self.velocity = Vector2(0, 0)
@@ -11,6 +11,8 @@ class Object:
         self.gravity = Vector2(0, 9.81 * self.mass)
         self.bounciness = bounciness  # Coefficient de rebond
         self.angular_velocity = 0  # Rotation de l'objet (en rad/s)
+        self.damping_coefficient = damping_coefficient
+        self.static = static # Static objects are not affected by forces
 
     def apply_force(self, force):
         acceleration = force / self.mass
@@ -26,8 +28,8 @@ class Object:
         self.apply_force(self.gravity * dt)
 
         # Calcul du damping dynamique
-        self.damping_coefficient = 0.01 + 0.04 * (self.velocity.length() / self.max_speed)
-        self.velocity *= (1 - self.damping_coefficient * dt)
+        self.damping = 0.01 + self.damping_coefficient * (self.velocity.length() / self.max_speed)
+        self.velocity *= (1 - self.damping * dt)
 
         # Limiter la vitesse de manière plus progressive
         if self.velocity.length() > self.max_speed:

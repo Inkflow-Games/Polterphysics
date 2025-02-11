@@ -33,11 +33,11 @@ pygame.display.set_caption("Physics Engine Test")
 physics_engine = PhysicsEngine()
 
 # Create a test object (simulating a basketball)
-test_object = Object(mass=0.6, position=(400, 100), radius=15, max_speed=80, bounciness=0.8)
+test_object = Object(mass=0.6, position=(400, 100), radius=15, max_speed=100, bounciness=1, damping_coefficient=0.02)
 physics_engine.add_object(test_object)
 
 # Create a second test object (another basketball)
-second_object = Object(mass=0.6, position=(600, 100), radius=15, max_speed=80, bounciness=0.8)
+second_object = Object(mass=2, position=(600, 100), radius=25, max_speed=200, bounciness=0.07, damping_coefficient=0)
 physics_engine.add_object(second_object)
 
 # Clock to control frame rate
