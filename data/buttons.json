@@ -2,21 +2,21 @@
     "main_menu": {
         "Play": {
             "size": 1,
-            "position": [960, 500],
+            "position": [450, 300],
             "height": 50,
             "width": 100,
             "action": "Play"
         },
         "Pause": {
             "size": 1,
-            "position": [960, 420],
+            "position": [450, 220],
             "height": 50,
             "width": 100,
             "action": "Pause"
         },
         "Stop": {
             "size": 1,
-            "position": [960, 580],
+            "position": [450, 380],
             "height": 50,
             "width": 100,
             "action": "Stop"

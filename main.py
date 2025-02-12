@@ -41,6 +41,11 @@ while run:
     # Draw all buttons in the correct order
     for button in button_list:
         button.draw(screen)
+        if (pygame.mouse.get_pos()[0] < button.position[0] + button.width/2) and (pygame.mouse.get_pos()[0] > button.position[0] - button.width/2) and (pygame.mouse.get_pos()[1] < button.position[1] + button.height/2) and (pygame.mouse.get_pos()[1] > button.position[1] - button.height/2) :
+            print("nice")
+
+
+
 
     # Event handling
     for event in pygame.event.get():
