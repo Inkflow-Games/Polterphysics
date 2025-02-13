@@ -3,6 +3,7 @@ import math
 
 
 def squarecircle(rectobj,circobj):
+    #commente pas ce code, je vai le modif,il sert a rien
     circx = circobj.position.x
     circy = circobj.position.y
     circrad = 10

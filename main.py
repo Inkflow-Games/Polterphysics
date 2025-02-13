@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 """
 Polterphysics
 physics_engine_test.py
@@ -19,8 +17,8 @@ Dependencies: pygame, core.physics_engine, objects.object
 
 import pygame
 from pygame.math import Vector2
-from core.collision import p2pcd
 from core.physics_engine import PhysicsEngine
+from core.collision import p2pcd
 from objects.object import Object
 from utils.math_utils import *
 
@@ -77,19 +75,19 @@ while running:
 
     # Apply force to the first object (Arrow keys)
     if keys[pygame.K_RIGHT] and not key_state_1[pygame.K_RIGHT]:
-        test_object.apply_force(Vector2(newton_to_force(46), 0))  # Apply force to the right
+        test_object.apply_force(Vector2(newton_to_force(30), 0))  # Apply force to the right
         key_state_1[pygame.K_RIGHT] = True
 
     if keys[pygame.K_LEFT] and not key_state_1[pygame.K_LEFT]:
-        test_object.apply_force(Vector2(-newton_to_force(46), 0))  # Apply force to the left
+        test_object.apply_force(Vector2(-newton_to_force(30), 0))  # Apply force to the left
         key_state_1[pygame.K_LEFT] = True
 
     if keys[pygame.K_DOWN] and not key_state_1[pygame.K_DOWN]:
-        test_object.apply_force(Vector2(0, newton_to_force(46)))  # Apply force downward
+        test_object.apply_force(Vector2(0, newton_to_force(30)))  # Apply force downward
         key_state_1[pygame.K_DOWN] = True
 
     if keys[pygame.K_UP] and not key_state_1[pygame.K_UP]:
-        test_object.apply_force(Vector2(0, -newton_to_force(46)))  # Apply force upward
+        test_object.apply_force(Vector2(0, -newton_to_force(30)))  # Apply force upward
         key_state_1[pygame.K_UP] = True
 
     # Get key states for the second object (ZQSD keys)
@@ -143,4 +141,3 @@ while running:
 
 # Quit Pygame
 pygame.quit()
->>>>>>> Stashed changes
