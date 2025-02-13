@@ -1,6 +1,6 @@
 """
 Polterphysics
-physics_engine_test.py
+main.py
 
 A script that demonstrates the functionality of the game's physics engine
 Features include:
@@ -9,7 +9,6 @@ Features include:
 - Debugging display of object position
 - Two controllable objects (balls) to collide with each other
 
-Author: Rafael Véclin
 Last Updated: Feb 2025
 Python Version: 3.12.9
 Dependencies: pygame, core.physics_engine, objects.object
@@ -18,7 +17,7 @@ Dependencies: pygame, core.physics_engine, objects.object
 import pygame
 from pygame.math import Vector2
 from core.physics_engine import PhysicsEngine
-from core.collision import p2pcd
+from core.collision import resolve_collision
 from objects.object import Object
 from utils.math_utils import *
 
@@ -34,7 +33,7 @@ pygame.display.set_caption("Physics Engine Test")
 physics_engine = PhysicsEngine()
 
 # Create a test object (simulating a basketball)
-test_object = Object(mass=0.6, position=(400, 100), radius=15, max_speed=100, bounciness=1, damping_coefficient=0.02)
+test_object = Object(mass=0.6, position=(400, 100), radius=15, max_speed=100, bounciness=0.8, damping_coefficient=0.02)
 physics_engine.add_object(test_object)
 
 # Create a second test object (another basketball)
@@ -55,10 +54,10 @@ key_state_1 = {
 
 # Dictionary to track key states for the second object (ZQSD control)
 key_state_2 = {
-    pygame.K_d: False,  # Right (D)
-    pygame.K_q: False,  # Left (Q)
-    pygame.K_s: False,  # Down (S)
-    pygame.K_z: False   # Up (Z)
+    pygame.K_d: False,
+    pygame.K_q: False,
+    pygame.K_s: False,
+    pygame.K_z: False
 }
 
 # Ground level (just above the bottom of the window)
@@ -95,19 +94,19 @@ while running:
 
     # Apply force to the second object (ZQSD keys)
     if keys_2[pygame.K_d] and not key_state_2[pygame.K_d]:
-        second_object.apply_force(Vector2(newton_to_force(46), 0))  # Apply force to the right
+        second_object.apply_force(Vector2(newton_to_force(46), 0))
         key_state_2[pygame.K_d] = True
 
     if keys_2[pygame.K_q] and not key_state_2[pygame.K_q]:
-        second_object.apply_force(Vector2(-newton_to_force(46), 0))  # Apply force to the left
+        second_object.apply_force(Vector2(-newton_to_force(46), 0))
         key_state_2[pygame.K_q] = True
 
     if keys_2[pygame.K_s] and not key_state_2[pygame.K_s]:
-        second_object.apply_force(Vector2(0, newton_to_force(46)))  # Apply force downward
+        second_object.apply_force(Vector2(0, newton_to_force(46)))
         key_state_2[pygame.K_s] = True
 
     if keys_2[pygame.K_z] and not key_state_2[pygame.K_z]:
-        second_object.apply_force(Vector2(0, -newton_to_force(46)))  # Apply force upward
+        second_object.apply_force(Vector2(0, -newton_to_force(46)))
         key_state_2[pygame.K_z] = True
 
     # Reset key state when key is released
@@ -121,7 +120,7 @@ while running:
 
     # Update physics engine based on time delta
     dt = clock.get_time() / 100.0  # Convert milliseconds to a suitable scale
-    p2pcd(test_object,second_object)
+    resolve_collision(test_object,second_object)
     physics_engine.update(dt, ground_level)  # Pass ground_level as display_height - 20 (or whatever your ground level is)
 
     # Draw frame

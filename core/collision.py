@@ -1,58 +1,90 @@
+"""
+collision.py
+
+A script that provides functions for detecting and resolving collisions 
+between objects using physics-based calculations.
+
+Features include:
+- Compute Euclidean distance and direction vector between two points.
+- Resolve collisions between two circular objects.
+- Update object velocities based on mass and direction of impact.
+
+Author: Clément Moussy
+Last Updated: Feb 2025
+Python Version: 3.12.9
+Dependencies: pygame.math (Vector2), math
+"""
+
 from pygame.math import Vector2
-import math
+from math import *
 
+def compute_distance_and_direction(point1, point2):
+    """
+    Computes the Euclidean distance and direction vector between two points.
 
-def squarecircle(rectobj,circobj):
-    #commente pas ce code, je vai le modif,il sert a rien
-    circx = circobj.position.x
-    circy = circobj.position.y
-    circrad = 10
-    rectx = rectobj.position.x
-    recty = rectobj.position.y
-    rectwid = rectobj.hitbox.l
-    rectlen = rectobj.hitbox.h
-    print(circx,circy,rectx,recty,rectlen,rectwid)
+    Parameters:
+    point1 (Vector2): First point (or object's position).
+    point2 (Vector2): Second point (or object's position).
 
-    distancex = abs(circx - rectx)
-    distancey = abs(circy - recty)
-    if (distancex > rectwid/2 + circrad): return False
-    if (distancex > rectlen/2 + circrad): return False
-    if (distancex <= (rectwid/2)): return True
-    if (distancex <= (rectlen/2)): return True
-    dist = math.pow((distancex - rectwid/2),2) + math.pow((distancey - rectlen/2),2)
-    return (dist <= math.pow(circrad,2))
+    Returns:
+    tuple: A tuple containing:
+        - float: The rounded Euclidean distance between the two points.
+        - Vector2: The direction vector from `point1` to `point2`.
+    """
+    dx = point2.x - point1.x  # Difference in x-coordinates
+    dy = point2.y - point1.y  # Difference in y-coordinates
+    distance = round(sqrt(dx**2 + dy**2), 6)  # Compute Euclidean distance
+    direction_vector = Vector2(dx, dy)  # Create direction vector
+    return distance, direction_vector
 
-def dist(c1,c2):
-    dx = c2.x - c1.x
-    dy = c2.y - c1.y
-    return round(math.sqrt((dx**2)+(dy**2)),6),Vector2(dx,dy)
+def resolve_collision(circle1, circle2):
+    """
+    Resolves collisions between two circular objects.
 
-def p2pcd(circle1,circle2):
-        dis,nor_vec = dist(circle1.position,circle2.position)
-        radius1 = circle1.radius
-        radius2 = circle2.radius
-        velocity1 = circle1.velocity
-        velocity2 = circle2.velocity
-        if  int(dis) <= int(radius1+radius2):
-            newvel = Vector2(circle2.velocity.x - circle1.velocity.x, circle2.velocity.y - circle1.velocity.y)
-            if nor_vec.dot(newvel) <= 0:
-                un = nor_vec/(dist(Vector2(0,0),nor_vec)[0])
-                ut = Vector2(-un.y,un.x)
-                m1 = circle1.mass
-                m2 = circle2.mass
-                v1n = un.dot(velocity1)
-                v1t = ut.dot(velocity1)
-                v2n = un.dot(velocity2)
-                v2t = ut.dot(velocity2)
-                vp1n = (v1n*(m1-m2) + 2*(m2*v2n))/(m1+m2)
-                vp2n = (v2n*(m2-m1) + 2*(m1*v1n))/(m1+m2)
-                vp1n = un*vp1n
-                vp2n = un*vp2n
-                vp1t = ut*v1t
-                vp2t = ut*v2t
-                vp1 = vp1n+vp1t
-                vp2 = vp2n+vp2t
-                circle1.velocity = vp1
-                circle2.velocity = vp2
-                return
-        return
+    This function updates the velocities of both objects based on their masses, positions,
+    and velocities.
+
+    Parameters:
+    circle1 (Object): First circular object.
+    circle2 (Object): Second circular object.
+    """
+    # Compute the distance and the direction vector between both objects
+    distance, direction_vector = compute_distance_and_direction(circle1.position, circle2.position)
+    
+    # Retrieve key properties of both objects
+    radius1, radius2 = circle1.radius, circle2.radius
+    velocity1, velocity2 = circle1.velocity, circle2.velocity
+    mass1, mass2 = circle1.mass, circle2.mass
+
+    # Check if the objects are colliding (distance is less than or equal to sum of radii)
+    if int(distance) <= int(radius1 + radius2):
+
+        # Compute relative velocity (how fast they approach each other)
+        relative_velocity = Vector2(velocity2.x - velocity1.x, velocity2.y - velocity1.y)
+
+        # Check if the objects are actually moving towards each other (avoids unnecessary calculations)
+        if direction_vector.dot(relative_velocity) <= 0:
+
+            # Compute unit normal and tangent vectors
+            unit_normal = direction_vector / (compute_distance_and_direction(Vector2(0, 0), direction_vector)[0])
+            unit_tangent = Vector2(-unit_normal.y, unit_normal.x)
+
+            # Decompose velocities into normal and tangential components
+            velocity1_normal = unit_normal.dot(velocity1)
+            velocity1_tangent = unit_tangent.dot(velocity1)
+            velocity2_normal = unit_normal.dot(velocity2)
+            velocity2_tangent = unit_tangent.dot(velocity2)
+
+            # Compute new normal velocities after elastic collision
+            new_velocity1_normal = (velocity1_normal * (mass1 - mass2) + 2 * (mass2 * velocity2_normal)) / (mass1 + mass2)
+            new_velocity2_normal = (velocity2_normal * (mass2 - mass1) + 2 * (mass1 * velocity1_normal)) / (mass1 + mass2)
+
+            # Convert new normal velocities into vector form
+            new_velocity1_normal_vector = unit_normal * new_velocity1_normal
+            new_velocity2_normal_vector = unit_normal * new_velocity2_normal
+            new_velocity1_tangent_vector = unit_tangent * velocity1_tangent
+            new_velocity2_tangent_vector = unit_tangent * velocity2_tangent
+
+            # Compute final velocity vectors by combining normal and tangential components
+            circle1.velocity = new_velocity1_normal_vector + new_velocity1_tangent_vector
+            circle2.velocity = new_velocity2_normal_vector + new_velocity2_tangent_vector
