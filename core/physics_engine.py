@@ -41,32 +41,6 @@ class PhysicsEngine:
         if obj in self.objects:
             self.objects.remove(obj)
 
-    def check_collision(self, obj1, obj2):
-        """
-        Checks for collision between two objects (placeholder implementation).
-
-        Parameters:
-        obj1 (Object): First object to check.
-        obj2 (Object): Second object to check.
-
-        Returns:
-        bool: True if a collision is detected, False otherwise. (Currently unimplemented and returns False)
-        """
-        # Placeholder for actual collision detection logic
-        return False
-
-    def resolve_collision(self, obj1, obj2):
-        """
-        Resolves collisions between two objects by adjusting velocities and positions,
-        with improved handling of collision detection and separation.
-
-        Parameters:
-        obj1 (Object): First object involved in the collision.
-        obj2 (Object): Second object involved in the collision.
-        """
-        # Placeholder for collision resolution logic
-        pass
-
     def update(self, dt, ground_level):
         """
         Updates all objects in the physics engine by calling their `update` methods.
