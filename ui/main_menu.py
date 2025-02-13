@@ -26,6 +26,9 @@ class Button:
 
         pass
            
+    def hover(self, screen):
+        pygame.draw.rect(screen, "red", pygame.Rect(self.position.x - (self.width+5) / 2, self.position.y - (self.height+5) / 2, self.width+5, self.height+5))
+
 
     def draw(self, screen):
         pygame.draw.rect(screen, "blue", pygame.Rect(self.position.x - self.width / 2, self.position.y - self.height / 2, self.width, self.height))
