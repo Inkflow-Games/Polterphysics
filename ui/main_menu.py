@@ -12,16 +12,16 @@ class Button:
 
     def is_pressed(self):
         #Action to perform for the button using a match case to determine the action to do
-        match self.action() :
+        match self.action :
             case "Play" :
                 #run
-                pass
+                print(self.action)
             case "Pause" :
                 #pause the game
-                pass
+                print(self.action)
             case "Stop" :
                 #close the window
-                pygame.run = False
+                pygame.quit()
 
 
         pass

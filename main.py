@@ -1,6 +1,8 @@
+from pydoc import cli
 import pygame
 from pygame.math import Vector2
 from ui.main_menu import *
+from core.input_handler import *
 from utils.math_utils import WIDTH, HEIGHT, FPS
 import json
 
@@ -37,13 +39,20 @@ run = True
 while run:
     # Clear the screen with a white background just once at the beginning of the loop
     screen.fill('white')
+
+    #Check the click
+    click = GetMouseInput()
+
     
     # Draw all buttons in the correct order
     for button in button_list:
         if (pygame.mouse.get_pos()[0] < button.position[0] + button.width/2) and (pygame.mouse.get_pos()[0] > button.position[0] - button.width/2) and (pygame.mouse.get_pos()[1] < button.position[1] + button.height/2) and (pygame.mouse.get_pos()[1] > button.position[1] - button.height/2) :
             button.hover(screen)
+            if click :
+                button.is_pressed()
         else :
             button.draw(screen)
+
 
 
     # Event handling
