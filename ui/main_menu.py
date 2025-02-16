@@ -7,24 +7,24 @@ class Button:
         self.height = height
         self.width = width
         self.action = action
-        
+        self.game_state = ""
 
 
     def is_pressed(self):
+        
         #Action to perform for the button using a match case to determine the action to do
         match self.action :
             case "Play" :
-                #run
-                print(self.action)
+                self.game_state = "running"
+                print("game's running")
             case "Pause" :
-                #pause the game
-                print(self.action)
+                self.game_state = "paused"
+                print("game's paused")
             case "Stop" :
                 #close the window
                 pygame.quit()
-
-
-        pass
+            case "Jump" :
+                pass
            
     def hover(self, screen):
         pygame.draw.rect(screen, "red", pygame.Rect(self.position.x - (self.width+5) / 2, self.position.y - (self.height+5) / 2, self.width+5, self.height+5))
