@@ -61,7 +61,8 @@ key_state_2 = {
     pygame.K_d: False,
     pygame.K_q: False,
     pygame.K_s: False,
-    pygame.K_z: False
+    pygame.K_z: False, 
+    pygame.K_SPACE: False
 }
 
 # Ground level (just above the bottom of the window)
@@ -142,6 +143,14 @@ while running:
     if keys_2[pygame.K_z] and not key_state_2[pygame.K_z]:
         second_object.apply_force(Vector2(0, -newton_to_force(46)))
         key_state_2[pygame.K_z] = True
+
+    # Check if we pause the game with space
+    if keys_2[pygame.K_SPACE] and not key_state_2[pygame.K_SPACE] :
+        key_state_2[pygame.K_SPACE] = True
+        if game_state == 'paused' :
+            game_state = 'running'
+        else : 
+            game_state = "paused"
 
     # Reset key state when key is released
     for key in key_state_1:
