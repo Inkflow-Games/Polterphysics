@@ -16,6 +16,7 @@ Dependencies: math, pygame.math.Vector2
 
 import math
 from pygame.math import Vector2
+from utils.math_utils import *
 
 class Object:
     """
@@ -52,32 +53,37 @@ class Object:
         self.velocity = Vector2(0, 0)
         self.max_speed = max_speed
         self.radius = radius
-        self.gravity = Vector2(0, 9.81 * self.mass)
+        self.weight = Vector2(0, 9.81) * self.mass
         self.bounciness = bounciness
         self.angular_velocity = 0
         self.damping_coefficient = damping_coefficient
         self.static = static
     
-    def apply_force(self, force):
+    def apply_impulsion(self, impulsion):
         """
         Applies a force to the object, modifying its velocity.
 
         Parameters:
-        force (Vector2): The force vector applied to the object.
+        impulsion (Vector2): The force vector applied to the object.
         """
-        acceleration = force / self.mass
-        self.velocity += acceleration
+        impulsion_pixels = impulsion * 150
+        dv = impulsion_pixels / self.mass
+        self.velocity += dv
+
     
     def apply_spin(self, spin_force):
+        pass
         """
         Applies a rotational force (spin) to the object.
 
         Parameters:
         spin_force (float): The force applied to generate angular acceleration.
         """
+        """
         moment_of_inertia = self.mass * 0.1  # Approximate moment of inertia
         angular_acceleration = spin_force / moment_of_inertia
         self.angular_velocity += angular_acceleration
+        """
     
     def update(self, dt, ground_level):
         """
@@ -88,11 +94,14 @@ class Object:
         ground_level (float): The y-coordinate representing the ground level.
         """
         # Apply gravity force
-        self.apply_force(self.gravity * dt)
+        self.velocity += (self.weight / self.mass)
+        if self.mass == 1 :
+            print(f"velocity: {self.velocity}")  # Debug
+
 
         # Compute dynamic damping
-        self.damping = 0.01 + self.damping_coefficient * (self.velocity.length() / self.max_speed)
-        self.velocity *= (1 - self.damping * dt)
+        #self.damping = self.damping_coefficient * (self.velocity.length() / self.max_speed)
+        #self.velocity *= (1 - self.damping * dt)
 
         # Gradually limit speed instead of hard clamping
         if self.velocity.length() > self.max_speed:
@@ -102,10 +111,9 @@ class Object:
         # Update position based on velocity
         self.position += self.velocity * dt
 
-        # Apply rotation effect (spin can slightly affect trajectory)
-        self.position += Vector2(math.cos(self.angular_velocity), math.sin(self.angular_velocity)) * dt
-
         # Collision detection with the ground
-        if self.position.y + self.radius >= ground_level:  # If the object touches the ground
-            self.position.y = ground_level - self.radius  # Adjust position to stay on the ground
-            self.velocity.y = -self.velocity.y * self.bounciness  # Apply bounce effect (invert and reduce velocity)
+        if self.position.y + self.radius >= ground_level:
+            self.position.y = ground_level - self.radius
+            self.velocity.y = -self.velocity.y * self.bounciness
+            if abs(self.velocity.y) < 0.1:  # Éviter les petits rebonds infinis
+                self.velocity.y = 0
