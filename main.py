@@ -20,6 +20,10 @@ from core.physics_engine import PhysicsEngine
 from core.collision import resolve_collision
 from objects.object import Object
 from utils.math_utils import *
+from ui.main_menu import *
+from core.input_handler import *
+from utils.math_utils import WIDTH, HEIGHT, FPS
+import json
 
 # Initialize Pygame
 pygame.init()
@@ -57,17 +61,48 @@ key_state_2 = {
     pygame.K_d: False,
     pygame.K_q: False,
     pygame.K_s: False,
-    pygame.K_z: False
+    pygame.K_z: False, 
+    pygame.K_SPACE: False
 }
 
 # Ground level (just above the bottom of the window)
 ground_level = display_height - 20
 
+# Charger les boutons depuis le fichier JSON
+with open("data/buttons.json", "r") as file:
+    buttons = json.load(file)
+
+# Accéder aux boutons du menu principal
+main_menu_buttons = buttons["main_menu"]
+
+# Liste pour stocker les objets Button
+button_list = []
+
+
+# Créer les instances de Button et les ajouter à la liste
+for button in main_menu_buttons.values():
+    new_button = Button(
+        size=button["size"],
+        position = Vector2(button["position"][0], button["position"][1]),
+        height=button["height"],
+        width=button["width"],
+        action=button["action"]
+    )
+    button_list.append(new_button)
+
+game_state = "running"
+
+
 # Main game loop
 while running:
+    click = False
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+        else :
+            if GetMouseInput(event):  # Get the click input
+                click = True
 
     # Get key states for the first object (Arrow keys)
     keys = pygame.key.get_pressed()
@@ -109,6 +144,14 @@ while running:
         second_object.apply_force(Vector2(0, -newton_to_force(46)))
         key_state_2[pygame.K_z] = True
 
+    # Check if we pause the game with space
+    if keys_2[pygame.K_SPACE] and not key_state_2[pygame.K_SPACE] :
+        key_state_2[pygame.K_SPACE] = True
+        if game_state == 'paused' :
+            game_state = 'running'
+        else : 
+            game_state = "paused"
+
     # Reset key state when key is released
     for key in key_state_1:
         if not keys[key]:
@@ -118,15 +161,27 @@ while running:
         if not keys_2[key]:
             key_state_2[key] = False
 
-    # Update physics engine based on time delta
-    dt = clock.get_time() / 100.0  # Convert milliseconds to a suitable scale
-    resolve_collision(test_object,second_object)
-    physics_engine.update(dt, ground_level)  # Pass ground_level as display_height - 20 (or whatever your ground level is)
+    if game_state == "running" : # the physics is calculated only during play mode
+        # Update physics engine based on time delta
+        dt = clock.get_time() / 100.0  # Convert milliseconds to a suitable scale
+        resolve_collision(test_object,second_object)
+        physics_engine.update(dt, ground_level)  # Pass ground_level as display_height - 20 (or whatever your ground level is)
 
     # Draw frame
     screen.fill((0, 0, 0))  # Clear screen
     pygame.draw.circle(screen, (255, 0, 0), (int(test_object.position.x), int(test_object.position.y)), test_object.radius)  # Draw first object
     pygame.draw.circle(screen, (0, 0, 255), (int(second_object.position.x), int(second_object.position.y)), second_object.radius)  # Draw second object
+
+    # Draw all buttons in the correct order
+    for button in button_list:
+        if (pygame.mouse.get_pos()[0] < button.position[0] + button.width/2) and (pygame.mouse.get_pos()[0] > button.position[0] - button.width/2) and (pygame.mouse.get_pos()[1] < button.position[1] + button.height/2) and (pygame.mouse.get_pos()[1] > button.position[1] - button.height/2) :
+            button.hover(screen)   
+            if click :
+                button.is_pressed()
+                game_state = button.game_state
+                click = False
+        else :
+            button.draw(screen)
 
     # Display debug positions
     font = pygame.font.SysFont("Arial", 24)
@@ -136,7 +191,9 @@ while running:
     screen.blit(position_text_2, (10, 40))
 
     pygame.display.flip()  # Refresh screen
-    clock.tick(60)  # Limit FPS to 60
+    clock.tick(120)  # Limit FPS to 120
+
+
 
 # Quit Pygame
 pygame.quit()

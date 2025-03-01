@@ -13,6 +13,10 @@ Python Version: 3.12.9
 Dependencies: None
 """
 
+WIDTH = 1000
+HEIGHT = 500
+FPS = 60
+
 def force_to_newton(force=0):
     """
     Converts a given force value to Newtons.
@@ -36,3 +40,4 @@ def newton_to_force(newton=0):
     float: The equivalent value in force units.
     """
     return newton * 1.87
+
