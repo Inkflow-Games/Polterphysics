@@ -3,23 +3,91 @@
     "Play": {
       "size": 1,
       "position": [ 920, 130 ],
-      "height": 70,
+      "height": 50,
       "width": 100,
       "action": "Play"
     },
-    "Pause": {
+    "LevelSelection": {
       "size": 1,
       "position": [ 920, 50 ],
       "height": 50,
       "width": 100,
-      "action": "Pause"
+      "action": "SelectLevel"
     },
-    "Stop": {
+    "Quit": {
       "size": 1,
       "position": [ 50, 750 ],
       "height": 50,
       "width": 50,
       "action": "Stop"
+    }
+
+  },
+
+  "level_selection": {
+    "Level1": {
+      "size": 1,
+      "position": [ 920, 130 ],
+      "height": 50,
+      "width": 100,
+      "action": "Level1"
+    },
+    "Level2": {
+      "size": 1,
+      "position": [ 920, 50 ],
+      "height": 50,
+      "width": 100,
+      "action": "Level2"
+    },
+    "Level3": {
+      "size": 1,
+      "position": [ 920, -50 ],
+      "height": 50,
+      "width": 100,
+      "action": "Level3"
+    },
+    "Exit": {
+      "size": 1,
+      "position": [ 50, 750 ],
+      "height": 50,
+      "width": 50,
+      "action": "LoadMainMenu"
+    }
+
+  },
+
+
+  "level1": {
+    "Exit": {
+      "size": 1,
+      "position": [ 50, 750 ],
+      "height": 50,
+      "width": 50,
+      "action": "LoadMainMenu"
+    }
+
+  },
+
+
+  "level2": {
+    "Exit": {
+      "size": 1,
+      "position": [ 50, 750 ],
+      "height": 50,
+      "width": 50,
+      "action": "LoadMainMenu"
+    }
+
+  },
+
+
+  "level3": {
+    "Exit": {
+      "size": 1,
+      "position": [ 50, 750 ],
+      "height": 50,
+      "width": 50,
+      "action": "LoadMainMenu"
     }
 
   }
