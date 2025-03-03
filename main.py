@@ -90,7 +90,7 @@ for button in main_menu_buttons.values():
     )
     button_list.append(new_button)
 
-game_state = "running"
+game_state = "paused"
 
 
 # Main game loop
