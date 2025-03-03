@@ -14,7 +14,6 @@ Python Version: 3.12.9
 Dependencies: math, pygame.math.Vector2
 """
 
-import math
 from pygame.math import Vector2
 from utils.math_utils import *
 
