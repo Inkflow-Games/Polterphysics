@@ -23,7 +23,20 @@ class Button:
             case "Stop" :
                 #close the window
                 pygame.quit()
-            case "Jump" :
+            case "Load Main Menu" :
+                #load_scene(0)
+                pass
+            case "Load Level Menu" :
+                #load_scene(1)
+                pass
+            case "Level1" :
+                #load_scene(2)
+                pass
+            case "Level2" :
+                #load_scene(3)
+                pass
+            case "Level3" :
+                #load_scene(4)
                 pass
            
     def hover(self, screen):
