@@ -23,6 +23,7 @@ from utils.math_utils import *
 from ui.main_menu import *
 from core.input_handler import *
 from utils.math_utils import WIDTH, HEIGHT, FPS
+from config.levels import *
 import json
 
 # Initialize Pygame
