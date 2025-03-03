@@ -1,8 +1,9 @@
+import pygame
 import json
 from objects.object import Object 
 
 # Dictionary storing level numbers as keys and lists of objects as values
-levels = {1: [], 2: []}  # The ground is assumed to be a non-possessable object
+levels = {1: [], 2: [],3:[]}  # The ground is assumed to be a non-possessable object
 
 # Global variable to track the current level
 current_level = 1
@@ -89,3 +90,5 @@ items = {
         "static": True,
     }
 }
+
+pygame.init()    
