@@ -23,6 +23,7 @@ from utils.math_utils import *
 from ui.main_menu import *
 from core.input_handler import *
 from utils.math_utils import WIDTH, HEIGHT, FPS
+import core.level_manager as lman
 import json
 
 # Initialize Pygame
@@ -68,27 +69,8 @@ key_state_2 = {
 # Ground level (just above the bottom of the window)
 ground_level = display_height - 20
 
-# Charger les boutons depuis le fichier JSON
-with open("data/buttons.json", "r") as file:
-    buttons = json.load(file)
+lman.load_scene(0)
 
-# Accéder aux boutons du menu principal
-main_menu_buttons = buttons["main_menu"]
-
-# Liste pour stocker les objets Button
-button_list = []
-
-
-# Créer les instances de Button et les ajouter à la liste
-for button in main_menu_buttons.values():
-    new_button = Button(
-        size=button["size"],
-        position = Vector2(button["position"][0], button["position"][1]),
-        height=button["height"],
-        width=button["width"],
-        action=button["action"]
-    )
-    button_list.append(new_button)
 
 game_state = "paused"
 
@@ -175,8 +157,10 @@ while running:
     pygame.draw.circle(screen, (255, 0, 0), (int(test_object.position.x), int(test_object.position.y)), test_object.radius)  # Draw first object
     pygame.draw.circle(screen, (0, 0, 255), (int(second_object.position.x), int(second_object.position.y)), second_object.radius)  # Draw second object
 
+
     # Draw all buttons in the correct order
-    for button in button_list:
+    print(len(lman.button_list))
+    for button in lman.button_list:
         if (pygame.mouse.get_pos()[0] < button.position[0] + button.width/2) and (pygame.mouse.get_pos()[0] > button.position[0] - button.width/2) and (pygame.mouse.get_pos()[1] < button.position[1] + button.height/2) and (pygame.mouse.get_pos()[1] > button.position[1] - button.height/2) :
             button.hover(screen)   
             if click :

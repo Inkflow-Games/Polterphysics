@@ -1,4 +1,5 @@
 import pygame
+import core.level_manager as lmanager
 
 class Button:
     def __init__(self, size, position, height, width, action=''):
@@ -25,19 +26,19 @@ class Button:
                 pygame.quit()
             case "Load Main Menu" :
                 #load_scene(0)
-                pass
+                lmanager.load_scene(0)
             case "Load Level Menu" :
                 #load_scene(1)
-                pass
+                lmanager.load_scene(1)
             case "Level1" :
                 #load_scene(2)
-                pass
+                lmanager.load_scene(2)
             case "Level2" :
                 #load_scene(3)
-                pass
+                lmanager.load_scene(3)
             case "Level3" :
                 #load_scene(4)
-                pass
+                lmanager.load_scene(4)
            
     def hover(self, screen):
         pygame.draw.rect(screen, "red", pygame.Rect(self.position.x - (self.width+5) / 2, self.position.y - (self.height+5) / 2, self.width+5, self.height+5))

@@ -7,19 +7,19 @@
       "width": 100,
       "action": "Play"
     },
-    "LevelSelection": {
+    "Pause": {
       "size": 1,
       "position": [ 920, 50 ],
       "height": 50,
       "width": 100,
-      "action": "SelectLevel"
+      "action": "Pause"
     },
-    "Quit": {
+    "Load Level Menu": {
       "size": 1,
       "position": [ 50, 750 ],
       "height": 50,
       "width": 50,
-      "action": "Stop"
+      "action": "Load Level Menu"
     }
 
   },
@@ -27,21 +27,21 @@
   "level_selection": {
     "Level1": {
       "size": 1,
-      "position": [ 920, 130 ],
+      "position": [ 120, 130 ],
       "height": 50,
       "width": 100,
       "action": "Level1"
     },
     "Level2": {
       "size": 1,
-      "position": [ 920, 50 ],
+      "position": [ 420, 130 ],
       "height": 50,
       "width": 100,
       "action": "Level2"
     },
     "Level3": {
       "size": 1,
-      "position": [ 920, -50 ],
+      "position": [ 920, 130 ],
       "height": 50,
       "width": 100,
       "action": "Level3"
@@ -51,7 +51,7 @@
       "position": [ 50, 750 ],
       "height": 50,
       "width": 50,
-      "action": "LoadMainMenu"
+      "action": "Load Level Menu"
     }
 
   },
@@ -63,7 +63,7 @@
       "position": [ 50, 750 ],
       "height": 50,
       "width": 50,
-      "action": "LoadMainMenu"
+      "action": "Load Level Menu"
     }
 
   },
@@ -75,7 +75,7 @@
       "position": [ 50, 750 ],
       "height": 50,
       "width": 50,
-      "action": "LoadMainMenu"
+      "action": "Load Level Menu"
     }
 
   },
