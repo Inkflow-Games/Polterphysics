@@ -20,7 +20,7 @@ from core.physics_engine import PhysicsEngine
 from core.collision import resolve_collision
 from objects.object import Object
 from utils.math_utils import *
-from ui.main_menu import *
+
 from core.input_handler import *
 from utils.math_utils import WIDTH, HEIGHT, FPS
 import json
@@ -33,7 +33,7 @@ display_width, display_height = 1000, 800
 screen = pygame.display.set_mode((display_width, display_height))
 pygame.display.set_caption("Physics Engine Test")
 
-# Initialize physics engine
+# Initialize physics enginefrom ui.main_menu import *
 physics_engine = PhysicsEngine()
 
 # Create a test object (simulating a basketball)
