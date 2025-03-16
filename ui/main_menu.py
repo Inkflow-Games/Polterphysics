@@ -2,8 +2,9 @@ import pygame
 import core.level_manager as lmanager
 
 class Button:
-    def __init__(self, size, position, height, width, action=''):
+    def __init__(self, image, size, position, height, width, action=''):
         self.size = size
+        self.image = image
         self.position = position
         self.height = height
         self.width = width

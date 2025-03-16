@@ -2,23 +2,29 @@
   "main_menu": {
     "Play": {
       "size": 1,
-      "position": [ 920, 130 ],
-      "height": 50,
-      "width": 100,
+      "image": "Data\\ButtonsImages\\PlayButton.png",
+      "image2": "Data\\ButtonsImages\\PlayButtonPressed.png",
+      "position": [ 900, 200 ],
+      "height": 75,
+      "width": 150,
       "action": "Play"
     },
     "Pause": {
       "size": 1,
-      "position": [ 920, 50 ],
-      "height": 50,
-      "width": 100,
+      "image": "Data\\ButtonsImages\\PlayButton.png",
+      "image2": "Data\\ButtonsImages\\PlayButtonPressed.png",
+      "position": [ 900, 80 ],
+      "height": 75,
+      "width": 150,
       "action": "Pause"
     },
     "Load Level Menu": {
       "size": 1,
-      "position": [ 50, 750 ],
-      "height": 50,
-      "width": 50,
+      "image": "Data\\ButtonsImages\\LevelButton.png",
+      "image2": "Data\\ButtonsImages\\LevelButtonPressed.png",
+      "position": [ 120, 550 ],
+      "height": 75,
+      "width": 150,
       "action": "Load Level Menu"
     }
 
@@ -27,31 +33,39 @@
   "level_selection": {
     "Level1": {
       "size": 1,
-      "position": [ 120, 130 ],
-      "height": 50,
-      "width": 100,
+      "image": "Data\\ButtonsImages\\PlayButton.png",
+      "image2": "Data\\ButtonsImages\\PlayButtonPressed.png",
+      "position": [ 900, 200 ],
+      "height": 75,
+      "width": 150,
       "action": "Level1"
     },
     "Level2": {
       "size": 1,
-      "position": [ 420, 130 ],
-      "height": 50,
-      "width": 100,
+      "image": "Data\\ButtonsImages\\PlayButton.png",
+      "image2": "Data\\ButtonsImages\\PlayButtonPressed.png",
+      "position": [ 900, 350 ],
+      "height": 75,
+      "width": 150,
       "action": "Level2"
     },
     "Level3": {
       "size": 1,
-      "position": [ 920, 130 ],
-      "height": 50,
-      "width": 100,
+      "image": "Data\\ButtonsImages\\PlayButton.png",
+      "image2": "Data\\ButtonsImages\\PlayButtonPressed.png",
+      "position": [ 900, 500 ],
+      "height": 75,
+      "width": 150,
       "action": "Level3"
     },
     "Exit": {
       "size": 1,
+      "image": "Data\\ButtonsImages\\HomeButton.png",
+      "image2": "Data\\ButtonsImages\\HomeButtonPressed.png",
       "position": [ 50, 750 ],
-      "height": 50,
-      "width": 50,
-      "action": "Load Level Menu"
+      "height": 75,
+      "width": 150,
+      "action": "Load Main Menu"
     }
 
   },
@@ -60,9 +74,11 @@
   "level1": {
     "Exit": {
       "size": 1,
+      "image": "Data\\ButtonsImages\\LevelButton.png",
+      "image2": "Data\\ButtonsImages\\LevelButtonPressed.png",
       "position": [ 50, 750 ],
-      "height": 50,
-      "width": 50,
+      "height": 75,
+      "width": 150,
       "action": "Load Level Menu"
     }
 
@@ -72,9 +88,11 @@
   "level2": {
     "Exit": {
       "size": 1,
+      "image": "Data\\ButtonsImages\\LevelButton.png",
+      "image2": "Data\\ButtonsImages\\LevelButtonPressed.png",
       "position": [ 50, 750 ],
-      "height": 50,
-      "width": 50,
+      "height": 75,
+      "width": 150,
       "action": "Load Level Menu"
     }
 
@@ -84,10 +102,12 @@
   "level3": {
     "Exit": {
       "size": 1,
+      "image": "Data\\ButtonsImages\\LevelButton.png",
+      "image2": "Data\\ButtonsImages\\LevelButtonPressed.png",
       "position": [ 50, 750 ],
-      "height": 50,
-      "width": 50,
-      "action": "LoadMainMenu"
+      "height": 75,
+      "width": 150,
+      "action": "Load Level Menu"
     }
 
   }

@@ -8,8 +8,10 @@ import pygame
 import core.level_manager as lmanager
 
 class Button:
-    def __init__(self, size, position, height, width, action=''):
+    def __init__(self, image, image2,  size, position, height, width, action=''):
         self.size = size
+        self.image = image
+        self.image2 = image2
         self.position = position
         self.height = height
         self.width = width
@@ -47,12 +49,14 @@ class Button:
                 lmanager.load_scene(4)
            
     def hover(self, screen):
-        pygame.draw.rect(screen, "red", pygame.Rect(self.position.x - (self.width+5) / 2, self.position.y - (self.height+5) / 2, self.width+5, self.height+5))
+        #pygame.draw.rect(screen, "red", pygame.Rect(self.position.x - (self.width+5) / 2, self.position.y - (self.height+5) / 2, self.width+5, self.height+5))
+        screen.blit(pygame.image.load(self.image2).convert(), (self.position.x - (self.width+5)/2, self.position.y - (self.height+5)/2))
 
 
     def draw(self, screen):
-        pygame.draw.rect(screen, "blue", pygame.Rect(self.position.x - self.width / 2, self.position.y - self.height / 2, self.width, self.height))
-
+        #pygame.draw.rect(screen, "blue", pygame.Rect(self.position.x - self.width / 2, self.position.y - self.height / 2, self.width, self.height))
+        screen.blit(pygame.image.load(self.image).convert(), (self.position.x - (self.width+5)/2, self.position.y - (self.height+5)/2))
+        pass
 
 
 
@@ -89,6 +93,8 @@ def load_scene(n: int):
             for button in main_menu_buttons.values():
                 new_button = Button(
                     size=button["size"],
+                    image=button["image"],
+                    image2=button["image2"],
                     position=Vector2(button["position"][0], button["position"][1]),
                     height=button["height"],
                     width=button["width"],
@@ -102,6 +108,8 @@ def load_scene(n: int):
             for button in level_menu_buttons.values():
                 new_button = Button(
                     size=button["size"],
+                    image=button["image"],
+                    image2=button["image2"],
                     position=Vector2(button["position"][0], button["position"][1]),
                     height=button["height"],
                     width=button["width"],
@@ -115,6 +123,8 @@ def load_scene(n: int):
             for button in level_1.values():
                 new_button = Button(
                     size=button["size"],
+                    image=button["image"],
+                    image2=button["image2"],
                     position=Vector2(button["position"][0], button["position"][1]),
                     height=button["height"],
                     width=button["width"],
@@ -128,6 +138,8 @@ def load_scene(n: int):
             for button in level_2.values():
                 new_button = Button(
                     size=button["size"],
+                    image=button["image"],
+                    image2=button["image2"],
                     position=Vector2(button["position"][0], button["position"][1]),
                     height=button["height"],
                     width=button["width"],
@@ -141,6 +153,8 @@ def load_scene(n: int):
             for button in level_3.values():
                 new_button = Button(
                     size=button["size"],
+                    image=button["image"],
+                    image2=button["image2"],
                     position=Vector2(button["position"][0], button["position"][1]),
                     height=button["height"],
                     width=button["width"],
