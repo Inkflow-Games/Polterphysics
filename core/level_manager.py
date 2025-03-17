@@ -70,11 +70,11 @@ with open("Data/buttons.json", "r") as file : #load all the buttons and split th
     level_2 = buttons["level2"]
     level_3 = buttons["level3"]
 
-    #with open("Data/levels.json", "r") as f : #load the different objects for the level
-       # levels = json.load(f)
-        #level_1_o = levels["1"]
-        #level_2_o = levels["2"]
-        #level_3_o = levels["3"]
+    with open("Data/levels.json", "r") as f : #load the different objects for the level
+       levels = json.load(f)
+       level_1_o = levels["1"]
+       level_2_o = levels["2"]
+       level_3_o = levels["3"]
 
 button_list = []
 object_list = []
@@ -93,7 +93,6 @@ def load_button(b):
 
 def load_objects(l):
     new =  Object(mass = l[0], position = tuple(l[1]), max_speed = l[2], radius = l[3],bounciness = l[4], damping_coefficient = l[5], static = l[6])
-    phy.physics_engine.add_object(new)
     return new
 
 current_scene = 0
@@ -120,22 +119,22 @@ def load_scene(n: int):
         case 2:
             for button in level_1.values():
                button_list.append(load_button(button))
-            # for object in level_1_o.values() :
-            #     object_list.append(load_objects(object))
+            for object in level_1_o.values() :
+                object_list.append(load_objects(object))
             print("level 1 loaded")
 
         case 3:
             for button in level_2.values():
                 button_list.append(load_button(button))
-            # for object in level_2_o.values() :
-            #     object_list.append(load_objects(object))
+            for object in level_2_o.values() :
+                object_list.append(load_objects(object))
             print("level 2 loaded")
 
         case 4:
             for button in level_3.values():
                 button_list.append(load_button(button))
-            # for object in level_3_o.values() :
-            #     object_list.append(load_objects(object))
+            for object in level_3_o.values() :
+                object_list.append(load_objects(object))
             print("level 3 loaded")
 
         case _:
