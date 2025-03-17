@@ -25,7 +25,6 @@ class Object:
         mass (float): The mass of the object.
         position (Vector2): The position of the object in 2D space.
         velocity (Vector2): The velocity of the object in 2D space.
-        max_speed (float): The maximum speed limit for the object.
         radius (float): The radius of the object, used for collision detection.
         gravity (Vector2): The gravitational force acting on the object.
         bounciness (float): The coefficient of restitution for bounce calculations.
@@ -34,7 +33,7 @@ class Object:
         static (bool): Whether the object is immovable and unaffected by forces.
     """
     
-    def __init__(self, mass, position, radius=0, max_speed=70, bounciness=0.8, damping_coefficient=0, static=False):
+    def __init__(self, mass, position, radius=0, bounciness=0.8, damping_coefficient=0, static=False):
         """
         Initializes an Object instance with the specified properties.
 
@@ -50,7 +49,6 @@ class Object:
         self.mass = mass
         self.position = Vector2(position)
         self.velocity = Vector2(0, 0)
-        self.max_speed = max_speed
         self.radius = radius
         self.weight = Vector2(0, 9.81) * self.mass
         self.bounciness = bounciness
@@ -65,11 +63,10 @@ class Object:
         Parameters:
         impulsion (Vector2): The force vector applied to the object.
         """
-        impulsion_pixels = impulsion * 150
-        dv = impulsion_pixels / self.mass
+        dv = newton_to_force(impulsion) / self.mass
         self.velocity += dv
 
-    
+
     def apply_spin(self, spin_force):
         pass
         """
@@ -97,16 +94,6 @@ class Object:
         if self.mass == 1 :
             print(f"velocity: {self.velocity}")  # Debug
 
-
-        # Compute dynamic damping
-        #self.damping = self.damping_coefficient * (self.velocity.length() / self.max_speed)
-        #self.velocity *= (1 - self.damping * dt)
-
-        # Gradually limit speed instead of hard clamping
-        if self.velocity.length() > self.max_speed:
-            excess_speed = self.velocity.length() - self.max_speed
-            self.velocity.scale_to_length(self.velocity.length() - excess_speed * 0.1)
-
         # Update position based on velocity
         self.position += self.velocity * dt
 
@@ -114,5 +101,8 @@ class Object:
         if self.position.y + self.radius >= ground_level:
             self.position.y = ground_level - self.radius
             self.velocity.y = -self.velocity.y * self.bounciness
-            if abs(self.velocity.y) < 0.1:  # Éviter les petits rebonds infinis
-                self.velocity.y = 0
+            if abs(self.velocity.y) < 0.1 :
+                self.velocity.y = 0  # Stopper les rebonds faibles
+
+        self.velocity -= self.velocity * self.damping_coefficient * dt
+

@@ -1,8 +1,7 @@
-✓ Length and heigth of an object
 ✓ Rotation after collision
 ✓ Collisions during rotation
 ✓ Maximum angular velocity
-✓ Object type (rectangle, circle)
+✓ Object type (rectangle, circle...)
 ✓ Object hitbox attribute
 ✓ Collision handling -> resultant force depends on mass, velocity, angle and spin
 ✓ Improve damping using object mass

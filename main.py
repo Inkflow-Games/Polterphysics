@@ -33,17 +33,18 @@ pygame.display.set_caption("Physics Engine Test")
 # Initialize physics engine
 physics_engine = PhysicsEngine()
 
-# Create the 10 objects (including the two controllable ones)
+# Create the objects
 objects = []
 
 # First controllable object
-test_object = Object(mass=1, position=(400, 100), radius=15, max_speed=1500, bounciness=1, damping_coefficient = 0)
+test_object = Object(mass=1, position=(400, 700), radius=30, bounciness=0.9, damping_coefficient=0)
 objects.append(test_object)
 
 # Second controllable object
-second_object = Object(mass=5, position=(600, 100), radius=25, max_speed=200, bounciness=0.07, damping_coefficient=0)
+second_object = Object(mass=5, position=(600, 700), radius=50, bounciness=0.07, damping_coefficient=1)
 objects.append(second_object)
 
+"""
 # Add 8 additional random objects
 import random
 for _ in range(8):
@@ -51,11 +52,11 @@ for _ in range(8):
         mass=random.uniform(0.5, 3.0),
         position=(random.randint(100, 900), random.randint(100, 600)),
         radius=random.randint(10, 30),
-        max_speed=random.randint(50, 150),
         bounciness=random.uniform(0.1, 0.9),
         damping_coefficient=random.uniform(0.01, 0.05)
     )
     objects.append(obj)
+"""
 
 # Add objects to physics engine
 for obj in objects:
@@ -83,16 +84,16 @@ while running:
 
     # Apply forces to the first object (Arrow keys)
     if keys[pygame.K_RIGHT] and not key_state_1[pygame.K_RIGHT]:
-        test_object.apply_impulsion(Vector2(30, 0))
+        test_object.apply_impulsion(Vector2(10, 0))
         key_state_1[pygame.K_RIGHT] = True
     if keys[pygame.K_LEFT] and not key_state_1[pygame.K_LEFT]:
-        test_object.apply_impulsion(Vector2(-30, 0))
+        test_object.apply_impulsion(Vector2(-10, 0))
         key_state_1[pygame.K_LEFT] = True
     if keys[pygame.K_DOWN] and not key_state_1[pygame.K_DOWN]:
-        test_object.apply_impulsion(Vector2(0, 30))
+        test_object.apply_impulsion(Vector2(0, 10))
         key_state_1[pygame.K_DOWN] = True
     if keys[pygame.K_UP] and not key_state_1[pygame.K_UP]:
-        test_object.apply_impulsion(Vector2(0, -30))
+        test_object.apply_impulsion(Vector2(0, -10))
         key_state_1[pygame.K_UP] = True
 
     # Apply forces to the second object (ZQSD keys)
@@ -118,7 +119,7 @@ while running:
             key_state_2[key] = False
 
     # Update physics engine
-    dt = clock.tick(120) / 1000  # Convertit en secondes
+    dt = max(clock.tick(120)/1000, 1/120)  # Convertit en secondes
 
     # Check for collisions between all objects
     for i in range(len(objects)):

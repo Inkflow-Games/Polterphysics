@@ -23,7 +23,7 @@ def force_to_newton(force=0):
     Returns:
     float: The equivalent value in Newtons.
     """
-    return force / 150
+    return force * 150
 
 def newton_to_force(newton=0):
     """
