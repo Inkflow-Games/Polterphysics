@@ -85,6 +85,7 @@ def scene_selector(n: int = None) -> int:
     """
 
 button_list = []
+object_list = []
 
 def load_button(b: Button):
     new_button = Button(
@@ -108,8 +109,9 @@ def load_scene(n: int):
     match n:
         case 0:
             button_list = []
-            for button in main_menu_buttons.values():
+            for button in main_menu_buttons.values(): #loading the buttons we have to draw each frame
                 button_list.append(load_button(button))
+            
             print("main menu loaded", len(button_list))
 
         case 1:
