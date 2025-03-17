@@ -69,7 +69,7 @@ key_state_2 = {
 # Ground level (just above the bottom of the window)
 ground_level = display_height - 20
 
-lman.load_scene(0)
+lman.load_scene(0) #initialize the main menu scene
 
 
 game_state = "paused"
@@ -159,7 +159,6 @@ while running:
 
 
     # Draw all buttons in the correct order
-    print(len(lman.button_list))
     for button in lman.button_list:
         if (pygame.mouse.get_pos()[0] < button.position[0] + button.width/2) and (pygame.mouse.get_pos()[0] > button.position[0] - button.width/2) and (pygame.mouse.get_pos()[1] < button.position[1] + button.height/2) and (pygame.mouse.get_pos()[1] > button.position[1] - button.height/2) :
             button.hover(screen)   

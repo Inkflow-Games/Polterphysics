@@ -80,6 +80,15 @@
       "height": 75,
       "width": 150,
       "action": "Load Level Menu"
+    },
+    "Restart": {
+      "size": 1,
+      "image": "Data\\ButtonsImages\\RestartButton.png",
+      "image2": "Data\\ButtonsImages\\RestartButtonPressed.png",
+      "position": [ 75, 550 ],
+      "height": 150,
+      "width": 150,
+      "action": "Restart Level"
     }
 
   },
@@ -94,6 +103,15 @@
       "height": 75,
       "width": 150,
       "action": "Load Level Menu"
+    },
+    "Restart": {
+      "size": 1,
+      "image": "Data\\ButtonsImages\\RestartButton.png",
+      "image2": "Data\\ButtonsImages\\RestartButtonPressed.png",
+      "position": [ 75, 550 ],
+      "height": 150,
+      "width": 150,
+      "action": "Restart Level"
     }
 
   },
@@ -108,6 +126,15 @@
       "height": 75,
       "width": 150,
       "action": "Load Level Menu"
+    },
+    "Restart": {
+      "size": 1,
+      "image": "Data\\ButtonsImages\\RestartButton.png",
+      "image2": "Data\\ButtonsImages\\RestartButtonPressed.png",
+      "position": [ 75, 550 ],
+      "height": 150,
+      "width": 150,
+      "action": "Restart Level"
     }
 
   }

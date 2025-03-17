@@ -5,7 +5,6 @@ import json
 from Data import *
 # Dictionary storing level numbers as keys and lists of objects as values
 import pygame
-import core.level_manager as lmanager
 
 class Button:
     def __init__(self, image, image2,  size, position, height, width, action=''):
@@ -32,21 +31,24 @@ class Button:
             case "Stop" :
                 #close the window
                 pygame.quit()
+            case "Restart Level" :
+                #load_scene(n)
+                load_scene(current_scene)
             case "Load Main Menu" :
                 #load_scene(0)
-                lmanager.load_scene(0)
+                load_scene(0)
             case "Load Level Menu" :
                 #load_scene(1)
-                lmanager.load_scene(1)
+                load_scene(1)
             case "Level1" :
                 #load_scene(2)
-                lmanager.load_scene(2)
+                load_scene(2)
             case "Level2" :
                 #load_scene(3)
-                lmanager.load_scene(3)
+                load_scene(3)
             case "Level3" :
                 #load_scene(4)
-                lmanager.load_scene(4)
+                load_scene(4)
            
     def hover(self, screen):
         #pygame.draw.rect(screen, "red", pygame.Rect(self.position.x - (self.width+5) / 2, self.position.y - (self.height+5) / 2, self.width+5, self.height+5))
@@ -84,83 +86,54 @@ def scene_selector(n: int = None) -> int:
 
 button_list = []
 
+def load_button(b: Button):
+    new_button = Button(
+        size=b["size"],
+        image=b["image"],
+        image2=b["image2"],
+        position=Vector2(b["position"][0], b["position"][1]),
+        height=b["height"],
+        width=b["width"],
+        action=b["action"]
+        )
+    return new_button
+
+current_scene = 0
+
 def load_scene(n: int):
     global button_list
+    global current_scene 
+    current_scene = n
     
     match n:
         case 0:
             button_list = []
             for button in main_menu_buttons.values():
-                new_button = Button(
-                    size=button["size"],
-                    image=button["image"],
-                    image2=button["image2"],
-                    position=Vector2(button["position"][0], button["position"][1]),
-                    height=button["height"],
-                    width=button["width"],
-                    action=button["action"]
-                )
-                button_list.append(new_button)
+                button_list.append(load_button(button))
             print("main menu loaded", len(button_list))
 
         case 1:
             button_list = []
             for button in level_menu_buttons.values():
-                new_button = Button(
-                    size=button["size"],
-                    image=button["image"],
-                    image2=button["image2"],
-                    position=Vector2(button["position"][0], button["position"][1]),
-                    height=button["height"],
-                    width=button["width"],
-                    action=button["action"]
-                )
-                button_list.append(new_button)
+                button_list.append(load_button(button))
             print("level manager loaded", len(button_list))
 
         case 2:
             button_list = []
             for button in level_1.values():
-                new_button = Button(
-                    size=button["size"],
-                    image=button["image"],
-                    image2=button["image2"],
-                    position=Vector2(button["position"][0], button["position"][1]),
-                    height=button["height"],
-                    width=button["width"],
-                    action=button["action"]
-                )
-                button_list.append(new_button)
+               button_list.append(load_button(button))
             print("level 1 loaded")
 
         case 3:
             button_list = []
             for button in level_2.values():
-                new_button = Button(
-                    size=button["size"],
-                    image=button["image"],
-                    image2=button["image2"],
-                    position=Vector2(button["position"][0], button["position"][1]),
-                    height=button["height"],
-                    width=button["width"],
-                    action=button["action"]
-                )
-                button_list.append(new_button)
+                button_list.append(load_button(button))
             print("level 2 loaded")
 
         case 4:
             button_list = []
             for button in level_3.values():
-                new_button = Button(
-                    size=button["size"],
-                    image=button["image"],
-                    image2=button["image2"],
-                    position=Vector2(button["position"][0], button["position"][1]),
-                    height=button["height"],
-                    width=button["width"],
-                    action=button["action"]
-                )
-                button_list.append(new_button)
+                button_list.append(load_button(button))
             print("level 3 loaded")
 
         case _:

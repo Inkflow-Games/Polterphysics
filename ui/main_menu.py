@@ -1,16 +1,27 @@
 import pygame
 import core.level_manager as lmanager
+import json
+#from ui.main_menu import *
+from Data import *
 
 class Button:
-    def __init__(self, image, size, position, height, width, action=''):
+    def __init__(self, image, image2,  size, position, height, width, action=''):
         self.size = size
         self.image = image
+        self.image2 = image2
         self.position = position
         self.height = height
         self.width = width
         self.action = action
         self.game_state = ""
 
+    with open("Data/buttons.json", "r") as file :
+        buttons = json.load(file)
+        main_menu_buttons = buttons["main_menu"]
+        level_menu_buttons = buttons["level_selection"]
+        level_1 = buttons["level1"]
+        level_2 = buttons["level2"]
+        level_3 = buttons["level3"]
 
     def is_pressed(self):
         
@@ -42,11 +53,16 @@ class Button:
                 lmanager.load_scene(4)
            
     def hover(self, screen):
-        pygame.draw.rect(screen, "red", pygame.Rect(self.position.x - (self.width+5) / 2, self.position.y - (self.height+5) / 2, self.width+5, self.height+5))
+        #pygame.draw.rect(screen, "red", pygame.Rect(self.position.x - (self.width+5) / 2, self.position.y - (self.height+5) / 2, self.width+5, self.height+5))
+        screen.blit(pygame.image.load(self.image2).convert(), (self.position.x - (self.width+5)/2, self.position.y - (self.height+5)/2))
 
 
     def draw(self, screen):
-        pygame.draw.rect(screen, "blue", pygame.Rect(self.position.x - self.width / 2, self.position.y - self.height / 2, self.width, self.height))
+        #pygame.draw.rect(screen, "blue", pygame.Rect(self.position.x - self.width / 2, self.position.y - self.height / 2, self.width, self.height))
+        screen.blit(pygame.image.load(self.image).convert(), (self.position.x - (self.width+5)/2, self.position.y - (self.height+5)/2))
+        pass
+
+
 
 
 
