@@ -1,65 +1,74 @@
 {
     "ping_pong_ball": {
         "mass": 0.003,  
-        "position": (0, 0),
+        "position": [0, 0],
         "max_speed": 116,
         "radius": 0.022,
         "bounciness": 0.88,
         "damping_coefficient": 0.06,
-        "static": 0,
+        "static": 0
     },
     "soccer_ball": {
         "mass": 0.43,
-        "position": (0, 0),
+        "position": [0, 0],
         "max_speed": 30,
         "radius": 0.11,
         "bounciness": 0.75,
         "damping_coefficient": 0.04,
-        "static": 0,
+        "static": 0
     },
     "basketball": {
         "mass": 0.62,
-        "position": (0, 0),
+        "position": [0, 0],
         "max_speed": 20,
         "radius": 0.12,
         "bounciness": 0.85,
         "damping_coefficient": 0.05,
-        "static": 0,
+        "static": 0
     },
     "tennis_ball": {
         "mass": 0.058,
-        "position": (0, 0),
+        "position": [0, 0],
         "max_speed": 70,
         "radius": 0.033,
         "bounciness": 0.9,
         "damping_coefficient": 0.03,
-        "static": 0,
+        "static": 0
     },
     "bowling_ball": {
         "mass": 6.35,  
-        "position": (0, 0),
+        "position": [0, 0],
         "max_speed": 10,
         "radius": 0.1085,
         "bounciness": 0.1,
         "damping_coefficient": 0.1,
-        "static": 0,
+        "static": 0
     },
     "petanque_ball": {
         "mass": 0.7,
-        "position": (0, 0),
+        "position": [0, 0],
         "max_speed": 15,
         "radius": 0.037,
         "bounciness": 0.4,
         "damping_coefficient": 0.08,
-        "static": 0,
+        "static": 0
     },
     "bloc" : {
         "mass": 0.7,
-        "position": (0, 0),
+        "position": [0, 0],
         "max_speed": 15,
         "radius": 0.037,
         "bounciness": 0.4,
         "damping_coefficient": 0.08,
-        "static": 1,
+        "static": 1
+    },
+    "flag" : {
+        "mass" : 500,
+        "position" : [0, 0],
+        "max_speed" : 15,
+        "radius" : 0.037,
+        "bounciness" : 1,
+        "damping_coefficient" : 1,
+        "static" : 1
     }
 }
