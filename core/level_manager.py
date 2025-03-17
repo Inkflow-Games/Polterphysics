@@ -5,6 +5,10 @@ import json
 from Data import *
 # Dictionary storing level numbers as keys and lists of objects as values
 import pygame
+import core.physics_engine as phy
+
+
+
 
 class Button:
     def __init__(self, image, image2,  size, position, height, width, action=''):
@@ -75,6 +79,12 @@ with open("Data/buttons.json", "r") as file :
     level_2 = buttons["level2"]
     level_3 = buttons["level3"]
 
+with open("Data/levels.json", "r") as f :
+    levels = json.load(f)
+    level_1_o = levels["1"]
+    level_2_o = levels["2"]
+    level_3_o = levels["3"]
+
 def scene_selector(n: int = None) -> int:
     """
     Changes the current level.
@@ -98,6 +108,13 @@ def load_button(b: Button):
         action=b["action"]
         )
     return new_button
+
+def load_objects(l):
+    new =  Object(mass = l[0], position = tuple(l[1]), max_speed = l[2], radius = l[3],bounciness = l[4], damping_coefficient = l[5], static = l[6])
+    phy.physics_engine.add_object(new)
+    return new
+
+    
 
 current_scene = 0
 
@@ -125,6 +142,8 @@ def load_scene(n: int):
             for button in level_1.values():
                button_list.append(load_button(button))
             print("level 1 loaded")
+            for object in level_1_o.values() :
+                object_list.append()
 
         case 3:
             button_list = []
