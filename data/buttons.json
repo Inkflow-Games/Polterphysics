@@ -33,8 +33,8 @@
   "level_selection": {
     "Level1": {
       "size": 1,
-      "image": "Data\\ButtonsImages\\PlayButton.png",
-      "image2": "Data\\ButtonsImages\\PlayButtonPressed.png",
+      "image": "Data\\ButtonsImages\\Lvl1Button.png",
+      "image2": "Data\\ButtonsImages\\Lvl1ButtonPressed.png",
       "position": [ 900, 200 ],
       "height": 75,
       "width": 150,
@@ -42,8 +42,8 @@
     },
     "Level2": {
       "size": 1,
-      "image": "Data\\ButtonsImages\\PlayButton.png",
-      "image2": "Data\\ButtonsImages\\PlayButtonPressed.png",
+      "image": "Data\\ButtonsImages\\Lvl2Button.png",
+      "image2": "Data\\ButtonsImages\\Lvl2ButtonPressed.png",
       "position": [ 900, 350 ],
       "height": 75,
       "width": 150,
@@ -51,8 +51,8 @@
     },
     "Level3": {
       "size": 1,
-      "image": "Data\\ButtonsImages\\PlayButton.png",
-      "image2": "Data\\ButtonsImages\\PlayButtonPressed.png",
+      "image": "Data\\ButtonsImages\\Lvl3Button.png",
+      "image2": "Data\\ButtonsImages\\Lvl3ButtonPressed.png",
       "position": [ 900, 500 ],
       "height": 75,
       "width": 150,
