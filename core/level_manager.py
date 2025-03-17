@@ -1,14 +1,10 @@
 import pygame
 from objects.object import *
 import json
-#from ui.main_menu import *
 from Data import *
 # Dictionary storing level numbers as keys and lists of objects as values
 import pygame
 import core.physics_engine as phy
-
-
-
 
 class Button:
     def __init__(self, image, image2,  size, position, height, width, action=''):
@@ -64,14 +60,9 @@ class Button:
         screen.blit(pygame.image.load(self.image).convert(), (self.position.x - (self.width+5)/2, self.position.y - (self.height+5)/2))
         pass
 
-
-
-
-levels = {1: [], 2: [],3:[]}  # The ground is assumed to be a non-possessable object
-
 # Global variable to track the current level
 
-with open("Data/buttons.json", "r") as file :
+with open("Data/buttons.json", "r") as file : #load all the buttons and split them into multiple lists
     buttons = json.load(file)
     main_menu_buttons = buttons["main_menu"]
     level_menu_buttons = buttons["level_selection"]
@@ -79,25 +70,16 @@ with open("Data/buttons.json", "r") as file :
     level_2 = buttons["level2"]
     level_3 = buttons["level3"]
 
-with open("Data/levels.json", "r") as f :
-    levels = json.load(f)
-    level_1_o = levels["1"]
-    level_2_o = levels["2"]
-    level_3_o = levels["3"]
-
-def scene_selector(n: int = None) -> int:
-    """
-    Changes the current level.
-    If no argument is given, it increments the current level by 1.
-
-    :param n: The new level number (optional, defaults to current_level + 1)
-    :return: The updated level number
-    """
+    #with open("Data/levels.json", "r") as f : #load the different objects for the level
+       # levels = json.load(f)
+        #level_1_o = levels["1"]
+        #level_2_o = levels["2"]
+        #level_3_o = levels["3"]
 
 button_list = []
 object_list = []
 
-def load_button(b: Button):
+def load_button(b):
     new_button = Button(
         size=b["size"],
         image=b["image"],
@@ -114,47 +96,46 @@ def load_objects(l):
     phy.physics_engine.add_object(new)
     return new
 
-    
-
 current_scene = 0
 
 def load_scene(n: int):
     global button_list
+    global object_list
     global current_scene 
     current_scene = n
+    object_list = []
+    button_list = []
     
     match n:
         case 0:
-            button_list = []
             for button in main_menu_buttons.values(): #loading the buttons we have to draw each frame
                 button_list.append(load_button(button))
-            
             print("main menu loaded", len(button_list))
 
         case 1:
-            button_list = []
             for button in level_menu_buttons.values():
                 button_list.append(load_button(button))
             print("level manager loaded", len(button_list))
 
         case 2:
-            button_list = []
             for button in level_1.values():
                button_list.append(load_button(button))
+            # for object in level_1_o.values() :
+            #     object_list.append(load_objects(object))
             print("level 1 loaded")
-            for object in level_1_o.values() :
-                object_list.append()
 
         case 3:
-            button_list = []
             for button in level_2.values():
                 button_list.append(load_button(button))
+            # for object in level_2_o.values() :
+            #     object_list.append(load_objects(object))
             print("level 2 loaded")
 
         case 4:
-            button_list = []
             for button in level_3.values():
                 button_list.append(load_button(button))
+            # for object in level_3_o.values() :
+            #     object_list.append(load_objects(object))
             print("level 3 loaded")
 
         case _:
