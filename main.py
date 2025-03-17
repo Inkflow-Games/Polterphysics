@@ -37,12 +37,16 @@ pygame.display.set_caption("Physics Engine Test")
 # Initialize physics engine
 physics_engine = PhysicsEngine()
 
+lman.load_scene(0) #initialize the main menu scene
+
 # Create a test object (simulating a basketball)
-test_object = Object(mass=0.6, position=(400, 100), radius=15, max_speed=100, bounciness=0.8, damping_coefficient=0.02)
+# test_object = Object(mass=0.6, position=(400, 100), radius=15, max_speed=100, bounciness=0.8, damping_coefficient=0.02)
+test_object = lman.object_list[-1]
 physics_engine.add_object(test_object)
 
 # Create a second test object (another basketball)
-second_object = Object(mass=2, position=(600, 100), radius=25, max_speed=200, bounciness=0.07, damping_coefficient=0)
+# second_object = Object(mass=2, position=(600, 100), radius=25, max_speed=200, bounciness=0.07, damping_coefficient=0)
+second_object = lman.object_list[-2]
 physics_engine.add_object(second_object)
 
 # Clock to control frame rate
@@ -68,8 +72,6 @@ key_state_2 = {
 
 # Ground level (just above the bottom of the window)
 ground_level = display_height - 20
-
-lman.load_scene(0) #initialize the main menu scene
 
 
 game_state = "paused"

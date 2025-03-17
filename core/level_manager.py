@@ -92,7 +92,7 @@ def load_button(b):
     return new_button
 
 def load_objects(l):
-    new =  Object(mass = l[0], position = tuple(l[1]), max_speed = l[2], radius = l[3],bounciness = l[4], damping_coefficient = l[5], static = l[6])
+    new =  Object(mass = l[0], position = Vector2(l[1]), max_speed = l[2], radius = l[3],bounciness = l[4], damping_coefficient = l[5], static = l[6])
     return new
 
 current_scene = 0
@@ -109,6 +109,8 @@ def load_scene(n: int):
         case 0:
             for button in main_menu_buttons.values(): #loading the buttons we have to draw each frame
                 button_list.append(load_button(button))
+            for object in level_1_o.values() :
+                object_list.append(load_objects(object))
             print("main menu loaded", len(button_list))
 
         case 1:
