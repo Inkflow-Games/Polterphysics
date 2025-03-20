@@ -33,21 +33,27 @@ class Button:
                 pygame.quit()
             case "Restart Level" :
                 #load_scene(n)
+                self.game_state = "paused"
                 load_scene(current_scene)
             case "Load Main Menu" :
                 #load_scene(0)
+                self.game_state = "menu"
                 load_scene(0)
             case "Load Level Menu" :
                 #load_scene(1)
+                self.game_state = "menu"
                 load_scene(1)
             case "Level1" :
                 #load_scene(2)
+                self.game_state = "paused"
                 load_scene(2)
             case "Level2" :
                 #load_scene(3)
+                self.game_state = "paused"
                 load_scene(3)
             case "Level3" :
                 #load_scene(4)
+                self.game_state = "paused"
                 load_scene(4)
            
     def hover(self, screen):
@@ -109,8 +115,6 @@ def load_scene(n: int):
         case 0:
             for button in main_menu_buttons.values(): #loading the buttons we have to draw each frame
                 button_list.append(load_button(button))
-            for object in level_1_o.values() :
-                object_list.append(load_objects(object))
             print("main menu loaded", len(button_list))
 
         case 1:
