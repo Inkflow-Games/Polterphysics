@@ -20,7 +20,6 @@ from core.physics_engine import PhysicsEngine
 from core.collision import resolve_collision
 from objects.object import Object
 from utils.math_utils import *
-from ui.main_menu import *
 from core.input_handler import *
 from utils.math_utils import WIDTH, HEIGHT, FPS
 import core.level_manager as lman
