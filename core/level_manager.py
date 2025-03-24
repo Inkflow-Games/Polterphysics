@@ -1,7 +1,7 @@
 import pygame
 from objects.object import *
 import json
-from Data import *
+from data import *
 # Dictionary storing level numbers as keys and lists of objects as values
 import pygame
 import core.physics_engine as phy
@@ -68,7 +68,7 @@ class Button:
 
 # Global variable to track the current level
 
-with open("Data/buttons.json", "r") as file : #load all the buttons and split them into multiple lists
+with open("data/buttons.json", "r") as file : #load all the buttons and split them into multiple lists
     buttons = json.load(file)
     main_menu_buttons = buttons["main_menu"]
     level_menu_buttons = buttons["level_selection"]
@@ -76,7 +76,7 @@ with open("Data/buttons.json", "r") as file : #load all the buttons and split th
     level_2 = buttons["level2"]
     level_3 = buttons["level3"]
 
-    with open("Data/levels.json", "r") as f : #load the different objects for the level
+    with open("data/levels.json", "r") as f : #load the different objects for the level
        levels = json.load(f)
        level_1_o = levels["1"]
        level_2_o = levels["2"]

@@ -2,8 +2,8 @@
   "main_menu": {
     "Play": {
       "size": 1,
-      "image": "Data\\ButtonsImages\\PlayButton.png",
-      "image2": "Data\\ButtonsImages\\PlayButtonPressed.png",
+      "image": "data\\ButtonsImages\\PlayButton.png",
+      "image2": "data\\ButtonsImages\\PlayButtonPressed.png",
       "position": [ 900, 200 ],
       "height": 75,
       "width": 150,
@@ -11,8 +11,8 @@
     },
     "Pause": {
       "size": 1,
-      "image": "Data\\ButtonsImages\\PlayButton.png",
-      "image2": "Data\\ButtonsImages\\PlayButtonPressed.png",
+      "image": "data\\ButtonsImages\\PlayButton.png",
+      "image2": "data\\ButtonsImages\\PlayButtonPressed.png",
       "position": [ 900, 80 ],
       "height": 75,
       "width": 150,
@@ -20,8 +20,8 @@
     },
     "Load Level Menu": {
       "size": 1,
-      "image": "Data\\ButtonsImages\\LevelButton.png",
-      "image2": "Data\\ButtonsImages\\LevelButtonPressed.png",
+      "image": "data\\ButtonsImages\\LevelButton.png",
+      "image2": "data\\ButtonsImages\\LevelButtonPressed.png",
       "position": [ 120, 550 ],
       "height": 75,
       "width": 150,
@@ -33,8 +33,8 @@
   "level_selection": {
     "Level1": {
       "size": 1,
-      "image": "Data\\ButtonsImages\\Lvl1Button.png",
-      "image2": "Data\\ButtonsImages\\Lvl1ButtonPressed.png",
+      "image": "data\\ButtonsImages\\Lvl1Button.png",
+      "image2": "data\\ButtonsImages\\Lvl1ButtonPressed.png",
       "position": [ 900, 200 ],
       "height": 75,
       "width": 150,
@@ -42,8 +42,8 @@
     },
     "Level2": {
       "size": 1,
-      "image": "Data\\ButtonsImages\\Lvl2Button.png",
-      "image2": "Data\\ButtonsImages\\Lvl2ButtonPressed.png",
+      "image": "data\\ButtonsImages\\Lvl2Button.png",
+      "image2": "data\\ButtonsImages\\Lvl2ButtonPressed.png",
       "position": [ 900, 350 ],
       "height": 75,
       "width": 150,
@@ -51,8 +51,8 @@
     },
     "Level3": {
       "size": 1,
-      "image": "Data\\ButtonsImages\\Lvl3Button.png",
-      "image2": "Data\\ButtonsImages\\Lvl3ButtonPressed.png",
+      "image": "data\\ButtonsImages\\Lvl3Button.png",
+      "image2": "data\\ButtonsImages\\Lvl3ButtonPressed.png",
       "position": [ 900, 500 ],
       "height": 75,
       "width": 150,
@@ -60,8 +60,8 @@
     },
     "Exit": {
       "size": 1,
-      "image": "Data\\ButtonsImages\\HomeButton.png",
-      "image2": "Data\\ButtonsImages\\HomeButtonPressed.png",
+      "image": "data\\ButtonsImages\\HomeButton.png",
+      "image2": "data\\ButtonsImages\\HomeButtonPressed.png",
       "position": [ 50, 750 ],
       "height": 75,
       "width": 150,
@@ -74,8 +74,8 @@
   "level1": {
     "Exit": {
       "size": 1,
-      "image": "Data\\ButtonsImages\\LevelButton.png",
-      "image2": "Data\\ButtonsImages\\LevelButtonPressed.png",
+      "image": "data\\ButtonsImages\\LevelButton.png",
+      "image2": "data\\ButtonsImages\\LevelButtonPressed.png",
       "position": [ 50, 750 ],
       "height": 75,
       "width": 150,
@@ -83,8 +83,8 @@
     },
     "Restart": {
       "size": 1,
-      "image": "Data\\ButtonsImages\\RestartButton.png",
-      "image2": "Data\\ButtonsImages\\RestartButtonPressed.png",
+      "image": "data\\ButtonsImages\\RestartButton.png",
+      "image2": "data\\ButtonsImages\\RestartButtonPressed.png",
       "position": [ 75, 550 ],
       "height": 150,
       "width": 150,
@@ -97,8 +97,8 @@
   "level2": {
     "Exit": {
       "size": 1,
-      "image": "Data\\ButtonsImages\\LevelButton.png",
-      "image2": "Data\\ButtonsImages\\LevelButtonPressed.png",
+      "image": "data\\ButtonsImages\\LevelButton.png",
+      "image2": "data\\ButtonsImages\\LevelButtonPressed.png",
       "position": [ 50, 750 ],
       "height": 75,
       "width": 150,
@@ -106,8 +106,8 @@
     },
     "Restart": {
       "size": 1,
-      "image": "Data\\ButtonsImages\\RestartButton.png",
-      "image2": "Data\\ButtonsImages\\RestartButtonPressed.png",
+      "image": "data\\ButtonsImages\\RestartButton.png",
+      "image2": "data\\ButtonsImages\\RestartButtonPressed.png",
       "position": [ 75, 550 ],
       "height": 150,
       "width": 150,
@@ -120,8 +120,8 @@
   "level3": {
     "Exit": {
       "size": 1,
-      "image": "Data\\ButtonsImages\\LevelButton.png",
-      "image2": "Data\\ButtonsImages\\LevelButtonPressed.png",
+      "image": "data\\ButtonsImages\\LevelButton.png",
+      "image2": "data\\ButtonsImages\\LevelButtonPressed.png",
       "position": [ 50, 750 ],
       "height": 75,
       "width": 150,
@@ -129,8 +129,8 @@
     },
     "Restart": {
       "size": 1,
-      "image": "Data\\ButtonsImages\\RestartButton.png",
-      "image2": "Data\\ButtonsImages\\RestartButtonPressed.png",
+      "image": "data\\ButtonsImages\\RestartButton.png",
+      "image2": "data\\ButtonsImages\\RestartButtonPressed.png",
       "position": [ 75, 550 ],
       "height": 150,
       "width": 150,
