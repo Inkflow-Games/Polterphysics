@@ -113,6 +113,115 @@
       "size": 1,
       "image": "data\\ButtonsImages\\LevelButton.png",
       "image2": "data\\ButtonsImages\\LevelButtonPressed.png",
+      "position": [ 900, 80 ],
+      "height": 75,
+      "width": 150,
+      "action": "Pause"
+    },
+    "Load Level Menu": {
+      "size": 1,
+      "image": "data\\ButtonsImages\\LevelButton.png",
+      "image2": "data\\ButtonsImages\\LevelButtonPressed.png",
+      "position": [ 120, 550 ],
+      "height": 75,
+      "width": 150,
+      "action": "Load Level Menu"
+    }
+
+  },
+
+  "level_selection": {
+    "Level1": {
+      "size": 1,
+      "image": "data\\ButtonsImages\\Lvl1Button.png",
+      "image2": "data\\ButtonsImages\\Lvl1ButtonPressed.png",
+      "position": [ 900, 200 ],
+      "height": 75,
+      "width": 150,
+      "action": "Level1"
+    },
+    "Level2": {
+      "size": 1,
+      "image": "data\\ButtonsImages\\Lvl2Button.png",
+      "image2": "data\\ButtonsImages\\Lvl2ButtonPressed.png",
+      "position": [ 900, 350 ],
+      "height": 75,
+      "width": 150,
+      "action": "Level2"
+    },
+    "Level3": {
+      "size": 1,
+      "image": "data\\ButtonsImages\\Lvl3Button.png",
+      "image2": "data\\ButtonsImages\\Lvl3ButtonPressed.png",
+      "position": [ 900, 500 ],
+      "height": 75,
+      "width": 150,
+      "action": "Level3"
+    },
+    "Exit": {
+      "size": 1,
+      "image": "data\\ButtonsImages\\HomeButton.png",
+      "image2": "data\\ButtonsImages\\HomeButtonPressed.png",
+      "position": [ 50, 750 ],
+      "height": 75,
+      "width": 150,
+      "action": "Load Main Menu"
+    }
+
+  },
+
+
+  "level1": {
+    "Exit": {
+      "size": 1,
+      "image": "data\\ButtonsImages\\LevelButton.png",
+      "image2": "data\\ButtonsImages\\LevelButtonPressed.png",
+      "position": [ 50, 750 ],
+      "height": 75,
+      "width": 150,
+      "action": "Load Level Menu"
+    },
+    "Restart": {
+      "size": 1,
+      "image": "data\\ButtonsImages\\RestartButton.png",
+      "image2": "data\\ButtonsImages\\RestartButtonPressed.png",
+      "position": [ 75, 550 ],
+      "height": 150,
+      "width": 150,
+      "action": "Restart Level"
+    }
+
+  },
+
+
+  "level2": {
+    "Exit": {
+      "size": 1,
+      "image": "data\\ButtonsImages\\LevelButton.png",
+      "image2": "data\\ButtonsImages\\LevelButtonPressed.png",
+      "position": [ 50, 750 ],
+      "height": 75,
+      "width": 150,
+      "action": "Load Level Menu"
+    },
+    "Restart": {
+      "size": 1,
+      "image": "data\\ButtonsImages\\RestartButton.png",
+      "image2": "data\\ButtonsImages\\RestartButtonPressed.png",
+      "position": [ 75, 550 ],
+      "height": 150,
+      "width": 150,
+      "action": "Restart Level"
+    }
+
+  },
+
+
+  "level3": {
+    "Exit": {
+      "size": 1,
+      "image": "data\\ButtonsImages\\LevelButton.png",
+      "image2": "data\\ButtonsImages\\LevelButtonPressed.png",
       "position": [ 50, 750 ],
       "height": 75,
       "width": 150,

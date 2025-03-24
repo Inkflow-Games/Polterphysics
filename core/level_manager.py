@@ -1,4 +1,3 @@
-from email.policy import default
 import pygame
 from objects.object import *
 import json
