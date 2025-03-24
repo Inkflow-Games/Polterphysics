@@ -4,10 +4,19 @@
       "size": 1,
       "image": "data\\ButtonsImages\\LevelButton.png",
       "image2": "data\\ButtonsImages\\LevelButtonPressed.png",
-      "position": [ 550, 350 ],
+      "position": [ 100, 450 ],
       "height": 75,
       "width": 150,
       "action": "Load Level Menu"
+    },
+    "Option": {
+      "size": 1,
+      "image": "data\\ButtonsImages\\OptionButton.png",
+      "image2": "data\\ButtonsImages\\OptionButtonPressed.png",
+      "position": [ 100, 250 ],
+      "height": 75,
+      "width": 150,
+      "action": "Load Option Menu"
     }
 
   },
