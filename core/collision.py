@@ -88,4 +88,3 @@ def resolve_collision(circle1, circle2):
             # Compute final velocity vectors by combining normal and tangential components
             circle1.velocity = new_velocity1_normal_vector + new_velocity1_tangent_vector
             circle2.velocity = new_velocity2_normal_vector + new_velocity2_tangent_vector
-
