@@ -24,6 +24,7 @@ from core.input_handler import *
 from utils.math_utils import WIDTH, HEIGHT, FPS
 import core.level_manager as lman
 import json
+from editor.level_editor import LevelEditor  # Import the LevelEditor
 
 # Initialize Pygame
 pygame.init()
@@ -71,8 +72,7 @@ ground_level = display_height - 20
 lman.load_scene(0)
 
 game_state = "menu"
-
-
+level_editor = None  # Initialize the level editor as None
 
 # Main game loop
 while running:
@@ -81,9 +81,17 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-        else :
+        else:
             if GetMouseInput(event):  # Get the click input
                 click = True
+
+    # Check if the red square is clicked (to open level editor)
+    if game_state == "menu":
+        mouse_pos = pygame.mouse.get_pos()
+        if pygame.mouse.get_pressed()[0]:  # Check for left click
+            if 400 < mouse_pos[0] < 500 and 350 < mouse_pos[1] < 450:  # Red square coordinates
+                level_editor = LevelEditor(screen)  # Initialize the level editor
+                game_state = "level_editor"  # Switch game state to level editor
 
     # Get key states for the first object (Arrow keys)
     keys = pygame.key.get_pressed()
@@ -91,8 +99,7 @@ while running:
     # Get key states for the second object (ZQSD keys)
     keys_2 = pygame.key.get_pressed()
 
-    if game_state == "paused" : # only check input when the game is paused
-
+    if game_state == "paused" :  # only check input when the game is paused
         # Apply force to the first object (Arrow keys)
         if keys[pygame.K_RIGHT] and not key_state_1[pygame.K_RIGHT]:
             test_object.apply_force(Vector2(newton_to_force(30), 0))  # Apply force to the right
@@ -109,7 +116,6 @@ while running:
         if keys[pygame.K_UP] and not key_state_1[pygame.K_UP]:
             test_object.apply_force(Vector2(0, -newton_to_force(30)))  # Apply force upward
             key_state_1[pygame.K_UP] = True
-
 
         # Apply force to the second object (ZQSD keys)
         if keys_2[pygame.K_d] and not key_state_2[pygame.K_d]:
@@ -145,7 +151,7 @@ while running:
         if not keys_2[key]:
             key_state_2[key] = False
 
-    if game_state == "running" : # the physics is calculated only during play mode
+    if game_state == "running" :  # the physics is calculated only during play mode
         # Update physics engine based on time delta
         dt = clock.get_time() / 100.0  # Convert milliseconds to a suitable scale
         resolve_collision(test_object,second_object)
@@ -157,9 +163,12 @@ while running:
         pygame.draw.circle(screen, (255, 0, 0), (int(test_object.position.x), int(test_object.position.y)), test_object.radius)  # Draw first object
         pygame.draw.circle(screen, (0, 0, 255), (int(second_object.position.x), int(second_object.position.y)), second_object.radius)  # Draw second object
 
+    # Draw the red square on the menu screen
+    if game_state == "menu":
+        pygame.draw.rect(screen, (255, 0, 0), (400, 350, 100, 100))  # Red square to open the editor
 
     # Draw all buttons in the correct order
-    new_scene = lman.current_scene #verify if we changed of scene
+    new_scene = lman.current_scene  # verify if we changed of scene
     running_scene = new_scene
     for button in lman.button_list:
         if (pygame.mouse.get_pos()[0] < button.position[0] + button.width/2) and (pygame.mouse.get_pos()[0] > button.position[0] - button.width/2) and (pygame.mouse.get_pos()[1] < button.position[1] + button.height/2) and (pygame.mouse.get_pos()[1] > button.position[1] - button.height/2) :
@@ -167,17 +176,15 @@ while running:
             if click :
                 button.is_pressed()
                 game_state = button.game_state
-                new_scene = lman.current_scene #verify if we changed of scene
+                new_scene = lman.current_scene  # verify if we changed of scene
                 click = False
-                if game_state!= "menu": #we load new objects if the scene changed
-    
+                if game_state != "menu":  # we load new objects if the scene changed
                     test_object = lman.object_list[-1] 
                     physics_engine.add_object(test_object)
                     second_object = lman.object_list[-2]
                     physics_engine.add_object(second_object)
-        else :
+        else:
             button.draw(screen)
-                    
 
     # Display debug positions
     font = pygame.font.SysFont("Arial", 24)
@@ -188,8 +195,6 @@ while running:
 
     pygame.display.flip()  # Refresh screen
     clock.tick(120)  # Limit FPS to 120
-
-
 
 # Quit Pygame
 pygame.quit()
