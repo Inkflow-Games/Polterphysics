@@ -1,28 +1,10 @@
 {
   "main_menu": {
-    "Play": {
-      "size": 1,
-      "image": "data\\ButtonsImages\\PlayButton.png",
-      "image2": "data\\ButtonsImages\\PlayButtonPressed.png",
-      "position": [ 900, 200 ],
-      "height": 75,
-      "width": 150,
-      "action": "Play"
-    },
-    "Pause": {
-      "size": 1,
-      "image": "data\\ButtonsImages\\PlayButton.png",
-      "image2": "data\\ButtonsImages\\PlayButtonPressed.png",
-      "position": [ 900, 80 ],
-      "height": 75,
-      "width": 150,
-      "action": "Pause"
-    },
     "Load Level Menu": {
       "size": 1,
       "image": "data\\ButtonsImages\\LevelButton.png",
       "image2": "data\\ButtonsImages\\LevelButtonPressed.png",
-      "position": [ 120, 550 ],
+      "position": [ 550, 350 ],
       "height": 75,
       "width": 150,
       "action": "Load Level Menu"
