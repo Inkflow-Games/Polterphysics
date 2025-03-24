@@ -20,9 +20,9 @@ from core.physics_engine import PhysicsEngine
 from core.collision import resolve_collision
 from objects.object import Object
 from utils.math_utils import *
-from ui.main_menu import *
 from core.input_handler import *
 from utils.math_utils import WIDTH, HEIGHT, FPS
+import core.level_manager as lman
 import json
 
 # Initialize Pygame
@@ -68,29 +68,10 @@ key_state_2 = {
 # Ground level (just above the bottom of the window)
 ground_level = display_height - 20
 
-# Charger les boutons depuis le fichier JSON
-with open("data/buttons.json", "r") as file:
-    buttons = json.load(file)
+lman.load_scene(0)
 
-# Accéder aux boutons du menu principal
-main_menu_buttons = buttons["main_menu"]
+game_state = "menu"
 
-# Liste pour stocker les objets Button
-button_list = []
-
-
-# Créer les instances de Button et les ajouter à la liste
-for button in main_menu_buttons.values():
-    new_button = Button(
-        size=button["size"],
-        position = Vector2(button["position"][0], button["position"][1]),
-        height=button["height"],
-        width=button["width"],
-        action=button["action"]
-    )
-    button_list.append(new_button)
-
-game_state = "paused"
 
 
 # Main game loop
@@ -107,49 +88,52 @@ while running:
     # Get key states for the first object (Arrow keys)
     keys = pygame.key.get_pressed()
 
-    # Apply force to the first object (Arrow keys)
-    if keys[pygame.K_RIGHT] and not key_state_1[pygame.K_RIGHT]:
-        test_object.apply_force(Vector2(newton_to_force(30), 0))  # Apply force to the right
-        key_state_1[pygame.K_RIGHT] = True
-
-    if keys[pygame.K_LEFT] and not key_state_1[pygame.K_LEFT]:
-        test_object.apply_force(Vector2(-newton_to_force(30), 0))  # Apply force to the left
-        key_state_1[pygame.K_LEFT] = True
-
-    if keys[pygame.K_DOWN] and not key_state_1[pygame.K_DOWN]:
-        test_object.apply_force(Vector2(0, newton_to_force(30)))  # Apply force downward
-        key_state_1[pygame.K_DOWN] = True
-
-    if keys[pygame.K_UP] and not key_state_1[pygame.K_UP]:
-        test_object.apply_force(Vector2(0, -newton_to_force(30)))  # Apply force upward
-        key_state_1[pygame.K_UP] = True
-
     # Get key states for the second object (ZQSD keys)
     keys_2 = pygame.key.get_pressed()
 
-    # Apply force to the second object (ZQSD keys)
-    if keys_2[pygame.K_d] and not key_state_2[pygame.K_d]:
-        second_object.apply_force(Vector2(newton_to_force(46), 0))
-        key_state_2[pygame.K_d] = True
+    if game_state == "paused" : # only check input when the game is paused
 
-    if keys_2[pygame.K_q] and not key_state_2[pygame.K_q]:
-        second_object.apply_force(Vector2(-newton_to_force(46), 0))
-        key_state_2[pygame.K_q] = True
+        # Apply force to the first object (Arrow keys)
+        if keys[pygame.K_RIGHT] and not key_state_1[pygame.K_RIGHT]:
+            test_object.apply_force(Vector2(newton_to_force(30), 0))  # Apply force to the right
+            key_state_1[pygame.K_RIGHT] = True
 
-    if keys_2[pygame.K_s] and not key_state_2[pygame.K_s]:
-        second_object.apply_force(Vector2(0, newton_to_force(46)))
-        key_state_2[pygame.K_s] = True
+        if keys[pygame.K_LEFT] and not key_state_1[pygame.K_LEFT]:
+            test_object.apply_force(Vector2(-newton_to_force(30), 0))  # Apply force to the left
+            key_state_1[pygame.K_LEFT] = True
 
-    if keys_2[pygame.K_z] and not key_state_2[pygame.K_z]:
-        second_object.apply_force(Vector2(0, -newton_to_force(46)))
-        key_state_2[pygame.K_z] = True
+        if keys[pygame.K_DOWN] and not key_state_1[pygame.K_DOWN]:
+            test_object.apply_force(Vector2(0, newton_to_force(30)))  # Apply force downward
+            key_state_1[pygame.K_DOWN] = True
+
+        if keys[pygame.K_UP] and not key_state_1[pygame.K_UP]:
+            test_object.apply_force(Vector2(0, -newton_to_force(30)))  # Apply force upward
+            key_state_1[pygame.K_UP] = True
+
+
+        # Apply force to the second object (ZQSD keys)
+        if keys_2[pygame.K_d] and not key_state_2[pygame.K_d]:
+            second_object.apply_force(Vector2(newton_to_force(46), 0))
+            key_state_2[pygame.K_d] = True
+
+        if keys_2[pygame.K_q] and not key_state_2[pygame.K_q]:
+            second_object.apply_force(Vector2(-newton_to_force(46), 0))
+            key_state_2[pygame.K_q] = True
+
+        if keys_2[pygame.K_s] and not key_state_2[pygame.K_s]:
+            second_object.apply_force(Vector2(0, newton_to_force(46)))
+            key_state_2[pygame.K_s] = True
+
+        if keys_2[pygame.K_z] and not key_state_2[pygame.K_z]:
+            second_object.apply_force(Vector2(0, -newton_to_force(46)))
+            key_state_2[pygame.K_z] = True
 
     # Check if we pause the game with space
     if keys_2[pygame.K_SPACE] and not key_state_2[pygame.K_SPACE] :
         key_state_2[pygame.K_SPACE] = True
         if game_state == 'paused' :
             game_state = 'running'
-        else : 
+        elif  game_state == 'running': 
             game_state = "paused"
 
     # Reset key state when key is released
@@ -169,19 +153,31 @@ while running:
 
     # Draw frame
     screen.fill((0, 0, 0))  # Clear screen
-    pygame.draw.circle(screen, (255, 0, 0), (int(test_object.position.x), int(test_object.position.y)), test_object.radius)  # Draw first object
-    pygame.draw.circle(screen, (0, 0, 255), (int(second_object.position.x), int(second_object.position.y)), second_object.radius)  # Draw second object
+    if game_state != "menu":
+        pygame.draw.circle(screen, (255, 0, 0), (int(test_object.position.x), int(test_object.position.y)), test_object.radius)  # Draw first object
+        pygame.draw.circle(screen, (0, 0, 255), (int(second_object.position.x), int(second_object.position.y)), second_object.radius)  # Draw second object
+
 
     # Draw all buttons in the correct order
-    for button in button_list:
+    new_scene = lman.current_scene #verify if we changed of scene
+    running_scene = new_scene
+    for button in lman.button_list:
         if (pygame.mouse.get_pos()[0] < button.position[0] + button.width/2) and (pygame.mouse.get_pos()[0] > button.position[0] - button.width/2) and (pygame.mouse.get_pos()[1] < button.position[1] + button.height/2) and (pygame.mouse.get_pos()[1] > button.position[1] - button.height/2) :
             button.hover(screen)   
             if click :
                 button.is_pressed()
                 game_state = button.game_state
+                new_scene = lman.current_scene #verify if we changed of scene
                 click = False
+                if game_state!= "menu": #we load new objects if the scene changed
+    
+                    test_object = lman.object_list[-1] 
+                    physics_engine.add_object(test_object)
+                    second_object = lman.object_list[-2]
+                    physics_engine.add_object(second_object)
         else :
             button.draw(screen)
+                    
 
     # Display debug positions
     font = pygame.font.SysFont("Arial", 24)
