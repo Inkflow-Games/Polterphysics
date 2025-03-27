@@ -34,7 +34,7 @@ class Object:
         static (bool): Whether the object is immovable and unaffected by forces.
     """
     
-    def __init__(self, mass, position, radius=0, max_speed=70, bounciness=0.8, damping_coefficient=0, static=False):
+    def __init__(self, name, mass, position, radius=0, max_speed=70, bounciness=0.8, damping_coefficient=0, static=False):
         """
         Initializes an Object instance with the specified properties.
 
@@ -47,6 +47,7 @@ class Object:
         damping_coefficient (float, optional): The damping effect coefficient (default is 0).
         static (bool, optional): If True, the object does not move (default is False).
         """
+        self.name = name
         self.mass = mass
         self.position = Vector2(position)
         self.velocity = Vector2(0, 0)

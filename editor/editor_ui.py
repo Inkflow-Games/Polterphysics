@@ -16,14 +16,15 @@ class LevelEditorUI:
             object_data = json.load(f)
             self.available_objects = [
                 Object(
-                    object_data[name]["mass"],
-                    object_data[name]["position"],
-                    object_data[name]["radius"],
-                    object_data[name]["max_speed"],
-                    object_data[name]["bounciness"],
-                    object_data[name]["damping_coefficient"],
-                    object_data[name]["static"]
-                ) for name in object_data
+                    object_data[id]["name"],
+                    object_data[id]["mass"],
+                    object_data[id]["position"],
+                    object_data[id]["radius"],
+                    object_data[id]["max_speed"],
+                    object_data[id]["bounciness"],
+                    object_data[id]["damping_coefficient"],
+                    object_data[id]["static"]
+                ) for id in object_data
             ]
 
     def draw(self):

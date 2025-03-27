@@ -1,5 +1,6 @@
 {
-    "ping_pong_ball": {
+    "1" : {
+        "name" : "ping_pong_ball",
         "mass": 0.003,  
         "position": [0, 0],
         "max_speed": 116,
@@ -8,7 +9,8 @@
         "damping_coefficient": 0.06,
         "static": 0
     },
-    "soccer_ball": {
+    "2" : {
+        "name" : "soccer_ball",
         "mass": 0.43,
         "position": [0, 0],
         "max_speed": 30,
@@ -17,7 +19,8 @@
         "damping_coefficient": 0.04,
         "static": 0
     },
-    "basketball": {
+    "3" : {
+        "name" : "basket_ball",
         "mass": 0.62,
         "position": [0, 0],
         "max_speed": 20,
@@ -26,7 +29,8 @@
         "damping_coefficient": 0.05,
         "static": 0
     },
-    "tennis_ball": {
+    "4" : {
+        "name" : "tennis_ball",
         "mass": 0.058,
         "position": [0, 0],
         "max_speed": 70,
@@ -35,7 +39,8 @@
         "damping_coefficient": 0.03,
         "static": 0
     },
-    "bowling_ball": {
+    "5" : {
+        "name" : "bowling_ball",
         "mass": 6.35,  
         "position": [0, 0],
         "max_speed": 10,
@@ -44,7 +49,8 @@
         "damping_coefficient": 0.1,
         "static": 0
     },
-    "petanque_ball": {
+    "6" : {
+        "name" : "petanque_ball",
         "mass": 0.7,
         "position": [0, 0],
         "max_speed": 15,
@@ -53,7 +59,8 @@
         "damping_coefficient": 0.08,
         "static": 0
     },
-    "bloc" : {
+    "7" : {
+        "name" : "block",
         "mass": 0.7,
         "position": [0, 0],
         "max_speed": 15,
@@ -62,7 +69,8 @@
         "damping_coefficient": 0.08,
         "static": 1
     },
-    "flag" : {
+    "8" : {
+        "name" : "flag",
         "mass" : 500,
         "position" : [0, 0],
         "max_speed" : 15,

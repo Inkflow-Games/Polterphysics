@@ -43,6 +43,7 @@ class LevelEditor:
         if self.selected_object:
             # Placer l'objet sélectionné à la position du clic
             new_obj = Object(
+                self.selected_object.name,
                 self.selected_object.mass,
                 (mouse_pos[0], mouse_pos[1]),  # Utilise les coordonnées du clic
                 self.selected_object.radius,
@@ -60,13 +61,15 @@ class LevelEditor:
         with open(path, "r") as file:
             levels_data = json.load(file)
 
-        level_id = "AAAAA"  # À changer si nécessaire
+        level_id = "4"  # À changer si nécessaire
         level_data = {}
 
         # Ajoutez les objets placés sur le niveau sous forme de dictionnaire
+        id = 1
         for obj in self.objects_on_level:
             # Format: "nom_objet": [masse, position, rayon, vitesse_max, rebond, coeff_amortissement, statique]
-            level_data[obj.name] = [
+            level_data[id] = [
+                obj.name,
                 obj.mass,
                 [obj.position.x, obj.position.y],  # Position en [x, y]
                 obj.radius,
@@ -75,6 +78,7 @@ class LevelEditor:
                 obj.damping_coefficient,
                 obj.static
             ]
+            id += 1
 
         # Ajout de ce niveau au dictionnaire global des niveaux
         levels_data[level_id] = level_data
