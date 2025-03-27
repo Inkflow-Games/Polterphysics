@@ -1,6 +1,5 @@
 import pygame
 import json
-import math
 from editor.editor_ui import LevelEditorUI
 from pygame.locals import *
 from objects.object import Object
