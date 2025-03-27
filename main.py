@@ -12,14 +12,13 @@ def main():
 
     running = True
     while running:
-        screen.fill((30, 30, 30))
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
             else:
                 editor.handle_event(event)
         
-        editor.draw()
+        editor.update()
         pygame.display.flip()
         clock.tick(60)
 

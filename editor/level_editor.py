@@ -6,25 +6,26 @@ from pygame.locals import *
 from objects.object import Object
 
 class LevelEditor:
-    def __init__(self, screen):
+    def __init__(self, screen, placed_objects = []):
         self.screen = screen
-        self.ui = LevelEditorUI(screen)
-        self.objects_on_level = []
+        self.placed_objects = placed_objects
+        self.ui = LevelEditorUI(screen, placed_objects)
         self.selected_object = None
 
     def draw(self):
         """ Affiche l'interface de l'éditeur de niveau """
-        self.ui.draw()
+        self.ui.draw(self.selected_object)
 
     def handle_event(self, event):
         """ Gère les événements de la souris """
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse_pos = pygame.mouse.get_pos()
-            if mouse_pos[0] < 360:  # Sélection d'un objet dans le panneau gauche
-                self.select_object(mouse_pos)
-            else:  # Placer l'objet à l'endroit du clic
-                self.place_selected_object(mouse_pos)
-            if event.button == 3:  # Clic droit pour sauvegarder
+            if event.button == 1 :
+                if mouse_pos[0] < 360:  # Sélection d'un objet dans le panneau gauche
+                    self.select_object(mouse_pos)
+                elif self.selected_object and 365 + self.selected_object.radius < mouse_pos[0] < 1555 - self.selected_object.radius :  # Placer l'objet à l'endroit du clic
+                    self.place_selected_object(mouse_pos)
+            elif event.button == 3:  # Clic droit pour sauvegarder
                 self.save_level()
 
     def select_object(self, mouse_pos):
@@ -37,6 +38,7 @@ class LevelEditor:
                 print(f"Objet sélectionné : {self.selected_object}")
                 break
             y_offset += obj.radius * 2 + FIXED_MARGIN
+        self.draw()
 
     def place_selected_object(self, mouse_pos):
         """ Place un objet sélectionné à l'endroit du clic """
@@ -52,8 +54,19 @@ class LevelEditor:
                 self.selected_object.damping_coefficient,
                 self.selected_object.static
             )
-            self.objects_on_level.append(new_obj)
+            self.placed_objects.append(new_obj)
             print(f"Objet placé à {mouse_pos}")
+    
+    def display_objects(self):
+        """ Affiche les objets placés sur le niveau """
+        for obj in self.placed_objects:
+            pygame.draw.circle(self.screen, (255, 0, 0), (int(obj.position.x), int(obj.position.y)), obj.radius)
+    
+    def update(self) :
+        """ Met à jour les objets du niveau et les affiche """
+        self.draw()
+        self.display_objects()
+        pygame.display.flip()
 
     def save_level(self, path="Data/levels.json"):
         """ Sauvegarde les objets du niveau dans un fichier JSON """
@@ -61,12 +74,12 @@ class LevelEditor:
         with open(path, "r") as file:
             levels_data = json.load(file)
 
-        level_id = "4"  # À changer si nécessaire
+        level_id = str(len(levels_data) + 1)  # ID du niveau à sauvegarder
         level_data = {}
 
         # Ajoutez les objets placés sur le niveau sous forme de dictionnaire
         id = 1
-        for obj in self.objects_on_level:
+        for obj in self.placed_objects :
             # Format: "nom_objet": [masse, position, rayon, vitesse_max, rebond, coeff_amortissement, statique]
             level_data[id] = [
                 obj.name,

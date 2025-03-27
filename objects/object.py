@@ -34,7 +34,7 @@ class Object:
         static (bool): Whether the object is immovable and unaffected by forces.
     """
     
-    def __init__(self, name, mass, position, radius=0, max_speed=70, bounciness=0.8, damping_coefficient=0, static=False):
+    def __init__(self, name='Object', mass=1, position=(960,590), radius=0, max_speed=70, bounciness=0.8, damping_coefficient=0, static=False):
         """
         Initializes an Object instance with the specified properties.
 
