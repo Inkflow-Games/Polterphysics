@@ -11,7 +11,7 @@ class Button:
         self.size = size
         self.image = image
         self.image2 = image2
-        self.position = position
+        self.position = position # It is is percentage to correctly fit for every screen
         self.height = height
         self.width = width
         self.action = action
@@ -36,6 +36,10 @@ class Button:
                 #load_scene(n)
                 self.game_state = "paused"
                 load_scene(current_scene, screen_width, screen_height)
+            case "Next Level" :
+                #load_scene(n+1)
+                self.game_state = "paused"
+                load_scene(current_scene+1, screen_width, screen_height)
             case "Load Main Menu" :
                 #load_scene(0)
                 self.game_state = "menu"
