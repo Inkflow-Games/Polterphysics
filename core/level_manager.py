@@ -75,15 +75,9 @@ with open("data/buttons.json", "r") as file : #load all the buttons and split th
     buttons = json.load(file)
     main_menu_buttons = buttons["main_menu"]
     level_menu_buttons = buttons["level_selection"]
-    level_1 = buttons["level1"]
-    level_2 = buttons["level2"]
-    level_3 = buttons["level3"]
 
-    with open("data/levels.json", "r") as f : #load the different objects for the level
-       levels = json.load(f)
-       level_1_o = levels["1"]
-       level_2_o = levels["2"]
-       level_3_o = levels["3"]
+with open("data/levels.json", "r") as f : #load the different objects for the level
+    levels = json.load(f)
 
 button_list = []
 object_list = []
@@ -125,27 +119,10 @@ def load_scene(n: int):
                 button_list.append(load_button(button))
             print("level manager loaded", len(button_list))
 
-        case 2:
-            for button in level_1.values():
+        case _:  #The default case is used to load the next level each time
+            for button in buttons["{}".format(n-1)].values():
                button_list.append(load_button(button))
-            for object in level_1_o.values() :
+            for object in levels["{}".format(n-1)].values() :
                 object_list.append(load_objects(object))
-            print("level 1 loaded")
-
-        case 3:
-            for button in level_2.values():
-                button_list.append(load_button(button))
-            for object in level_2_o.values() :
-                object_list.append(load_objects(object))
-            print("level 2 loaded")
-
-        case 4:
-            for button in level_3.values():
-                button_list.append(load_button(button))
-            for object in level_3_o.values() :
-                object_list.append(load_objects(object))
-            print("level 3 loaded")
-
-        case _:
-            print(f"Scene {n} not recognized")
+            print("level {} loaded".format(n-1))
 
