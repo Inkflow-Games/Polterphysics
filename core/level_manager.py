@@ -18,8 +18,9 @@ class Button:
         self.game_state = ""
 
 
-    def is_pressed(self):
+    def is_pressed(self, display_width, display_height):
         
+        screen_width, screen_height = display_width, display_height
         #Action to perform for the button using a match case to determine the action to do
         match self.action :
             case "Play" :
@@ -34,30 +35,30 @@ class Button:
             case "Restart Level" :
                 #load_scene(n)
                 self.game_state = "paused"
-                load_scene(current_scene)
+                load_scene(current_scene, screen_width, screen_height)
             case "Load Main Menu" :
                 #load_scene(0)
                 self.game_state = "menu"
-                load_scene(0)
+                load_scene(0, screen_width, screen_height)
             case "Load Level Menu" :
                 #load_scene(1)
                 self.game_state = "menu"
-                load_scene(1)
+                load_scene(1, screen_width, screen_height)
             case "Level1" :
                 #load_scene(2)
                 self.game_state = "paused"
-                load_scene(2)
+                load_scene(2, screen_width, screen_height)
             case "Level2" :
                 #load_scene(3)
                 self.game_state = "paused"
-                load_scene(3)
+                load_scene(3, screen_width, screen_height)
             case "Level3" :
                 #load_scene(4)
                 self.game_state = "paused"
-                load_scene(4)
+                load_scene(4, screen_width, screen_height)
             case default :
                 self.game_state = 'menu'
-                load_scene(current_scene)
+                load_scene(current_scene, screen_width, screen_height)
            
     def hover(self, screen):
         #pygame.draw.rect(screen, "red", pygame.Rect(self.position.x - (self.width+5) / 2, self.position.y - (self.height+5) / 2, self.width+5, self.height+5))
@@ -82,12 +83,12 @@ with open("data/levels.json", "r") as f : #load the different objects for the le
 button_list = []
 object_list = []
 
-def load_button(b):
+def load_button(b, screen_width, screen_height):
     new_button = Button(
         size=b["size"],
         image=b["image"],
         image2=b["image2"],
-        position=Vector2(b["position"][0], b["position"][1]),
+        position=Vector2(b["position"][0]*screen_width, b["position"][1]*screen_height),
         height=b["height"],
         width=b["width"],
         action=b["action"]
@@ -100,10 +101,11 @@ def load_objects(l):
 
 current_scene = 0
 
-def load_scene(n: int):
+def load_scene(n: int, screen_width, screen_height):
     global button_list
     global object_list
     global current_scene 
+    display_width, display_height = screen_width, screen_height
     current_scene = n
     object_list = []
     button_list = []
@@ -111,17 +113,17 @@ def load_scene(n: int):
     match n:
         case 0:
             for button in main_menu_buttons.values(): #loading the buttons we have to draw each frame
-                button_list.append(load_button(button))
+                button_list.append(load_button(button, screen_width, screen_height))
             print("main menu loaded", len(button_list))
 
         case 1:
             for button in level_menu_buttons.values():
-                button_list.append(load_button(button))
+                button_list.append(load_button(button, screen_width, screen_height))
             print("level manager loaded", len(button_list))
 
         case _:  #The default case is used to load the next level each time
             for button in buttons["{}".format(n-1)].values():
-               button_list.append(load_button(button))
+               button_list.append(load_button(button, screen_width, screen_height))
             for object in levels["{}".format(n-1)].values() :
                 object_list.append(load_objects(object))
             print("level {} loaded".format(n-1))

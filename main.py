@@ -72,7 +72,7 @@ key_state_2 = {
 # Ground level (just above the bottom of the window)
 ground_level = display_height - 20
 
-level_manager.load_scene(0)
+level_manager.load_scene(0, display_width, display_height)
 
 game_state = "menu"
 
@@ -169,7 +169,7 @@ while running:
         if (pygame.mouse.get_pos()[0] < button.position[0] + button.width/2) and (pygame.mouse.get_pos()[0] > button.position[0] - button.width/2) and (pygame.mouse.get_pos()[1] < button.position[1] + button.height/2) and (pygame.mouse.get_pos()[1] > button.position[1] - button.height/2) :
             button.hover(screen)   
             if click :
-                button.is_pressed()
+                button.is_pressed(display_width, display_height)
                 game_state = button.game_state
                 new_scene = level_manager.current_scene #verify if we changed of scene
                 click = False
