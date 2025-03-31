@@ -66,12 +66,12 @@ class Button:
            
     def hover(self, screen):
         #pygame.draw.rect(screen, "red", pygame.Rect(self.position.x - (self.width+5) / 2, self.position.y - (self.height+5) / 2, self.width+5, self.height+5))
-        screen.blit(pygame.image.load(self.image2).convert(), (self.position.x - (self.width+5)/2, self.position.y - (self.height+5)/2))
+        screen.blit(pygame.image.load(self.image2), (self.position.x - (self.width+5)/2, self.position.y - (self.height+5)/2))
 
 
     def draw(self, screen):
         #pygame.draw.rect(screen, "blue", pygame.Rect(self.position.x - self.width / 2, self.position.y - self.height / 2, self.width, self.height))
-        screen.blit(pygame.image.load(self.image).convert(), (self.position.x - (self.width+5)/2, self.position.y - (self.height+5)/2))
+        screen.blit(pygame.image.load(self.image), (self.position.x - (self.width+5)/2, self.position.y - (self.height+5)/2))
         pass
 
 # Global variable to track the current level

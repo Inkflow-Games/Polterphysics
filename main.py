@@ -266,7 +266,7 @@ while running:
 
 
     # Draw frame
-    screen.fill((0, 0, 0))  # Clear screen
+    screen.fill((170, 170, 170))  # Clear screen
     if game_state != "menu":
         pygame.draw.circle(screen, (255, 0, 0), (int(test_object.position.x), int(test_object.position.y)), test_object.radius)  # Draw first object
         pygame.draw.circle(screen, (0, 0, 255), (int(second_object.position.x), int(second_object.position.y)), second_object.radius)  # Draw second object
