@@ -50,6 +50,8 @@ vector2_angle = 0
 
 test_position_x_before = 0
 test_position_y_before = 0
+second_position_x_before = 0
+second_position_y_before = 0
 
 
 
@@ -256,6 +258,9 @@ while running:
         test_position_x_before = test_object.position.x
         test_position_y_before = test_object.position.y
         
+        second_position_x_before = second_object.position.x
+        second_position_y_before = second_object.position.y
+        
         
         # Update physics engine based on time delta
         dt = clock.get_time() / 100.0  # Convert milliseconds to a suitable scale
@@ -367,6 +372,32 @@ while running:
     if vector_applied2 == True and vector2_coords!= Vector2(0,0): 
         vector_2 = font.render(f"Vector on second_object: ({int(vector2_coords.x)}, {int(vector2_coords.y)}), angle : {round(vector2_angle,2)}", True, (255, 255, 255))
         screen.blit(vector_2, (10, 90))
+        
+        
+        v0 = Vector2((second_object.position.x - second_position_x_before)/dt , (second_object.position.y - second_position_y_before)/dt) #in PIXELS / dt²
+        acceleration = vector2_coords / second_object.mass #is a Vector2 --> pixels / kg --> coordinates of ax and ay
+        predicted_velocity = v0 + acceleration
+        print(f"v0 = {v0}")
+        print(f"acceleration = {acceleration}")
+        print(f"predicted_velocity = {predicted_velocity}")
+        
+        
+        predicted_positions = []
+        simulated_position = second_object.position.copy()  # Copie pour éviter les références
+        simulated_velocity = predicted_velocity.copy()  # Copie pour éviter les références
+
+        dt_sim = 0.1  # Pas de temps pour la simulation
+
+        for _ in range(50):  # Simuler sur 50 frames (~5s)
+            simulated_velocity.y += newton_to_force(9.81) * dt  # Ajouter la gravité à chaque nouvelle frame
+            simulated_position.x += newton_to_force(simulated_velocity.x) * dt  # Mettre à jour la position X
+            simulated_position.y += newton_to_force(simulated_velocity.y) * dt  # Mettre à jour la position Y
+
+            predicted_positions.append(simulated_position.copy())  # Sauvegarder une COPIE
+
+        # Dessiner la trajectoire en jaune
+        for point in predicted_positions:
+            pygame.draw.circle(screen, (255, 255, 255), (int(point.x), int(point.y)), 3)  # Petit point jaune
 
     pygame.display.flip()  # Refresh screen
     clock.tick(120)  # Limit FPS to 120
