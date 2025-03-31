@@ -25,6 +25,7 @@ from utils.vector_utils import *
 from ui.main_menu import *
 from core.input_handler import *
 from utils.math_utils import WIDTH, HEIGHT, FPS
+import core.level_manager as level_manager
 import json
 from math import atan, degrees
 
@@ -118,7 +119,7 @@ for button in main_menu_buttons.values():
     )
     button_list.append(new_button)
 
-game_state = "running"
+game_state = "menu"
 
 
 # Main game loop
@@ -271,13 +272,22 @@ while running:
         pygame.draw.line(screen, (255, 255, 255), clicked_object.position, mouse_position, 5)  
 
     # Draw all buttons in the correct order
-    for button in button_list:
+    new_scene = level_manager.current_scene #verify if we changed of scene
+    running_scene = new_scene
+    for button in level_manager.button_list:
         if (pygame.mouse.get_pos()[0] < button.position[0] + button.width/2) and (pygame.mouse.get_pos()[0] > button.position[0] - button.width/2) and (pygame.mouse.get_pos()[1] < button.position[1] + button.height/2) and (pygame.mouse.get_pos()[1] > button.position[1] - button.height/2) :
             button.hover(screen)   
             if click :
-                button.is_pressed()
+                button.is_pressed(display_width, display_height)
                 game_state = button.game_state
+                new_scene = level_manager.current_scene #verify if we changed of scene
                 click = False
+                if game_state!= "menu": #we load new objects if the scene changed
+    
+                    test_object = level_manager.object_list[-1] 
+                    physics_engine.add_object(test_object)
+                    second_object = level_manager.object_list[-2]
+                    physics_engine.add_object(second_object)
         else :
             button.draw(screen)
 
