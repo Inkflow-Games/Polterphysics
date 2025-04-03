@@ -27,6 +27,9 @@ import json
 
 # Initialize Pygame
 pygame.init()
+pygame.mixer.init() #to play music
+click_sound = pygame.mixer.Sound("data/Music/click.wav")  #import the "click" sound
+
 
 # Get the size of the screen
 display_info = pygame.display.Info()
@@ -80,6 +83,14 @@ game_state = "menu"
 
 # Main game loop
 while running:
+
+    if game_state != "menu" and not pygame.mixer.music.get_busy() : #play music only ingame
+        pygame.mixer.music.load("data/Music/login_test.mp3")  #play music when the game is running
+        pygame.mixer.music.play(-1)  #-1 loop the music
+    elif game_state == "menu" and pygame.mixer.music.get_busy() :
+        pygame.mixer.music.stop() #stop music
+        
+
     click = False
 
     for event in pygame.event.get():
@@ -137,9 +148,11 @@ while running:
         key_state_2[pygame.K_SPACE] = True
         if game_state == 'paused' :
             game_state = 'running'
+            
+            
         elif  game_state == 'running': 
             game_state = "paused"
-         
+
     # Reset key state when key is released
     for key in key_state_1:
         if not keys[key]:
@@ -169,6 +182,7 @@ while running:
         if (pygame.mouse.get_pos()[0] < button.position[0] + button.width/2) and (pygame.mouse.get_pos()[0] > button.position[0] - button.width/2) and (pygame.mouse.get_pos()[1] < button.position[1] + button.height/2) and (pygame.mouse.get_pos()[1] > button.position[1] - button.height/2) :
             button.hover(screen)   
             if click :
+                click_sound.play()
                 button.is_pressed(display_width, display_height)
                 game_state = button.game_state
                 new_scene = level_manager.current_scene #verify if we changed of scene
