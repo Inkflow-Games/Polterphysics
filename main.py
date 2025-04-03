@@ -139,7 +139,7 @@ while running:
             game_state = 'running'
         elif  game_state == 'running': 
             game_state = "paused"
-
+         
     # Reset key state when key is released
     for key in key_state_1:
         if not keys[key]:
