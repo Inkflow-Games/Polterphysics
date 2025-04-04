@@ -24,9 +24,11 @@ from core.input_handler import *
 from utils.math_utils import WIDTH, HEIGHT, FPS
 import core.level_manager as lman
 import json
+from core.sound import*
 
 # Initialize Pygame
 pygame.init()
+pygame.mixer.init()
 
 # Configure the window
 display_width, display_height = 1000, 800
@@ -76,6 +78,10 @@ game_state = "menu"
 
 # Main game loop
 while running:
+    if game_state != "menu" and not pygame.mixer.music.get_busy() :
+        play_music("data/Music/pwomp.wav")
+    elif game_state == "menu" and pygame.mixer.music.get_busy():
+        stop_sound()
     click = False
 
     for event in pygame.event.get():
@@ -165,6 +171,8 @@ while running:
         if (pygame.mouse.get_pos()[0] < button.position[0] + button.width/2) and (pygame.mouse.get_pos()[0] > button.position[0] - button.width/2) and (pygame.mouse.get_pos()[1] < button.position[1] + button.height/2) and (pygame.mouse.get_pos()[1] > button.position[1] - button.height/2) :
             button.hover(screen)   
             if click :
+
+                play_sound_fx("data/Music/click.wav")
                 button.is_pressed()
                 game_state = button.game_state
                 new_scene = lman.current_scene #verify if we changed of scene
