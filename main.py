@@ -26,15 +26,18 @@ from core.input_handler import *
 from utils.math_utils import WIDTH, HEIGHT, FPS
 import core.level_manager as level_manager
 import json
-from math import atan, degrees
 
 
 
-
-# define the function somewhere else if possible (need the reference to the objects in order to work)
+"""Must integrate it elsewhere in the program after debug"""
+#possibility to stack the minus vectors if called multiple times
 def reset_vectors_applied (vector1_cd, vector2_cd):# must give the Vector2 (=coordinates) of the vectors
-    test_object.apply_force(-vector1_cd)
-    second_object.apply_force(-vector2_cd)
+    if vector1_cd != Vector2(0,0) :
+        test_object.apply_force(-vector1_cd)
+        vector1_coords = Vector2(0,0)
+    if vector1_cd != Vector2(0,0) :
+        second_object.apply_force(-vector2_cd)
+        vector2_coords = Vector2(0,0)
 
 
 
@@ -121,7 +124,7 @@ while running:
         pygame.mixer.music.play(-1)  #-1 loop the music
     elif game_state == "menu" and pygame.mixer.music.get_busy() :
         pygame.mixer.music.stop() #stop music
-        
+
 
     click = False
 
@@ -180,16 +183,13 @@ while running:
         key_state_2[pygame.K_SPACE] = True
         if game_state == 'paused' :
             game_state = 'running'
-            
-            
         elif  game_state == 'running': 
             game_state = "paused"
-        
+
     if keys_2[pygame.K_a] and not key_state_2[pygame.K_a] :
         key_state_2[pygame.K_a] = True
         reset_vectors_applied (vector1_coords, vector2_coords)
 
-            
 
 
     # Reset key state when key is released
@@ -200,67 +200,21 @@ while running:
     for key in key_state_2:
         if not keys_2[key]:
             key_state_2[key] = False
-            
-            
-            
-    if game_state == "paused":
-        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-            mouse_position = pygame.mouse.get_pos()
-            
-            # Vérifier sur quel cercle on clique
-            if is_point_in_circle(mouse_position, test_object.position, test_object.radius):
-                clicked_object = test_object  # if click on the test_object
-                if vector_applied1 == True :  # if we didn't apply a vector to test_object yet (in pause mode) 
-                    force_vector = -vector1_coords
-                    test_object.apply_force(force_vector)
-                    vector_applied1 = False
-                    vector1_coords = Vector2(0,0)
-            elif is_point_in_circle(mouse_position, second_object.position, second_object.radius):
-                clicked_object = second_object  # if click on second_object
-                if vector_applied2 == True:
-                    force_vector = -vector2_coords
-                    second_object.apply_force(force_vector)
-                    vector_applied2 = False
-                    vector2_coords = Vector2(0,0)
 
-        # while left click is pressed, update the mouse position 
-        elif event.type == pygame.MOUSEMOTION and clicked_object is not None:
-            mouse_position = pygame.mouse.get_pos()
-            
-        # apply a vector to an object when left click is released
-        elif event.type == pygame.MOUSEBUTTONUP and event.button == 1 and clicked_object is not None:
-            force_vector = Vector2(mouse_position[0] - clicked_object.position[0], 
-                                    mouse_position[1] - clicked_object.position[1])
-            clicked_object.apply_force(force_vector)  # apply the computed force to the clicked object
-            # need to convert in in Newtons depending on its coordinates, then display it in the vectors information
-            print(f"Force applied : {force_vector}") # delete that after complete debug
-            
-            last_clicked = clicked_object
-            # gives update to the vector applied to the clicked object
-            if clicked_object == test_object :
-                vector_applied1 = True
-                vector1_coords = force_vector
-                vector1_angle = compute_angle(vector1_coords.x,vector1_coords.y) #computes the angle between axis x and vector, in degrees
-            if clicked_object == second_object :
-                vector_applied2 = True
-                vector2_coords = force_vector
-                vector2_angle = compute_angle(vector2_coords.x,vector2_coords.y) #computes the angle between axis x and vector, in degrees
-            clicked_object = None
-            
-            
-            #il faut encore récupérer toutes ces informations pour afficher une équation de trajectoire
+    if game_state == "paused":
+        #call the function that handles the vector application process
+        clicked_object, vector_applied1, vector_applied2, vector1_coords, vector2_coords, vector1_angle, vector2_angle, mouse_position = vector_application(
+    event,
+    test_object, second_object,
+    clicked_object, vector_applied1, vector_applied2,
+    vector1_coords, vector2_coords,
+    vector1_angle, vector2_angle)
+
 
 
     if game_state == "running" : # the physics is calculated only during play mode
-        vector_applied1 = False #reset the vectors applied to our object
-        vector_applied2 = False
-        
-        test_position_x_before = test_object.position.x
-        test_position_y_before = test_object.position.y
-        
-        second_position_x_before = second_object.position.x
-        second_position_y_before = second_object.position.y
-        
+        #update vectors state and last position of the objects
+        vector_applied1, vector_applied2, test_position_x_before, test_position_y_before, second_position_x_before, second_position_y_before = objects_running_info(test_object, second_object, vector_applied1, vector_applied2)
         
         # Update physics engine based on time delta
         dt = clock.get_time() / 100.0  # Convert milliseconds to a suitable scale
@@ -275,8 +229,10 @@ while running:
     if game_state != "menu":
         pygame.draw.circle(screen, (255, 0, 0), (int(test_object.position.x), int(test_object.position.y)), test_object.radius)  # Draw first object
         pygame.draw.circle(screen, (0, 0, 255), (int(second_object.position.x), int(second_object.position.y)), second_object.radius)  # Draw second object
-
-        if clicked_object != None and game_state == "paused" : # Draws a white line between clicked object and mouse position (during vector construction and 'paused')
+        
+        # Draws a white line between clicked object and mouse position (during vector construction and 'paused')
+        """Must stay in main because of where the game is taking place (screen)"""
+        if clicked_object != None and game_state == "paused" : 
             pygame.draw.line(screen, (255, 255, 255), clicked_object.position, mouse_position, 5)
 
     # Draw all buttons in the correct order
@@ -299,103 +255,28 @@ while running:
                     physics_engine.add_object(second_object)
         else :
             button.draw(screen)
-                    
 
-    # Display debug positions
+
+    # Display debug positions : must stay in main
     font = pygame.font.SysFont("Arial", 24)
     position_text_1 = font.render(f"Position 1: ({int(test_object.position.x)}, {-int(test_object.position.y)})", True, (255, 255, 255))
     position_text_2 = font.render(f"Position 2: ({int(second_object.position.x)}, {-int(second_object.position.y)})", True, (255, 255, 255))
     screen.blit(position_text_1, (10, 10))
     screen.blit(position_text_2, (10, 40))
     
-    
+    # Prediction of the trajectory of "test_object"
     if vector_applied1 == True and vector1_coords!= Vector2(0,0):
-        vector_1 = font.render(f"Vector on test_object: ({int(vector1_coords.x)}, {int(vector1_coords.y)}), angle : {round(vector1_angle,2)}", True, (255, 255, 255))
-        screen.blit(vector_1, (10, 70))
-        
-        
-        """
-        (test) Simulation of the trajectory for test_object
-        """
-        
-        
-        """based on acceleration"""
-        v0 = Vector2((test_object.position.x - test_position_x_before)/dt , (test_object.position.y - test_position_y_before)/dt) #in PIXELS / dt²
-        acceleration = vector1_coords / test_object.mass #is a Vector2 --> pixels / kg --> coordinates of ax and ay
-        predicted_velocity = v0 + acceleration
-        print(f"v0 = {v0}")
-        print(f"acceleration = {acceleration}")
-        print(f"predicted_velocity = {predicted_velocity}")
-        
-        
-        predicted_positions = []
-        simulated_position = test_object.position.copy()  # Copie pour éviter les références
-        simulated_velocity = predicted_velocity.copy()  # Copie pour éviter les références
+        predicted_positions = computes_50_position(test_object, vector1_coords, dt, test_position_x_before, test_position_y_before , simulation_steps=50, dt_sim=0.1)
 
-        dt_sim = 0.1  # Pas de temps pour la simulation
-
-        for _ in range(50):  # Simuler sur 50 frames (~5s)
-            simulated_velocity.y += newton_to_force(9.81) * dt  # Ajouter la gravité à chaque nouvelle frame
-            simulated_position.x += newton_to_force(simulated_velocity.x) * dt  # Mettre à jour la position X
-            simulated_position.y += newton_to_force(simulated_velocity.y) * dt  # Mettre à jour la position Y
-
-            predicted_positions.append(simulated_position.copy())  # Sauvegarder une COPIE
-
-        # Dessiner la trajectoire en jaune
+        # Draw in yellow
         for point in predicted_positions:
             pygame.draw.circle(screen, (255, 255, 0), (int(point.x), int(point.y)), 3)  # Petit point jaune
 
-
-        
-        """
-        Last time test : based on vectorial sum
-        
-        
-        
-        norm, angle = norm_and_angle_computation(test_position_x_before , test_position_y_before, test_object.position.x , test_object.position.y, vector1_coords, dt)
-        print(f" x = t*{norm}*{cos(radians(angle)) + vector1_coords[0]} + {test_object.position.x}")
-        print(f" y = {0.5*9.81}*t² + t*{norm}*{sin(radians(angle)) + vector1_coords[1]} + {test_object.position.y}")
-        
-        print(f"norm = {norm} pixels")
-        print(f"angle = {angle} degrees")
-        print(f"last x : {position_x_before}")
-        print(f"last y : {test_position_y_before}")
-        
-        for i in range (0,100,5) :
-            pygame.draw.circle(screen, (255, 255, 0), (int((dt*i) *(norm*cos(radians(angle)) + vector1_coords[0]) + test_object.position.x), 
-                                                        int(0.5*9.81*(dt*i)**2 + (dt*i)*(norm*sin(radians(angle)) + vector1_coords[1]) + test_object.position.y)), 
-                                                        test_object.radius)
-        """
-    
-    
-    
+    # Prediction of the trajectory of "second_object"
     if vector_applied2 == True and vector2_coords!= Vector2(0,0): 
-        vector_2 = font.render(f"Vector on second_object: ({int(vector2_coords.x)}, {int(vector2_coords.y)}), angle : {round(vector2_angle,2)}", True, (255, 255, 255))
-        screen.blit(vector_2, (10, 90))
-        
-        
-        v0 = Vector2((second_object.position.x - second_position_x_before)/dt , (second_object.position.y - second_position_y_before)/dt) #in PIXELS / dt²
-        acceleration = vector2_coords / second_object.mass #is a Vector2 --> pixels / kg --> coordinates of ax and ay
-        predicted_velocity = v0 + acceleration
-        print(f"v0 = {v0}")
-        print(f"acceleration = {acceleration}")
-        print(f"predicted_velocity = {predicted_velocity}")
-        
-        
-        predicted_positions = []
-        simulated_position = second_object.position.copy()  # Copie pour éviter les références
-        simulated_velocity = predicted_velocity.copy()  # Copie pour éviter les références
+        predicted_positions = computes_50_position(second_object, vector2_coords, dt, second_position_x_before, second_position_y_before , simulation_steps=50, dt_sim=0.1)
 
-        dt_sim = 0.1  # Pas de temps pour la simulation
-
-        for _ in range(50):  # Simuler sur 50 frames (~5s)
-            simulated_velocity.y += newton_to_force(9.81) * dt  # Ajouter la gravité à chaque nouvelle frame
-            simulated_position.x += newton_to_force(simulated_velocity.x) * dt  # Mettre à jour la position X
-            simulated_position.y += newton_to_force(simulated_velocity.y) * dt  # Mettre à jour la position Y
-
-            predicted_positions.append(simulated_position.copy())  # Sauvegarder une COPIE
-
-        # Dessiner la trajectoire en jaune
+        # Draw in white
         for point in predicted_positions:
             pygame.draw.circle(screen, (255, 255, 255), (int(point.x), int(point.y)), 3)  # Petit point jaune
 
