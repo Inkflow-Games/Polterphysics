@@ -22,16 +22,23 @@ from objects.object import Object
 from utils.math_utils import *
 from core.input_handler import *
 from utils.math_utils import WIDTH, HEIGHT, FPS
-import core.level_manager as lman
+import core.level_manager as level_manager
 import json
 
 # Initialize Pygame
 pygame.init()
+pygame.mixer.init() #to play music
+click_sound = pygame.mixer.Sound("data/Music/click.wav")  #import the "click" sound
 
-# Configure the window
-display_width, display_height = 1000, 800
-screen = pygame.display.set_mode((display_width, display_height))
+
+# Get the size of the screen
+display_info = pygame.display.Info()
+
+# Configure the window in full screen
+display_width, display_height = display_info.current_w, display_info.current_h
+screen = pygame.display.set_mode((display_width, display_height-50))
 pygame.display.set_caption("Physics Engine Test")
+
 
 # Initialize physics engine
 physics_engine = PhysicsEngine()
@@ -68,7 +75,7 @@ key_state_2 = {
 # Ground level (just above the bottom of the window)
 ground_level = display_height - 20
 
-lman.load_scene(0)
+level_manager.load_scene(0, display_width, display_height)
 
 game_state = "menu"
 
@@ -76,6 +83,14 @@ game_state = "menu"
 
 # Main game loop
 while running:
+
+    if game_state != "menu" and not pygame.mixer.music.get_busy() : #play music only ingame
+        pygame.mixer.music.load("data/Music/login_test.mp3")  #play music when the game is running
+        pygame.mixer.music.play(-1)  #-1 loop the music
+    elif game_state == "menu" and pygame.mixer.music.get_busy() :
+        pygame.mixer.music.stop() #stop music
+        
+
     click = False
 
     for event in pygame.event.get():
@@ -133,6 +148,8 @@ while running:
         key_state_2[pygame.K_SPACE] = True
         if game_state == 'paused' :
             game_state = 'running'
+            
+            
         elif  game_state == 'running': 
             game_state = "paused"
 
@@ -159,21 +176,22 @@ while running:
 
 
     # Draw all buttons in the correct order
-    new_scene = lman.current_scene #verify if we changed of scene
+    new_scene = level_manager.current_scene #verify if we changed of scene
     running_scene = new_scene
-    for button in lman.button_list:
+    for button in level_manager.button_list:
         if (pygame.mouse.get_pos()[0] < button.position[0] + button.width/2) and (pygame.mouse.get_pos()[0] > button.position[0] - button.width/2) and (pygame.mouse.get_pos()[1] < button.position[1] + button.height/2) and (pygame.mouse.get_pos()[1] > button.position[1] - button.height/2) :
             button.hover(screen)   
             if click :
-                button.is_pressed()
+                click_sound.play()
+                button.is_pressed(display_width, display_height)
                 game_state = button.game_state
-                new_scene = lman.current_scene #verify if we changed of scene
+                new_scene = level_manager.current_scene #verify if we changed of scene
                 click = False
                 if game_state!= "menu": #we load new objects if the scene changed
     
-                    test_object = lman.object_list[-1] 
+                    test_object = level_manager.object_list[-1] 
                     physics_engine.add_object(test_object)
-                    second_object = lman.object_list[-2]
+                    second_object = level_manager.object_list[-2]
                     physics_engine.add_object(second_object)
         else :
             button.draw(screen)
