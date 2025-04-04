@@ -64,6 +64,7 @@ class Button:
             case default :
                 self.game_state = 'menu'
                 load_scene(current_scene, screen_width, screen_height)
+
            
     def hover(self, screen):
         #pygame.draw.rect(screen, "red", pygame.Rect(self.position.x - (self.width+5) / 2, self.position.y - (self.height+5) / 2, self.width+5, self.height+5))
