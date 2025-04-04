@@ -64,6 +64,7 @@ class Button:
             case default :
                 self.game_state = 'menu'
                 load_scene(current_scene, screen_width, screen_height)
+
            
     def hover(self, screen): # The function which changes the sprite when hovered
         img = pygame.image.load(self.imageHover)
