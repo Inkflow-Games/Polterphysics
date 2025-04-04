@@ -196,7 +196,7 @@ while running:
     screen.blit(position_text_2, (10, 40))
 
     pygame.display.flip()  # Refresh screen
-    clock.tick(120)  # Limit FPS to 120
+    clock.tick(100)  # Limit FPS to 120
 
 
 

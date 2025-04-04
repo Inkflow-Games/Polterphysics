@@ -68,13 +68,13 @@ class Button:
            
     def hover(self, screen): # The function which changes the sprite when hovered
         img = pygame.image.load(self.imageHover)
-        img = pygame.transform.scale(img, (self.width, self.height)*self.size)
+        # img = pygame.transform.scale(img, (self.width, self.height)*self.size)
         screen.blit(img, (self.position.x - (self.width)/2, self.position.y - (self.height)/2))
 
 
     def draw(self, screen): # THe way we draw the sprite if not hovered
         img = pygame.image.load(self.image)
-        img = pygame.transform.scale(img, (self.width, self.height)*self.size)
+        # img = pygame.transform.scale(img, (self.width, self.height)*self.size)
         screen.blit(img, (self.position.x - (self.width)/2, self.position.y - (self.height)/2))
         pass
 

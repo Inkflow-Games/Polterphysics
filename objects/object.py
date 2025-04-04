@@ -90,20 +90,20 @@ class Object:
         # Apply gravity force
         self.apply_force(self.gravity * dt)
 
-        # Compute dynamic damping
-        self.damping = 0.01 + self.damping_coefficient * (self.velocity.length() / self.max_speed)
-        self.velocity *= (1 - self.damping * dt)
+        # # Compute dynamic damping
+        # self.damping = 0.01 + self.damping_coefficient * (self.velocity.length() / self.max_speed)
+        # self.velocity *= (1 - self.damping * dt)
 
-        # Gradually limit speed instead of hard clamping
-        if self.velocity.length() > self.max_speed:
-            excess_speed = self.velocity.length() - self.max_speed
-            self.velocity.scale_to_length(self.velocity.length() - excess_speed * 0.1)
+        # # Gradually limit speed instead of hard clamping
+        # if self.velocity.length() > self.max_speed:
+        #     excess_speed = self.velocity.length() - self.max_speed
+        #     self.velocity.scale_to_length(self.velocity.length() - excess_speed * 0.1)
 
         # Update position based on velocity
         self.position += self.velocity * dt
 
-        # Apply rotation effect (spin can slightly affect trajectory)
-        self.position += Vector2(math.cos(self.angular_velocity), math.sin(self.angular_velocity)) * dt
+        # # Apply rotation effect (spin can slightly affect trajectory)
+        # self.position += Vector2(math.cos(self.angular_velocity), math.sin(self.angular_velocity)) * dt
 
         # Collision detection with the ground
         if self.position.y + self.radius >= ground_level:  # If the object touches the ground
