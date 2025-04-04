@@ -65,15 +65,13 @@ class Button:
                 self.game_state = 'menu'
                 load_scene(current_scene, screen_width, screen_height)
            
-    def hover(self, screen):
-        #pygame.draw.rect(screen, "red", pygame.Rect(self.position.x - (self.width+5) / 2, self.position.y - (self.height+5) / 2, self.width+5, self.height+5))
+    def hover(self, screen): # The function which changes the sprite when hovered
         img = pygame.image.load(self.imageHover)
         img = pygame.transform.scale(img, (self.width, self.height)*self.size)
         screen.blit(img, (self.position.x - (self.width)/2, self.position.y - (self.height)/2))
 
 
-    def draw(self, screen):
-        #pygame.draw.rect(screen, "blue", pygame.Rect(self.position.x - self.width / 2, self.position.y - self.height / 2, self.width, self.height))
+    def draw(self, screen): # THe way we draw the sprite if not hovered
         img = pygame.image.load(self.image)
         img = pygame.transform.scale(img, (self.width, self.height)*self.size)
         screen.blit(img, (self.position.x - (self.width)/2, self.position.y - (self.height)/2))
@@ -120,12 +118,12 @@ def load_scene(n: int, screen_width, screen_height):
     button_list = []
     
     match n:
-        case 0:
+        case 0: # Loading the main menu
             for button in main_menu_buttons.values(): #loading the buttons we have to draw each frame
                 button_list.append(load_button(button, screen_width, screen_height))
             print("main menu loaded", len(button_list))
 
-        case 1:
+        case 1: #Loading the level manager menu
             for button in level_menu_buttons.values():
                 button_list.append(load_button(button, screen_width, screen_height))
             print("level manager loaded", len(button_list))
