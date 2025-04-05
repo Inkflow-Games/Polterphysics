@@ -15,7 +15,9 @@ Dependencies: math, pygame.math.Vector2
 """
 
 import math
+import pygame
 from pygame.math import Vector2
+from core.collision import * 
 
 class Object:
     """
@@ -34,7 +36,7 @@ class Object:
         static (bool): Whether the object is immovable and unaffected by forces.
     """
     
-    def __init__(self, mass, position, radius=0, max_speed=70, bounciness=0.8, damping_coefficient=0, static=False):
+    def __init__(self, mass, position, max_speed=70, bounciness=0.8, damping_coefficient=0, static=False):
         """
         Initializes an Object instance with the specified properties.
 
@@ -51,7 +53,6 @@ class Object:
         self.position = Vector2(position)
         self.velocity = Vector2(0, 0)
         self.max_speed = max_speed
-        self.radius = radius
         self.gravity = Vector2(0, 9.81 * self.mass)
         self.bounciness = bounciness
         self.angular_velocity = 0
@@ -94,18 +95,113 @@ class Object:
         self.damping = 0.01 + self.damping_coefficient * (self.velocity.length() / self.max_speed)
         self.velocity *= (1 - self.damping * dt)
 
-        # Gradually limit speed instead of hard clamping
-        if self.velocity.length() > self.max_speed:
-            excess_speed = self.velocity.length() - self.max_speed
-            self.velocity.scale_to_length(self.velocity.length() - excess_speed * 0.1)
-
         # Update position based on velocity
         self.position += self.velocity * dt
 
         # Apply rotation effect (spin can slightly affect trajectory)
-        self.position += Vector2(math.cos(self.angular_velocity), math.sin(self.angular_velocity)) * dt
+        self.rotate()
 
-        # Collision detection with the ground
-        if self.position.y + self.radius >= ground_level:  # If the object touches the ground
-            self.position.y = ground_level - self.radius  # Adjust position to stay on the ground
-            self.velocity.y = -self.velocity.y * self.bounciness  # Apply bounce effect (invert and reduce velocity)
+class Polygon:
+    def __init__(self,points,mass):
+        self.vertices = points
+        self.length = len(points)
+        self.centroid = self.center()
+        self.angular_velocity = 0
+        self.mass = mass
+        self.inertia = self.calcinertia()
+        self.velocity = Vector2(0,0)
+
+    def calcinertia(self):
+        I = 0
+        A_total = 0
+
+        for i in range(self.length):
+            j = (i+1) % self.length
+            v1, v2 = self.vertices[i] - self.centroid, self.vertices[j] - self.centroid
+            cross = v1.cross(v2)
+            area = 0.5 * cross
+            A_total += area
+
+            I_triangle = (1/12) * (v1.dot(v1) + v1.dot(v2) + v2.dot(v2)) * cross
+            I += I_triangle
+
+        return (self.mass / A_total) * abs(I)
+
+    def center(self):
+        ans = Vector2(0,0)
+        n=len(self.vertices)
+        signedarea = 0
+        for i in range(n):
+            x0 = self.vertices[i].x
+            y0 = self.vertices[i].y
+            x1 = self.vertices[(i+1)%n].x
+            y1 = self.vertices[(i+1)%n].y
+            A = (x0 * y1) - (x1 * y0)
+            signedarea += A
+
+            ans.x += (x0 + x1) * A
+            ans.y += (y0 + y1) * A
+        signedarea *= 0.5
+        ans.x = round((ans.x) / (6 * signedarea),1)
+        ans.y = round((ans.y) / (6 * signedarea),1)
+        return ans
+
+    def rotate(self,rad):
+
+        angle_rad = rad
+        for i in range(self.length):
+            # Shift the point so that center_point becomes the origin
+            new_point = (self.vertices[i][0] - self.centroid[0], self.vertices[i][1] - self.centroid[1])
+            new_point = (new_point[0] * cos(angle_rad) - new_point[1] * sin(angle_rad),
+                    new_point[0] * sin(angle_rad) + new_point[1] * cos(angle_rad))
+            # Reverse the shifting we have done
+            new_point = Vector2(new_point[0] + self.centroid[0], new_point[1] + self.centroid[1])
+            self.vertices[i] = new_point
+        return
+    
+    def add(self,vector):
+        for i in range(self.length):
+            self.vertices[i] += vector
+        self.centroid += vector
+        return
+    
+    def draw(self,surface,color):
+        #self.add(centerpos-self.centroid)
+        centerpos = self.centroid
+        pygame.draw.polygon(surface,color,self.vertices)
+        pygame.draw.circle(surface,(0,255,0),self.center(),3)
+        return
+            
+    def support(self,direction):
+        return findfurthest(direction,self.vertices)
+  
+class circle:
+    def __init__(self,centre, radius, mass):
+        self.radius = radius
+        self.centroid = centre
+        self.angular_velocity = 0
+        self.mass = mass
+        self.velocity = Vector2(0,0)
+        self.inertia = self.calcinertia()
+
+    def support(self, direction):
+        if direction.length() == 0:
+            return self.centroid + self.radius * Vector2(0,0.00000001)
+        else : return self.centroid + self.radius * direction.normalize()
+
+    def calcinertia(self):
+        temp = (1/2)*self.mass*(self.radius**2)
+        return temp
+    
+    def add(self,vector):
+        self.centroid += vector
+        return
+    
+    def rotate(self,angle):
+        return
+    
+    def draw(self,surface,color):
+        pygame.draw.circle(surface,color,self.centroid,self.radius)
+        pygame.draw.circle(surface,(0,255,0),self.centroid,3)
+        return
+        
