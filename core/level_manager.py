@@ -6,7 +6,7 @@ from data import *
 # Dictionary storing level numbers as keys and lists of objects as values
 import pygame
 import core.physics_engine as phy
-
+from core.sound import play_music
 class Button:
     def __init__(self, image, imageHover,  size, position, height, width, action=''):
         self.size = size
@@ -120,21 +120,45 @@ def load_scene(n: int, screen_width, screen_height):
     object_list = []
     button_list = []
     
+    
+playing_music = ""
+
+def load_scene(n: int, screen_width, screen_height):
+    global button_list
+    global object_list
+    global current_scene 
+    global playing_music
+    display_width, display_height = screen_width, screen_height
+    current_scene = n
+    object_list = []
+    button_list = []
+    
     match n:
+        
         case 0:
             for button in main_menu_buttons.values(): #loading the buttons we have to draw each frame
                 button_list.append(load_button(button, screen_width, screen_height))
+
             print("main menu loaded", len(button_list))
+            if playing_music != "data/Music/menu.mp3" :
+                play_music(f"data/Music/menu.mp3")
+                playing_music = "data/Music/menu.mp3"
 
         case 1:
             for button in level_menu_buttons.values():
                 button_list.append(load_button(button, screen_width, screen_height))
             print("level manager loaded", len(button_list))
-
+            if playing_music != "data/Music/menu.mp3" :
+                play_music(f"data/Music/menu.mp3")
+                playing_music = "data/Music/menu.mp3"
+            
         case _:  #The default case is used to load the next level each time
             for button in buttons["{}".format(n-1)].values():
                button_list.append(load_button(button, screen_width, screen_height))
             for object in levels["{}".format(n-1)].values() :
                 object_list.append(load_objects(object))
             print("level {} loaded".format(n-1))
+            if playing_music != f"data/Music/level{n-1}.mp3" :
+                play_music(f"data/Music/level{n-1}.mp3")
+                playing_music = f"data/Music/level{n-1}.mp3"
 
