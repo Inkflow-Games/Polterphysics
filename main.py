@@ -237,8 +237,8 @@ while running:
             button.hover(screen)   
             if click :
 
-                hmm = randint(1,50)
-                if hmm == 30 :
+                secret_sound = randint(0,50)
+                if secret_sound == 30 :
                     play_sound_fx("data/Music/pwomp.wav")
                 else :
                     play_sound_fx("data/Music/click.wav")
