@@ -1,11 +1,23 @@
-from tkinter import SEL
+"""
+Polterphysics
+level_manager.py
+
+A script that handle the different scenes and change of them
+Features include:
+- Button class
+- Handleing button behaviour
+- Loading the objects corresponding to the scene
+
+Last Updated: Apr 2025
+Python Version: 3.12.9
+Dependencies: pygame, core.sound, data, objects.object
+"""
 import pygame
 from objects.object import *
 import json
 from data import *
 # Dictionary storing level numbers as keys and lists of objects as values
 import pygame
-import core.physics_engine as phy
 from core.sound import play_music
 class Button:
     def __init__(self, image, imageHover,  size, position, height, width, action=''):
