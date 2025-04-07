@@ -105,7 +105,7 @@ def load_button(b, screen_width, screen_height):
 
 def load_objects(l):
     #new =  Object(mass = l[0], position = Vector2(l[1]), max_speed = l[2], radius = l[3],bounciness = l[4], damping_coefficient = l[5], static = l[6])
-    g = circle(Vector2(100,100),3,50)
+    g = Object(False, False, 3, 0.8, None, 50, Vector2(100,100))
     return g
 
 current_scene = 0

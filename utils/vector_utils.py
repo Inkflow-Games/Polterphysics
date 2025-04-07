@@ -49,11 +49,11 @@ def objects_running_info(test_object, second_object, vector_applied1 = False, ve
         vector_applied1 = False #reset the vectors applied to our object
         vector_applied2 = False
         
-        test_position_x_before = test_object.centroid.x #obtain the position of the objects at the previous frame (if "frame_already_passed" >0)
-        test_position_y_before = test_object.centroid.y
+        test_position_x_before = test_object.shape.centroid.x #obtain the position of the objects at the previous frame (if "frame_already_passed" >0)
+        test_position_y_before = test_object.shape.centroid.y
         
-        second_position_x_before = second_object.centroid.x
-        second_position_y_before = second_object.centroid.y
+        second_position_x_before = second_object.shape.centroid.x
+        second_position_y_before = second_object.shape.centroid.y
         
         return vector_applied1, vector_applied2, test_position_x_before, test_position_y_before, second_position_x_before, second_position_y_before
 
@@ -64,12 +64,12 @@ def computes_50_position(object, vector1_coords, dt, position_x_before, position
     
     #in PIXELS / dt²
     v0 = Vector2(
-        (object.position.x - position_x_before) / dt,
-        (object.position.y - position_y_before) / dt
+        (object.shape.centroid.x - position_x_before) / dt,
+        (object.shape.centroid.y - position_y_before) / dt
     )
 
     #is a Vector2 --> pixels / kg --> coordinates of ax and ay
-    acceleration = vector1_coords / object.mass
+    acceleration = vector1_coords / object.shape.mass
 
     predicted_velocity = v0 + acceleration
 

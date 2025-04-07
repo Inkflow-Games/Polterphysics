@@ -41,15 +41,15 @@ class PhysicsEngine:
         if obj in self.objects:
             self.objects.remove(obj)
 
-    def update_polygon(self,poly,dt):
-        poly.add(poly.velocity*dt)
-        poly.rotate(poly.angular_velocity*dt)
-        poly.velocity *= 0.99
-        poly.angular_velocity *= 0.99
+    def update_polygon(self,object,dt):
+        object.shape.add(object.shape.velocity*dt)
+        object.shape.rotate(object.shape.angular_velocity*dt)
+        object.shape.velocity *= 0.99
+        object.shape.angular_velocity *= 0.99
 
     def update(self, dt):
         """
-        Updates all objects in the physics engine by calling their `update` methods.
+        Updates all objects in the physics engine by calling the `update` methods.
 
         Parameters:
         dt (float): Time step elapsed since the last update (in seconds).

@@ -15,11 +15,10 @@ Python Version: 3.12.9
 Dependencies: pygame.math (Vector2), math
 """
 
-import pygame
 from pygame.math import Vector2
 from math import *
 
-def findfurthest(D, vertices):
+def find_furthest(D, vertices):
     max_point = vertices[0]
     max_dot = max_point.dot(D)
 
@@ -31,7 +30,7 @@ def findfurthest(D, vertices):
             
     return max_point
 
-def findfurthests(D,vertices):
+def find_furthests(D,vertices):
     print(vertices,D)
     temp = [round(vert.dot(D),1) for vert in vertices]
     print(temp)
@@ -40,16 +39,16 @@ def findfurthests(D,vertices):
     return max_indices
 
 def Support(D,A,B):
-    a = findfurthest(D,A)
-    b = findfurthest(-D,B)
+    a = find_furthest(D,A)
+    b = find_furthest(-D,B)
     opmax = a - b
     return opmax
        
 class GJK2D:
-    def __init__(self,ShapeA,ShapeB):
+    def __init__(self, Object1, Object2):
         self.vertices = []
-        self.A = ShapeA
-        self.B = ShapeB
+        self.shape1 = Object1.shape
+        self.shape2 = Object2.shape
         self.typecol = None
         self.colpoint = 0
       
@@ -61,10 +60,10 @@ class GJK2D:
             self.colpoint = polyB.support(mtd)
             #pygame.draw.circle(screen,(50,50,50),self.colpoint,3)
         else:
-            polyA = self.A.vertices
-            polyB = self.B.vertices
-            supportA = findfurthests(mtd, polyA)
-            supportB = findfurthests(-mtd, polyB)
+            polyA = self.shape1.vertices
+            polyB = self.shape2.vertices
+            supportA = find_furthests(mtd, polyA)
+            supportB = find_furthests(-mtd, polyB)
             #supportA = find_furthests(polyA, mtd)
             #supportB = find_furthests(polyB,-mtd)
             print(supportA,supportB)
@@ -73,15 +72,15 @@ class GJK2D:
             # Classify contact type
             if len(supportA) == 1 and len(supportB) == 2:
                 self.typecol = (supportA[0], supportB, "vertex-edge")
-                self.colpoint = self.vertextoedge(self.B.vertices[supportB[0]],self.B.vertices[supportB[1]],self.A.vertices[supportA[0]])
+                self.colpoint = self.vertextoedge(self.shape2.vertices[supportB[0]],self.shape2.vertices[supportB[1]],self.shape1.vertices[supportA[0]])
 
             elif len(supportA) == 2 and len(supportB) == 1:
                 self.typecol = (supportA, supportB[0], "edge-vertex")
-                self.colpoint = self.vertextoedge(self.A.vertices[supportA[0]],self.A.vertices[supportA[1]],self.B.vertices[supportB[0]])
+                self.colpoint = self.vertextoedge(self.shape1.vertices[supportA[0]],self.shape1.vertices[supportA[1]],self.shape2.vertices[supportB[0]])
 
             elif len(supportA) == 2 and len(supportB) == 2:
                 self.typecol = (supportA, supportB, "edge-edge")
-                self.colpoint = self.edgetoedge(self.A.vertices[supportA[0]],self.A.vertices[supportA[1]],self.B.vertices[supportB[0]],self.B.vertices[supportB[1]])
+                self.colpoint = self.edgetoedge(self.shape1.vertices[supportA[0]],self.shape1.vertices[supportA[1]],self.shape2.vertices[supportB[0]],self.shape2.vertices[supportB[1]])
 
             else : self.typecol = (None, None, "unknown")
 
@@ -114,7 +113,7 @@ class GJK2D:
         return (end_point + start_point)/2
    
     def calcsupport(self,direction):
-        temp = self.A.support(direction) - self.B.support(-direction)
+        temp = self.shape1.support(direction) - self.shape2.support(-direction)
         return temp
     
     def TripleProduct(self,a,b,c):
@@ -123,7 +122,7 @@ class GJK2D:
 
     def detection(self):
         #direction = Vector2(1,1)
-        direction = self.A.centroid
+        direction = self.shape1.centroid
         a = self.calcsupport(direction)
         direction = -direction
         b = self.calcsupport(direction)
@@ -211,10 +210,10 @@ class GJK2D:
         #pygame.draw.line(screen,(120,20,100),contact_point,(contact_point+penetrationvector)*10)
         normal = penetrationvector.normalize()
         #pygame.draw.line(screen,(50,50,50),contact_point,(contact_point-normal)*10)
-        rA = contact_point - self.A.centroid
-        rB = contact_point - self.B.centroid
-        vA = self.A.velocity + Vector2(-self.A.angular_velocity * rA.y, self.A.angular_velocity * rA.x)
-        vB = self.B.velocity + Vector2(-self.B.angular_velocity * rB.y, self.B.angular_velocity * rB.x)
+        rA = contact_point - self.shape1.centroid
+        rB = contact_point - self.shape2.centroid
+        vA = self.shape1.velocity + Vector2(-self.shape1.angular_velocity * rA.y, self.shape1.angular_velocity * rA.x)
+        vB = self.shape2.velocity + Vector2(-self.shape2.angular_velocity * rB.y, self.shape2.angular_velocity * rB.x)
         relative_velocity = vB - vA
 
         # Check if bodies are separating
@@ -223,10 +222,10 @@ class GJK2D:
             return  # Objects are already separating
 
         # Compute impulse scalar
-        inv_mass1 = 1 / self.A.mass if self.A.mass > 0 else 0
-        inv_mass2 = 1 / self.B.mass if self.B.mass > 0 else 0
-        inv_I1 = 1 / self.A.inertia if self.A.inertia > 0 else 0
-        inv_I2 = 1 / self.B.inertia if self.B.inertia > 0 else 0
+        inv_mass1 = 1 / self.shape1.mass if self.shape1.mass > 0 else 0
+        inv_mass2 = 1 / self.shape2.mass if self.shape2.mass > 0 else 0
+        inv_I1 = 1 / self.shape1.inertia if self.shape1.inertia > 0 else 0
+        inv_I2 = 1 / self.shape2.inertia if self.shape2.inertia > 0 else 0
 
         rA_cross_N = rA.cross(normal)
         rB_cross_N = rB.cross(normal)
@@ -237,16 +236,16 @@ class GJK2D:
 
         # Apply impulse to linear velocity
         impulse = j * normal
-        self.A.velocity -= impulse * inv_mass1
-        self.B.velocity += impulse * inv_mass2
+        self.shape1.velocity -= impulse * inv_mass1
+        self.shape2.velocity += impulse * inv_mass2
         a = Vector2(0,0)
 
         # Apply angular impulse
         #print("rA",rA.cross(impulse)* inv_I1)
         #print(impulse * inv_mass1,impulse * inv_mass2)
         #print("rB",rB.cross(impulse)* inv_I2)
-        self.A.angular_velocity -= rA.cross(impulse) * inv_I1
-        self.B.angular_velocity += rB.cross(impulse) * inv_I2
+        self.shape1.angular_velocity -= rA.cross(impulse) * inv_I1
+        self.shape2.angular_velocity += rB.cross(impulse) * inv_I2
         #print("a",self.A.velocity,self.A.inertia,self.A.angular_velocity)
         #print("b",self.B.velocity,self.B.inertia,self.B.angular_velocity)
         return

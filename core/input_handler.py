@@ -24,7 +24,7 @@ def vector_application(
     mouse_position = pygame.mouse.get_pos()
 
     if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-        if is_point_in_circle(mouse_position, test_object.centroid, test_object.radius):
+        if is_point_in_circle(mouse_position, test_object.shape.centroid, test_object.shape.radius):
             clicked_object = test_object
             if vector_applied1:
                 force_vector = -vector1_coords
@@ -32,7 +32,7 @@ def vector_application(
                 vector_applied1 = False
                 vector1_coords = Vector2(0, 0)
 
-        elif is_point_in_circle(mouse_position, second_object.centroid, second_object.radius):
+        elif is_point_in_circle(mouse_position, second_object.shape.centroid, second_object.shape.radius):
             clicked_object = second_object
             if vector_applied2:
                 force_vector = -vector2_coords
