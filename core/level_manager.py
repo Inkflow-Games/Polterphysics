@@ -147,25 +147,32 @@ def load_button(button, screen_width, screen_height):
         )
     return new_button
 
-def load_objects(l):
-    new =  Object(mass = l[0], position = Vector2(l[1]), max_speed = l[2], radius = l[3],bounciness = l[4], damping_coefficient = l[5], static = l[6])
+def load_objects(object):
+    """
+    This function allow us to turn the json object into objects
+
+    Parameters:
+    object (dictionnary): the json of the object we want to load
+
+    Returns:
+    Object: The object now turned into a object.
+    """
+    new =  Object(mass = object[0], position = Vector2(object[1]), max_speed = object[2], radius = object[3],bounciness = object[4], damping_coefficient = object[5], static = object[6])
     return new
 
 current_scene = 0
-
-def load_scene(n: int, screen_width, screen_height):
-    global button_list
-    global object_list
-    global current_scene 
-    display_width, display_height = screen_width, screen_height
-    current_scene = n
-    object_list = []
-    button_list = []
-    
-    
 playing_music = ""
 
 def load_scene(n: int, screen_width, screen_height):
+    """
+    This function allow us to load the correct scene each time
+
+    Parameters:
+    n (int): the index of the scene we want
+    screen_width (int) : the screen width
+    screen_height(int) : the screen height
+
+    """
     global button_list
     global object_list
     global current_scene 

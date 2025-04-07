@@ -23,43 +23,10 @@ from objects.object import Object
 from utils.math_utils import *
 from utils.vector_utils import *
 from core.input_handler import *
-from utils.math_utils import WIDTH, HEIGHT, FPS
 import core.level_manager as level_manager
 import json
 from core.sound import *
 from random import randint
-
-
-
-"""Must integrate it elsewhere in the program after debug"""
-#possibility to stack the minus vectors if called multiple times
-def reset_vectors_applied (vector1_cd, vector2_cd):# must give the Vector2 (=coordinates) of the vectors
-    if vector1_cd != Vector2(0,0) :
-        test_object.apply_force(-vector1_cd)
-        vector1_coords = Vector2(0,0)
-    if vector1_cd != Vector2(0,0) :
-        second_object.apply_force(-vector2_cd)
-        vector2_coords = Vector2(0,0)
-
-
-
-
-clicked_object = None
-last_clicked = None
-vector_applied1 = False
-vector_applied2 = False
-vector1_coords = Vector2(0,0)
-vector2_coords = Vector2(0,0)
-vector1_angle = 0 #measures in degrees
-vector2_angle = 0
-
-test_position_x_before = 0
-test_position_y_before = 0
-second_position_x_before = 0
-second_position_y_before = 0
-
-
-
 
 # Initialize Pygame
 pygame.init()
@@ -78,6 +45,35 @@ pygame.display.set_caption("Physics Engine Test")
 # Initialize physics engine
 physics_engine = PhysicsEngine()
 
+# Clock to control frame rate
+clock = pygame.time.Clock()
+running = True
+
+clicked_object = None
+last_clicked = None
+vector_applied1 = False
+vector_applied2 = False
+vector1_coords = Vector2(0,0)
+vector2_coords = Vector2(0,0)
+vector1_angle = 0 #measures in degrees
+vector2_angle = 0
+
+test_position_x_before = 0
+test_position_y_before = 0
+second_position_x_before = 0
+second_position_y_before = 0
+
+"""Must integrate it elsewhere in the program after debug"""
+#possibility to stack the minus vectors if called multiple times
+def reset_vectors_applied (vector1_cd, vector2_cd):# must give the Vector2 (=coordinates) of the vectors
+    if vector1_cd != Vector2(0,0) :
+        test_object.apply_force(-vector1_cd)
+        vector1_coords = Vector2(0,0)
+    if vector1_cd != Vector2(0,0) :
+        second_object.apply_force(-vector2_cd)
+        vector2_coords = Vector2(0,0)
+
+
 # Create a test object (simulating a basketball)
 test_object = Object(mass=0.6, position=(400, 100), radius=15, max_speed=700, bounciness=0.8, damping_coefficient=0.02)
 physics_engine.add_object(test_object)
@@ -86,9 +82,6 @@ physics_engine.add_object(test_object)
 second_object = Object(mass=2, position=(600, 100), radius=25, max_speed=700, bounciness=0.07, damping_coefficient=0)
 physics_engine.add_object(second_object)
 
-# Clock to control frame rate
-clock = pygame.time.Clock()
-running = True
 
 # Dictionary to track key states for the first object
 key_state_1 = {
