@@ -36,7 +36,7 @@ class Object:
         static (bool): Whether the object is immovable and unaffected by forces.
     """
     
-    def __init__(self, mass, position, max_speed=70, bounciness=0.8, damping_coefficient=0, static=False):
+    def __init__(self, polygon=True, static=False, mass=1, restitution_coefficient=0.8, vertices=None, radius=None, centroid=None):
         """
         Initializes an Object instance with the specified properties.
 
@@ -49,69 +49,25 @@ class Object:
         damping_coefficient (float, optional): The damping effect coefficient (default is 0).
         static (bool, optional): If True, the object does not move (default is False).
         """
-        self.mass = mass
-        self.position = Vector2(position)
-        self.velocity = Vector2(0, 0)
-        self.max_speed = max_speed
-        self.gravity = Vector2(0, 9.81 * self.mass)
-        self.bounciness = bounciness
-        self.angular_velocity = 0
-        self.damping_coefficient = damping_coefficient
+        self.polygon = polygon
         self.static = static
-    
-    def apply_force(self, force):
-        """
-        Applies a force to the object, modifying its velocity.
-
-        Parameters:
-        force (Vector2): The force vector applied to the object.
-        """
-        acceleration = force / self.mass
-        self.velocity += acceleration
-    
-    def apply_spin(self, spin_force):
-        """
-        Applies a rotational force (spin) to the object.
-
-        Parameters:
-        spin_force (float): The force applied to generate angular acceleration.
-        """
-        moment_of_inertia = self.mass * 0.1  # Approximate moment of inertia
-        angular_acceleration = spin_force / moment_of_inertia
-        self.angular_velocity += angular_acceleration
-    
-    def update(self, dt, ground_level):
-        """
-        Updates the object's position, velocity, and handles collisions.
-
-        Parameters:
-        dt (float): The time step for the simulation.
-        ground_level (float): The y-coordinate representing the ground level.
-        """
-        # Apply gravity force
-        self.apply_force(self.gravity * dt)
-
-        # Compute dynamic damping
-        self.damping = 0.01 + self.damping_coefficient * (self.velocity.length() / self.max_speed)
-        self.velocity *= (1 - self.damping * dt)
-
-        # Update position based on velocity
-        self.position += self.velocity * dt
-
-        # Apply rotation effect (spin can slightly affect trajectory)
-        self.rotate()
+        self.restitution_coefficient = restitution_coefficient
+        if polygon :
+            self.shape = Polygon(vertices, mass)
+        else :
+            self.shape = Circle(centroid, radius, mass)
 
 class Polygon:
-    def __init__(self,points,mass):
-        self.vertices = points
-        self.length = len(points)
+    def __init__(self, vertices=[], mass=1):
+        self.vertices = vertices
+        self.length = len(vertices)
         self.centroid = self.center()
         self.angular_velocity = 0
         self.mass = mass
-        self.inertia = self.calcinertia()
+        self.inertia = self.calculate_inertia()
         self.velocity = Vector2(0,0)
 
-    def calcinertia(self):
+    def calculate_inertia(self):
         I = 0
         A_total = 0
 
@@ -146,7 +102,7 @@ class Polygon:
         ans.y = round((ans.y) / (6 * signedarea),1)
         return ans
 
-    def rotate(self,rad):
+    def rotate(self, rad):
 
         angle_rad = rad
         for i in range(self.length):
@@ -159,60 +115,70 @@ class Polygon:
             self.vertices[i] = new_point
         return
     
-    def add(self,vector):
+    def add(self, vector):
         for i in range(self.length):
             self.vertices[i] += vector
         self.centroid += vector
         return
     
-    def draw(self,surface,color):
+    def draw(self, surface, color):
         #self.add(centerpos-self.centroid)
         centerpos = self.centroid
         pygame.draw.polygon(surface,color,self.vertices)
         pygame.draw.circle(surface,(0,255,0),self.center(),3)
         return
             
-    def support(self,direction):
-        return findfurthest(direction,self.vertices)
+    def support(self, direction):
+        return find_furthest(direction,self.vertices)
     
     def apply_force(self, force):
+        """
+        Applies a force to the object, modifying its velocity.
+
+        Parameters:
+        force (Vector2): The force vector applied to the object.
+        """
         self.velocity += force / self.mass
 
-  
-class circle:
-    def __init__(self,centre, radius, mass):
+class Circle:
+    def __init__(self, centre=Vector2(0,0), radius=10, mass=1):
         self.radius = radius
         self.centroid = centre
         self.angular_velocity = 0
         self.mass = mass
         self.velocity = Vector2(0,0)
-        self.inertia = self.calcinertia()
+        self.inertia = self.calculate_inertia()
 
     def support(self, direction):
         if direction.length() == 0:
             return self.centroid + self.radius * Vector2(0,0.00000001)
         else : return self.centroid + self.radius * direction.normalize()
 
-    def calcinertia(self):
+    def calculate_inertia(self):
         temp = (1/2)*self.mass*(self.radius**2)
         return temp
     
-    def add(self,vector):
+    def add(self, vector):
         self.centroid += vector
         return
     
-    def rotate(self,angle):
+    def rotate(self, rad):
         return
     
-    def draw(self,surface,color):
+    def draw(self, surface, color):
         pygame.draw.circle(surface,color,self.centroid,self.radius)
         pygame.draw.circle(surface,(0,255,0),self.centroid,3)
         return
-    
-    def apply_force(self, force):
-        self.velocity += force / self.mass
 
-    def move_center(self,position):
+    def move_center(self, position):
         temp = position - self.centroid
         self.add(temp)
-        
+
+    def apply_force(self, force):
+        """
+        Applies a force to the object, modifying its velocity.
+
+        Parameters:
+        force (Vector2): The force vector applied to the object.
+        """
+        self.velocity += force / self.mass
