@@ -26,6 +26,8 @@ from core.input_handler import *
 from utils.math_utils import WIDTH, HEIGHT, FPS
 import core.level_manager as level_manager
 import json
+from core.sound import *
+from random import randint
 
 
 
@@ -234,6 +236,12 @@ while running:
         if (pygame.mouse.get_pos()[0] < button.position[0] + button.width/2) and (pygame.mouse.get_pos()[0] > button.position[0] - button.width/2) and (pygame.mouse.get_pos()[1] < button.position[1] + button.height/2) and (pygame.mouse.get_pos()[1] > button.position[1] - button.height/2) :
             button.hover(screen)   
             if click :
+
+                hmm = randint(1,50)
+                if hmm == 30 :
+                    play_sound_fx("data/Music/pwomp.wav")
+                else :
+                    play_sound_fx("data/Music/click.wav")
                 button.is_pressed(display_width, display_height)
                 game_state = button.game_state
                 new_scene = level_manager.current_scene #verify if we changed of scene
