@@ -59,10 +59,8 @@ class Button:
         match self.action :
             case "Play" :
                 self.game_state = "running"
-                print("game's running")
             case "Pause" :
                 self.game_state = "paused"
-                print("game's paused")
             case "Stop" :
                 #close the window
                 pygame.quit()
@@ -187,7 +185,6 @@ def load_scene(n: int, screen_width, screen_height):
             for button in main_menu_buttons.values(): #loading the buttons we have to draw each frame
                 button_list.append(load_button(button, screen_width, screen_height))
 
-            print("main menu loaded", len(button_list))
             if playing_music != "data/Music/menu.mp3" :
                 play_music(f"data/Music/menu.mp3")
                 playing_music = "data/Music/menu.mp3"
@@ -195,7 +192,6 @@ def load_scene(n: int, screen_width, screen_height):
         case 1: #Loading the level manager menu
             for button in level_menu_buttons.values():
                 button_list.append(load_button(button, screen_width, screen_height))
-            print("level manager loaded", len(button_list))
             if playing_music != "data/Music/menu.mp3" :
                 play_music(f"data/Music/menu.mp3")
                 playing_music = "data/Music/menu.mp3"
@@ -205,7 +201,6 @@ def load_scene(n: int, screen_width, screen_height):
                button_list.append(load_button(button, screen_width, screen_height))
             for object in levels["{}".format(n-1)].values() :
                 object_list.append(load_objects(object))
-            print("level {} loaded".format(n-1))
             if playing_music != f"data/Music/level{n-1}.mp3" :
                 play_music(f"data/Music/level{n-1}.mp3")
                 playing_music = f"data/Music/level{n-1}.mp3"

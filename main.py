@@ -222,8 +222,8 @@ while running:
         if clicked_object != None and game_state == "paused" : 
             pygame.draw.line(screen, (255, 255, 255), clicked_object.position, mouse_position, 5)
 
-    # Draw all buttons in the correct order
-    new_scene = level_manager.current_scene #verify if we changed of scene
+    # Draw all buttons in the correct order depending on the current scene, it loads the button as well
+    new_scene = level_manager.current_scene 
     running_scene = new_scene
     for button in level_manager.button_list:
         if (pygame.mouse.get_pos()[0] < button.position[0] + button.width/2) and (pygame.mouse.get_pos()[0] > button.position[0] - button.width/2) and (pygame.mouse.get_pos()[1] < button.position[1] + button.height/2) and (pygame.mouse.get_pos()[1] > button.position[1] - button.height/2) :
