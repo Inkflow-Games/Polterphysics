@@ -198,7 +198,6 @@ while running:
     vector1_angle, vector2_angle)
 
 
-
     if game_state == "running" : # the physics is calculated only during play mode
         #update vectors state and last position of the objects
         vector_applied1, vector_applied2, test_position_x_before, test_position_y_before, second_position_x_before, second_position_y_before = objects_running_info(test_object, second_object, vector_applied1, vector_applied2)
@@ -207,8 +206,6 @@ while running:
         dt = clock.get_time() / 100.0  # Convert milliseconds to a suitable scale
         resolve_collision(test_object,second_object)
         physics_engine.update(dt, ground_level)  # Pass ground_level as display_height - 20 (or whatever your ground level is)
-
-
 
 
     # Draw frame
@@ -274,8 +271,6 @@ while running:
 
     pygame.display.flip()  # Refresh screen
     clock.tick(120)  # Limit FPS to 120
-
-
 
 # Quit Pygame
 pygame.quit()

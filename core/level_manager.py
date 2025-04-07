@@ -71,7 +71,10 @@ class Button:
             case "Next Level" :
                 #load_scene(n+1)
                 self.game_state = "paused"
-                load_scene(current_scene+1, screen_width, screen_height)
+                if (current_scene + 1 > max_scene) : 
+                    load_scene(current_scene, screen_width, screen_height)
+                else :
+                    load_scene(current_scene+1, screen_width, screen_height)
             case "Load Main Menu" :
                 #load_scene(0)
                 self.game_state = "menu"
@@ -80,23 +83,11 @@ class Button:
                 #load_scene(1)
                 self.game_state = "menu"
                 load_scene(1, screen_width, screen_height)
-            case "Level1" :
-                #load_scene(2)
+            case "1" | "2" | "3" :
                 self.game_state = "paused"
-                load_scene(2, screen_width, screen_height)
-            case "Level2" :
-                #load_scene(3)
-                self.game_state = "paused"
-                load_scene(3, screen_width, screen_height)
-            case "Level3" :
-                #load_scene(4)
-                self.game_state = "paused"
-                load_scene(4, screen_width, screen_height)
-            case default :
-                self.game_state = 'menu'
-                load_scene(current_scene, screen_width, screen_height)
+                load_scene(int(self.action), screen_width, screen_height)
 
-           
+                   
     def hover(self, screen): # The function which changes the sprite when hovered
         img = pygame.image.load(self.imageHover)
         # img = pygame.transform.scale(img, (self.width, self.height)*self.size)
@@ -159,6 +150,7 @@ def load_objects(object):
     return new
 
 current_scene = 0
+max_scene = 4
 playing_music = ""
 
 def load_scene(n: int, screen_width, screen_height):
