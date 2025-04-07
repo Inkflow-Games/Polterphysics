@@ -19,7 +19,28 @@ from data import *
 # Dictionary storing level numbers as keys and lists of objects as values
 import pygame
 from core.sound import play_music
+
 class Button:
+    """
+    A class representing a Button.
+
+    This class defines the structure and behavior of the object, including its
+    attributes, methods, and any necessary calculations or interactions.
+
+    Attributes:
+        image (string): The path to the image which is display for the button
+        imageHover (string): The path to the image which is diplay while the button is hovered
+        position (array of int): representing the x and y position for the button with coefficients (0 to 1)
+        height (int) : representing the height of the image
+        width (int) : representing the width of the image
+        action (string) : a string representing the action of the button
+
+    Methods:
+        is_pressed(self, display_width, display_height): The function called when a button is pressed
+        hover(self, screen): The function to display the button when hovered
+        draw(self, screen): The function to display the button otherwise
+    """
+
     def __init__(self, image, imageHover,  size, position, height, width, action=''):
         self.size = size
         self.image = image
@@ -103,15 +124,26 @@ with open("data/levels.json", "r") as f : #load the different objects for the le
 button_list = []
 object_list = []
 
-def load_button(b, screen_width, screen_height):
+def load_button(button, screen_width, screen_height):
+    """
+    This function allow us to turn the button from json dictionnaries to a Button object
+
+    Parameters:
+    button (dictionnary): the json of the button we want to load
+    screen_width (int): The screen width
+    screen_height (int)
+
+    Returns:
+    Button: The button now turned into a button object.
+    """
     new_button = Button(
-        size=b["size"],
-        image=b["image"],
-        imageHover=b["imageHover"],
-        position=Vector2(b["position"][0]*screen_width, b["position"][1]*screen_height),
-        height=b["height"],
-        width=b["width"],
-        action=b["action"]
+        size=button["size"],
+        image=button["image"],
+        imageHover=button["imageHover"],
+        position=Vector2(button["position"][0]*screen_width, button["position"][1]*screen_height),
+        height=button["height"],
+        width=button["width"],
+        action=button["action"]
         )
     return new_button
 
