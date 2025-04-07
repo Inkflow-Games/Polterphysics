@@ -15,14 +15,14 @@ class LevelEditorUI:
             object_data = json.load(f)
             self.available_objects = [
                 Object(
-                    object_data[id]["name"],
-                    object_data[id]["mass"],
-                    object_data[id]["position"],
-                    object_data[id]["radius"],
-                    object_data[id]["max_speed"],
-                    object_data[id]["bounciness"],
-                    object_data[id]["damping_coefficient"],
-                    object_data[id]["static"]
+                    polygon=object_data[id]["polygon"],
+                    static=object_data[id]["static"],
+                    mass=object_data[id]["mass"],
+                    restitution_coefficient=object_data[id]["restitution_coefficient"],
+                    vertices=(),
+                    centroid=Vector2(object_data[id]["centroid"]),
+                    radius=object_data[id]["radius"],
+                    name=object_data[id]["name"]
                 ) for id in object_data
             ]
 
@@ -39,8 +39,8 @@ class LevelEditorUI:
         y_offset = 30
         FIXED_MARGIN = 20
         for obj in self.available_objects:
-            pygame.draw.circle(self.screen, (255, 0, 0), (180, y_offset + obj.radius), obj.radius)
-            y_offset += obj.radius * 2 + FIXED_MARGIN
+            pygame.draw.circle(self.screen, (255, 0, 0), (180, y_offset + obj.shape.radius), obj.shape.radius)
+            y_offset += obj.shape.radius * 2 + FIXED_MARGIN
 
     def draw_right_panel(self, selected_object):
         """ Dessine les informations de l'objet sélectionné dans le panneau de droite """
@@ -51,7 +51,7 @@ class LevelEditorUI:
         font = pygame.font.SysFont(None, 36)
         if selected_object:  # Si un objet est sélectionné
             text = font.render(f"Objet : {selected_object.name}", True, (255, 255, 255))
-            size_text = font.render(f"Taille : {selected_object.radius}", True, (255, 255, 255))
+            size_text = font.render(f"Taille : {selected_object.shape.radius}", True, (255, 255, 255))
             self.screen.blit(size_text, (1580, 100))
         else:
             text = font.render("None", True, (255, 255, 255))

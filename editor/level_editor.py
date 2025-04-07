@@ -2,6 +2,7 @@ import pygame
 import json
 from editor.editor_ui import LevelEditorUI
 from pygame.locals import *
+from pygame.math import Vector2
 from objects.object import Object
 
 class LevelEditor:
@@ -22,7 +23,7 @@ class LevelEditor:
             if event.button == 1 :
                 if mouse_pos[0] < 360:  # Sélection d'un objet dans le panneau gauche
                     self.select_object(mouse_pos)
-                elif self.selected_object and 365 + self.selected_object.radius < mouse_pos[0] < 1555 - self.selected_object.radius :  # Placer l'objet à l'endroit du clic
+                elif self.selected_object and 365 + self.selected_object.shape.radius < mouse_pos[0] < 1555 - self.selected_object.shape.radius :  # Placer l'objet à l'endroit du clic
                     self.place_selected_object(mouse_pos)
             elif event.button == 3:  # Clic droit pour sauvegarder
                 self.save_level()
@@ -32,11 +33,11 @@ class LevelEditor:
         y_offset = 30
         FIXED_MARGIN = 20
         for obj in self.ui.available_objects:
-            if y_offset < mouse_pos[1] < y_offset + obj.radius * 2:
+            if y_offset < mouse_pos[1] < y_offset + obj.shape.radius * 2:
                 self.selected_object = obj
                 print(f"Objet sélectionné : {self.selected_object}")
                 break
-            y_offset += obj.radius * 2 + FIXED_MARGIN
+            y_offset += obj.shape.radius * 2 + FIXED_MARGIN
         self.draw()
 
     def place_selected_object(self, mouse_pos):
@@ -44,14 +45,14 @@ class LevelEditor:
         if self.selected_object:
             # Placer l'objet sélectionné à la position du clic
             new_obj = Object(
-                self.selected_object.name,
-                self.selected_object.mass,
-                (mouse_pos[0], mouse_pos[1]),  # Utilise les coordonnées du clic
-                self.selected_object.radius,
-                self.selected_object.max_speed,
-                self.selected_object.bounciness,
-                self.selected_object.damping_coefficient,
-                self.selected_object.static
+                polygon=self.selected_object.polygon,
+                static=self.selected_object.static,
+                mass=self.selected_object.shape.mass,
+                restitution_coefficient=self.selected_object.restitution_coefficient,
+                vertices=None,
+                radius=self.selected_object.shape.radius,
+                centroid=Vector2(mouse_pos[0], mouse_pos[1]),  # Utilise les coordonnées du clic
+                name=self.selected_object.name
             )
             self.placed_objects.append(new_obj)
             print(f"Objet placé à {mouse_pos}")
@@ -59,7 +60,7 @@ class LevelEditor:
     def display_objects(self):
         """ Affiche les objets placés sur le niveau """
         for obj in self.placed_objects:
-            pygame.draw.circle(self.screen, (255, 0, 0), (int(obj.position.x), int(obj.position.y)), obj.radius)
+            pygame.draw.circle(self.screen, (255, 0, 0), (int(obj.shape.centroid.x), int(obj.shape.centroid.y)), obj.shape.radius)
     
     def update(self) :
         """ Met à jour les objets du niveau et les affiche """
@@ -83,7 +84,7 @@ class LevelEditor:
             level_data[id] = [
                 obj.name,
                 obj.mass,
-                [obj.position.x, obj.position.y],  # Position en [x, y]
+                [obj.shape.centroid.x, obj.shape.centroid.y],  # Position en [x, y]
                 obj.radius,
                 obj.max_speed,
                 obj.bounciness,

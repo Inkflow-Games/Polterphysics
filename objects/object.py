@@ -9,12 +9,11 @@ Features include:
 - Collision detection with a ground level and bounce effect
 
 Author: Rafael Véclin
-Last Updated: Feb 2025
+Last Updated: Apr 2025
 Python Version: 3.12.9
-Dependencies: math, pygame.math.Vector2
+Dependencies: pygame, pygame.math.Vector2, core.collision
 """
 
-import math
 import pygame
 from pygame.math import Vector2
 from core.collision import * 
@@ -36,7 +35,7 @@ class Object:
         static (bool): Whether the object is immovable and unaffected by forces.
     """
     
-    def __init__(self, name='Object', polygon=True, static=False, mass=1, restitution_coefficient=0.8, vertices=None, radius=None, centroid=None):
+    def __init__(self, polygon=True, static=False, mass=1, restitution_coefficient=0.8, vertices=None, radius=None, centroid=None, name='Object'):
         """
         Initializes an Object instance with the specified properties.
 

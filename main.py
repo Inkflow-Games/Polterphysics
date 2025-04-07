@@ -4,6 +4,7 @@ import pygame
 from editor.level_editor import LevelEditor
 
 def main():
+    print("OUBLIE PAS DE CHANGER LA FONCTION DE SAUVEGARDE")
     pygame.init()
     screen = pygame.display.set_mode((1920, 1080))
     pygame.display.set_caption("Level Editor")
