@@ -49,11 +49,11 @@ def objects_running_info(test_object, second_object, vector_applied1 = False, ve
         vector_applied1 = False #reset the vectors applied to our object
         vector_applied2 = False
         
-        test_position_x_before = test_object.position.x #obtain the position of the objects at the previous frame (if "frame_already_passed" >0)
-        test_position_y_before = test_object.position.y
+        test_position_x_before = test_object.centroid.x #obtain the position of the objects at the previous frame (if "frame_already_passed" >0)
+        test_position_y_before = test_object.centroid.y
         
-        second_position_x_before = second_object.position.x
-        second_position_y_before = second_object.position.y
+        second_position_x_before = second_object.centroid.x
+        second_position_y_before = second_object.centroid.y
         
         return vector_applied1, vector_applied2, test_position_x_before, test_position_y_before, second_position_x_before, second_position_y_before
 

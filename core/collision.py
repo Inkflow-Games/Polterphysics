@@ -39,18 +39,6 @@ def findfurthests(D,vertices):
     max_indices = [i for i, num in enumerate(temp) if num == maximum]
     return max_indices
 
-"""
-def findfurthest(D,vertices):
-    max = Vector2.dot(D,vertices[0])
-    maxpoint = vertices[0]
-    for elements in vertices[1:]:
-        temp = Vector2.dot(D,elements)
-        if max < temp:
-            max = temp
-            maxpoint = elements
-    return maxpoint"
-"""
-
 def Support(D,A,B):
     a = findfurthest(D,A)
     b = findfurthest(-D,B)

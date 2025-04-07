@@ -174,6 +174,10 @@ class Polygon:
             
     def support(self,direction):
         return findfurthest(direction,self.vertices)
+    
+    def apply_force(self, force):
+        self.velocity += force / self.mass
+
   
 class circle:
     def __init__(self,centre, radius, mass):
@@ -204,4 +208,11 @@ class circle:
         pygame.draw.circle(surface,color,self.centroid,self.radius)
         pygame.draw.circle(surface,(0,255,0),self.centroid,3)
         return
+    
+    def apply_force(self, force):
+        self.velocity += force / self.mass
+
+    def move_center(self,position):
+        temp = position - self.centroid
+        self.add(temp)
         

@@ -41,13 +41,13 @@ class PhysicsEngine:
         if obj in self.objects:
             self.objects.remove(obj)
 
-    def update_polygon(self,poly):
-        poly.add(poly.velocity/60)
-        poly.rotate(poly.angular_velocity/60)
+    def update_polygon(self,poly,dt):
+        poly.add(poly.velocity*dt)
+        poly.rotate(poly.angular_velocity*dt)
         poly.velocity *= 0.99
         poly.angular_velocity *= 0.99
 
-    def update(self, dt, ground_level):
+    def update(self, dt):
         """
         Updates all objects in the physics engine by calling their `update` methods.
 
@@ -57,4 +57,4 @@ class PhysicsEngine:
                               (e.g., objects cannot fall below this).
         """
         for obj1 in self.objects:
-            self.update_polygon(obj1)
+            self.update_polygon(obj1,dt)
