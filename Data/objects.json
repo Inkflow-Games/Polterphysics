@@ -1,73 +1,81 @@
 {
-    "ping_pong_ball": {
+    "1" : {
+        "name" : "Ping Pong Ball",
         "mass": 0.003,  
         "position": [0, 0],
         "max_speed": 116,
-        "radius": 0.022,
+        "radius": 2,
         "bounciness": 0.88,
         "damping_coefficient": 0.06,
         "static": 0
     },
-    "soccer_ball": {
+    "2" : {
+        "name" : "Soccer Ball",
         "mass": 0.43,
         "position": [0, 0],
         "max_speed": 30,
-        "radius": 0.11,
+        "radius": 10,
         "bounciness": 0.75,
         "damping_coefficient": 0.04,
         "static": 0
     },
-    "basketball": {
+    "3" : {
+        "name" : "Basketball Ball",
         "mass": 0.62,
         "position": [0, 0],
         "max_speed": 20,
-        "radius": 0.12,
+        "radius": 15,
         "bounciness": 0.85,
         "damping_coefficient": 0.05,
         "static": 0
     },
-    "tennis_ball": {
+    "4" : {
+        "name" : "Tennis Ball",
         "mass": 0.058,
         "position": [0, 0],
         "max_speed": 70,
-        "radius": 0.033,
+        "radius": 4,
         "bounciness": 0.9,
         "damping_coefficient": 0.03,
         "static": 0
     },
-    "bowling_ball": {
+    "5" : {
+        "name" : "Bowling Ball",
         "mass": 6.35,  
         "position": [0, 0],
         "max_speed": 10,
-        "radius": 0.1085,
+        "radius": 10,
         "bounciness": 0.1,
         "damping_coefficient": 0.1,
         "static": 0
     },
-    "petanque_ball": {
+    "6" : {
+        "name" : "Petanque Ball",
         "mass": 0.7,
         "position": [0, 0],
         "max_speed": 15,
-        "radius": 0.037,
+        "radius": 4,
         "bounciness": 0.4,
         "damping_coefficient": 0.08,
         "static": 0
     },
-    "bloc" : {
+    "7" : {
+        "name" : "Block",
         "mass": 0.7,
         "position": [0, 0],
         "max_speed": 15,
-        "radius": 0.037,
-        "bounciness": 0.4,
+        "radius": 25,
+        "bounciness": 0,
         "damping_coefficient": 0.08,
         "static": 1
     },
-    "flag" : {
+    "8" : {
+        "name" : "Flag",
         "mass" : 500,
         "position" : [0, 0],
         "max_speed" : 15,
-        "radius" : 0.037,
-        "bounciness" : 1,
+        "radius" : 15,
+        "bounciness" : 0,
         "damping_coefficient" : 1,
         "static" : 1
     }

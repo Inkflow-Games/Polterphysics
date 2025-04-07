@@ -3,9 +3,6 @@ import pygame
 from objects.object import *
 import json
 from data import *
-# Dictionary storing level numbers as keys and lists of objects as values
-import pygame
-import core.physics_engine as phy
 
 class Button:
     def __init__(self, image, imageHover,  size, position, height, width, action=''):
@@ -91,15 +88,15 @@ with open("data/levels.json", "r") as f : #load the different objects for the le
 button_list = []
 object_list = []
 
-def load_button(b, screen_width, screen_height):
+def load_button(button):
     new_button = Button(
-        size=b["size"],
-        image=b["image"],
-        imageHover=b["imageHover"],
-        position=Vector2(b["position"][0]*screen_width, b["position"][1]*screen_height),
-        height=b["height"],
-        width=b["width"],
-        action=b["action"]
+        size = button["size"],
+        image = button["image"],
+        image2 = button["image2"],
+        position = Vector2(button["position"][0], button["position"][1]),
+        height = button["height"],
+        width = button["width"],
+        action = button["action"]
         )
     return new_button
 
