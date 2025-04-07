@@ -3,9 +3,10 @@
     "",
     "\\config",
     "\\core",
-    "\\Data",
+    "\\data",
     "\\objects",
-    "\\ui"
+    "\\ui",
+    "\\utils"
   ],
   "SelectedNode": "\\main.py",
   "PreviewInSolutionExplorer": false
