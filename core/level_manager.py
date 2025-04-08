@@ -85,7 +85,7 @@ class Button:
                 load_scene(1, screen_width, screen_height)
             case "1" | "2" | "3" :
                 self.game_state = "paused"
-                load_scene(int(self.action), screen_width, screen_height)
+                load_scene(int(self.action)+1, screen_width, screen_height)
 
                    
     def hover(self, screen): # The function which changes the sprite when hovered
