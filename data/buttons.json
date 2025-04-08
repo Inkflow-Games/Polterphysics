@@ -29,7 +29,7 @@
       "position": [ 0.8, 0.2 ],
       "height": 100,
       "width": 150,
-      "action": "Level1"
+      "action": "1"
     },
     "Level2": {
       "size": 1,
@@ -38,7 +38,7 @@
       "position": [ 0.8, 0.35 ],
       "height": 100,
       "width": 150,
-      "action": "Level2"
+      "action": "2"
     },
     "Level3": {
       "size": 1,
@@ -47,7 +47,7 @@
       "position": [ 0.8, 0.5 ],
       "height": 100,
       "width": 150,
-      "action": "Level3"
+      "action": "3"
     },
     "Exit": {
       "size": 1,
