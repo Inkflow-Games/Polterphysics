@@ -126,6 +126,7 @@ def load_scene(n: int, screen_width, screen_height):
     global object_list
     global current_scene 
     global playing_music
+    global background
     display_width, display_height = screen_width, screen_height
     current_scene = n
     object_list = []
@@ -152,8 +153,10 @@ def load_scene(n: int, screen_width, screen_height):
         case _:  #The default case is used to load the next level each time
             for button in buttons["{}".format(n-1)].values():
                button_list.append(load_button(button, screen_width, screen_height))
-            for object in levels["{}".format(n-1)].values() :
-                object_list.append(load_objects(object))
+            for object in levels["{}".format(n-1)].keys() :
+                if object != "background" :
+                    object_list.append(load_objects(levels["{}".format(n-1)][object]))
+                else : background = pygame.image.load(levels["{}".format(n-1)][object])
             print("level {} loaded".format(n-1))
             if playing_music != f"data/Music/level{n-1}.mp3" :
                 play_music(f"data/Music/level{n-1}.mp3")

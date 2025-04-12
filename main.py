@@ -114,7 +114,6 @@ ground_level = display_height - 20
 level_manager.load_scene(0, display_width, display_height)
 
 game_state = "menu"
-background = ""
 
 
 # Main game loop
@@ -221,7 +220,7 @@ while running:
     # Draw frame
     screen.fill((170, 170, 170))  # Clear screen
     if game_state != "menu":
-        screen.blit(background, (0,0))
+        screen.blit(level_manager.background, (400,0))
         pygame.draw.circle(screen, (255, 0, 0), (int(test_object.position.x), int(test_object.position.y)), test_object.radius)  # Draw first object
         pygame.draw.circle(screen, (0, 0, 255), (int(second_object.position.x), int(second_object.position.y)), second_object.radius)  # Draw second object
         
