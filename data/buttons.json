@@ -67,7 +67,7 @@
       "size": 1,
       "image": "data\\ButtonsImages\\LevelButton.png",
       "imageHover": "data\\ButtonsImages\\LevelButtonPressed.png",
-      "position": [ 0.1, 0.8 ],
+      "position": [ 0.9, 0.8 ],
       "height": 80,
       "width": 240,
       "action": "Load Level Menu"
@@ -76,7 +76,7 @@
       "size": 1,
       "image": "data\\ButtonsImages\\RestartButton.png",
       "imageHover": "data\\ButtonsImages\\RestartButtonPressed.png",
-      "position": [ 0.1, 0.5 ],
+      "position": [ 0.9, 0.2 ],
       "height": 80,
       "width": 240,
       "action": "Restart Level"
@@ -85,10 +85,19 @@
       "size": 1,
       "image": "data\\ButtonsImages\\PlayButton.png",
       "imageHover": "data\\ButtonsImages\\PlayButtonPressed.png",
-      "position": [ 0.7, 0.8 ],
+      "position": [ 0.1, 0.8 ],
       "height": 80,
       "width": 240,
       "action": "Next Level"
+    },
+    "Play": {
+      "size": 1,
+      "image": "data\\ButtonsImages\\PlayButton.png",
+      "imageHover": "data\\ButtonsImages\\PlayButtonPressed.png",
+      "position": [ 0.9, 0.1 ],
+      "height": 80,
+      "width": 240,
+      "action": "Play"
     }
 
   },
@@ -99,7 +108,7 @@
       "size": 1,
       "image": "data\\ButtonsImages\\LevelButton.png",
       "imageHover": "data\\ButtonsImages\\LevelButtonPressed.png",
-      "position": [ 0.1, 0.8 ],
+      "position": [ 0.9, 0.8 ],
       "height": 80,
       "width": 240,
       "action": "Load Level Menu"
@@ -108,7 +117,7 @@
       "size": 1,
       "image": "data\\ButtonsImages\\RestartButton.png",
       "imageHover": "data\\ButtonsImages\\RestartButtonPressed.png",
-      "position": [ 0.1, 0.5 ],
+      "position": [ 0.9, 0.2 ],
       "height": 80,
       "width": 240,
       "action": "Restart Level"
@@ -117,10 +126,19 @@
       "size": 1,
       "image": "data\\ButtonsImages\\PlayButton.png",
       "imageHover": "data\\ButtonsImages\\PlayButtonPressed.png",
-      "position": [ 0.7, 0.8 ],
+      "position": [ 0.1, 0.8 ],
       "height": 80,
       "width": 240,
       "action": "Next Level"
+    },
+    "Play": {
+      "size": 1,
+      "image": "data\\ButtonsImages\\PlayButton.png",
+      "imageHover": "data\\ButtonsImages\\PlayButtonPressed.png",
+      "position": [ 0.9, 0.1 ],
+      "height": 80,
+      "width": 240,
+      "action": "Play"
     }
 
   },
@@ -131,7 +149,7 @@
       "size": 1,
       "image": "data\\ButtonsImages\\LevelButton.png",
       "imageHover": "data\\ButtonsImages\\LevelButtonPressed.png",
-      "position": [ 0.1, 0.8 ],
+      "position": [ 0.9, 0.8 ],
       "height": 80,
       "width": 240,
       "action": "Load Level Menu"
@@ -140,7 +158,7 @@
       "size": 1,
       "image": "data\\ButtonsImages\\RestartButton.png",
       "imageHover": "data\\ButtonsImages\\RestartButtonPressed.png",
-      "position": [ 0.1, 0.5 ],
+      "position": [ 0.9, 0.2 ],
       "height": 80,
       "width": 240,
       "action": "Restart Level"
@@ -149,10 +167,19 @@
       "size": 1,
       "image": "data\\ButtonsImages\\PlayButton.png",
       "imageHover": "data\\ButtonsImages\\PlayButtonPressed.png",
-      "position": [ 0.7, 0.8 ],
+      "position": [ 0.1, 0.8 ],
       "height": 80,
       "width": 240,
       "action": "Next Level"
+    },
+    "Play": {
+      "size": 1,
+      "image": "data\\ButtonsImages\\PlayButton.png",
+      "imageHover": "data\\ButtonsImages\\PlayButtonPressed.png",
+      "position": [ 0.9, 0.1 ],
+      "height": 80,
+      "width": 240,
+      "action": "Play"
     }
   }
 }
