@@ -12,6 +12,7 @@ Last Updated: Apr 2025
 Python Version: 3.12.9
 Dependencies: pygame, core.sound, data, objects.object
 """
+from pickle import TRUE
 import pygame
 from objects.object import *
 import json
@@ -55,6 +56,7 @@ class Button:
     def is_pressed(self, display_width, display_height):
         
         screen_width, screen_height = display_width, display_height
+        global tries
         #Action to perform for the button using a match case to determine the action to do
         match self.action :
             case "Play" :
@@ -67,10 +69,12 @@ class Button:
             case "Restart Level" :
                 #load_scene(n)
                 self.game_state = "paused"
+                tries+=1
                 load_scene(current_scene, screen_width, screen_height)
             case "Next Level" :
                 #load_scene(n+1)
                 self.game_state = "paused"
+                tries = 0
                 if (current_scene + 1 > max_scene) : 
                     load_scene(current_scene, screen_width, screen_height)
                 else :
@@ -85,6 +89,7 @@ class Button:
                 load_scene(1, screen_width, screen_height)
             case "1" | "2" | "3" :
                 self.game_state = "paused"
+                tries = 0
                 load_scene(int(self.action)+1, screen_width, screen_height)
 
                    
@@ -112,6 +117,10 @@ with open("data/levels.json", "r") as f : #load the different objects for the le
 
 button_list = []
 object_list = []
+current_scene = 0
+max_scene = 4
+playing_music = ""
+tries = 0
 
 def load_button(button, screen_width, screen_height):
     """
@@ -149,10 +158,6 @@ def load_objects(object):
     new =  Object(mass = object[0], position = Vector2(object[1]), max_speed = object[2], radius = object[3],bounciness = object[4], damping_coefficient = object[5], static = object[6])
     return new
 
-current_scene = 0
-max_scene = 4
-playing_music = ""
-
 def load_scene(n: int, screen_width, screen_height):
     """
     This function allow us to load the correct scene each time
@@ -168,10 +173,13 @@ def load_scene(n: int, screen_width, screen_height):
     global current_scene 
     global playing_music
     global background
+    global text_list
+    global tries
     display_width, display_height = screen_width, screen_height
     current_scene = n
     object_list = []
     button_list = []
+    text_list = []
     
     match n:
         case 0: # Loading the main menu
@@ -200,4 +208,11 @@ def load_scene(n: int, screen_width, screen_height):
             if playing_music != f"data/Music/level{n-1}.mp3" :
                 play_music(f"data/Music/level{n-1}.mp3")
                 playing_music = f"data/Music/level{n-1}.mp3"
+
+            font = pygame.font.SysFont("Calibri", 40)
+            font.set_bold(True)
+            index_of_the_level = font.render("LEVEL : {}".format(n-1), True, (255, 255, 255))
+            number_of_tries = font.render("TRY NUMBER : {}".format(tries), True, (255, 255, 255))
+            text_list.append(index_of_the_level)
+            text_list.append(number_of_tries)
 
