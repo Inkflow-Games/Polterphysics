@@ -36,7 +36,7 @@ class Object:
         static (bool): Whether the object is immovable and unaffected by forces.
     """
     
-    def __init__(self, polygon=True, static=False, mass=1, restitution_coefficient=0.8, vertices=None, radius=None, centroid=None,name='Object'):
+    def __init__(self, polygon=True, static=False, mass=1, restitution_coefficient=0.8, vertices=None, radius=None, centroid=None,name='Object',grabable=True):
         """
         Initializes an Object instance with the specified properties.
 
@@ -53,6 +53,7 @@ class Object:
         self.polygon = polygon
         self.static = static
         self.restitution_coefficient = restitution_coefficient
+        self.grabable = grabable
         if polygon :
             self.shape = Polygon(vertices, mass)
         else :

@@ -121,4 +121,10 @@ class Quadtree:
             self.northwest.draw(drawing)
             self.southeast.draw(drawing)
             self.southwest.draw(drawing)
- 
+
+    def insertall(self,listofobjects):
+        for elements in listofobjects:
+            self.insert(elements)
+    
+    def searchall(self):
+        pass

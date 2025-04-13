@@ -80,12 +80,12 @@ quadtree = Quadtree(bounding_box,4)
 
 # Create a test object (simulating a basketball)
 #test_object = Object("OBject1",False, False, mass=1, restitution_coefficient=0.8, vertices=None, radius=30, centroid=(400, 100))
-c = Object(True, False, mass=400000000, restitution_coefficient=0.8, vertices=[Vector2(0 ,800),Vector2(1300, 800),Vector2(1300, 900),Vector2(0, 900)],name="OBjectc")
+c = Object(polygon=True,static= False, mass=400000000, restitution_coefficient=0.8, vertices=[Vector2(0 ,800),Vector2(1300, 800),Vector2(1300, 900),Vector2(0, 900)],name="OBjectc")
 physics_engine.add_object(c)
 
 # Create a second test object (another basketball)
 #second_object = Object("OBject2",False, False, mass=2, restitution_coefficient=0.8, vertices=None, radius=30, centroid=(600, 100))
-g = Object(False, False, 50, 0.8, None, 30, Vector2(100,100),name="OBjectg",)
+g = Object(polygon=False, static=False, mass=50, restitution_coefficient=0.8,vertices= None,radius= 30,centroid= Vector2(100,100),name="OBjectg")
 physics_engine.add_object(g)
 
 # Clock to control frame rate
