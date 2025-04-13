@@ -78,12 +78,12 @@ physics_engine = PhysicsEngine()
 bounding_box = RectangleQ(0,0,display_width,display_height)
 quadtree = Quadtree(bounding_box,4)
 
-# Create a test object (simulating a basketball)
-#test_object = Object("OBject1",False, False, mass=1, restitution_coefficient=0.8, vertices=None, radius=30, centroid=(400, 100))
+# # Create a test object (simulating a basketball)
+# #test_object = Object("OBject1",False, False, mass=1, restitution_coefficient=0.8, vertices=None, radius=30, centroid=(400, 100))
 c = Object(polygon=True,static= False, mass=400000000, restitution_coefficient=0.8, vertices=[Vector2(0 ,800),Vector2(1300, 800),Vector2(1300, 900),Vector2(0, 900)],name="OBjectc")
 physics_engine.add_object(c)
 
-# Create a second test object (another basketball)
+# # Create a second test object (another basketball)
 #second_object = Object("OBject2",False, False, mass=2, restitution_coefficient=0.8, vertices=None, radius=30, centroid=(600, 100))
 g = Object(polygon=False, static=False, mass=50, restitution_coefficient=0.8,vertices= None,radius= 30,centroid= Vector2(100,100),name="OBjectg")
 physics_engine.add_object(g)
@@ -122,6 +122,7 @@ game_state = "menu"
 # Main game loop
 while running:
 
+
     click = False
 
     for event in pygame.event.get():
@@ -137,7 +138,7 @@ while running:
     # Get key states for the second object (ZQSD keys)
     keys_2 = pygame.key.get_pressed()
 
-    if game_state == "paused" : # only check input when the game is paused
+    if game_state != "menu" : # only check input when the game is paused
 
         # Apply force to the first object (Arrow keys)
         if keys[pygame.K_RIGHT] and not key_state_1[pygame.K_RIGHT]:
@@ -255,10 +256,14 @@ while running:
                 click = False
                 if game_state!= "menu": #we load new objects if the scene changed
     
-                    test_object = level_manager.object_list[-1] 
-                    physics_engine.add_object(test_object)
-                    second_object = level_manager.object_list[-2]
-                    physics_engine.add_object(second_object)
+                    # test_object = level_manager.object_list[-1] 
+                    # physics_engine.add_object(test_object)
+                    # second_object = level_manager.object_list[-2]
+                    # physics_engine.add_object(second_object)
+                    physics_engine.add_object(level_manager.object_list[0])
+                    test_object = level_manager.object_list[0]
+                    second_object = level_manager.object_list[0]
+                    pass
         else :
             button.draw(screen)
 
