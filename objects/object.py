@@ -14,10 +14,10 @@ Python Version: 3.12.9
 Dependencies: math, pygame.math.Vector2
 """
 
-import math
 import pygame
 from pygame.math import Vector2
 from core.collision import * 
+from objects.Quadtree import CircleQ
 
 class Object:
     """
@@ -36,7 +36,7 @@ class Object:
         static (bool): Whether the object is immovable and unaffected by forces.
     """
     
-    def __init__(self, polygon=True, static=False, mass=1, restitution_coefficient=0.8, vertices=None, radius=None, centroid=None):
+    def __init__(self, polygon=True, static=False, mass=1, restitution_coefficient=0.8, vertices=None, radius=None, centroid=None,name='Object'):
         """
         Initializes an Object instance with the specified properties.
 
@@ -49,6 +49,7 @@ class Object:
         damping_coefficient (float, optional): The damping effect coefficient (default is 0).
         static (bool, optional): If True, the object does not move (default is False).
         """
+        self.name = name
         self.polygon = polygon
         self.static = static
         self.restitution_coefficient = restitution_coefficient
@@ -56,6 +57,13 @@ class Object:
             self.shape = Polygon(vertices, mass)
         else :
             self.shape = Circle(centroid, radius, mass)
+        self.mincircle = self.minimumcircle()
+
+    def minimumcircle(self):
+        if hasattr(self.shape,'radius'):
+            return CircleQ(self.shape.centroid.x,self.shape.centroid.y,self.shape.radius)
+        else:
+            return CircleQ(self.shape.centroid.x,self.shape.centroid.y,550)
 
 class Polygon:
     def __init__(self, vertices=[], mass=1):

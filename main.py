@@ -23,6 +23,7 @@ from objects.object import *
 from utils.math_utils import *
 from utils.vector_utils import *
 from core.input_handler import *
+from objects.Quadtree import RectangleQ,Quadtree
 import core.level_manager as level_manager
 import json
 
@@ -74,15 +75,17 @@ pygame.display.set_caption("Physics Engine Test")
 
 # Initialize physics engine
 physics_engine = PhysicsEngine()
+bounding_box = RectangleQ(0,0,display_width,display_height)
+quadtree = Quadtree(bounding_box,4)
 
 # Create a test object (simulating a basketball)
-test_object = Object(False, False, mass=1, restitution_coefficient=0.8, vertices=None, radius=30, centroid=(400, 100))
-c = Object(True, False, mass=400000000, restitution_coefficient=0.8, vertices=[Vector2(0 ,800),Vector2(1300, 800),Vector2(1300, 900),Vector2(0, 900)])
+#test_object = Object("OBject1",False, False, mass=1, restitution_coefficient=0.8, vertices=None, radius=30, centroid=(400, 100))
+c = Object(True, False, mass=400000000, restitution_coefficient=0.8, vertices=[Vector2(0 ,800),Vector2(1300, 800),Vector2(1300, 900),Vector2(0, 900)],name="OBjectc")
 physics_engine.add_object(c)
 
 # Create a second test object (another basketball)
-second_object = Object(False, False, mass=2, restitution_coefficient=0.8, vertices=None, radius=30, centroid=(600, 100))
-g = Object(False, False, 50, 0.8, None, 30, Vector2(100,100))
+#second_object = Object("OBject2",False, False, mass=2, restitution_coefficient=0.8, vertices=None, radius=30, centroid=(600, 100))
+g = Object(False, False, 50, 0.8, None, 30, Vector2(100,100),name="OBjectg",)
 physics_engine.add_object(g)
 
 # Clock to control frame rate
@@ -211,6 +214,12 @@ while running:
         g.shape.velocity += Vector2(0,9)
         # Update physics engine based on time delta
         dt = clock.get_time() / 100.0  # Convert milliseconds to a suitable scale
+        quadtree.insert(g)
+        quadtree.insert(c)
+        tab = []
+        quadtree.query(c,tab)
+        quadtree.delpoint(g)
+        quadtree.delpoint(c)
         gjk = GJK2D(g,c)
         trig = gjk.detection()
         stuff = gjk.EPA(trig)
@@ -225,6 +234,8 @@ while running:
     if game_state != "menu":
         g.shape.draw(screen,(255,0,0))
         c.shape.draw(screen,(255,0,0))
+        pygame.draw.circle(screen,(0,255,255),Vector2(g.mincircle.x,g.mincircle.y),g.mincircle.radius,2)
+        pygame.draw.circle(screen,(0,255,255),Vector2(c.mincircle.x,c.mincircle.y),c.mincircle.radius,2) 
 
         # Draws a white line between clicked object and mouse position (during vector construction and 'paused')
         """Must stay in main because of where the game is taking place (screen)"""
@@ -261,15 +272,16 @@ while running:
     
     # Prediction of the trajectory of "test_object"
     if vector_applied1 == True and vector1_coords!= Vector2(0,0):
-        predicted_positions = computes_50_position(test_object, vector1_coords, dt, test_position_x_before, test_position_y_before , simulation_steps=50, dt_sim=0.1)
+        predicted_positions = computes_50_position(test_object, vector1_coords, clock.get_time() / 100.0, test_position_x_before, test_position_y_before , simulation_steps=50, dt_sim=0.1)
 
         # Draw in yellow
         for point in predicted_positions:
+            print("e",point)
             pygame.draw.circle(screen, (255, 255, 0), (int(point.x), int(point.y)), 3)  # Petit point jaune
 
     # Prediction of the trajectory of "second_object"
     if vector_applied2 == True and vector2_coords!= Vector2(0,0): 
-        predicted_positions = computes_50_position(second_object, vector2_coords, dt, second_position_x_before, second_position_y_before , simulation_steps=50, dt_sim=0.1)
+        predicted_positions = computes_50_position(second_object, vector2_coords, clock.get_time() / 100.0, second_position_x_before, second_position_y_before , simulation_steps=50, dt_sim=0.1)
 
         # Draw in white
         for point in predicted_positions:

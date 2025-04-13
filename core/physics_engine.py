@@ -46,6 +46,8 @@ class PhysicsEngine:
         object.shape.rotate(object.shape.angular_velocity*dt)
         object.shape.velocity *= 0.99
         object.shape.angular_velocity *= 0.99
+        object.mincircle.x = object.shape.centroid.x
+        object.mincircle.y = object.shape.centroid.y
 
     def update(self, dt):
         """

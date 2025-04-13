@@ -45,10 +45,10 @@ def vector_application(
 
     elif event.type == pygame.MOUSEBUTTONUP and event.button == 1 and clicked_object is not None:
         force_vector = Vector2(
-            mouse_position[0] - clicked_object.position[0],
-            mouse_position[1] - clicked_object.position[1]
+            mouse_position[0] - clicked_object.shape.centroid[0],
+            mouse_position[1] - clicked_object.shape.centroid[1]
         )
-        clicked_object.apply_force(force_vector)
+        clicked_object.shape.apply_force(force_vector)
         print(f"Force applied : {force_vector}")
 
         if clicked_object == test_object:

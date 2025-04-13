@@ -78,8 +78,8 @@ def computes_50_position(object, vector1_coords, dt, position_x_before, position
     print(f"predicted_velocity = {predicted_velocity}")
 
     predicted_positions = []
-    simulated_position = object.position.copy() # Copie pour éviter les références
-    simulated_velocity = predicted_velocity.copy()   # Copie pour éviter les références
+    simulated_position = object.shape.centroid # Copie pour éviter les références
+    simulated_velocity = predicted_velocity  # Copie pour éviter les références
 
     for _ in range(simulation_steps): # Simulate on 50 frames 
         simulated_velocity.y += newton_to_force(9.81) * dt_sim  # Add gravity each frame
