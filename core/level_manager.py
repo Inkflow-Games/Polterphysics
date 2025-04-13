@@ -5,6 +5,7 @@ import json
 from data import *
 # Dictionary storing level numbers as keys and lists of objects as values
 import pygame
+import ast
 import core.physics_engine as phy
 
 class Button:
@@ -103,12 +104,20 @@ def load_button(b, screen_width, screen_height):
         )
     return new_button
 
-def load_objects(l):
+def load_objects(object_infos):
     #new =  Object(mass = l[0], position = Vector2(l[1]), max_speed = l[2], radius = l[3],bounciness = l[4], damping_coefficient = l[5], static = l[6])
-    g = Object(False, False, 3, 0.8, None, 50, Vector2(100,100))
-    return g
+    #g = Object(False, False, 3, 0.8, None, 50, Vector2(100,100))
+
+    new = Object(polygon=object_infos["polygon"], static=object_infos["static"], mass=object_infos["mass"], restitution_coefficient=object_infos["restitution_coefficient"], radius=object_infos["radius"], grabable=object_infos["grabable"], name=object_infos["name"], centroid=transform_Vector2(object_infos["centroid"]), vertices=transform_Vector2(object_infos["vertices"]))
+    return new
 
 current_scene = 0
+
+def transform_Vector2(infos) :
+    arr = []
+    for elem in infos:
+        arr.append(Vector2(*elem))
+    return arr
 
 def load_scene(n: int, screen_width, screen_height):
     global button_list
@@ -133,7 +142,11 @@ def load_scene(n: int, screen_width, screen_height):
         case _:  #The default case is used to load the next level each time
             for button in buttons["{}".format(n-1)].values():
                button_list.append(load_button(button, screen_width, screen_height))
+
             for object in levels["{}".format(n-1)].values() :
                 object_list.append(load_objects(object))
+
+
+
             print("level {} loaded".format(n-1))
 
