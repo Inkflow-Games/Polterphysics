@@ -1,9 +1,9 @@
 {
   "1": {
     "Bloc1": {
-      "polygon": false,
-      "static": false,
-      "mass": 400,
+      "polygon": true,
+      "static": true,
+      "mass": 40000000000000,
       "restitution_coefficient": 0.8,
       "radius": 5,
       "grabable": false,

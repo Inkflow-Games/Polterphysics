@@ -80,13 +80,13 @@ quadtree = Quadtree(bounding_box,4)
 
 # # Create a test object (simulating a basketball)
 # #test_object = Object("OBject1",False, False, mass=1, restitution_coefficient=0.8, vertices=None, radius=30, centroid=(400, 100))
-c = Object(polygon=True,static= False, mass=400000000, restitution_coefficient=0.8, vertices=[Vector2(0 ,800),Vector2(1300, 800),Vector2(1300, 900),Vector2(0, 900)],name="OBjectc")
-physics_engine.add_object(c)
+#c = Object(polygon=True,static= False, mass=400000000, restitution_coefficient=0.8, vertices=[Vector2(0 ,800),Vector2(1300, 800),Vector2(1300, 900),Vector2(0, 900)],name="OBjectc")
+#physics_engine.add_object(c)
 
 # # Create a second test object (another basketball)
 #second_object = Object("OBject2",False, False, mass=2, restitution_coefficient=0.8, vertices=None, radius=30, centroid=(600, 100))
-g = Object(polygon=False, static=False, mass=50, restitution_coefficient=0.8,vertices= None,radius= 30,centroid= Vector2(100,100),name="OBjectg")
-physics_engine.add_object(g)
+#g = Object(polygon=False, static=False, mass=50, restitution_coefficient=0.8,vertices= None,radius= 30,centroid= Vector2(100,100),name="OBjectg")
+#physics_engine.add_object(g)
 
 # Clock to control frame rate
 clock = pygame.time.Clock()
@@ -113,7 +113,7 @@ key_state_2 = {
 # Ground level (just above the bottom of the window)
 ground_level = display_height - 20
 
-level_manager.load_scene(0, display_width, display_height)
+level_manager.load_scene(0, display_width, display_height,physics_engine)
 
 game_state = "menu"
 
@@ -138,8 +138,8 @@ while running:
     # Get key states for the second object (ZQSD keys)
     keys_2 = pygame.key.get_pressed()
 
+    '''
     if game_state != "menu" : # only check input when the game is paused
-
         # Apply force to the first object (Arrow keys)
         if keys[pygame.K_RIGHT] and not key_state_1[pygame.K_RIGHT]:
             c.shape.apply_force(Vector2(newton_to_force(30), 0))  # Apply force to the right
@@ -174,7 +174,7 @@ while running:
         if keys_2[pygame.K_z] and not key_state_2[pygame.K_z]:
             g.shape.apply_force(Vector2(0, -newton_to_force(46)))
             key_state_2[pygame.K_z] = True
-
+    '''
     # Check if we pause the game with space
     if keys_2[pygame.K_SPACE] and not key_state_2[pygame.K_SPACE] :
         key_state_2[pygame.K_SPACE] = True
@@ -200,43 +200,49 @@ while running:
 
     if game_state == "paused":
         #call the function that handles the vector application process
+        '''
         clicked_object, vector_applied1, vector_applied2, vector1_coords, vector2_coords, vector1_angle, vector2_angle, mouse_position = vector_application(
     event,
     test_object, second_object,
     clicked_object, vector_applied1, vector_applied2,
     vector1_coords, vector2_coords,
     vector1_angle, vector2_angle)
+    '''
 
 
 
     if game_state == "running" : # the physics is calculated only during play mode
         #update vectors state and last position of the objects
-        vector_applied1, vector_applied2, test_position_x_before, test_position_y_before, second_position_x_before, second_position_y_before = objects_running_info(test_object, second_object, vector_applied1, vector_applied2)
-        g.shape.velocity += Vector2(0,9)
+        #vector_applied1, vector_applied2, test_position_x_before, test_position_y_before, second_position_x_before, second_position_y_before = objects_running_info(test_object, second_object, vector_applied1, vector_applied2)
         # Update physics engine based on time delta
-        dt = clock.get_time() / 100.0  # Convert milliseconds to a suitable scale
-        quadtree.insert(g)
-        quadtree.insert(c)
+        dt = clock.get_time() / 100.0  # Convert milliseconds to a suitable scale'
+        physics_engine.objects[1].shape.velocity += (Vector2(0,9.8) * dt)
+        for element in physics_engine.objects:
+            quadtree.insert(element)
         tab = []
-        quadtree.query(c,tab)
-        quadtree.delpoint(g)
-        quadtree.delpoint(c)
-        gjk = GJK2D(g,c)
+        quadtree.query(physics_engine.objects[1],tab)
+        for element in physics_engine.objects:
+            quadtree.delpoint(element)
+        print(physics_engine.objects[0])
+        print(physics_engine.objects[1])
+        gjk = GJK2D(physics_engine.objects[0],physics_engine.objects[1])
         trig = gjk.detection()
         stuff = gjk.EPA(trig)
         if trig is not None:
             gjk.find_contact_features(gjk.shape1,gjk.shape2,stuff)
             gjk.resolve(stuff)
+        physics_engine.objects[0].shape.velocity = Vector2(0,0)
+        physics_engine.objects[0].shape.angular_velocity = 0
         physics_engine.update(dt)  # Pass ground_level as display_height - 20 (or whatever your ground level is)
 
 
     # Draw frame
     screen.fill((170, 170, 170))  # Clear screen
     if game_state != "menu":
-        g.shape.draw(screen,(255,0,0))
-        c.shape.draw(screen,(255,0,0))
-        pygame.draw.circle(screen,(0,255,255),Vector2(g.mincircle.x,g.mincircle.y),g.mincircle.radius,2)
-        pygame.draw.circle(screen,(0,255,255),Vector2(c.mincircle.x,c.mincircle.y),c.mincircle.radius,2) 
+        for elements in physics_engine.objects:
+            elements.shape.draw(screen,(255,0,0))
+        for elements in physics_engine.objects:
+            pygame.draw.circle(screen,(0,255,255),Vector2(elements.mincircle.x,elements.mincircle.y),elements.mincircle.radius,2)
 
         # Draws a white line between clicked object and mouse position (during vector construction and 'paused')
         """Must stay in main because of where the game is taking place (screen)"""
@@ -250,7 +256,7 @@ while running:
         if (pygame.mouse.get_pos()[0] < button.position[0] + button.width/2) and (pygame.mouse.get_pos()[0] > button.position[0] - button.width/2) and (pygame.mouse.get_pos()[1] < button.position[1] + button.height/2) and (pygame.mouse.get_pos()[1] > button.position[1] - button.height/2) :
             button.hover(screen)   
             if click :
-                button.is_pressed(display_width, display_height)
+                button.is_pressed(display_width, display_height,physics_engine)
                 game_state = button.game_state
                 new_scene = level_manager.current_scene #verify if we changed of scene
                 click = False
@@ -260,9 +266,6 @@ while running:
                     # physics_engine.add_object(test_object)
                     # second_object = level_manager.object_list[-2]
                     # physics_engine.add_object(second_object)
-                    physics_engine.add_object(level_manager.object_list[0])
-                    test_object = level_manager.object_list[0]
-                    second_object = level_manager.object_list[0]
                     pass
         else :
             button.draw(screen)
@@ -270,10 +273,10 @@ while running:
 
     # Display debug positions : must stay in main
     font = pygame.font.SysFont("Arial", 24)
-    position_text_1 = font.render(f"Position 1: ({int(c.shape.centroid.x)}, {-int(c.shape.centroid.y)})", True, (255, 255, 255))
-    position_text_2 = font.render(f"Position 2: ({int(g.shape.centroid.x)}, {-int(g.shape.centroid.y)})", True, (255, 255, 255))
-    screen.blit(position_text_1, (10, 10))
-    screen.blit(position_text_2, (10, 40))
+    #position_text_1 = font.render(f"Position 1: ({int(physics_engine.objects[0].shape.centroid.x)}, {-int(physics_engine.objects[0].shape.centroid.y)})", True, (255, 255, 255))
+    #position_text_2 = font.render(f"Position 2: ({int(physics_engine.objects[1].shape.centroid.x)}, {-int(physics_engine.objects[1].shape.centroid.y)})", True, (255, 255, 255))
+    #screen.blit(position_text_1, (10, 10))
+    #screen.blit(position_text_2, (10, 40))
     
     # Prediction of the trajectory of "test_object"
     if vector_applied1 == True and vector1_coords!= Vector2(0,0):

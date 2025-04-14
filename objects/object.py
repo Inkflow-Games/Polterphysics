@@ -190,4 +190,5 @@ class Circle:
         Parameters:
         force (Vector2): The force vector applied to the object.
         """
+
         self.velocity += force / self.mass

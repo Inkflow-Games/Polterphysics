@@ -5,8 +5,6 @@ import json
 from data import *
 # Dictionary storing level numbers as keys and lists of objects as values
 import pygame
-import ast
-import core.physics_engine as phy
 
 class Button:
     def __init__(self, image, imageHover,  size, position, height, width, action=''):
@@ -20,51 +18,46 @@ class Button:
         self.game_state = ""
 
 
-    def is_pressed(self, display_width, display_height):
-        
+    def is_pressed(self, display_width, display_height,object_list):
+        max_scene = 4
         screen_width, screen_height = display_width, display_height
+        global tries
+        print(self.position,self.action)
         #Action to perform for the button using a match case to determine the action to do
         match self.action :
             case "Play" :
                 self.game_state = "running"
-                print("game's running")
             case "Pause" :
                 self.game_state = "paused"
-                print("game's paused")
             case "Stop" :
                 #close the window
                 pygame.quit()
             case "Restart Level" :
                 #load_scene(n)
                 self.game_state = "paused"
-                load_scene(current_scene, screen_width, screen_height)
+                tries+=1
+                load_scene(current_scene, screen_width, screen_height,object_list)
             case "Next Level" :
                 #load_scene(n+1)
                 self.game_state = "paused"
-                load_scene(current_scene+1, screen_width, screen_height)
+                tries = 0
+                if (current_scene + 1 > max_scene) : 
+                    load_scene(current_scene, screen_width, screen_height,object_list)
+                else :
+                    load_scene(current_scene+1, screen_width, screen_height,object_list)
             case "Load Main Menu" :
                 #load_scene(0)
                 self.game_state = "menu"
-                load_scene(0, screen_width, screen_height)
+                load_scene(0, screen_width, screen_height,object_list)
             case "Load Level Menu" :
                 #load_scene(1)
                 self.game_state = "menu"
-                load_scene(1, screen_width, screen_height)
-            case "Level1" :
-                #load_scene(2)
+                load_scene(1, screen_width, screen_height,object_list)
+            case "1" | "2" | "3" :
                 self.game_state = "paused"
-                load_scene(2, screen_width, screen_height)
-            case "Level2" :
-                #load_scene(3)
-                self.game_state = "paused"
-                load_scene(3, screen_width, screen_height)
-            case "Level3" :
-                #load_scene(4)
-                self.game_state = "paused"
-                load_scene(4, screen_width, screen_height)
-            case default :
-                self.game_state = 'menu'
-                load_scene(current_scene, screen_width, screen_height)
+                tries = 0
+                print('qdq')
+                load_scene(int(self.action)+1, screen_width, screen_height,object_list)
 
            
     def hover(self, screen): # The function which changes the sprite when hovered
@@ -107,7 +100,6 @@ def load_button(b, screen_width, screen_height):
 def load_objects(object_infos):
     #new =  Object(mass = l[0], position = Vector2(l[1]), max_speed = l[2], radius = l[3],bounciness = l[4], damping_coefficient = l[5], static = l[6])
     #g = Object(False, False, 3, 0.8, None, 50, Vector2(100,100))
-    print(transform_Vector2(object_infos["centroid"]))
     new = Object(polygon=object_infos["polygon"], static=object_infos["static"], mass=object_infos["mass"], restitution_coefficient=object_infos["restitution_coefficient"], radius=object_infos["radius"], grabable=object_infos["grabable"], name=object_infos["name"], centroid=transform_Vector2(object_infos["centroid"])[0], vertices=transform_Vector2(object_infos["vertices"]))
     return new
 
@@ -119,13 +111,11 @@ def transform_Vector2(infos) :
         arr.append(Vector2(*elem))
     return arr
 
-def load_scene(n: int, screen_width, screen_height):
-    global button_list
-    global object_list
+def load_scene(n: int, screen_width, screen_height,object_list):
+    object_list.objects = []
     global current_scene 
-    display_width, display_height = screen_width, screen_height
+    global button_list
     current_scene = n
-    object_list = []
     button_list = []
     
     match n:
@@ -144,9 +134,7 @@ def load_scene(n: int, screen_width, screen_height):
                button_list.append(load_button(button, screen_width, screen_height))
 
             for object in levels["{}".format(n-1)].values() :
-                object_list.append(load_objects(object))
-
-
+                object_list.add_object(load_objects(object))
 
             print("level {} loaded".format(n-1))
 

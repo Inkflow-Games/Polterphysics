@@ -42,12 +42,21 @@ class PhysicsEngine:
             self.objects.remove(obj)
 
     def update_polygon(self,object,dt):
+        table = {True:0,False:1}
         object.shape.add(object.shape.velocity*dt)
         object.shape.rotate(object.shape.angular_velocity*dt)
-        object.shape.velocity *= 0.99
-        object.shape.angular_velocity *= 0.99
+        object.shape.velocity *= (0.99)
+        object.shape.angular_velocity *= (0.99)
         object.mincircle.x = object.shape.centroid.x
         object.mincircle.y = object.shape.centroid.y
+    '''def update_polygon(self,object,dt):
+        table = {True:0,False:1}
+        object.shape.add(object.shape.velocity*dt*table[object.static])
+        object.shape.rotate(object.shape.angular_velocity*dt*table[object.static])
+        object.shape.velocity *= (0.99*table[object.static])
+        object.shape.angular_velocity *= (0.99*table[object.static])
+        object.mincircle.x = object.shape.centroid.x
+        object.mincircle.y = object.shape.centroid.y'''
 
     def update(self, dt):
         """
