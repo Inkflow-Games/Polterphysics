@@ -4,7 +4,7 @@
       "size": 1,
       "image": "data\\ButtonsImages\\LevelButton.png",
       "imageHover": "data\\ButtonsImages\\LevelButtonPressed.png",
-      "position": [ 0.1, 0.55 ],
+      "position": [0.1, 0.55],
       "height": 80,
       "width": 240,
       "action": "Load Level Menu"
@@ -13,12 +13,11 @@
       "size": 1,
       "image": "data\\ButtonsImages\\OptionButton.png",
       "imageHover": "data\\ButtonsImages\\OptionButtonPressed.png",
-      "position": [ 0.1, 0.3 ],
+      "position": [0.1, 0.3],
       "height": 100,
       "width": 150,
       "action": "Load Option Menu"
     }
-
   },
 
   "level_selection": {
@@ -26,7 +25,7 @@
       "size": 1,
       "image": "data\\ButtonsImages\\Lvl1Button.png",
       "imageHover": "data\\ButtonsImages\\Lvl1ButtonPressed.png",
-      "position": [ 0.8, 0.2 ],
+      "position": [0.8, 0.2],
       "height": 100,
       "width": 150,
       "action": "Level1"
@@ -35,7 +34,7 @@
       "size": 1,
       "image": "data\\ButtonsImages\\Lvl2Button.png",
       "imageHover": "data\\ButtonsImages\\Lvl2ButtonPressed.png",
-      "position": [ 0.8, 0.35 ],
+      "position": [0.8, 0.35],
       "height": 100,
       "width": 150,
       "action": "Level2"
@@ -44,7 +43,7 @@
       "size": 1,
       "image": "data\\ButtonsImages\\Lvl3Button.png",
       "imageHover": "data\\ButtonsImages\\Lvl3ButtonPressed.png",
-      "position": [ 0.8, 0.5 ],
+      "position": [0.8, 0.5],
       "height": 100,
       "width": 150,
       "action": "Level3"
@@ -53,21 +52,19 @@
       "size": 1,
       "image": "data\\ButtonsImages\\HomeButton.png",
       "imageHover": "data\\ButtonsImages\\HomeButtonPressed.png",
-      "position": [ 0.1, 0.7 ],
+      "position": [0.1, 0.7],
       "height": 80,
       "width": 240,
       "action": "Load Main Menu"
     }
-
   },
-
 
   "1": {
     "Exit": {
       "size": 1,
       "image": "data\\ButtonsImages\\LevelButton.png",
       "imageHover": "data\\ButtonsImages\\LevelButtonPressed.png",
-      "position": [ 0.9, 0.8 ],
+      "position": [0.9, 0.8],
       "height": 80,
       "width": 240,
       "action": "Load Level Menu"
@@ -76,7 +73,7 @@
       "size": 1,
       "image": "data\\ButtonsImages\\RestartButton.png",
       "imageHover": "data\\ButtonsImages\\RestartButtonPressed.png",
-      "position": [ 0.9, 0.2 ],
+      "position": [0.9, 0.2],
       "height": 80,
       "width": 240,
       "action": "Restart Level"
@@ -85,7 +82,7 @@
       "size": 1,
       "image": "data\\ButtonsImages\\PlayButton.png",
       "imageHover": "data\\ButtonsImages\\PlayButtonPressed.png",
-      "position": [ 0.1, 0.8 ],
+      "position": [0.1, 0.8],
       "height": 80,
       "width": 240,
       "action": "Next Level"
@@ -94,21 +91,46 @@
       "size": 1,
       "image": "data\\ButtonsImages\\PlayButton.png",
       "imageHover": "data\\ButtonsImages\\PlayButtonPressed.png",
-      "position": [ 0.9, 0.1 ],
+      "position": [0.9, 0.1],
       "height": 80,
       "width": 240,
       "action": "Play"
+    },
+    "Polter": {
+      "size": 1,
+      "image": "data\\Phantoms\\polter.png",
+      "imageHover": "data\\Phantoms\\polter_hover.png",
+      "position": [0.9, 0.3],
+      "height": 100,
+      "width": 100,
+      "action": "Play"
+    },
+    "Ballman": {
+      "size": 1,
+      "image": "data\\Phantoms\\ballman.png",
+      "imageHover": "data\\Phantoms\\ballman_hover.png",
+      "position": [0.9, 0.4],
+      "height": 100,
+      "width": 100,
+      "action": "Play"
+    },
+    "Trickandle": {
+      "size": 1,
+      "image": "data\\Phantoms\\trickandle.png",
+      "imageHover": "data\\Phantoms\\trickandle_hover.png",
+      "position": [0.9, 0.5],
+      "height": 100,
+      "width": 100,
+      "action": "Play"
     }
-
   },
-
 
   "2": {
     "Exit": {
       "size": 1,
       "image": "data\\ButtonsImages\\LevelButton.png",
       "imageHover": "data\\ButtonsImages\\LevelButtonPressed.png",
-      "position": [ 0.9, 0.8 ],
+      "position": [0.9, 0.8],
       "height": 80,
       "width": 240,
       "action": "Load Level Menu"
@@ -117,7 +139,7 @@
       "size": 1,
       "image": "data\\ButtonsImages\\RestartButton.png",
       "imageHover": "data\\ButtonsImages\\RestartButtonPressed.png",
-      "position": [ 0.9, 0.2 ],
+      "position": [0.9, 0.2],
       "height": 80,
       "width": 240,
       "action": "Restart Level"
@@ -126,7 +148,7 @@
       "size": 1,
       "image": "data\\ButtonsImages\\PlayButton.png",
       "imageHover": "data\\ButtonsImages\\PlayButtonPressed.png",
-      "position": [ 0.1, 0.8 ],
+      "position": [0.1, 0.8],
       "height": 80,
       "width": 240,
       "action": "Next Level"
@@ -135,21 +157,46 @@
       "size": 1,
       "image": "data\\ButtonsImages\\PlayButton.png",
       "imageHover": "data\\ButtonsImages\\PlayButtonPressed.png",
-      "position": [ 0.9, 0.1 ],
+      "position": [0.9, 0.1],
       "height": 80,
       "width": 240,
       "action": "Play"
+    },
+    "Polter": {
+      "size": 1,
+      "image": "data\\Phantoms\\polter.png",
+      "imageHover": "data\\Phantoms\\polter_hover.png",
+      "position": [0.9, 0.3],
+      "height": 100,
+      "width": 100,
+      "action": "Play"
+    },
+    "Ballman": {
+      "size": 1,
+      "image": "data\\Phantoms\\ballman.png",
+      "imageHover": "data\\Phantoms\\ballman_hover.png",
+      "position": [0.9, 0.4],
+      "height": 100,
+      "width": 100,
+      "action": "Play"
+    },
+    "Rospirit": {
+      "size": 1,
+      "image": "data\\Phantoms\\rospirit.png",
+      "imageHover": "data\\Phantoms\\rospirit_hover.png",
+      "position": [0.9, 0.5],
+      "height": 100,
+      "width": 100,
+      "action": "Play"
     }
-
   },
-
 
   "3": {
     "Exit": {
       "size": 1,
       "image": "data\\ButtonsImages\\LevelButton.png",
       "imageHover": "data\\ButtonsImages\\LevelButtonPressed.png",
-      "position": [ 0.9, 0.8 ],
+      "position": [0.9, 0.8],
       "height": 80,
       "width": 240,
       "action": "Load Level Menu"
@@ -158,7 +205,7 @@
       "size": 1,
       "image": "data\\ButtonsImages\\RestartButton.png",
       "imageHover": "data\\ButtonsImages\\RestartButtonPressed.png",
-      "position": [ 0.9, 0.2 ],
+      "position": [0.9, 0.2],
       "height": 80,
       "width": 240,
       "action": "Restart Level"
@@ -167,7 +214,7 @@
       "size": 1,
       "image": "data\\ButtonsImages\\PlayButton.png",
       "imageHover": "data\\ButtonsImages\\PlayButtonPressed.png",
-      "position": [ 0.1, 0.8 ],
+      "position": [0.1, 0.8],
       "height": 80,
       "width": 240,
       "action": "Next Level"
@@ -176,9 +223,36 @@
       "size": 1,
       "image": "data\\ButtonsImages\\PlayButton.png",
       "imageHover": "data\\ButtonsImages\\PlayButtonPressed.png",
-      "position": [ 0.9, 0.1 ],
+      "position": [0.9, 0.1],
       "height": 80,
       "width": 240,
+      "action": "Play"
+    },
+    "Polter": {
+      "size": 1,
+      "image": "data\\Phantoms\\polter.png",
+      "imageHover": "data\\Phantoms\\polter_hover.png",
+      "position": [0.9, 0.3],
+      "height": 100,
+      "width": 100,
+      "action": "Play"
+    },
+    "Rospirit": {
+      "size": 1,
+      "image": "data\\Phantoms\\rospirit.png",
+      "imageHover": "data\\Phantoms\\rospirit_hover.png",
+      "position": [0.9, 0.4],
+      "height": 100,
+      "width": 100,
+      "action": "Play"
+    },
+    "Trickandle": {
+      "size": 1,
+      "image": "data\\Phantoms\\trickandle.png",
+      "imageHover": "data\\Phantoms\\trickandle_hover.png",
+      "position": [0.9, 0.5],
+      "height": 100,
+      "width": 100,
       "action": "Play"
     }
   }
