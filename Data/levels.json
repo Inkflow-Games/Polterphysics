@@ -12,32 +12,89 @@
       "name": "Bloc1"
     },
 
-    "Bloc2": {
+    "Circle1": {
       "polygon": false,
       "static": false,
       "mass": 400,
       "restitution_coefficient": 0.8,
-      "radius": 15,
-      "grabable":  false,
+      "radius": 30,
+      "grabable":  true,
       "centroid": [[0,0]],
       "vertices": [ [0, 800], [1300, 800], [1300, 900], [0, 900] ],
-      "name" :  "Bloc2"
+      "name" :  "Circle1"
     }
       
 
 
   },
-    "2":{
-        "bloc1": [0.7, [500,500], 15,  0.037, 1.72, 0.02,  1],
-        "bloc2": [1.54, [400,300], 15,  0.037, 2, 0.02,  1],
-        "soccer_ball 1" : [0.6, [500,600], 30,  22, 0.75, 0.02,  0],
-        "soccer_ball 2" : [0.43, [300,400], 30,  22, 0.75, 0.02,  0]
+  "2": {
+    "Bloc1": {
+      "polygon": true,
+      "static": true,
+      "mass": 40000000000000,
+      "restitution_coefficient": 0.8,
+      "radius": 5,
+      "grabable": false,
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [ -100, 800 ],
+        [ 1300, 900 ],
+        [ 1300, 1000 ],
+        [ 0, 1000 ]
+      ],
+      "name": "Bloc1"
     },
-    "3":{
-        "bloc1": [0.6, [500,500], 15,  0.037, 3, 0.02,  1],
-        "bloc2": [1.54, [400,300], 15,  0.037, 1.72, 0.02,  1],
-        "bloc3": [1.54, [100,300], 15,  0.037, 1.7, 0.02,  1],
-        "soccer_ball" : [0.43, [410,600], 30,  22, 0.75, 0.02,  0],
-        "ball" : [0.13, [600,80], 40,  41, 0.75, 0.02,  0]
+
+    "Circle1": {
+      "polygon": false,
+      "static": false,
+      "mass": 400,
+      "restitution_coefficient": 0.8,
+      "radius": 30,
+      "grabable": true,
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [ 0, 800 ],
+        [ 1300, 800 ],
+        [ 1300, 900 ],
+        [ 0, 900 ]
+      ],
+      "name": "Circle1"
     }
+  },
+  "3": {
+    "Bloc1": {
+      "polygon": true,
+      "static": true,
+      "mass": 40000000000000,
+      "restitution_coefficient": 0.8,
+      "radius": 5,
+      "grabable": false,
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [ -100, 800 ],
+        [ 1300, 900 ],
+        [ 1300, 1000 ],
+        [ 0, 1000 ]
+      ],
+      "name": "Bloc1"
+    },
+
+    "Circle1": {
+      "polygon": false,
+      "static": false,
+      "mass": 400,
+      "restitution_coefficient": 0.8,
+      "radius": 40,
+      "grabable": true,
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [ 0, 800 ],
+        [ 1300, 800 ],
+        [ 1300, 900 ],
+        [ 0, 900 ]
+      ],
+      "name": "Circle1"
+    }
+  }
 }
