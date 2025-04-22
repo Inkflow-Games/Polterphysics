@@ -35,7 +35,7 @@ class CircleQ:
     def contains(self, point):
         point_distance_x = point.x - self.x
         point_distance_y = point.y - self.y
-        return (self.radius+point.radius)**2 >= point_distance_x**2 + point_distance_y**2
+        return (self.radius+point.radius)**2 >= (point_distance_x**2) + (point_distance_y**2)
         
 
 class Quadtree:
@@ -104,7 +104,7 @@ class Quadtree:
         else:
             for p in self.points:
                 if Object.mincircle.contains(p.mincircle):
-                    found.append(Object)
+                    found.append(p)
         if self.divided:
             self.northeast.query(Object, found)
             self.northwest.query(Object, found)
@@ -125,6 +125,13 @@ class Quadtree:
     def insertall(self,listofobjects):
         for elements in listofobjects:
             self.insert(elements)
+
+    def searchelements(self,elements):
+        interactions = []
+        for i in range(len(elements)):
+            temp = []
+            self.query(elements[i],temp)
+            interactions.append(temp)
+            self.delpoint(elements[i])
+        return interactions
     
-    def searchall(self):
-        pass

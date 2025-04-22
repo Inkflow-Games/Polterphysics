@@ -17,6 +17,7 @@ Dependencies: pygame.math (Vector2), math
 
 from pygame.math import Vector2
 from math import *
+import pygame
 
 def find_furthest(D, vertices):
     max_point = vertices[0]
@@ -47,6 +48,8 @@ def Support(D,A,B):
 class GJK2D:
     def __init__(self, Object1, Object2):
         self.vertices = []
+        self.res1 = Object1.restitution_coefficient
+        self.res2 = Object1.restitution_coefficient
         self.shape1 = Object1.shape
         self.shape2 = Object2.shape
         self.typecol = None
@@ -109,7 +112,6 @@ class GJK2D:
         print(start_point,end_point)
         #pygame.draw.line(screen,(200,200,200),start_point,end_point,5)
         #pygame.draw.circle(screen,(150,150,150),(end_point + start_point)/2,3)
-        print("e")
         return (end_point + start_point)/2
    
     def calcsupport(self,direction):
@@ -199,7 +201,7 @@ class GJK2D:
             return minNormal * (minDistance + 0.001)
         return Vector2(0,0)
        
-    def resolve(self,penetrationvector,restitution=0.6):
+    def resolve(self,penetrationvector,dt):
         #print(self.A.vertices,self.B.vertices,self.typecol)
         #pygame.draw.polygon(screen,(255,255,225),self.A.vertices)
         #pygame.draw.polygon(screen,(255,255,225),self.B.vertices)
@@ -207,6 +209,10 @@ class GJK2D:
         #print("ae",self.A.velocity,self.A.inertia,self.A.angular_velocity)
         #print("be",self.B.velocity,self.B.inertia,self.B.angular_velocity)
         contact_point = self.colpoint
+        restitution = min(self.res1,self.res2)
+        # Coulomb's law: μ = friction coefficient (can be per-object or global)
+        mu = 0.6  # You can tweak or get this from object properties
+        restitution = 0.8
         #pygame.draw.line(screen,(120,20,100),contact_point,(contact_point+penetrationvector)*10)
         normal = penetrationvector.normalize()
         #pygame.draw.line(screen,(50,50,50),contact_point,(contact_point-normal)*10)
@@ -231,30 +237,55 @@ class GJK2D:
         rB_cross_N = rB.cross(normal)
         denominator = inv_mass1 + inv_mass2 + (rA_cross_N ** 2) * inv_I1 + (rB_cross_N ** 2) * inv_I2
         j = -(1 + restitution) * vel_along_normal / denominator
-        bias = max(0,penetrationvector.magnitude() - 0.06) * 0.8 / (1/60)
+        bias = max(0,penetrationvector.magnitude() - 0.05) * 0.9 / dt
         j += bias
 
         # Apply impulse to linear velocity
         impulse = j * normal
         self.shape1.velocity -= impulse * inv_mass1
         self.shape2.velocity += impulse * inv_mass2
-        a = Vector2(0,0)
+        # --- Friction impulse ---
+        """
+        tangent = (relative_velocity - normal * relative_velocity.dot(normal))
+        if tangent.length_squared() > 0:
+            tangent = tangent.normalize()
 
-        # Apply angular impulse
-        #print("rA",rA.cross(impulse)* inv_I1)
-        #print(impulse * inv_mass1,impulse * inv_mass2)
-        #print("rB",rB.cross(impulse)* inv_I2)
-        self.shape1.angular_velocity -= rA.cross(impulse) * inv_I1
-        self.shape2.angular_velocity += rB.cross(impulse) * inv_I2
+        # Calculate magnitude of friction impulse
+        jt = -relative_velocity.dot(tangent)
+        jt /= denominator  # Same denominator as normal impulse
+        jt = max(-j * mu, min(jt, j * mu))  # Clamp it
+
+        # Clamp friction impulse
+        friction_impulse = jt * tangent
+        if friction_impulse.length() > j * mu:
+            friction_impulse = j * mu * tangent
+
+        # Apply linear friction impulse
+        self.shape1.velocity -= friction_impulse * inv_mass1
+        self.shape2.velocity += friction_impulse * inv_mass2
+
+        # Apply angular friction impulse
+        self.shape1.angular_velocity -= rA.cross(friction_impulse) * inv_I1
+        self.shape2.angular_velocity += rB.cross(friction_impulse) * inv_I2
+        """
+        
+        if relative_velocity.length() > 0:
+            tangent = relative_velocity - (relative_velocity.dot(normal)) * normal
+            if tangent.length() > 0:
+                tangent = tangent.normalize()
+                jt = -relative_velocity.dot(tangent)  # Friction force along the tangent direction
+                jt = max(min(jt, j * mu), -j * mu)  # Clamp to Coulomb friction
+                friction_impulse = jt * tangent
+
+                # Apply friction impulse
+                self.shape1.velocity -= friction_impulse * inv_mass1
+                self.shape2.velocity += friction_impulse * inv_mass2
+                self.shape1.angular_velocity -= rA.cross(friction_impulse) * inv_I1
+                self.shape2.angular_velocity += rB.cross(friction_impulse) * inv_I2
         #print("a",self.A.velocity,self.A.inertia,self.A.angular_velocity)
         #print("b",self.B.velocity,self.B.inertia,self.B.angular_velocity)
-        return
-    
-def circlealgorithm(points):
-    return
+        
 
-def update(poly):
-    poly.add(poly.velocity/60)
-    poly.rotate(poly.angular_velocity/60)
-    poly.velocity *= 0.995
-    poly.angular_velocity *= 0.995
+        return
+
+

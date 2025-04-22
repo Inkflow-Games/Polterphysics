@@ -14,6 +14,7 @@ Last Updated: Feb 2025
 Python Version: 3.12.9
 Dependencies: None
 """
+from pygame import Vector2
 
 class PhysicsEngine:
     """A simple physics engine that manages a collection of objects and handles collisions."""
@@ -43,12 +44,16 @@ class PhysicsEngine:
 
     def update_polygon(self,object,dt):
         table = {True:0,False:1}
-        object.shape.add(object.shape.velocity*dt)
-        object.shape.rotate(object.shape.angular_velocity*dt)
-        object.shape.velocity *= (0.99)
-        object.shape.angular_velocity *= (0.99)
-        object.mincircle.x = object.shape.centroid.x
-        object.mincircle.y = object.shape.centroid.y
+        object.shape.velocity += (Vector2(0,9.8) * dt * table[object.static])
+        object.shape.add(object.shape.velocity*dt* table[object.static])
+        object.shape.rotate(object.shape.angular_velocity*dt* table[object.static])
+        #object.shape.velocity *= (0.99)
+        #object.shape.angular_velocity *= (0.99)
+        print(object.mincircle.x,object.mincircle.y)
+        object.updatemc()
+        print(object.mincircle.x,object.mincircle.y)
+
+        
     '''def update_polygon(self,object,dt):
         table = {True:0,False:1}
         object.shape.add(object.shape.velocity*dt*table[object.static])

@@ -23,6 +23,7 @@ from objects.object import *
 from utils.math_utils import *
 from utils.vector_utils import *
 from core.input_handler import *
+from objects.mincircle import welzl
 from objects.Quadtree import RectangleQ,Quadtree
 import core.level_manager as level_manager
 import json
@@ -75,9 +76,8 @@ pygame.display.set_caption("Physics Engine Test")
 
 # Initialize physics engine
 physics_engine = PhysicsEngine()
-bounding_box = RectangleQ(0,0,display_width,display_height)
+bounding_box = RectangleQ(-100,-100,3400,2200)
 quadtree = Quadtree(bounding_box,4)
-
 # Clock to control frame rate
 clock = pygame.time.Clock()
 running = True
@@ -134,13 +134,14 @@ while running:
         test_object = physics_engine.objects[0]
         second_object = physics_engine.objects[1]
         #call the function that handles the vector application process
-        
+        """
         clicked_object, vector_applied1, vector_applied2, vector1_coords, vector2_coords, vector1_angle, vector2_angle, mouse_position = vector_application(
         event,
         test_object, second_object,
         clicked_object, vector_applied1, vector_applied2,
         vector1_coords, vector2_coords,
         vector1_angle, vector2_angle)
+        """
     
 
     if game_state == "running" : # the physics is calculated only during play mode
@@ -148,23 +149,23 @@ while running:
         #vector_applied1, vector_applied2, test_position_x_before, test_position_y_before, second_position_x_before, second_position_y_before = objects_running_info(test_object, second_object, vector_applied1, vector_applied2)
         # Update physics engine based on time delta
         dt = clock.get_time() / 100.0  # Convert milliseconds to a suitable scale'
-        physics_engine.objects[1].shape.velocity += (Vector2(0,9.8) * dt)
-        for element in physics_engine.objects:
-            quadtree.insert(element)
-        tab = []
-        quadtree.query(physics_engine.objects[1],tab)
-        for element in physics_engine.objects:
-            quadtree.delpoint(element)
-        print(physics_engine.objects[0])
-        print(physics_engine.objects[1])
-        gjk = GJK2D(physics_engine.objects[0],physics_engine.objects[1])
-        trig = gjk.detection()
-        stuff = gjk.EPA(trig)
-        if trig is not None:
-            gjk.find_contact_features(gjk.shape1,gjk.shape2,stuff)
-            gjk.resolve(stuff)
-        physics_engine.objects[0].shape.velocity = Vector2(0,0)
-        physics_engine.objects[0].shape.angular_velocity = 0
+        #physics_engine.objects[2].shape.velocity += (Vector2(0,9.8) * dt)
+        for elements in physics_engine.objects:
+            quadtree.insert(elements)
+        interactions = quadtree.searchelements(physics_engine.objects)
+
+        for interaction in interactions:
+            if len(interaction) >= 2:
+                for elms in interaction[1:]:
+                    gjk = GJK2D(interaction[0],elms)
+                    trig = gjk.detection()
+                    stuff = gjk.EPA(trig)
+                    if trig is not None:
+                        gjk.find_contact_features(gjk.shape1,gjk.shape2,stuff)
+                        gjk.resolve(stuff,dt)
+
+        #physics_engine.objects[0].shape.velocity = Vector2(0,0)
+        #physics_engine.objects[0].shape.angular_velocity = 0
         physics_engine.update(dt)  # Pass ground_level as display_height - 20 (or whatever your ground level is)
 
 
@@ -174,9 +175,7 @@ while running:
         for elements in physics_engine.objects:
             elements.shape.draw(screen,(255,0,0))
         for elements in physics_engine.objects:
-            #pygame.draw.circle(screen,(0,255,255),Vector2(elements.mincircle.x,elements.mincircle.y),elements.mincircle.radius,2)  PK cette ligne ??
-            pass
-
+            pygame.draw.circle(screen,(50,50,50),Vector2(elements.mincircle.x,elements.mincircle.y),elements.mincircle.radius,2)
         # Draws a white line between clicked object and mouse position (during vector construction and 'paused')
         """Must stay in main because of where the game is taking place (screen)"""
         if clicked_object != None and game_state == "paused" : 
@@ -203,7 +202,7 @@ while running:
 
         # Draw in yellow
         for point in predicted_positions:
-            print("e",point)
+            #print("e",point)
             pygame.draw.circle(screen, (255, 255, 0), (int(point.x), int(point.y)), 3)  # Petit point jaune
 
     # Prediction of the trajectory of "second_object"

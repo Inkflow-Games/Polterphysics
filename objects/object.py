@@ -17,6 +17,7 @@ Dependencies: math, pygame.math.Vector2
 import pygame
 from pygame.math import Vector2
 from core.collision import * 
+from objects.mincircle import welzl
 from objects.Quadtree import CircleQ
 
 class Object:
@@ -64,7 +65,41 @@ class Object:
         if hasattr(self.shape,'radius'):
             return CircleQ(self.shape.centroid.x,self.shape.centroid.y,self.shape.radius)
         else:
-            return CircleQ(self.shape.centroid.x,self.shape.centroid.y,550)
+            mec = welzl(self.shape)
+            return CircleQ(mec.c.x,mec.c.y,mec.r)
+    
+    def updatemc(self):
+        """
+        Rotates a point (x, y) around a given center by a given angle.
+
+        Parameters:
+        point (tuple): The (x, y) coordinates of the point to rotate.
+        center (tuple): The (cx, cy) coordinates of the rotation center.
+        angle_rad (float): The angle in radians.
+
+        Returns:
+        tuple: The rotated (x, y) coordinates.
+        """
+        px, py = self.mincircle.x+self.shape.velocity.x*(1/120),self.mincircle.y+self.shape.velocity.y*(1/120)
+        print("centr",self.shape.centroid.x,self.shape.centroid.y)
+        cx, cy = self.shape.centroid.x,self.shape.centroid.y
+        angle_rad = self.shape.angular_velocity * 1/120
+
+        # Translate point to origin
+        translated_x = px - cx
+        translated_y = py - cy
+
+        # Rotate
+        cos_a = cos(angle_rad)
+        sin_a = sin(angle_rad)
+        rotated_x = translated_x * cos_a - translated_y * sin_a
+        rotated_y = translated_x * sin_a + translated_y * cos_a
+        print("rot",rotated_x + cx,rotated_y+cy)
+
+        # Translate back
+        self.mincircle.x,self.mincircle.y = rotated_x + cx, rotated_y + cy
+
+
 
 class Polygon:
     def __init__(self, vertices=[], mass=1):
