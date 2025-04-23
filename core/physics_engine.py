@@ -50,7 +50,7 @@ class PhysicsEngine:
         #object.shape.velocity *= (0.99)
         #object.shape.angular_velocity *= (0.99)
         print(object.mincircle.x,object.mincircle.y)
-        object.updatemc()
+        object.updatemc(dt)
         print(object.mincircle.x,object.mincircle.y)
 
         

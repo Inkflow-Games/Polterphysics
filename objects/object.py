@@ -17,7 +17,7 @@ Dependencies: math, pygame.math.Vector2
 import pygame
 from pygame.math import Vector2
 from core.collision import * 
-from objects.mincircle import welzl
+from objects.mincircle import convert
 from objects.Quadtree import CircleQ
 
 class Object:
@@ -59,45 +59,24 @@ class Object:
             self.shape = Polygon(vertices, mass)
         else :
             self.shape = Circle(centroid, radius, mass)
-        self.mincircle = self.minimumcircle()
+        temp = self.minimumcircle()
+        self.mincircle = temp[0]
+        self.mincircledist = temp[1]
+        self.mincircleangle = temp[2]
 
     def minimumcircle(self):
         if hasattr(self.shape,'radius'):
-            return CircleQ(self.shape.centroid.x,self.shape.centroid.y,self.shape.radius)
+            #return (CircleQ(self.shape.centroid.x,self.shape.centroid.y,self.shape.radius),0,0)
+            return (CircleQ(self.shape.centroid.x,self.shape.centroid.y,200),0,0)
         else:
-            mec = welzl(self.shape)
-            return CircleQ(mec.c.x,mec.c.y,mec.r)
+            temp = convert(self.shape)
+            #return (CircleQ(temp[0].c.x,temp[0].c.y,temp[0].r),temp[1],temp[2])
+            return (CircleQ(temp[0].c.x,temp[0].c.y,700),temp[1],temp[2])
     
-    def updatemc(self):
-        """
-        Rotates a point (x, y) around a given center by a given angle.
-
-        Parameters:
-        point (tuple): The (x, y) coordinates of the point to rotate.
-        center (tuple): The (cx, cy) coordinates of the rotation center.
-        angle_rad (float): The angle in radians.
-
-        Returns:
-        tuple: The rotated (x, y) coordinates.
-        """
-        px, py = self.mincircle.x+self.shape.velocity.x*(1/120),self.mincircle.y+self.shape.velocity.y*(1/120)
-        print("centr",self.shape.centroid.x,self.shape.centroid.y)
-        cx, cy = self.shape.centroid.x,self.shape.centroid.y
-        angle_rad = self.shape.angular_velocity * 1/120
-
-        # Translate point to origin
-        translated_x = px - cx
-        translated_y = py - cy
-
-        # Rotate
-        cos_a = cos(angle_rad)
-        sin_a = sin(angle_rad)
-        rotated_x = translated_x * cos_a - translated_y * sin_a
-        rotated_y = translated_x * sin_a + translated_y * cos_a
-        print("rot",rotated_x + cx,rotated_y+cy)
-
-        # Translate back
-        self.mincircle.x,self.mincircle.y = rotated_x + cx, rotated_y + cy
+    def updatemc(self,dt):
+        self.mincircleangle = (self.mincircleangle + (self.shape.angular_velocity * dt))%(2*pi)
+        self.mincircle.x = self.shape.centroid.x + self.mincircledist * cos(self.mincircleangle)
+        self.mincircle.y = self.shape.centroid.y + self.mincircledist * sin(self.mincircleangle)
 
 
 

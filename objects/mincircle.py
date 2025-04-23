@@ -82,17 +82,12 @@ def welzl(shape):
     random.shuffle(polygon)
     return welzlHelper(polygon, [], len(polygon))
 
-# Main function
-def main():
-    test_points = [
-        Point(5, -2),
-        Point(-3, -2),
-        Point(-2, 5),
-        Point(1, 6),
-        Point(0, 2)
-    ]
-
-    mec = welzl(test_points)
-    print(mec.c.x, mec.c.y, mec.r)
+def convert(shape):
+    mec = welzl(shape)
+    dx = mec.c.x - shape.centroid.x
+    dy = mec.c.y - shape.centroid.y
+    r = math.hypot(dx,dy)
+    theta = math.atan2(dy,dx)
+    return (mec,r,theta)
 
 
