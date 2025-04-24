@@ -214,7 +214,7 @@ while running:
             pygame.draw.circle(screen, (255, 255, 255), (int(point.x), int(point.y)), 3)  # Petit point jaune
 
     pygame.display.flip()  # Refresh screen
-    clock.tick(120)  # Limit FPS to 120
+    clock.tick(60)  # Limit FPS to 120
 
 
 

@@ -211,8 +211,7 @@ class GJK2D:
         contact_point = self.colpoint
         restitution = min(self.res1,self.res2)
         # Coulomb's law: μ = friction coefficient (can be per-object or global)
-        mu = 0.6  # You can tweak or get this from object properties
-        restitution = 0.8
+        mu = 0.4  # You can tweak or get this from object properties
         #pygame.draw.line(screen,(120,20,100),contact_point,(contact_point+penetrationvector)*10)
         normal = penetrationvector.normalize()
         #pygame.draw.line(screen,(50,50,50),contact_point,(contact_point-normal)*10)
@@ -237,13 +236,16 @@ class GJK2D:
         rB_cross_N = rB.cross(normal)
         denominator = inv_mass1 + inv_mass2 + (rA_cross_N ** 2) * inv_I1 + (rB_cross_N ** 2) * inv_I2
         j = -(1 + restitution) * vel_along_normal / denominator
-        bias = max(0,penetrationvector.magnitude() - 0.05) * 0.9 / dt
+        bias = max(0,penetrationvector.magnitude() - 0.05) * (0.2 / dt)
         j += bias
 
         # Apply impulse to linear velocity
         impulse = j * normal
         self.shape1.velocity -= impulse * inv_mass1
         self.shape2.velocity += impulse * inv_mass2
+
+        self.shape1.angular_velocity -= rA.cross(impulse) * inv_I1
+        self.shape2.angular_velocity += rB.cross(impulse) * inv_I2
         # --- Friction impulse ---
         """
         tangent = (relative_velocity - normal * relative_velocity.dot(normal))
@@ -284,7 +286,12 @@ class GJK2D:
                 self.shape2.angular_velocity += rB.cross(friction_impulse) * inv_I2
         #print("a",self.A.velocity,self.A.inertia,self.A.angular_velocity)
         #print("b",self.B.velocity,self.B.inertia,self.B.angular_velocity)
-        
+        percent = 0.6
+        slop = 0.03
+        correction_mag = max(penetrationvector.length() - slop, 0) / (inv_mass1 + inv_mass2)
+        correction = correction_mag * percent * normal
+        self.shape1.add(-(correction * inv_mass1))
+        self.shape2.add(correction * inv_mass2)
 
         return
 

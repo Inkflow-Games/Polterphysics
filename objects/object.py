@@ -67,11 +67,11 @@ class Object:
     def minimumcircle(self):
         if hasattr(self.shape,'radius'):
             #return (CircleQ(self.shape.centroid.x,self.shape.centroid.y,self.shape.radius),0,0)
-            return (CircleQ(self.shape.centroid.x,self.shape.centroid.y,200),0,0)
+            return (CircleQ(self.shape.centroid.x,self.shape.centroid.y,self.shape.radius),0,0)
         else:
             temp = convert(self.shape)
             #return (CircleQ(temp[0].c.x,temp[0].c.y,temp[0].r),temp[1],temp[2])
-            return (CircleQ(temp[0].c.x,temp[0].c.y,700),temp[1],temp[2])
+            return (CircleQ(temp[0].c.x,temp[0].c.y,temp[0].r),temp[1],temp[2])
     
     def updatemc(self,dt):
         self.mincircleangle = (self.mincircleangle + (self.shape.angular_velocity * dt))%(2*pi)
