@@ -1,177 +1,126 @@
 {
-    "1": {
-        "1": [
-            "bloc",
-            0.7,
-            [
-                500,
-                500
-            ],
-            15,
-            0.037,
-            1.3,
-            0.08,
-            1
-        ],
-        "2": [
-            0.7,
-            [
-                "bloc",
-                400,
-                300
-            ],
-            15,
-            0.037,
-            0.48,
-            0.08,
-            1
-        ],
-        "3": [
-            "tenis_ball",
-            0.058,
-            [
-                300,
-                100
-            ],
-            70,
-            33,
-            0.4,
-            0.08,
-            0
-        ],
-        "4": [
-            "soccer_ball",
-            0.43,
-            [
-                210,
-                100
-            ],
-            30,
-            30,
-            0.75,
-            0.04,
-            0
-        ]
+    "Level 1": {
+      "1": {
+        "name": "Bloc",
+        "mass": 0.7,
+        "centroid": [500, 500],
+        "radius": 15,
+        "restitution_coefficient": 0.08,
+        "static": true,
+        "polygon": false
+      },
+      "2": {
+        "name": "Bloc",
+        "mass": 0.7,
+        "centroid": [400, 300],
+        "radius": 15,
+        "restitution_coefficient": 0.08,
+        "static": true,
+        "polygon": false
+      },
+      "3": {
+        "name": "Tennis Ball",
+        "mass": 0.058,
+        "centroid": [300, 100],
+        "radius": 4,
+        "restitution_coefficient": 0.9,
+        "static": false,
+        "polygon": false
+      },
+      "4": {
+        "name": "Soccer Ball",
+        "mass": 0.43,
+        "centroid": [210, 100],
+        "radius": 10,
+        "restitution_coefficient": 0.75,
+        "static": false,
+        "polygon": false
+      }
     },
-    "2": {
-        "1": [
-            "bloc",
-            0.7,
-            [
-                500,
-                500
-            ],
-            15,
-            0.037,
-            1.72,
-            0.08,
-            1
-        ],
-        "2": [
-            "bloc",
-            1.54,
-            [
-                400,
-                300
-            ],
-            15,
-            0.037,
-            2,
-            0.08,
-            1
-        ],
-        "3": [
-            "soccer_ball",
-            0.43,
-            [
-                500,
-                600
-            ],
-            30,
-            22,
-            0.75,
-            0.04,
-            0
-        ],
-        "4": [
-            "soccer_ball",
-            0.43,
-            [
-                300,
-                400
-            ],
-            30,
-            22,
-            0.75,
-            0.04,
-            0
-        ]
+    "Level 2": {
+      "1": {
+        "name": "Bloc",
+        "mass": 0.7,
+        "centroid": [500, 500],
+        "radius": 15,
+        "restitution_coefficient": 0.08,
+        "static": true,
+        "polygon": false
+      },
+      "2": {
+        "name": "Bloc",
+        "mass": 1.54,
+        "centroid": [400, 300],
+        "radius": 15,
+        "restitution_coefficient": 0.08,
+        "static": true,
+        "polygon": false
+      },
+      "3": {
+        "name": "Soccer Ball",
+        "mass": 0.43,
+        "centroid": [500, 600],
+        "radius": 10,
+        "restitution_coefficient": 0.75,
+        "static": false,
+        "polygon": false
+      },
+      "4": {
+        "name": "Soccer Ball",
+        "mass": 0.43,
+        "centroid": [300, 400],
+        "radius": 10,
+        "restitution_coefficient": 0.75,
+        "static": false,
+        "polygon": false
+      }
     },
-    "3": {
-        "1": [
-            "bloc",
-            0.6,
-            [
-                500,
-                500
-            ],
-            15,
-            0.037,
-            3,
-            0.08,
-            1
-        ],
-        "2": [
-            "bloc",
-            1.54,
-            [
-                400,
-                300
-            ],
-            15,
-            0.037,
-            1.72,
-            0.08,
-            1
-        ],
-        "3": [
-            "bloc",
-            1.54,
-            [
-                100,
-                300
-            ],
-            15,
-            0.037,
-            1.7,
-            0.08,
-            1
-        ],
-        "4": [
-            "soccer_ball",
-            0.43,
-            [
-                410,
-                600
-            ],
-            30,
-            22,
-            0.75,
-            0.04,
-            0
-        ],
-        "5": [
-            "ball",
-            0.13,
-            [
-                600,
-                80
-            ],
-            40,
-            41,
-            0.75,
-            0.04,
-            0
-        ]
+    "Level 3": {
+      "1": {
+        "name": "Bloc",
+        "mass": 0.6,
+        "centroid": [500, 500],
+        "radius": 15,
+        "restitution_coefficient": 0.08,
+        "static": true,
+        "polygon": false
+      },
+      "2": {
+        "name": "Bloc",
+        "mass": 1.54,
+        "centroid": [400, 300],
+        "radius": 15,
+        "restitution_coefficient": 0.08,
+        "static": true,
+        "polygon": false
+      },
+      "3": {
+        "name": "Bloc",
+        "mass": 1.54,
+        "centroid": [100, 300],
+        "radius": 15,
+        "restitution_coefficient": 0.08,
+        "static": true,
+        "polygon": false
+      },
+      "4": {
+        "name": "Soccer Ball",
+        "mass": 0.43,
+        "centroid": [410, 600],
+        "radius": 10,
+        "restitution_coefficient": 0.75,
+        "static": false,
+        "polygon": false
+      },
+      "5": {
+        "name": "Basketball Ball",
+        "mass": 0.13,
+        "centroid": [600, 80],
+        "radius": 40,
+        "restitution_coefficient": 0.04,
+        "static": false,
+        "polygon": false
+      }
     }
-}
+  }
+  
