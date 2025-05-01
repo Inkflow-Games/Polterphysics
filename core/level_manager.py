@@ -100,7 +100,7 @@ def load_button(b, screen_width, screen_height):
 def load_objects(object_infos):
     #new =  Object(mass = l[0], position = Vector2(l[1]), max_speed = l[2], radius = l[3],bounciness = l[4], damping_coefficient = l[5], static = l[6])
     #g = Object(False, False, 3, 0.8, None, 50, Vector2(100,100))
-    new = Object(polygon=object_infos["polygon"], static=object_infos["static"], mass=object_infos["mass"], restitution_coefficient=object_infos["restitution_coefficient"], radius=object_infos["radius"], grabable=object_infos["grabable"], name=object_infos["name"], centroid=transform_Vector2(object_infos["centroid"])[0], vertices=transform_Vector2(object_infos["vertices"]))
+    new = Object(polygon=object_infos["polygon"], static=object_infos["static"], mass=object_infos["mass"], restitution_coefficient=object_infos["restitution_coefficient"], radius=object_infos["radius"], grabable=object_infos["grabable"], applied_coords=object_infos["applied_coords"], applied_angle=object_infos["applied_angle"], name=object_infos["name"], centroid=transform_Vector2(object_infos["centroid"])[0], vertices=transform_Vector2(object_infos["vertices"]))
     return new
 
 current_scene = 0
