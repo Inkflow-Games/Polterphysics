@@ -11,14 +11,17 @@ Features include:
 Author: Maxime Noudelberg
 Last Updated: Feb 2025
 Python Version: 3.12.9
-Dependencies: math : degrees, sqrt, atan2
+Dependencies: json
+              math : degrees, sqrt, atan2
               pygame.math : Vector2
 """
 
 from math import degrees, sqrt, atan2
 from utils.math_utils import newton_to_force
+import core.physics_engine
 import pygame
 from pygame.math import Vector2
+import json
 
 
 
@@ -88,3 +91,55 @@ def computes_50_position(object, vector1_coords, dt, position_x_before, position
         predicted_positions.append(simulated_position.copy())
 
     return predicted_positions
+
+
+
+
+def update_vector(obj_name = "", scene = 0, coords = [0,0], angle = 0) :
+    """
+    Write in the json the info of the vector applied to the user to an object from a given scene
+
+    Parameters:
+        obj_name (str) : the name of the object to change (NEED to give its name according to "levels.json" --> "scene"["name"])
+        scene (int): The integer of the number of a scene (in "levels.json"). Defaults to 0.
+        coords (array of int size 2) : the coordinates of the vector applied by the user (NEED to be converted from Vector2 to array of int)
+        angle (int) : measure in degrees (?) of the angle of the vector applied
+    """
+    
+    with open("data/levels.json", "r") as f:
+        data = json.load(f)
+
+    scene_str = str(scene)
+    data[scene_str][obj_name]["applied_coords"][0] = coords[0]
+    data[scene_str][obj_name]["applied_coords"][1] = coords[1]
+    data[scene_str][obj_name]["applied_angle"] = angle
+
+    # Save changes
+    with open("data/levels.json", "w") as f:
+        json.dump(data, f, indent=2, separators=(',', ': '))
+
+
+def reset_level_vectors(list_obj, scene = 0) :
+    """
+    Resets all the vectors applied to the objects from a given scene
+
+    Parameters:
+        list_obj (we need to give physics_engine.objects): list of all the initialized objects of a scene
+        scene (int): The integer of the number of a scene (in "levels.json"). Defaults to 0.
+    """
+
+
+    with open("data/levels.json", "r") as f:
+        data = json.load(f)
+
+    scene_str = str(scene)
+    for obj in list_obj :
+        obj_name = obj.name
+        data[scene_str][obj_name]["applied_coords"][0] = 0
+        data[scene_str][obj_name]["applied_coords"][1] = 0
+        data[scene_str][obj_name]["applied_angle"] = 1  # Need to change to 0 after debug
+
+
+    # Save changes
+    with open("data/levels.json", "w") as f:
+        json.dump(data, f, indent=2, separators=(',', ': '))

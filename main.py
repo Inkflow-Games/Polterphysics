@@ -93,6 +93,7 @@ ground_level = display_height - 20
 
 level_manager.load_scene(0, display_width, display_height,physics_engine)
 
+
 game_state = "menu"
 
 
@@ -194,7 +195,15 @@ while running:
                 click = False
         else :
             button.draw(screen)
-
+    
+    
+    
+    
+    reset_level_vectors(physics_engine.objects, 1) # Testing modifications of vectors
+    
+    
+    
+    
     
     # Prediction of the trajectory of "test_object"
     if vector_applied1 == True and vector1_coords!= Vector2(0,0):
