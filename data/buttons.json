@@ -2,7 +2,7 @@
   "main_menu": {
     "Start Game": {
       "size": 1,
-      "image": "data\\ButtonsImages\\PlayButton.png",
+      "image": "data\\ButtonsImages\\MansionButton.png",
       "imageHover": "data\\ButtonsImages\\MansionButtonPressed.png",
       "position": [0.5, 0.55],
       "height": 80,
