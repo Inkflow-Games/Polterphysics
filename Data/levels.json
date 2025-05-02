@@ -7,13 +7,37 @@
       "restitution_coefficient": 0.8,
       "radius": 5,
       "grabable": false,
-      "applied_coords" : [0,0], 
-      "applied_angle" : 0,
-      "centroid": [ [ 0, 0 ] ],
-      "vertices": [[ 0, 800 ],[ 1300, 800 ],[ 1300, 900 ],[ 0, 900 ]],
+      "applied_coords": [
+        0,
+        0
+      ],
+      "applied_angle": 1,
+      "centroid": [
+        [
+          0,
+          0
+        ]
+      ],
+      "vertices": [
+        [
+          0,
+          800
+        ],
+        [
+          1300,
+          800
+        ],
+        [
+          1300,
+          900
+        ],
+        [
+          0,
+          900
+        ]
+      ],
       "name": "Bloc1"
     },
-    
     "Bloc2": {
       "polygon": true,
       "static": false,
@@ -21,29 +45,75 @@
       "restitution_coefficient": 0.8,
       "radius": 5,
       "grabable": false,
-      "applied_coords" : [0,0], 
-      "applied_angle" : 0,
-      "centroid": [ [ 0, 0 ] ],
-      "vertices": [[ 0, 500 ],[ 1300, 500 ],[ 1300, 600 ],[ 0, 600 ]],
+      "applied_coords": [
+        0,
+        0
+      ],
+      "applied_angle": 1,
+      "centroid": [
+        [
+          0,
+          0
+        ]
+      ],
+      "vertices": [
+        [
+          0,
+          500
+        ],
+        [
+          1300,
+          500
+        ],
+        [
+          1300,
+          600
+        ],
+        [
+          0,
+          600
+        ]
+      ],
       "name": "Bloc2"
     },
-
     "Circle1": {
       "polygon": false,
       "static": false,
       "mass": 400,
       "restitution_coefficient": 0.8,
       "radius": 30,
-      "grabable":  true,
-      "applied_coords" : [0,0], 
-      "applied_angle" : 0,
-      "centroid": [[0,0]],
-      "vertices": [ [0, 800], [1300, 800], [1300, 900], [0, 900] ],
-      "name" :  "Circle1"
+      "grabable": true,
+      "applied_coords": [
+        0,
+        0
+      ],
+      "applied_angle": 1,
+      "centroid": [
+        [
+          0,
+          0
+        ]
+      ],
+      "vertices": [
+        [
+          0,
+          800
+        ],
+        [
+          1300,
+          800
+        ],
+        [
+          1300,
+          900
+        ],
+        [
+          0,
+          900
+        ]
+      ],
+      "name": "Circle1"
     }
-      
-
-
   },
   "2": {
     "Bloc1": {
@@ -53,18 +123,37 @@
       "restitution_coefficient": 0.8,
       "radius": 5,
       "grabable": false,
-      "applied_coords" : [0,0], 
-      "applied_angle" : 0,
-      "centroid": [ [ 0, 0 ] ],
+      "applied_coords": [
+        0,
+        0
+      ],
+      "applied_angle": 0,
+      "centroid": [
+        [
+          0,
+          0
+        ]
+      ],
       "vertices": [
-        [ -100, 800 ],
-        [ 1300, 900 ],
-        [ 1300, 1000 ],
-        [ 0, 1000 ]
+        [
+          -100,
+          800
+        ],
+        [
+          1300,
+          900
+        ],
+        [
+          1300,
+          1000
+        ],
+        [
+          0,
+          1000
+        ]
       ],
       "name": "Bloc1"
     },
-
     "Circle1": {
       "polygon": false,
       "static": false,
@@ -72,14 +161,34 @@
       "restitution_coefficient": 0.8,
       "radius": 30,
       "grabable": true,
-      "applied_coords" : [0,0], 
-      "applied_angle" : 0,
-      "centroid": [ [ 0, 0 ] ],
+      "applied_coords": [
+        0,
+        0
+      ],
+      "applied_angle": 0,
+      "centroid": [
+        [
+          0,
+          0
+        ]
+      ],
       "vertices": [
-        [ 0, 800 ],
-        [ 1300, 800 ],
-        [ 1300, 900 ],
-        [ 0, 900 ]
+        [
+          0,
+          800
+        ],
+        [
+          1300,
+          800
+        ],
+        [
+          1300,
+          900
+        ],
+        [
+          0,
+          900
+        ]
       ],
       "name": "Circle1"
     }
@@ -92,18 +201,37 @@
       "restitution_coefficient": 0.8,
       "radius": 5,
       "grabable": false,
-      "applied_coords" : [0,0], 
-      "applied_angle" : 0,
-      "centroid": [ [ 0, 0 ] ],
+      "applied_coords": [
+        0,
+        0
+      ],
+      "applied_angle": 0,
+      "centroid": [
+        [
+          0,
+          0
+        ]
+      ],
       "vertices": [
-        [ -100, 800 ],
-        [ 1300, 900 ],
-        [ 1300, 1000 ],
-        [ 0, 1000 ]
+        [
+          -100,
+          800
+        ],
+        [
+          1300,
+          900
+        ],
+        [
+          1300,
+          1000
+        ],
+        [
+          0,
+          1000
+        ]
       ],
       "name": "Bloc1"
     },
-
     "Circle1": {
       "polygon": false,
       "static": false,
@@ -111,14 +239,34 @@
       "restitution_coefficient": 0.8,
       "radius": 40,
       "grabable": true,
-      "applied_coords" : [0,0], 
-      "applied_angle" : 0,
-      "centroid": [ [ 0, 0 ] ],
+      "applied_coords": [
+        0,
+        0
+      ],
+      "applied_angle": 0,
+      "centroid": [
+        [
+          0,
+          0
+        ]
+      ],
       "vertices": [
-        [ 0, 800 ],
-        [ 1300, 800 ],
-        [ 1300, 900 ],
-        [ 0, 900 ]
+        [
+          0,
+          800
+        ],
+        [
+          1300,
+          800
+        ],
+        [
+          1300,
+          900
+        ],
+        [
+          0,
+          900
+        ]
       ],
       "name": "Circle1"
     }

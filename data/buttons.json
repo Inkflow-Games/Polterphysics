@@ -8,17 +8,7 @@
       "height": 80,
       "width": 240,
       "action": "Load Level Menu"
-    },
-    "Option": {
-      "size": 1,
-      "image": "data\\ButtonsImages\\OptionButton.png",
-      "imageHover": "data\\ButtonsImages\\OptionButtonPressed.png",
-      "position": [ 0.1, 0.3 ],
-      "height": 100,
-      "width": 150,
-      "action": "Load Option Menu"
     }
-
   },
 
   "level_selection": {
