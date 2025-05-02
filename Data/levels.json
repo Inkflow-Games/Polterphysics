@@ -16,11 +16,11 @@
       "polygon": true,
       "static": false,
       "mass": 400,
-      "restitution_coefficient": 0.8,
+      "restitution_coefficient": 0.4,
       "radius": 5,
       "grabable": false,
       "centroid": [ [ 0, 0 ] ],
-      "vertices": [[ 0, 500 ],[ 1300, 500 ],[ 1300, 600 ],[ 0, 600 ]],
+      "vertices": [[ 0, 500 ],[ 1300, 500 ],[ 1300, 600 ],[ 750, 700],[ 0, 600 ]],
       "name": "Bloc1"
     },
 
@@ -28,7 +28,7 @@
       "polygon": false,
       "static": false,
       "mass": 400,
-      "restitution_coefficient": 0.8,
+      "restitution_coefficient": 0.6,
       "radius": 30,
       "grabable":  true,
       "centroid": [[0,0]],
