@@ -14,6 +14,7 @@ Last Updated: Feb 2025
 Python Version: 3.12.9
 Dependencies: None
 """
+from pygame import Vector2
 
 class PhysicsEngine:
     """A simple physics engine that manages a collection of objects and handles collisions."""
@@ -41,15 +42,41 @@ class PhysicsEngine:
         if obj in self.objects:
             self.objects.remove(obj)
 
-    def update(self, dt, ground_level):
+    def update_polygon(self,object,dt):
         """
-        Updates all objects in the physics engine by calling their `update` methods.
+        Updates the position and orientation of a polygon over time, applying gravity, translation,
+        and rotation if the object is dynamic (not static).
+
+        Parameters:
+        object (Object): The object containing the shape (expected to be a Polygon).
+        dt (float): The delta time step for the update.
+        """
+        # Use a lookup table to check if the object is static (skip physics if static)
+        table = {True:0,False:1}
+        object.shape.velocity += (Vector2(0,9.8) * dt * table[object.static])
+        object.shape.add(object.shape.velocity*dt* table[object.static])
+        object.shape.rotate(object.shape.angular_velocity*dt* table[object.static])
+        #object.shape.velocity *= (0.99)
+        #object.shape.angular_velocity *= (0.99)
+        # Update the minimum enclosing circle if applicable
+        object.updatemc(dt)
+
+        
+    '''def update_polygon(self,object,dt):
+        table = {True:0,False:1}
+        object.shape.add(object.shape.velocity*dt*table[object.static])
+        object.shape.rotate(object.shape.angular_velocity*dt*table[object.static])
+        object.shape.velocity *= (0.99*table[object.static])
+        object.shape.angular_velocity *= (0.99*table[object.static])
+        object.mincircle.x = object.shape.centroid.x
+        object.mincircle.y = object.shape.centroid.y'''
+
+    def update(self, dt):
+        """
+        Updates all objects in the physics engine by calling the `update` methods.
 
         Parameters:
         dt (float): Time step elapsed since the last update (in seconds).
-        ground_level (float): The y-coordinate of the ground level for collision detection
-                              (e.g., objects cannot fall below this).
         """
         for obj1 in self.objects:
-            if not obj1.static:
-                obj1.update(dt, ground_level)  # Update object state
+            self.update_polygon(obj1,dt)
