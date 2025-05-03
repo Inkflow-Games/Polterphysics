@@ -2,12 +2,14 @@ import pygame
 from pygame.math import Vector2
 from utils.vector_utils import * 
 from core.collision import *
+from objects.Quadtree import RectangleQ, Quadtree
+from objects.object import *
 pygame.init()
 
 def GetMouseInput(event) :
     return event.type == pygame.MOUSEBUTTONDOWN #autorise qu'un seul clic gauche jusqu'au relachement de la touche  --> on peut pas maintenir la touche pour faire clic gauche continuellement
 
-#verifies if the mouse is in the radius of a clicked circle
+# (NOT USED ANYMORE) verifies if the mouse is in the radius of a clicked circle
 def is_point_in_circle(point, circle_center, radius):
     dx = point[0] - circle_center[0]
     dy = point[1] - circle_center[1]
@@ -15,54 +17,74 @@ def is_point_in_circle(point, circle_center, radius):
 
 
 def vector_application(
-    event, 
-    test_object, second_object,
-    clicked_object, vector_applied1, vector_applied2, 
-    vector1_coords, vector2_coords, 
-    vector1_angle, vector2_angle
-):
-    mouse_position = pygame.mouse.get_pos()
+    event,
+    objects_list,
+    clicked_object = Object,
+    quadtree = Quadtree(RectangleQ(-100,-100,3400,2200),4),
+    
+) :
+    """
+    Handles the inputs from the user to apply vectors
 
-    if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-        if (test_object.polygon == False) :
-
-            if is_point_in_circle(mouse_position, test_object.shape.centroid, test_object.shape.radius):
-                clicked_object = test_object
-                if vector_applied1:
-                    force_vector = -vector1_coords
-                    test_object.apply_force(force_vector)
-                    vector_applied1 = False
-                    vector1_coords = Vector2(0, 0)
-
-        elif is_point_in_circle(mouse_position, second_object.shape.centroid, second_object.shape.radius):
-            clicked_object = second_object
-            if vector_applied2:
-                force_vector = -vector2_coords
-                second_object.apply_force(force_vector)
-                vector_applied2 = False
-                vector2_coords = Vector2(0, 0)
-
-    elif event.type == pygame.MOUSEMOTION and clicked_object is not None:
-        pass  # Rien à faire ici, mais tu peux gérer un affichage de curseur par exemple
-
-    elif event.type == pygame.MOUSEBUTTONUP and event.button == 1 and clicked_object is not None:
+    Parameters:
+        event (bool) : 1/0 is left click/no left click from the user
+        object_list (list of references) : physics_engine.objects : list of all the objects instanced in physics_engine
+        clicked_object : reference of the object that the user is applying the vector to
+        quadtree (Quadtree) : need precisions 
+        
+    Dependencies : 
+        Quadtree functions
+        compute_angle
+        update_vector
+        update_mouse
+        compute_positions
+    """
+    
+    mouse_position = Vector2(pygame.mouse.get_pos())
+    
+    if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and clicked_object == None: # left click + when no object is clicked 
+        print("click detected")
+        for elements in objects_list:
+            quadtree.insert(elements) 
+        potential = []
+        mini = float("inf")
+        quadtree.query(Object(False,False,1,1,[],1,mouse_position, "mouse", False), potential) #creates a circle of radius 1 to detect intersection with objects around the area
+        for elements in potential :
+            if elements.grabable != True :
+                potential.remove(elements) #only keeps grabable objects in the potential movable objects
+            elif elements.shape.centroid.distance_squared_to(mouse_position) < mini :
+                mini = elements.shape.centroid.distance_squared_to(mouse_position)  # obtain the distance between mouse and nearest centroid
+                clicked_object = elements  #obtain the object that is the closest to the mouse
+        print(f"clicked object is : {clicked_object}")
+        for elements in objects_list :
+            quadtree.delpoint(elements)
+        return clicked_object
+    
+    elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and clicked_object != None: # left click + object clicked
+        update_mouse(clicked_object, mouse_position)
         force_vector = Vector2(
-            mouse_position[0] - clicked_object.shape.centroid[0],
-            mouse_position[1] - clicked_object.shape.centroid[1]
-        )
-        clicked_object.shape.apply_force(force_vector)
-        print(f"Force applied : {force_vector}")
-
-        if clicked_object == test_object:
-            vector_applied1 = True
-            vector1_coords = force_vector
-            vector1_angle = compute_angle(vector1_coords.x, vector1_coords.y)
-        elif clicked_object == second_object:
-            vector_applied2 = True
-            vector2_coords = force_vector
-            vector2_angle = compute_angle(vector2_coords.x, vector2_coords.y)
-
+        (mouse_position[0] - clicked_object.shape.centroid[0])*5,
+        (mouse_position[1] - clicked_object.shape.centroid[1])*5
+        ) #modify the multiplication coeff if needed
+        print(f"force_vector {force_vector}")
+        print(f"velocity {clicked_object.shape.velocity} and type {type(clicked_object.shape.velocity)}")
+        vector_angle = compute_angle(force_vector.x, force_vector.y) #need revisions because it gives stupid values sometimes
+        update_vector(clicked_object, force_vector, vector_angle)
+    
+    elif event.type == pygame.MOUSEBUTTONUP and event.button == 1 and clicked_object != None: # when click is released
+        update_mouse(clicked_object, mouse_position)
+        force_vector = Vector2(
+        (mouse_position[0] - clicked_object.shape.centroid[0])*5,
+        (mouse_position[1] - clicked_object.shape.centroid[1])*5
+        ) #modify the multiplication coeff if needed --> give more/less precision with the norm of the vector
+        print(f"force_vector {force_vector}")
+        print(f"velocity {clicked_object.shape.velocity} and type {type(clicked_object.shape.velocity)}")
+        vector_angle = compute_angle(force_vector.x, force_vector.y) #need revisions because it gives stupid values sometimes
+        update_vector(clicked_object, force_vector, vector_angle)
+        
+        # to change : move the centroid of circles and not coherent positions given
+        # computes_positions(clicked_object, simulation_steps=20, dt_sim=0.1)
+        
         clicked_object = None
-
-    return clicked_object, vector_applied1, vector_applied2, vector1_coords, vector2_coords, vector1_angle, vector2_angle, mouse_position
-
+        return clicked_object
+    return clicked_object

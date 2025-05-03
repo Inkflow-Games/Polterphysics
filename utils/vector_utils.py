@@ -26,10 +26,21 @@ import json
 
 
 def compute_angle(coord1, coord2):
+    """
+    Computes the angle between axis x and the vector applied by the user 
+
+    Parameters:
+        coord1 (int/float) : x coordinate (of a vector)
+        coord2 (int/float) : y coordinate (of a vector)
+
+    Dependencies : 
+        degrees
+        atan2
+    """
     return -degrees(atan2(coord2, coord1))
 
 
-#only used in the trajectory simulation based on vectorial sum
+# (NOT USED) (to delete) : only used in the trajectory simulation based on vectorial sum
 def norm_and_angle_computation(x_before =0 , y_before =0, x_now =0 , y_now =0, force_vector = Vector2(0,0), dt = 1/120) : # before <=> dt-1  and now <=> actual position
     vx = (x_now - x_before)/dt
     vy = (y_now - y_before)/dt  # if vy is positive <=> the object is going down
@@ -41,13 +52,13 @@ def norm_and_angle_computation(x_before =0 , y_before =0, x_now =0 , y_now =0, f
 
 
 
-#currently not used
+#currently not used (to delete)
 def initial_speed_computation(x_before = 0, y_before = 0, x_now = 0, y_now = 0, dt = 1/120) :
     return (sqrt((x_now - x_before)**2 + (y_now - y_before)**2))/dt
 
 
 
-
+# to comment
 def objects_running_info(test_object, second_object, vector_applied1 = False, vector_applied2 = False) :
         vector_applied1 = False #reset the vectors applied to our object
         vector_applied2 = False
@@ -61,7 +72,112 @@ def objects_running_info(test_object, second_object, vector_applied1 = False, ve
         return vector_applied1, vector_applied2, test_position_x_before, test_position_y_before, second_position_x_before, second_position_y_before
 
 
-def computes_50_position(object, vector1_coords, dt, position_x_before, position_y_before, simulation_steps=50, dt_sim=0.1):
+def update_vector(obj, coords = Vector2(0,0), angle = 0.0) :
+    """
+    Updates the info of "applied_coords" and "applied_angle" of the object according to the vector applied by the user
+
+    Parameters:
+        obj (Object) : reference of the object to update (in physics_engine.objects)
+        coords (Vector2) : coordinates of the vector
+        angle (int/float) : angle of the vector
+    """
+    obj.applied_coords[0] = round(coords[0])
+    obj.applied_coords[1] = round(coords[1])
+    obj.applied_angle = angle
+
+
+
+def update_mouse(obj, position = Vector2(0,0)) :
+    """
+    Updates the info of "mouse" of the object according to the vector applied by the user
+
+    Parameters:
+        obj (Object) : reference of the object to update (in physics_engine.objects)
+        position (Vector2) : coordinates of the mouse
+    """
+    obj.mouse[0] = round(position[0])
+    obj.mouse[1] = round(position[1])
+
+
+
+def reset_level_vectors(list_obj) :
+    """
+    Resets all the vectors applied to the objects from a given scene
+
+    Parameters:
+        list_obj (we need to give physics_engine.objects): list of all the initialized objects of a scene
+    """
+    for obj in list_obj :
+        obj.applied_coords[0] = 0
+        obj.applied_coords[1] = 0
+        obj.applied_angle = 0
+
+
+
+def computes_positions(obj, simulation_steps=20, dt_sim=0.1):
+    """
+    Computes "simulation_steps" positions to visualize the application of a vector 
+
+    Parameters:
+        obj (Object) : reference of the object to update (in physics_engine.objects)
+        simulation_steps (int) : number of positions to compute
+        dt_sim (float) : time difference between 2 positions
+    """
+
+    v0 = obj.shape.velocity # the Vector2(x,y --> y>0 downwards) corresponding to its inertia = initial speed 
+    added_accel = Vector2(obj.applied_coords) / obj.shape.mass
+    speed = v0 + added_accel
+
+    print(f"v0 = {v0}")
+    print(f"added_accel = {added_accel}")
+    print(f"speed = {speed}")
+
+    predicted_positions = []
+    original = obj.shape.centroid # Object's initial position
+    print(f"actual position {original}")
+    simulated_position = original #need the reference of the first position to simulate the others
+    print(f"simulated position {simulated_position}")
+    
+    for _ in range(1, simulation_steps+1) : #  Simulate on simulation_steps*dt_sim frames --> ex : 20*0.1 = 2 seconds of simulation 
+        speed.y += 9.81*dt_sim
+        simulated_position.x += speed.x * dt_sim
+        simulated_position.y += speed.y * dt_sim
+        predicted_positions.append([int(simulated_position.x), int(simulated_position.y)].copy())
+        print(predicted_positions)
+
+    obj.simulated = predicted_positions
+
+
+
+def lines_and_positions(
+    objects_list,
+    screen,
+    game_state = "running"
+) :
+    """
+    Draws the vectors applied and the simulated positions
+
+    Parameters:
+        objects_list (we need to give physics_engine.objects): list of all the initialized objects of a scene
+        screen (pygame display) : reference to the window where the game is taking place
+        game_state (str) : the name of the game state --> set to !="menu" for us here
+    """
+
+
+    if game_state == "paused" : 
+        # with open("data/levels.json", "r") as f:
+        #     data = json.load(f)
+        # str_scene = "{}".format(running_scene-1)
+        for obj in objects_list :
+            if (obj.applied_coords != [0,0]) : # If a vector is applied
+                pygame.draw.line(screen, (255, 255, 255), obj.shape.centroid, obj.mouse, 5)  # draw a line between centroid of object and the mouse position associated with it
+                for i in range (len(obj.simulated)) :
+                    pygame.draw.circle(screen, (255, 255, 0), (int(obj.simulated[i][0]), int(obj.simulated[i][1])), 3)  # Petit point jaune
+
+
+#keep this just in case for movement equations
+"""
+def computes_positions(object, vector_coords, dt, position_x_before, position_y_before, simulation_steps=50, dt_sim=0.1):
 
     #doesn't take into account "frottements" and other external forces
     
@@ -92,54 +208,4 @@ def computes_50_position(object, vector1_coords, dt, position_x_before, position
 
     return predicted_positions
 
-
-
-
-def update_vector(obj_name = "", scene = 0, coords = [0,0], angle = 0) :
-    """
-    Write in the json the info of the vector applied to the user to an object from a given scene
-
-    Parameters:
-        obj_name (str) : the name of the object to change (NEED to give its name according to "levels.json" --> "scene"["name"])
-        scene (int): The integer of the number of a scene (in "levels.json"). Defaults to 0.
-        coords (array of int size 2) : the coordinates of the vector applied by the user (NEED to be converted from Vector2 to array of int)
-        angle (int) : measure in degrees (?) of the angle of the vector applied
-    """
-    
-    with open("data/levels.json", "r") as f:
-        data = json.load(f)
-
-    scene_str = str(scene)
-    data[scene_str][obj_name]["applied_coords"][0] = coords[0]
-    data[scene_str][obj_name]["applied_coords"][1] = coords[1]
-    data[scene_str][obj_name]["applied_angle"] = angle
-
-    # Save changes
-    with open("data/levels.json", "w") as f:
-        json.dump(data, f, indent=2, separators=(',', ': '))
-
-
-def reset_level_vectors(list_obj, scene = 0) :
-    """
-    Resets all the vectors applied to the objects from a given scene
-
-    Parameters:
-        list_obj (we need to give physics_engine.objects): list of all the initialized objects of a scene
-        scene (int): The integer of the number of a scene (in "levels.json"). Defaults to 0.
-    """
-
-
-    with open("data/levels.json", "r") as f:
-        data = json.load(f)
-
-    scene_str = str(scene)
-    for obj in list_obj :
-        obj_name = obj.name
-        data[scene_str][obj_name]["applied_coords"][0] = 0
-        data[scene_str][obj_name]["applied_coords"][1] = 0
-        data[scene_str][obj_name]["applied_angle"] = 1  # Need to change to 0 after debug
-
-
-    # Save changes
-    with open("data/levels.json", "w") as f:
-        json.dump(data, f, indent=2, separators=(',', ': '))
+"""
