@@ -25,38 +25,25 @@ class Object:
     A class representing a physical object with mass, velocity, and rotation.
 
     Attributes:
-        mass (float): The mass of the object.
-        position (Vector2): The position of the object in 2D space.
-        velocity (Vector2): The velocity of the object in 2D space.
-        max_speed (float): The maximum speed limit for the object.
-        radius (float): The radius of the object, used for collision detection.
-        gravity (Vector2): The gravitational force acting on the object.
-        bounciness (float): The coefficient of restitution for bounce calculations.
-        angular_velocity (float): The rotational speed of the object in radians per second.
-        damping_coefficient (float): The coefficient affecting the damping effect.
-        static (bool): Whether the object is immovable and unaffected by forces.
+        TO UPDATE
     """
     
-    def __init__(self, polygon=True, static=False, mass=1, restitution_coefficient=0.8, vertices=None, radius=None, centroid=None,name='Object',grabable=True, applied_coords =[0,0], applied_angle = 0):
+    def __init__(self, polygon=True, static=False, mass=1, restitution_coefficient=0.8, vertices=None, radius=None, centroid=None,name='Object',grabable=True, mouse=[0,0], applied_coords =[0,0], applied_angle = 500, simulated =[]):
         """
         Initializes an Object instance with the specified properties.
 
         Parameters:
-        mass (float): The mass of the object.
-        position (tuple or Vector2): The initial position of the object.
-        radius (float, optional): The object's radius (default is 0).
-        max_speed (float, optional): The maximum speed limit (default is 70).
-        bounciness (float, optional): The bounce coefficient (default is 0.8).
-        damping_coefficient (float, optional): The damping effect coefficient (default is 0).
-        static (bool, optional): If True, the object does not move (default is False).
+            TO UPDATE
         """
         self.name = name
         self.polygon = polygon
         self.static = static
         self.restitution_coefficient = restitution_coefficient
         self.grabable = grabable
+        self.mouse = mouse
         self.applied_coords = applied_coords
         self.applied_angle = applied_angle
+        self.simulated = simulated
         if polygon :
             self.shape = Polygon(vertices, mass)
         else :
@@ -163,7 +150,7 @@ class Polygon:
         Parameters:
         force (Vector2): The force vector applied to the object.
         """
-        self.velocity += force / self.mass
+        self.velocity += force / self.mass #this is the acceleration vector of the object --> you add an acceleration not a force
 
 class Circle:
     def __init__(self, centre=Vector2(0,0), radius=10, mass=1):
@@ -207,4 +194,4 @@ class Circle:
         force (Vector2): The force vector applied to the object.
         """
 
-        self.velocity += force / self.mass
+        self.velocity += force / self.mass #this is the acceleration vector of the object --> you add an acceleration not a force

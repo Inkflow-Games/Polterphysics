@@ -44,7 +44,7 @@ class PhysicsEngine:
 
     def update_polygon(self,object,dt):
         table = {True:0,False:1}
-        object.shape.velocity += (Vector2(0,9.8) * dt * table[object.static])
+        object.shape.velocity += (Vector2(0,9.8) * dt * table[object.static]) # computes new velocity after applying acceleration for dt period
         object.shape.add(object.shape.velocity*dt* table[object.static])
         object.shape.rotate(object.shape.angular_velocity*dt* table[object.static])
         #object.shape.velocity *= (0.99)
