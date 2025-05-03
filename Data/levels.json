@@ -1,6 +1,6 @@
 {
     "1":{
-        "background" :  "data\\background\\funky_manor_background.png",
+        "background" :  "data\\background\\back2.png",
         "bloc1": [0.7, [500,500], 15,  0.037, 1.3, 0.02,  1],
         "bloc2": [0.7, [400,300], 15,  0.037, 0.48, 0.02,  1],
         "tennis_ball" : [0.58, [300,100], 70,  33, 0.4, 0.02,  0],

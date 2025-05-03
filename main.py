@@ -219,6 +219,9 @@ while running:
 
     # Draw frame
     screen.fill((170, 170, 170))  # Clear screen
+    if game_state == "menu" :
+        picture = pygame.image.load("data/background/back1.png")
+        screen.blit(picture, (85,0))
     if game_state != "menu":
         screen.blit(level_manager.background, (400,0))
         pygame.draw.circle(screen, (255, 0, 0), (int(test_object.position.x), int(test_object.position.y)), test_object.radius)  # Draw first object
@@ -257,11 +260,12 @@ while running:
 
 
     # Display debug positions : must stay in main
-    font = pygame.font.SysFont("Arial", 24)
-    position_text_1 = font.render(f"Position 1: ({int(test_object.position.x)}, {-int(test_object.position.y)})", True, (255, 255, 255))
-    position_text_2 = font.render(f"Position 2: ({int(second_object.position.x)}, {-int(second_object.position.y)})", True, (255, 255, 255))
-    screen.blit(position_text_1, (10, 10))
-    screen.blit(position_text_2, (10, 40))
+    if game_state != "menu":
+        font = pygame.font.SysFont("Arial", 24)
+        position_text_1 = font.render(f"Position 1: ({int(test_object.position.x)}, {-int(test_object.position.y)})", True, (255, 255, 255))
+        position_text_2 = font.render(f"Position 2: ({int(second_object.position.x)}, {-int(second_object.position.y)})", True, (255, 255, 255))
+        screen.blit(position_text_1, (40, 10))
+        screen.blit(position_text_2, (40, 40))
     
     # Prediction of the trajectory of "test_object"
     if vector_applied1 == True and vector1_coords!= Vector2(0,0):

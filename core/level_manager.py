@@ -139,6 +139,7 @@ def load_scene(n: int, screen_width, screen_height):
             if playing_music != "data/Music/menu.mp3":
                 play_music("data/Music/menu.mp3")
                 playing_music = "data/Music/menu.mp3"
+                
 
         case 1:  # Loading the level manager menu
             for button in level_menu_buttons.values():
