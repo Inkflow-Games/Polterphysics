@@ -43,20 +43,8 @@ def reset_vectors_applied (vector1_cd, vector2_cd):# must give the Vector2 (=coo
 
 
 
-clicked_object = None
-last_clicked = None
-vector_applied1 = False
-vector_applied2 = False
-vector1_coords = Vector2(0,0)
-vector2_coords = Vector2(0,0)
-vector1_angle = 0 #measures in degrees
-vector2_angle = 0
-
-test_position_x_before = 0
-test_position_y_before = 0
-second_position_x_before = 0
-second_position_y_before = 0
-
+clicked_object = None # will stock the object that will receive the vector from the user
+vectors_applied = False 
 
 
 
@@ -70,7 +58,7 @@ display_info = pygame.display.Info()
 
 # Configure the window in full screen
 display_width, display_height = display_info.current_w, display_info.current_h
-screen = pygame.display.set_mode((display_width, display_height-50))
+screen = pygame.display.set_mode((display_width, display_height-10))
 pygame.display.set_caption("Physics Engine Test")
 
 
@@ -94,6 +82,8 @@ ground_level = display_height - 20
 level_manager.load_scene(0, display_width, display_height,physics_engine)
 
 
+
+
 game_state = "menu"
 
 
@@ -101,7 +91,8 @@ game_state = "menu"
 # Main game loop
 while running:
 
-
+    new_scene = level_manager.current_scene #verify if we changed of scene
+    running_scene = new_scene
     click = False
 
     for event in pygame.event.get():
@@ -122,6 +113,7 @@ while running:
         elif  game_state == 'running': 
             game_state = "paused"
 
+    #temporary old function (to delete)
     if keys[pygame.K_a] and not key_state[pygame.K_a] :
         key_state[pygame.K_a] = True
         reset_vectors_applied (vector1_coords, vector2_coords)
@@ -131,30 +123,39 @@ while running:
         if not keys[key]:
             key_state[key] = False
 
-    if game_state != "menu":
-        test_object = physics_engine.objects[0]
-        second_object = physics_engine.objects[1]
-        #call the function that handles the vector application process
-        """
-        clicked_object, vector_applied1, vector_applied2, vector1_coords, vector2_coords, vector1_angle, vector2_angle, mouse_position = vector_application(
-        event,
-        test_object, second_object,
-        clicked_object, vector_applied1, vector_applied2,
-        vector1_coords, vector2_coords,
-        vector1_angle, vector2_angle)
-        """
-    
+    if game_state == "paused":
+        
+        vectors_applied = False # Allows for the application of the vectors at the moment game_state = "running"
+        
+        #to change : object detection incorrect when intersection with a "grabable" = False object
+        # Main mechanic : application of the vectors by the user
+        clicked_object = vector_application(event, physics_engine.objects, clicked_object, quadtree)
 
-    if game_state == "running" : # the physics is calculated only during play mode
-        #update vectors state and last position of the objects
-        #vector_applied1, vector_applied2, test_position_x_before, test_position_y_before, second_position_x_before, second_position_y_before = objects_running_info(test_object, second_object, vector_applied1, vector_applied2)
-        # Update physics engine based on time delta
+
+    if game_state == "running" : # Define the state when the physics engine is active
         dt = clock.get_time() / 100.0  # Convert milliseconds to a suitable scale'
-        #physics_engine.objects[2].shape.velocity += (Vector2(0,9.8) * dt)
+        
+        # Need comments from Clément
         for elements in physics_engine.objects:
-            quadtree.insert(elements)
+            quadtree.insert(elements)        
         interactions = quadtree.searchelements(physics_engine.objects)
+        
+        
+        # Apply all the vectors entered by the user during transition from "paused" state to "running" state --> prevent from vector stacking 
+        if vectors_applied == False :
+            for obj in physics_engine.objects :
+                if (obj.applied_coords != [0,0]) :
+                    obj.shape.velocity += (Vector2(obj.applied_coords) * dt) # to change (?): velocity = acceleration*dt
+            vectors_applied = True
+        
+        
+        # Reset the vectors info and mouse position for all the objects loaded in the physics engine
+        reset_level_vectors(physics_engine.objects) 
+        for elements in physics_engine.objects :
+            update_mouse(elements, Vector2(0,0))
 
+
+        # Need comments from Clément
         for interaction in interactions:
             if len(interaction) >= 2:
                 for elms in interaction[1:]:
@@ -165,22 +166,25 @@ while running:
                         gjk.find_contact_features(gjk.shape1,gjk.shape2,stuff)
                         gjk.resolve(stuff,dt)
 
+
+        # to delete
         #physics_engine.objects[0].shape.velocity = Vector2(0,0)
         #physics_engine.objects[0].shape.angular_velocity = 0
         physics_engine.update(dt)  # Pass ground_level as display_height - 20 (or whatever your ground level is)
 
 
-    # Draw frame
+    # Draw frame (display of the game)
     screen.fill((170, 170, 170))  # Clear screen
     if game_state != "menu":
         for elements in physics_engine.objects:
-            elements.shape.draw(screen,(255,0,0))
+            elements.shape.draw(screen,(255,0,0)) # Draws the shape of the objects in red
         for elements in physics_engine.objects:
-            pygame.draw.circle(screen,(50,50,50),Vector2(elements.mincircle.x,elements.mincircle.y),elements.mincircle.radius,2)
-        # Draws a white line between clicked object and mouse position (during vector construction and 'paused')
-        """Must stay in main because of where the game is taking place (screen)"""
-        if clicked_object != None and game_state == "paused" : 
-            pygame.draw.line(screen, (255, 255, 255), clicked_object.shape.centroid, mouse_position, 5)
+            pygame.draw.circle(screen,(50,50,50),Vector2(elements.mincircle.x,elements.mincircle.y),elements.mincircle.radius,2) # Draws the outline of these objects  
+        
+        #to change (bugged as hell)
+        # Draws the vectors applied by the user, and display (at the moment) 20 positions at intervals of 0.1s
+        lines_and_positions(physics_engine.objects,screen, game_state)
+
 
     # Draw all buttons in the correct order
     new_scene = level_manager.current_scene #verify if we changed of scene
@@ -195,35 +199,9 @@ while running:
                 click = False
         else :
             button.draw(screen)
-    
-    
-    
-    
-    reset_level_vectors(physics_engine.objects, 1) # Testing modifications of vectors
-    
-    
-    
-    
-    
-    # Prediction of the trajectory of "test_object"
-    if vector_applied1 == True and vector1_coords!= Vector2(0,0):
-        predicted_positions = computes_50_position(test_object, vector1_coords, clock.get_time() / 100.0, test_position_x_before, test_position_y_before , simulation_steps=50, dt_sim=0.1)
-
-        # Draw in yellow
-        for point in predicted_positions:
-            #print("e",point)
-            pygame.draw.circle(screen, (255, 255, 0), (int(point.x), int(point.y)), 3)  # Petit point jaune
-
-    # Prediction of the trajectory of "second_object"
-    if vector_applied2 == True and vector2_coords!= Vector2(0,0): 
-        predicted_positions = computes_50_position(second_object, vector2_coords, clock.get_time() / 100.0, second_position_x_before, second_position_y_before , simulation_steps=50, dt_sim=0.1)
-
-        # Draw in white
-        for point in predicted_positions:
-            pygame.draw.circle(screen, (255, 255, 255), (int(point.x), int(point.y)), 3)  # Petit point jaune
 
     pygame.display.flip()  # Refresh screen
-    clock.tick(60)  # Limit FPS to 120
+    clock.tick(60)  # Limit FPS to 60
 
 
 
