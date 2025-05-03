@@ -49,10 +49,9 @@ def vector_application(
         potential = []
         mini = float("inf")
         quadtree.query(Object(False,False,1,1,[],1,mouse_position, "mouse", False), potential) #creates a circle of radius 1 to detect intersection with objects around the area
+        print(f"potential {potential}")
         for elements in potential :
-            if elements.grabable != True :
-                potential.remove(elements) #only keeps grabable objects in the potential movable objects
-            elif elements.shape.centroid.distance_squared_to(mouse_position) < mini :
+            if elements.shape.centroid.distance_squared_to(mouse_position) < mini :
                 mini = elements.shape.centroid.distance_squared_to(mouse_position)  # obtain the distance between mouse and nearest centroid
                 clicked_object = elements  #obtain the object that is the closest to the mouse
         print(f"clicked object is : {clicked_object}")
@@ -60,14 +59,13 @@ def vector_application(
             quadtree.delpoint(elements)
         return clicked_object
     
-    elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and clicked_object != None: # left click + object clicked
+    elif ((event.type == pygame.MOUSEBUTTONDOWN and event.button == 1) or (event.type == pygame.MOUSEMOTION)) and clicked_object != None: # left click + object clicked
         update_mouse(clicked_object, mouse_position)
         force_vector = Vector2(
         (mouse_position[0] - clicked_object.shape.centroid[0])*5,
         (mouse_position[1] - clicked_object.shape.centroid[1])*5
         ) #modify the multiplication coeff if needed
-        print(f"force_vector {force_vector}")
-        print(f"velocity {clicked_object.shape.velocity} and type {type(clicked_object.shape.velocity)}")
+        print(f"force_vector maintien {force_vector}")
         vector_angle = compute_angle(force_vector.x, force_vector.y) #need revisions because it gives stupid values sometimes
         update_vector(clicked_object, force_vector, vector_angle)
     

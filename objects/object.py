@@ -28,7 +28,7 @@ class Object:
         TO UPDATE
     """
     
-    def __init__(self, polygon=True, static=False, mass=1, restitution_coefficient=0.8, vertices=None, radius=None, centroid=None,name='Object',grabable=True, mouse=[0,0], applied_coords =[0,0], applied_angle = 500, simulated =[]):
+    def __init__(self, polygon=True, grabable =False, mass=1, restitution_coefficient=0.8, vertices=None, radius=None, centroid=None,name='Object', mouse=[0,0], applied_coords =[0,0], applied_angle = 500, simulated =[]):
         """
         Initializes an Object instance with the specified properties.
 
@@ -37,7 +37,6 @@ class Object:
         """
         self.name = name
         self.polygon = polygon
-        self.static = static
         self.restitution_coefficient = restitution_coefficient
         self.grabable = grabable
         self.mouse = mouse
