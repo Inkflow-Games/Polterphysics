@@ -169,7 +169,7 @@ def lines_and_positions(
         #     data = json.load(f)
         # str_scene = "{}".format(running_scene-1)
         for obj in objects_list :
-            if (obj.applied_coords != [0,0]) : # If a vector is applied
+            if (obj.applied_coords != [0,0]) and (obj.grabable == True): # If a vector is applied
                 pygame.draw.line(screen, (255, 255, 255), obj.shape.centroid, obj.mouse, 5)  # draw a line between centroid of object and the mouse position associated with it
                 for i in range (len(obj.simulated)) :
                     pygame.draw.circle(screen, (255, 255, 0), (int(obj.simulated[i][0]), int(obj.simulated[i][1])), 3)  # Petit point jaune

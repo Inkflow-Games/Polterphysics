@@ -2,11 +2,10 @@
   "1": {
     "Bloc1": {
       "polygon": true,
-      "static": true,
+      "grabable": false,
       "mass": 40000000000000,
       "restitution_coefficient": 0.8,
       "radius": 5,
-      "grabable": false,
       "mouse" : [0,0],
       "applied_coords" : [0,0], 
       "applied_angle" : 0,
@@ -18,11 +17,10 @@
     
     "Bloc2": {
       "polygon": true,
-      "static": false,
+      "grabable": true,
       "mass": 400,
       "restitution_coefficient": 0.8,
       "radius": 5,
-      "grabable": true,
       "mouse" : [0,0],
       "applied_coords" : [0,0], 
       "applied_angle" : 0,
@@ -34,11 +32,10 @@
 
     "Circle1": {
       "polygon": false,
-      "static": false,
+      "grabable": true,
       "mass": 400,
       "restitution_coefficient": 0.8,
       "radius": 30,
-      "grabable":  true,
       "mouse" : [0,0],
       "applied_coords" : [0,0], 
       "applied_angle" : 0,
@@ -54,11 +51,10 @@
   "2": {
     "Bloc1": {
       "polygon": true,
-      "static": true,
+      "grabable": false,
       "mass": 40000000000000,
       "restitution_coefficient": 0.8,
       "radius": 5,
-      "grabable": false,
       "mouse" : [0,0],
       "applied_coords" : [0,0], 
       "applied_angle" : 0,
@@ -75,11 +71,10 @@
 
     "Circle1": {
       "polygon": false,
-      "static": false,
+      "grabable": true,
       "mass": 400,
       "restitution_coefficient": 0.8,
       "radius": 30,
-      "grabable": true,
       "mouse" : [0,0],
       "applied_coords" : [0,0], 
       "applied_angle" : 0,
@@ -97,11 +92,10 @@
   "3": {
     "Bloc1": {
       "polygon": true,
-      "static": true,
+      "grabable": false,
       "mass": 40000000000000,
       "restitution_coefficient": 0.8,
       "radius": 5,
-      "grabable": false,
       "mouse" : [0,0],
       "applied_coords" : [0,0], 
       "applied_angle" : 0,
@@ -118,11 +112,10 @@
 
     "Circle1": {
       "polygon": false,
-      "static": false,
+      "grabable": true,
       "mass": 400,
       "restitution_coefficient": 0.8,
       "radius": 40,
-      "grabable": true,
       "mouse" : [0,0],
       "applied_coords" : [0,0], 
       "applied_angle" : 0,
