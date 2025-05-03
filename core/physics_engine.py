@@ -43,10 +43,10 @@ class PhysicsEngine:
             self.objects.remove(obj)
 
     def update_polygon(self,object,dt):
-        table = {True:0,False:1}
-        object.shape.velocity += (Vector2(0,9.8) * dt * table[object.static]) # computes new velocity after applying acceleration for dt period
-        object.shape.add(object.shape.velocity*dt* table[object.static])
-        object.shape.rotate(object.shape.angular_velocity*dt* table[object.static])
+        table = {True:1,False:0}
+        object.shape.velocity += (Vector2(0,9.8) * dt * table[object.grabable]) # computes new velocity after applying acceleration for dt period
+        object.shape.add(object.shape.velocity*dt* table[object.grabable])
+        object.shape.rotate(object.shape.angular_velocity*dt* table[object.grabable])
         #object.shape.velocity *= (0.99)
         #object.shape.angular_velocity *= (0.99)
         print(object.mincircle.x,object.mincircle.y)
@@ -56,7 +56,7 @@ class PhysicsEngine:
         
     '''def update_polygon(self,object,dt):
         table = {True:0,False:1}
-        object.shape.add(object.shape.velocity*dt*table[object.static])
+        object.shape.add(object.shape.velocity*dt*table[object.static])    #potential replace by grabable
         object.shape.rotate(object.shape.angular_velocity*dt*table[object.static])
         object.shape.velocity *= (0.99*table[object.static])
         object.shape.angular_velocity *= (0.99*table[object.static])
