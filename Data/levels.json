@@ -106,7 +106,7 @@
       "applied_coords": [ 0, 0 ],
       "applied_angle": 0,
       "simulated": [],
-      "centroid": [ [ 80, 0 ] ],
+      "centroid": [ [ 800, 0 ] ],
       "vertices": [
         [ 0, 800 ],
         [ 1300, 800 ],
