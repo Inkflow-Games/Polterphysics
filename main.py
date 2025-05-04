@@ -152,7 +152,7 @@ while running:
         if vectors_applied == False :
             for obj in physics_engine.objects :
                 if (obj.applied_coords != [0,0]) and (obj.grabable == True) :
-                    obj.shape.velocity += (Vector2(obj.applied_coords) * dt) # to change (?): velocity = acceleration*dt
+                    obj.shape.velocity += (Vector2(obj.applied_coords) /  obj.shape.mass) # Instant increase of the speed of the object   
             vectors_applied = True
         
         
@@ -202,7 +202,7 @@ while running:
         #to change (bugged as hell)
         # Draws the vectors applied by the user, and display (at the moment) 20 positions at intervals of 0.1s
         
-        # lines_and_positions(physics_engine.objects,screen, game_state)
+        lines_and_positions(physics_engine.objects,screen, game_state)
         
         # to change : temporary script to just draw the vectors representation
         if game_state == "paused" : 
