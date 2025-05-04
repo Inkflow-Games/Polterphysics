@@ -196,7 +196,7 @@ while running:
         #to change (bugged as hell)
         # Draws the vectors applied by the user, and display (at the moment) 20 positions at intervals of 0.1s
         
-        # lines_and_positions(physics_engine.objects,screen, game_state)
+        lines_and_positions(physics_engine.objects,screen, game_state)
         
         # to change : temporary script to just draw the vectors representation
         if game_state == "paused" : 

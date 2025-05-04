@@ -113,66 +113,56 @@ def reset_level_vectors(list_obj) :
         obj.applied_angle = 0
 
 
-
 def computes_positions(obj, simulation_steps=20, dt_sim=0.1):
     """
-    Computes "simulation_steps" positions to visualize the application of a vector 
+    Computes "simulation_steps" positions to visualize the application of a vector
 
     Parameters:
         obj (Object) : reference of the object to update (in physics_engine.objects)
         simulation_steps (int) : number of positions to compute
         dt_sim (float) : time difference between 2 positions
     """
-
-    v0 = obj.shape.velocity # the Vector2(x,y --> y>0 downwards) corresponding to its inertia = initial speed 
-    added_accel = Vector2(obj.applied_coords) / obj.shape.mass
-    speed = v0 + added_accel
-
-    print(f"v0 = {v0}")
-    print(f"added_accel = {added_accel}")
-    print(f"speed = {speed}")
+    v0 = obj.shape.velocity  # Initial velocity of the object
+    added_accel = Vector2(obj.applied_coords) / (0.02 * obj.shape.mass)  # Applied acceleration
+    speed = v0 + added_accel  # Total speed (initial + applied acceleration)
 
     predicted_positions = []
-    original = obj.shape.centroid # Object's initial position
-    print(f"actual position {original}")
-    simulated_position = original #need the reference of the first position to simulate the others
-    print(f"simulated position {simulated_position}")
-    
-    for _ in range(1, simulation_steps+1) : #  Simulate on simulation_steps*dt_sim frames --> ex : 20*0.1 = 2 seconds of simulation 
-        speed.y += 9.81*dt_sim
-        simulated_position.x += speed.x * dt_sim
-        simulated_position.y += speed.y * dt_sim
-        predicted_positions.append([int(simulated_position.x), int(simulated_position.y)].copy())
-        print(predicted_positions)
+    original = obj.shape.centroid  # Starting position
+    simulated_position = original.copy()  # Copy for simulation steps
 
+    # Simulate trajectory
+    for _ in range(1, simulation_steps + 1):
+        speed.y += 9.81 * 2.5 * dt_sim  # Apply gravity
+        simulated_position.x += speed.x * dt_sim  # Update X position
+        simulated_position.y += speed.y * dt_sim  # Update Y position
+        predicted_positions.append([int(simulated_position.x), int(simulated_position.y)])
+
+    # Store simulated positions for later use
     obj.simulated = predicted_positions
 
 
-
-def lines_and_positions(
-    objects_list,
-    screen,
-    game_state = "running"
-) :
+def lines_and_positions(objects_list, screen, game_state="running"):
     """
     Draws the vectors applied and the simulated positions
 
     Parameters:
-        objects_list (we need to give physics_engine.objects): list of all the initialized objects of a scene
-        screen (pygame display) : reference to the window where the game is taking place
-        game_state (str) : the name of the game state --> set to !="menu" for us here
+        objects_list: list of all the initialized objects of a scene
+        screen (pygame display): reference to the window where the game is taking place
+        game_state (str): the name of the game state --> set to != "menu" for us here
     """
+    if game_state == "paused":
+        for obj in objects_list:
+            if (obj.applied_coords != [0, 0]) and obj.grabable:
+                # Recalculate positions on each frame, allowing dynamic updates
+                computes_positions(obj)
 
+                # Draw applied force line (white)
+                pygame.draw.line(screen, (255, 255, 255), obj.shape.centroid, obj.mouse, 5)
 
-    if game_state == "paused" : 
-        # with open("data/levels.json", "r") as f:
-        #     data = json.load(f)
-        # str_scene = "{}".format(running_scene-1)
-        for obj in objects_list :
-            if (obj.applied_coords != [0,0]) and (obj.grabable == True): # If a vector is applied
-                pygame.draw.line(screen, (255, 255, 255), obj.shape.centroid, obj.mouse, 5)  # draw a line between centroid of object and the mouse position associated with it
-                for i in range (len(obj.simulated)) :
-                    pygame.draw.circle(screen, (255, 255, 0), (int(obj.simulated[i][0]), int(obj.simulated[i][1])), 3)  # Petit point jaune
+                # Draw simulated positions as a trajectory (yellow points)
+                for i in range(len(obj.simulated)):
+                    pygame.draw.circle(screen, (255, 255, 0), (int(obj.simulated[i][0]), int(obj.simulated[i][1])), 3)
+
 
 
 #keep this just in case for movement equations

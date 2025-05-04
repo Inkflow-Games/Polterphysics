@@ -117,7 +117,7 @@ def vector_application(
         update_vector(clicked_object, force_vector, vector_angle)
         
         # to change : move the centroid of circles and not coherent positions given
-        #computes_positions(clicked_object, simulation_steps=20, dt_sim=0.1)
+        computes_positions(clicked_object, simulation_steps=20, dt_sim=0.1)
         
         clicked_object = None
         return clicked_object
