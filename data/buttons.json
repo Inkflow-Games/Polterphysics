@@ -122,7 +122,7 @@
       "size": 1,
       "image": "data\\Phantoms\\polter.png",
       "imageHover": "data\\Phantoms\\polter_hover.png",
-      "position": [0.9, 0.3],
+      "position": [0.1, 0.3],
       "height": 100,
       "width": 100,
       "action": "Play"
@@ -131,7 +131,7 @@
       "size": 1,
       "image": "data\\Phantoms\\ballman.png",
       "imageHover": "data\\Phantoms\\ballman_hover.png",
-      "position": [0.9, 0.4],
+      "position": [0.1, 0.4],
       "height": 100,
       "width": 100,
       "action": "Play"
@@ -140,7 +140,7 @@
       "size": 1,
       "image": "data\\Phantoms\\rospirit.png",
       "imageHover": "data\\Phantoms\\rospirit_hover.png",
-      "position": [0.9, 0.5],
+      "position": [0.1, 0.5],
       "height": 100,
       "width": 100,
       "action": "Play"
@@ -179,7 +179,7 @@
       "size": 1,
       "image": "data\\Phantoms\\polter.png",
       "imageHover": "data\\Phantoms\\polter_hover.png",
-      "position": [0.9, 0.3],
+      "position": [0.1, 0.3],
       "height": 100,
       "width": 100,
       "action": "Play"
@@ -188,7 +188,7 @@
       "size": 1,
       "image": "data\\Phantoms\\ballman.png",
       "imageHover": "data\\Phantoms\\ballman_hover.png",
-      "position": [0.9, 0.4],
+      "position": [0.1, 0.4],
       "height": 100,
       "width": 100,
       "action": "Play"
@@ -197,7 +197,7 @@
       "size": 1,
       "image": "data\\Phantoms\\rospirit.png",
       "imageHover": "data\\Phantoms\\rospirit_hover.png",
-      "position": [0.9, 0.5],
+      "position": [0.1, 0.5],
       "height": 100,
       "width": 100,
       "action": "Play"
@@ -236,7 +236,7 @@
       "size": 1,
       "image": "data\\Phantoms\\polter.png",
       "imageHover": "data\\Phantoms\\polter_hover.png",
-      "position": [0.9, 0.3],
+      "position": [0.1, 0.3],
       "height": 100,
       "width": 100,
       "action": "Play"
@@ -245,7 +245,7 @@
       "size": 1,
       "image": "data\\Phantoms\\ballman.png",
       "imageHover": "data\\Phantoms\\ballman_hover.png",
-      "position": [0.9, 0.4],
+      "position": [0.1, 0.4],
       "height": 100,
       "width": 100,
       "action": "Play"
@@ -254,7 +254,7 @@
       "size": 1,
       "image": "data\\Phantoms\\rospirit.png",
       "imageHover": "data\\Phantoms\\rospirit_hover.png",
-      "position": [0.9, 0.5],
+      "position": [0.1, 0.5],
       "height": 100,
       "width": 100,
       "action": "Play"
