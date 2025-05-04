@@ -188,6 +188,7 @@ while running:
         screen.blit(pictureOption, (0,0))
 
     if game_state != "menu" and game_state != "options":
+        screen.blit(level_manager.background, (90,30))
         for elements in physics_engine.objects:
             elements.shape.draw(screen,(255,0,0)) # Draws the shape of the objects in red
         for elements in physics_engine.objects:
