@@ -42,7 +42,7 @@
     "Circle1": {
       "polygon": false,
       "grabable": true,
-      "mass": 400,
+      "mass": 4,
       "restitution_coefficient": 0.8,
       "radius": 30,
       "mouse": [ 0, 0 ],
@@ -57,6 +57,25 @@
         [ 0, 900 ]
       ],
       "name": "Circle1"
+    },
+    "Circle2": {
+      "polygon": false,
+      "grabable": true,
+      "mass": 400,
+      "restitution_coefficient": 0.8,
+      "radius": 50,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 80, 0 ] ],
+      "vertices": [
+        [ 0, 800 ],
+        [ 1300, 800 ],
+        [ 1300, 900 ],
+        [ 0, 900 ]
+      ],
+      "name": "Circle2"
     }
   },
   "2": {

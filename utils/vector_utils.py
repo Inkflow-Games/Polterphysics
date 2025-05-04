@@ -113,32 +113,48 @@ def reset_level_vectors(list_obj) :
         obj.applied_angle = 0
 
 
-def computes_positions(obj, simulation_steps=20, dt_sim=0.1):
+def computes_positions(obj, realistic = False,simulation_steps=20, dt_sim=0.1):
     """
     Computes "simulation_steps" positions to visualize the application of a vector
 
     Parameters:
         obj (Object) : reference of the object to update (in physics_engine.objects)
-        simulation_steps (int) : number of positions to compute
-        dt_sim (float) : time difference between 2 positions
+        realistic (bool) : defines if the trajectories will be compute realistically or not (Default = False)
+        simulation_steps (int) : number of positions to compute (Default = 20)
+        dt_sim (float) : time difference between 2 positions (Default = 0.1)
     """
-    v0 = obj.shape.velocity  # Initial velocity of the object
-    added_accel = Vector2(obj.applied_coords) / (0.02 * obj.shape.mass)  # Applied acceleration
-    speed = v0 + added_accel  # Total speed (initial + applied acceleration)
-
+    
+    realistic = False
+    v0 = obj.shape.velocity  # Initial velocity of the object : pixels.dt^-1
+    force_applied = Vector2(obj.applied_coords)
+    # acceleration vector = obj.shape.mass * (sum)forces vectors
+    
     predicted_positions = []
     original = obj.shape.centroid  # Starting position
     simulated_position = original.copy()  # Copy for simulation steps
+    
+    # Realistic equations models
+    if realistic == True : 
+        for i in range(1, simulation_steps + 1):
+            x = 0.5*(force_applied.x*((dt_sim*i)**2))/obj.shape.mass + v0[0]*dt_sim*i + simulated_position[0]
+            y = 0.5*((force_applied.y/obj.shape.mass + 9.81)*((dt_sim*i)**2)) + v0[1]*dt_sim*i + simulated_position[1]
+            predicted_positions.append([int(x), int(y)])
+    
+    else : 
+        acceleration = Vector2(obj.applied_coords) / obj.shape.mass
 
-    # Simulate trajectory
-    for _ in range(1, simulation_steps + 1):
-        speed.y += 9.81 * 2.5 * dt_sim  # Apply gravity
-        simulated_position.x += speed.x * dt_sim  # Update X position
-        simulated_position.y += speed.y * dt_sim  # Update Y position
-        predicted_positions.append([int(simulated_position.x), int(simulated_position.y)])
+        predicted_velocity = v0 + acceleration
+        simulated_velocity = predicted_velocity.copy()  # Copie pour éviter les références
 
+        for _ in range(simulation_steps): # Simulate on 50 frames 
+            simulated_velocity.y += newton_to_force(9.81) * dt_sim  # Add gravity each frame
+            simulated_position.x += newton_to_force(simulated_velocity.x) * dt_sim
+            simulated_position.y += newton_to_force(simulated_velocity.y) * dt_sim
+            predicted_positions.append(simulated_position.copy())
+    
     # Store simulated positions for later use
     obj.simulated = predicted_positions
+
 
 
 def lines_and_positions(objects_list, screen, game_state="running"):
@@ -162,40 +178,3 @@ def lines_and_positions(objects_list, screen, game_state="running"):
                 # Draw simulated positions as a trajectory (yellow points)
                 for i in range(len(obj.simulated)):
                     pygame.draw.circle(screen, (255, 255, 0), (int(obj.simulated[i][0]), int(obj.simulated[i][1])), 3)
-
-
-
-#keep this just in case for movement equations
-"""
-def computes_positions(object, vector_coords, dt, position_x_before, position_y_before, simulation_steps=50, dt_sim=0.1):
-
-    #doesn't take into account "frottements" and other external forces
-    
-    #in PIXELS / dt²
-    v0 = Vector2(
-        (object.shape.centroid.x - position_x_before) / dt,
-        (object.shape.centroid.y - position_y_before) / dt
-    )
-
-    #is a Vector2 --> pixels / kg --> coordinates of ax and ay
-    acceleration = vector1_coords / object.shape.mass
-
-    predicted_velocity = v0 + acceleration
-
-    print(f"v0 = {v0}")
-    print(f"acceleration = {acceleration}")
-    print(f"predicted_velocity = {predicted_velocity}")
-
-    predicted_positions = []
-    simulated_position = object.shape.centroid # Copie pour éviter les références
-    simulated_velocity = predicted_velocity  # Copie pour éviter les références
-
-    for _ in range(simulation_steps): # Simulate on 50 frames 
-        simulated_velocity.y += newton_to_force(9.81) * dt_sim  # Add gravity each frame
-        simulated_position.x += newton_to_force(simulated_velocity.x) * dt_sim
-        simulated_position.y += newton_to_force(simulated_velocity.y) * dt_sim
-        predicted_positions.append(simulated_position.copy())
-
-    return predicted_positions
-
-"""

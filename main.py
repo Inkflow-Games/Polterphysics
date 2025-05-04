@@ -147,7 +147,7 @@ while running:
         if vectors_applied == False :
             for obj in physics_engine.objects :
                 if (obj.applied_coords != [0,0]) and (obj.grabable == True) :
-                    obj.shape.velocity += (Vector2(obj.applied_coords) * dt) # to change (?): velocity = acceleration*dt
+                    obj.shape.velocity += (Vector2(obj.applied_coords) /  obj.shape.mass) # Instant increase of the speed of the object   
             vectors_applied = True
         
         
