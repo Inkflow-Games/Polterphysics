@@ -16,6 +16,7 @@ Dependencies: pygame, core.physics_engine, objects.object
 
 import pygame
 from pygame.math import Vector2
+import pygame.transform
 from core.physics_engine import PhysicsEngine
 from core.collision import *
 from core.force_calculator import *
@@ -70,6 +71,10 @@ display_info = pygame.display.Info()
 display_width, display_height = display_info.current_w, display_info.current_h
 screen = pygame.display.set_mode((display_width, display_height-10))
 pygame.display.set_caption("Physics Engine Test")
+pictureBackground = pygame.image.load("data/background/back1.png")
+pictureBackground = pygame.transform.scale(pictureBackground, (display_width, display_height))
+pictureOption = pygame.image.load("data/background/back1-tuto.png")
+pictureOption = pygame.transform.scale(pictureOption, (display_width, display_height))
 
 
 # Initialize physics engine
@@ -178,11 +183,9 @@ while running:
     # Draw frame (display of the game)
     screen.fill((170, 170, 170))  # Clear screen
     if game_state == "menu" :
-        picture = pygame.image.load("data/background/back1.png")
-        screen.blit(picture, (85,0))
+        screen.blit(pictureBackground, (0,0))
     if game_state == "options" : 
-        picture = pygame.image.load("data/background/back1-tuto.png")
-        screen.blit(picture, (85,0))
+        screen.blit(pictureOption, (0,0))
 
     if game_state != "menu" and game_state != "options":
         for elements in physics_engine.objects:
