@@ -222,7 +222,11 @@ while running:
     if game_state == "menu" :
         picture = pygame.image.load("data/background/back1.png")
         screen.blit(picture, (85,0))
-    if game_state != "menu":
+    if game_state == "options" : 
+        picture = pygame.image.load("data/background/back1-tuto.png")
+        screen.blit(picture, (85,0))
+
+    if game_state != "menu" and game_state != "options":
         screen.blit(level_manager.background, (400,0))
         pygame.draw.circle(screen, (255, 0, 0), (int(test_object.position.x), int(test_object.position.y)), test_object.radius)  # Draw first object
         pygame.draw.circle(screen, (0, 0, 255), (int(second_object.position.x), int(second_object.position.y)), second_object.radius)  # Draw second object
