@@ -6,7 +6,8 @@ from data import *
 from utils.vector_utils import *
 # Dictionary storing level numbers as keys and lists of objects as values
 import pygame
-
+import core.physics_engine as phy
+from core.sound import play_music
 class Button:
     def __init__(self, image, imageHover,  size, position, height, width, action=''):
         self.size = size
@@ -23,7 +24,6 @@ class Button:
         max_scene = 4
         screen_width, screen_height = display_width, display_height
         global tries
-        print(self.position,self.action)
         #Action to perform for the button using a match case to determine the action to do
         match self.action :
             case "Play" :
@@ -33,8 +33,7 @@ class Button:
             case "Stop" :
                 #close the window
                 pygame.quit()
-            case "Restart Level" :
-                #load_scene(n)
+            case "Restart Level":
                 self.game_state = "paused"
                 tries+=1
                 reset_level_vectors(object_list.objects) # Proper reset of all the objects of the scene
@@ -62,6 +61,9 @@ class Button:
                 tries = 0
                 print('qdq')
                 load_scene(int(self.action)+1, screen_width, screen_height,object_list)
+            case "Option":
+                self.game_state = "options"
+                load_scene(-1, screen_width, screen_height,object_list)
 
 
     def hover(self, screen): # The function which changes the sprite when hovered
@@ -81,7 +83,7 @@ class Button:
 with open("data/buttons.json", "r") as file : #load all the buttons and split them into multiple lists
     buttons = json.load(file)
     main_menu_buttons = buttons["main_menu"]
-    level_menu_buttons = buttons["level_selection"]
+    tutorial_menu_buttons = buttons["tutorial_menu"]
 
 with open("data/levels.json", "r") as f : #load the different objects for the level
     levels = json.load(f)
@@ -89,15 +91,15 @@ with open("data/levels.json", "r") as f : #load the different objects for the le
 button_list = []
 object_list = []
 
-def load_button(b, screen_width, screen_height):
+def load_button(button, screen_width, screen_height):
     new_button = Button(
-        size=b["size"],
-        image=b["image"],
-        imageHover=b["imageHover"],
-        position=Vector2(b["position"][0]*screen_width, b["position"][1]*screen_height),
-        height=b["height"],
-        width=b["width"],
-        action=b["action"]
+        size=button["size"],
+        image=button["image"],
+        imageHover=button["imageHover"],
+        position=Vector2(button["position"][0]*screen_width, button["position"][1]*screen_height),
+        height=button["height"],
+        width=button["width"],
+        action=button["action"]
         )
     return new_button
 
@@ -115,30 +117,44 @@ def transform_Vector2(infos) :
         arr.append(Vector2(*elem))
     return arr
 
+playing_music = ""
+
 def load_scene(n: int, screen_width, screen_height,object_list):
     object_list.objects = []
     global current_scene 
     global button_list
     current_scene = n
     button_list = []
-    
+
+    global playing_music
+    global background
+
+
     match n:
-        case 0: # Loading the main menu
-            for button in main_menu_buttons.values(): #loading the buttons we have to draw each frame
+        case -1:  # Tutorial
+            for button in tutorial_menu_buttons.values():  
                 button_list.append(load_button(button, screen_width, screen_height))
-            print("main menu loaded", len(button_list))
-
-        case 1: #Loading the level manager menu
-            for button in level_menu_buttons.values():
+            if playing_music != "data/Music/menu.mp3":
+                play_music("data/Music/menu.mp3")
+                playing_music = "data/Music/menu.mp3"
+        case 0:  # Menu principal
+            for button in main_menu_buttons.values():
                 button_list.append(load_button(button, screen_width, screen_height))
-            print("level manager loaded", len(button_list))
-
-        case _:  #The default case is used to load the next level each time
+            if playing_music != "data/Music/menu.mp3":
+                play_music("data/Music/menu.mp3")
+                playing_music = "data/Music/menu.mp3"
+        case _:  # Autres niveaux
             for button in buttons["{}".format(n-1)].values():
                button_list.append(load_button(button, screen_width, screen_height))
 
-            for object in levels["{}".format(n-1)].values() :
-                object_list.add_object(load_objects(object))
+            for object in levels["{}".format(n-1)].keys() :
+                if object != "background":
+                    object_list.add_object(load_objects(levels["{}".format(n-1)][object]))
+                else :
+                    background = pygame.image.load(levels["{}".format(n-1)][object])
+            if playing_music != f"data/Music/level{n-1}.mp3":
+                play_music(f"data/Music/level{n-1}.mp3")
+                playing_music = f"data/Music/level{n-1}.mp3"
 
             print("level {} loaded".format(n-1))
 

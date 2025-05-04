@@ -1,17 +1,23 @@
 {
   "1": {
+    "background": "data\\background\\back2.png",
     "Bloc1": {
       "polygon": true,
       "grabable": false,
       "mass": 40000000000000,
       "restitution_coefficient": 0.8,
       "radius": 5,
-      "mouse" : [0,0],
-      "applied_coords" : [0,0], 
-      "applied_angle" : 0,
-      "simulated" : [],
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
       "centroid": [ [ 0, 0 ] ],
-      "vertices": [[ 0, 800 ],[ 1300, 800 ],[ 1300, 900 ],[ 0, 900 ]],
+      "vertices": [
+        [ 0, 800 ],
+        [ 1300, 800 ],
+        [ 1300, 900 ],
+        [ 0, 900 ]
+      ],
       "name": "Bloc1"
     },
     "Bloc2": {
@@ -20,12 +26,17 @@
       "mass": 400,
       "restitution_coefficient": 0.8,
       "radius": 5,
-      "mouse" : [0,0],
-      "applied_coords" : [0,0], 
-      "applied_angle" : 0,
-      "simulated" : [],
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
       "centroid": [ [ 0, 0 ] ],
-      "vertices": [[ 0, 500 ],[ 1300, 500 ],[ 1300, 600 ],[ 0, 600 ]],
+      "vertices": [
+        [ 0, 500 ],
+        [ 1300, 500 ],
+        [ 1300, 600 ],
+        [ 0, 600 ]
+      ],
       "name": "Bloc2"
     },
     "Circle1": {
@@ -34,26 +45,32 @@
       "mass": 400,
       "restitution_coefficient": 0.8,
       "radius": 30,
-      "mouse" : [0,0],
-      "applied_coords" : [0,0], 
-      "applied_angle" : 0,
-      "simulated" : [],
-      "centroid": [[0,0]],
-      "vertices": [ [0, 800], [1300, 800], [1300, 900], [0, 900] ],
-      "name" :  "Circle1"
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [ 0, 800 ],
+        [ 1300, 800 ],
+        [ 1300, 900 ],
+        [ 0, 900 ]
+      ],
+      "name": "Circle1"
     }
   },
   "2": {
+    "background": "data\\background\\dungeon background 2.png",
     "Bloc1": {
       "polygon": true,
       "grabable": false,
       "mass": 40000000000000,
       "restitution_coefficient": 0.8,
       "radius": 5,
-      "mouse" : [0,0],
-      "applied_coords" : [0,0], 
-      "applied_angle" : 0,
-      "simulated" : [],
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
       "centroid": [ [ 0, 0 ] ],
       "vertices": [
         [
@@ -81,10 +98,10 @@
       "mass": 400,
       "restitution_coefficient": 0.8,
       "radius": 30,
-      "mouse" : [0,0],
-      "applied_coords" : [0,0], 
-      "applied_angle" : 0,
-      "simulated" : [],
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
       "centroid": [ [ 50, 0 ] ],
       "vertices": [
         [
@@ -108,16 +125,17 @@
     }
   },
   "3": {
+    "background": "data\\background\\dungeon background 3.png",
     "Bloc1": {
       "polygon": true,
       "grabable": false,
       "mass": 40000000000000,
       "restitution_coefficient": 0.8,
       "radius": 5,
-      "mouse" : [0,0],
-      "applied_coords" : [0,0], 
-      "applied_angle" : 0,
-      "simulated" : [],
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
       "centroid": [ [ 0, 0 ] ],
       "vertices": [
         [
@@ -145,10 +163,10 @@
       "mass": 400,
       "restitution_coefficient": 0.8,
       "radius": 40,
-      "mouse" : [0,0],
-      "applied_coords" : [0,0], 
-      "applied_angle" : 0,
-      "simulated" : [],
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
       "centroid": [ [ 0, 0 ] ],
       "vertices": [
         [

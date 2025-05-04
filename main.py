@@ -27,6 +27,8 @@ from objects.mincircle import welzl
 from objects.Quadtree import RectangleQ,Quadtree
 import core.level_manager as level_manager
 import json
+from core.sound import *
+from random import randint
 
 
 """Must integrate it elsewhere in the program after debug"""
@@ -87,7 +89,6 @@ level_manager.load_scene(0, display_width, display_height,physics_engine)
 game_state = "menu"
 
 
-
 # Main game loop
 while running:
 
@@ -135,7 +136,7 @@ while running:
     if game_state == "running" : # Define the state when the physics engine is active
         dt = clock.get_time() / 100.0  # Convert milliseconds to a suitable scale'
         
-        # Need comments from Clément
+        # Need comments from Cl�ment
         for elements in physics_engine.objects:
             quadtree.insert(elements)        
         interactions = quadtree.searchelements(physics_engine.objects)
@@ -175,7 +176,14 @@ while running:
 
     # Draw frame (display of the game)
     screen.fill((170, 170, 170))  # Clear screen
-    if game_state != "menu":
+    if game_state == "menu" :
+        picture = pygame.image.load("data/background/back1.png")
+        screen.blit(picture, (85,0))
+    if game_state == "options" : 
+        picture = pygame.image.load("data/background/back1-tuto.png")
+        screen.blit(picture, (85,0))
+
+    if game_state != "menu" and game_state != "options":
         for elements in physics_engine.objects:
             elements.shape.draw(screen,(255,0,0)) # Draws the shape of the objects in red
         for elements in physics_engine.objects:
@@ -200,6 +208,12 @@ while running:
         if (pygame.mouse.get_pos()[0] < button.position[0] + button.width/2) and (pygame.mouse.get_pos()[0] > button.position[0] - button.width/2) and (pygame.mouse.get_pos()[1] < button.position[1] + button.height/2) and (pygame.mouse.get_pos()[1] > button.position[1] - button.height/2) :
             button.hover(screen)   
             if click :
+
+                secret_sound = randint(0,50)
+                if secret_sound == 30 :
+                    play_sound_fx("data/Music/pwomp.wav")
+                else :
+                    play_sound_fx("data/Music/click.wav")
                 button.is_pressed(display_width, display_height,physics_engine)
                 game_state = button.game_state
                 new_scene = level_manager.current_scene #verify if we changed of scene
@@ -208,7 +222,7 @@ while running:
             button.draw(screen)
 
     pygame.display.flip()  # Refresh screen
-    clock.tick(60)  # Limit FPS to 60
+    clock.tick(120)  # Limit FPS to 60
 
 
 
