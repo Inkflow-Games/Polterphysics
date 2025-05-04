@@ -86,10 +86,6 @@ class Button:
                 #load_scene(0)
                 self.game_state = "menu"
                 load_scene(0, screen_width, screen_height,object_list)
-            case "Load Level Menu" :
-                #load_scene(1)
-                self.game_state = "menu"
-                load_scene(1, screen_width, screen_height,object_list)
             case "1" | "2" | "3" :
                 self.game_state = "paused"
                 tries = 0
