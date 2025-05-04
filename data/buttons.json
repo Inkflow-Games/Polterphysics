@@ -25,7 +25,7 @@
       "size": 1,
       "image": "data\\ButtonsImages\\HomeButton.png",
       "imageHover": "data\\ButtonsImages\\HomeButtonPressed.png",
-      "position": [0.5, 0.85],
+      "position": [0.5, 0.90],
       "height": 80,
       "width": 240,
       "action": "Load Main Menu"
@@ -74,7 +74,7 @@
       "size": 1,
       "image": "data\\Phantoms\\polter.png",
       "imageHover": "data\\Phantoms\\polter_hover.png",
-      "position": [ 0.05, 0.3 ],
+      "position": [ 0.05, 0.35 ],
       "height": 100,
       "width": 100,
       "action": "Nothing"
@@ -140,7 +140,7 @@
       "size": 1,
       "image": "data\\Phantoms\\polter.png",
       "imageHover": "data\\Phantoms\\polter_hover.png",
-      "position": [ 0.05, 0.3 ],
+      "position": [ 0.05, 0.35 ],
       "height": 100,
       "width": 100,
       "action": "Nothing"
@@ -206,16 +206,16 @@
       "size": 1,
       "image": "data\\Phantoms\\polter.png",
       "imageHover": "data\\Phantoms\\polter_hover.png",
-      "position": [ 0.05, 0.3 ],
+      "position": [ 0.05, 0.35 ],
       "height": 100,
       "width": 100,
       "action": "Nothing"
     },
-    "Ballman": {
+    "Fathome": {
       "size": 1,
-      "image": "data\\Phantoms\\ballman.png",
-      "imageHover": "data\\Phantoms\\ballman_hover.png",
-      "position": [ 0.15, 0.4 ],
+      "image": "data\\Phantoms\\fathome.png",
+      "imageHover": "data\\Phantoms\\fathome_hover.png",
+      "position": [ 0.1, 0.4 ],
       "height": 100,
       "width": 100,
       "action": "Nothing"

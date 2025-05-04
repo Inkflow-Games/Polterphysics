@@ -98,7 +98,7 @@
     }
   },
   "2": {
-    "background": "data\\background\\dungeon background 2.png",
+    "background": "data\\background\\back3.png",
     "LeftPanel": {
       "polygon": true,
       "grabable": false,
@@ -201,7 +201,7 @@
     }
   },
   "3": {
-    "background": "data\\background\\dungeon background 3.png",
+    "background": "data\\background\\back10.png",
     "LeftPanel": {
       "polygon": true,
       "grabable": false,
