@@ -30,6 +30,9 @@ import json
 from core.sound import *
 from random import randint
 
+# Initialize Pygame
+pygame.init()
+pygame.mixer.init() #to play music
 
 """Must integrate it elsewhere in the program after debug"""
 #possibility to stack the minus vectors if called multiple times
@@ -43,7 +46,12 @@ def reset_vectors_applied (vector1_cd, vector2_cd):# must give the Vector2 (=coo
         vector2_coords = Vector2(0,0)
 
 
+# Initialize physics engine
+physics_engine = PhysicsEngine()
 
+# Clock to control frame rate
+clock = pygame.time.Clock()
+running = True
 
 clicked_object = None # will stock the object that will receive the vector from the user
 vectors_applied = False 
@@ -83,9 +91,6 @@ ground_level = display_height - 20
 
 level_manager.load_scene(0, display_width, display_height,physics_engine)
 
-
-
-
 game_state = "menu"
 
 
@@ -114,10 +119,6 @@ while running:
         elif  game_state == 'running': 
             game_state = "paused"
 
-    #temporary old function (to delete)
-    if keys[pygame.K_a] and not key_state[pygame.K_a] :
-        key_state[pygame.K_a] = True
-        reset_vectors_applied (vector1_coords, vector2_coords)
 
     # Reset key state when key is released
     for key in key_state:
@@ -188,7 +189,10 @@ while running:
             elements.shape.draw(screen,(255,0,0)) # Draws the shape of the objects in red
         for elements in physics_engine.objects:
             pygame.draw.circle(screen,(50,50,50),Vector2(elements.mincircle.x,elements.mincircle.y),elements.mincircle.radius,2) # Draws the outline of these objects  
-        
+        screen.blit(level_manager.text_list[0], (0.03 * display_width, 0.15 * display_height))
+        screen.blit(level_manager.text_list[1], (0.03 * display_width, 0.25 * display_height))
+
+
         #to change (bugged as hell)
         # Draws the vectors applied by the user, and display (at the moment) 20 positions at intervals of 0.1s
         
@@ -201,8 +205,8 @@ while running:
                     pygame.draw.line(screen, (255, 255, 255), obj.shape.centroid, obj.mouse, 5)
 
 
-    # Draw all buttons in the correct order
-    new_scene = level_manager.current_scene #verify if we changed of scene
+    # Draw all buttons in the correct order depending on the current scene, it loads the button as well
+    new_scene = level_manager.current_scene 
     running_scene = new_scene
     for button in level_manager.button_list:
         if (pygame.mouse.get_pos()[0] < button.position[0] + button.width/2) and (pygame.mouse.get_pos()[0] > button.position[0] - button.width/2) and (pygame.mouse.get_pos()[1] < button.position[1] + button.height/2) and (pygame.mouse.get_pos()[1] > button.position[1] - button.height/2) :
@@ -223,8 +227,6 @@ while running:
 
     pygame.display.flip()  # Refresh screen
     clock.tick(120)  # Limit FPS to 60
-
-
 
 # Quit Pygame
 pygame.quit()

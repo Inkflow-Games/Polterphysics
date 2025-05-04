@@ -1,4 +1,18 @@
-from tkinter import SEL
+"""
+Polterphysics
+level_manager.py
+
+A script that handle the different scenes and change of them
+Features include:
+- Button class
+- Handleing button behaviour
+- Loading the objects corresponding to the scene
+
+Last Updated: Apr 2025
+Python Version: 3.12.9
+Dependencies: pygame, core.sound, data, objects.object
+"""
+from pickle import TRUE
 import pygame
 from objects.object import *
 import json
@@ -6,9 +20,29 @@ from data import *
 from utils.vector_utils import *
 # Dictionary storing level numbers as keys and lists of objects as values
 import pygame
-import core.physics_engine as phy
 from core.sound import play_music
+
 class Button:
+    """
+    A class representing a Button.
+
+    This class defines the structure and behavior of the object, including its
+    attributes, methods, and any necessary calculations or interactions.
+
+    Attributes:
+        image (string): The path to the image which is display for the button
+        imageHover (string): The path to the image which is diplay while the button is hovered
+        position (array of int): representing the x and y position for the button with coefficients (0 to 1)
+        height (int) : representing the height of the image
+        width (int) : representing the width of the image
+        action (string) : a string representing the action of the button
+
+    Methods:
+        is_pressed(self, display_width, display_height): The function called when a button is pressed
+        hover(self, screen): The function to display the button when hovered
+        draw(self, screen): The function to display the button otherwise
+    """
+
     def __init__(self, image, imageHover,  size, position, height, width, action=''):
         self.size = size
         self.image = image
@@ -90,8 +124,23 @@ with open("data/levels.json", "r") as f : #load the different objects for the le
 
 button_list = []
 object_list = []
+current_scene = 0
+max_scene = 4
+playing_music = ""
+tries = 0
 
 def load_button(button, screen_width, screen_height):
+    """
+    This function allow us to turn the button from json dictionnaries to a Button object
+
+    Parameters:
+    button (dictionnary): the json of the button we want to load
+    screen_width (int): The screen width
+    screen_height (int)
+
+    Returns:
+    Button: The button now turned into a button object.
+    """
     new_button = Button(
         size=button["size"],
         image=button["image"],
@@ -104,8 +153,15 @@ def load_button(button, screen_width, screen_height):
     return new_button
 
 def load_objects(object_infos):
-    #new =  Object(mass = l[0], position = Vector2(l[1]), max_speed = l[2], radius = l[3],bounciness = l[4], damping_coefficient = l[5], static = l[6])
-    #g = Object(False, False, 3, 0.8, None, 50, Vector2(100,100))
+    """
+    This function allow us to turn the json object into objects
+
+    Parameters:
+    object (dictionnary): the json of the object we want to load
+
+    Returns:
+    Object: The object now turned into a object.
+    """
     new = Object(polygon=object_infos["polygon"], grabable=object_infos["grabable"], mass=object_infos["mass"], restitution_coefficient=object_infos["restitution_coefficient"], radius=object_infos["radius"], mouse=object_infos["mouse"], applied_coords=object_infos["applied_coords"], applied_angle=object_infos["applied_angle"], simulated=object_infos["simulated"], name=object_infos["name"], centroid=transform_Vector2(object_infos["centroid"])[0], vertices=transform_Vector2(object_infos["vertices"]))
     return new
 
@@ -120,14 +176,28 @@ def transform_Vector2(infos) :
 playing_music = ""
 
 def load_scene(n: int, screen_width, screen_height,object_list):
+    """
+    This function allow us to load the correct scene each time
+
+    Parameters:
+    n (int): the index of the scene we want
+    screen_width (int) : the screen width
+    screen_height(int) : the screen height
+
+    """
     object_list.objects = []
     global current_scene 
     global button_list
-    current_scene = n
-    button_list = []
-
     global playing_music
     global background
+    global text_list
+    global tries
+
+    current_scene = n
+    button_list = []
+    text_list = []
+
+
 
 
     match n:
@@ -156,5 +226,10 @@ def load_scene(n: int, screen_width, screen_height,object_list):
                 play_music(f"data/Music/level{n-1}.mp3")
                 playing_music = f"data/Music/level{n-1}.mp3"
 
-            print("level {} loaded".format(n-1))
+            font = pygame.font.SysFont("Calibri", 40)
+            font.set_bold(True)
+            index_of_the_level = font.render("LEVEL : {}".format(n-1), True, (255, 255, 255))
+            number_of_tries = font.render("TRY NUMBER : {}".format(tries), True, (255, 255, 255))
+            text_list.append(index_of_the_level)
+            text_list.append(number_of_tries)
 

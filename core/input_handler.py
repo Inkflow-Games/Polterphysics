@@ -1,3 +1,19 @@
+"""
+input_handler.py
+
+Library of functions that handle the possible actions of the user.
+
+Features include:
+- Define if left click is pressed
+- (to modify) Detect if a left click is on/in a circle (currently --> must be in an object later on)
+- Vector application during paused game script
+
+Author: Maxime Noudelberg
+Last Updated: April 2025
+Python Version: 3.12.10
+Dependencies: pygame, pygame.math, utils.vector_utils
+"""
+
 import pygame 
 from pygame.math import Vector2
 from utils.vector_utils import * 
@@ -7,10 +23,24 @@ from objects.object import *
 pygame.init()
 
 def GetMouseInput(event) :
+    """
+    Return 1/0 if left click pressed/not
+
+    Parameters:
+    event (<class 'pygame.event.Event'>) : defined class that detects events
+    """
     return event.type == pygame.MOUSEBUTTONDOWN #autorise qu'un seul clic gauche jusqu'au relachement de la touche  --> on peut pas maintenir la touche pour faire clic gauche continuellement
 
 # (NOT USED ANYMORE) verifies if the mouse is in the radius of a clicked circle
 def is_point_in_circle(point, circle_center, radius):
+    """
+    Return 1/0 if mouse position is between the center of a circle and its radius/not
+
+    Parameters:
+    point (tuple of integers): The position of the mouse
+    circle_center (array of integers (?)) : Actual coordinates of the center of our circle
+    radius (integer) : Radius of this same circle
+    """
     dx = point[0] - circle_center[0]
     dy = point[1] - circle_center[1]
     return dx**2 + dy**2 <= radius**2
