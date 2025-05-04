@@ -77,7 +77,7 @@ class Button:
 with open("data/buttons.json", "r") as file : #load all the buttons and split them into multiple lists
     buttons = json.load(file)
     main_menu_buttons = buttons["main_menu"]
-    level_menu_buttons = buttons["level_selection"]
+    tutorial_menu_buttons = buttons["tutorial_menu"]
 
 with open("data/levels.json", "r") as f : #load the different objects for the level
     levels = json.load(f)
@@ -128,9 +128,8 @@ def load_scene(n: int, screen_width, screen_height):
 
     match n:
         case -1:  # Tutorial
-            for button in buttons["tutorial_menu"].values():  
+            for button in tutorial_menu_buttons.values():  
                 button_list.append(load_button(button, screen_width, screen_height))
-            background = pygame.image.load("data/Background/back1-tuto.png")
             if playing_music != "data/Music/menu.mp3":
                 play_music("data/Music/menu.mp3")
                 playing_music = "data/Music/menu.mp3"

@@ -253,7 +253,7 @@ while running:
                 game_state = button.game_state
                 new_scene = level_manager.current_scene #verify if we changed of scene
                 click = False
-                if game_state!= "menu": #we load new objects if the scene changed
+                if game_state!= "menu" and game_state != "options": #we load new objects if the scene changed
     
                     test_object = level_manager.object_list[-1] 
                     physics_engine.add_object(test_object)
@@ -264,7 +264,7 @@ while running:
 
 
     # Display debug positions : must stay in main
-    if game_state != "menu":
+    if game_state != "menu" and game_state != "options":
         font = pygame.font.SysFont("Arial", 24)
         position_text_1 = font.render(f"Position 1: ({int(test_object.position.x)}, {-int(test_object.position.y)})", True, (255, 255, 255))
         position_text_2 = font.render(f"Position 2: ({int(second_object.position.x)}, {-int(second_object.position.y)})", True, (255, 255, 255))
