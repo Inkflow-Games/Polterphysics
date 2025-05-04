@@ -190,9 +190,11 @@ while running:
     if game_state != "menu" and game_state != "options":
         screen.blit(level_manager.background, (90,30))
         for elements in physics_engine.objects:
-            elements.shape.draw(screen,(255,0,0)) # Draws the shape of the objects in red
+            if (elements.name != "RightPanel" and elements.name != "LeftPanel") :
+                elements.shape.draw(screen,(255,0,0)) # Draws the shape of the objects in red
         for elements in physics_engine.objects:
-            pygame.draw.circle(screen,(50,50,50),Vector2(elements.mincircle.x,elements.mincircle.y),elements.mincircle.radius,2) # Draws the outline of these objects  
+            if (elements.name != "RightPanel" and elements.name != "LeftPanel") :
+                pygame.draw.circle(screen,(50,50,50),Vector2(elements.mincircle.x,elements.mincircle.y),elements.mincircle.radius,2) # Draws the outline of these objects  
         screen.blit(level_manager.text_list[0], (0.03 * display_width, 0.15 * display_height))
         screen.blit(level_manager.text_list[1], (0.03 * display_width, 0.25 * display_height))
 

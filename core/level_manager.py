@@ -212,7 +212,6 @@ def load_scene(n: int, screen_width, screen_height,object_list):
         case _:  # Autres niveaux
             for button in buttons["{}".format(n-1)].values():
                button_list.append(load_button(button, screen_width, screen_height))
-
             for object in levels["{}".format(n-1)].keys() :
                 if object != "background":
                     object_list.add_object(load_objects(levels["{}".format(n-1)][object]))
