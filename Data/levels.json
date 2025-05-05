@@ -39,10 +39,10 @@
       ],
       "name": "RightPanel"
     },
-    "Polter": {
+    "Bloc1": {
       "polygon": true,
       "grabable": false,
-      "mass": 40000000000000,
+      "mass": 50000000000000,
       "restitution_coefficient": 0.8,
       "radius": 5,
       "mouse": [ 0, 0 ],
@@ -51,12 +51,12 @@
       "simulated": [],
       "centroid": [ [ 0, 0 ] ],
       "vertices": [
-        [ 370, 800 ],
-        [ 1000, 800 ],
-        [ 1000, 900 ],
-        [ 370, 900 ]
+        [ 380, 800 ],
+        [ 700, 800 ],
+        [ 700, 1000 ],
+        [ 380, 1000 ]
       ],
-      "name": "Polter"
+      "name": "Bloc2"
     },
     "Bloc2": {
       "polygon": true,
@@ -77,7 +77,7 @@
       ],
       "name": "Bloc2"
     },
-    "Ballman": {
+    "Trickandle": {
       "polygon": false,
       "grabable": true,
       "mass": 4,
@@ -94,7 +94,7 @@
         [ 1000, 900 ],
         [ 0, 900 ]
       ],
-      "name": "Ballman"
+      "name": "Trickandle"
     },
     "Polter": {
       "polygon": false,
@@ -106,7 +106,7 @@
       "applied_coords": [ 0, 0 ],
       "applied_angle": 0,
       "simulated": [],
-      "centroid": [ [ 800, 0 ] ],
+      "centroid": [ [ 400, 200 ] ],
       "vertices": [
         [ 0, 800 ],
         [ 1300, 800 ],

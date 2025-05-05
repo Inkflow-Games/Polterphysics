@@ -207,10 +207,12 @@ while running:
                 game_state = button.game_state
                 new_scene = level_manager.current_scene #verify if we changed of scene
                 click = False
-        elif button.image[14:] == "data\\Phantoms" :
+        elif "data\\Phantoms\\" in  button.image:
             for elem in range (len(physics_engine.objects)) :
                 if (physics_engine.objects[elem].name == button.action) and physics_engine.objects[elem].applied_coords != [0,0]:
                     button.hover(screen)
+                elif  "data\\Phantoms\\" not in  button.image or physics_engine.objects[elem].applied_coords == [0,0]: 
+                    button.draw(screen)
 
         else :
             button.draw(screen)
