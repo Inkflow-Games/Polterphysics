@@ -39,7 +39,7 @@
       ],
       "name": "RightPanel"
     },
-    "Bloc1": {
+    "Polter": {
       "polygon": true,
       "grabable": false,
       "mass": 40000000000000,
@@ -56,7 +56,7 @@
         [ 1000, 900 ],
         [ 0, 900 ]
       ],
-      "name": "Bloc1"
+      "name": "Polter"
     },
     "Bloc2": {
       "polygon": true,
