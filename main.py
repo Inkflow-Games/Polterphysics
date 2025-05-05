@@ -16,7 +16,6 @@ Dependencies: pygame, core.physics_engine, objects.object
 
 import pygame
 from pygame.math import Vector2
-import pygame.transform
 from core.physics_engine import PhysicsEngine
 from core.collision import *
 from core.force_calculator import *
@@ -27,17 +26,15 @@ from core.input_handler import *
 from objects.mincircle import welzl
 from objects.Quadtree import RectangleQ,Quadtree
 import core.level_manager as level_manager
-import json
 from core.sound import *
 from random import randint
+from objects.key import Key
+from core.sprite_manager import SpriteManager
 
 # Initialize Pygame
 pygame.init()
 pygame.mixer.init() #to play music
 
-
-# Initialize physics engine
-physics_engine = PhysicsEngine()
 
 # Clock to control frame rate
 clock = pygame.time.Clock()
@@ -83,7 +80,6 @@ key_state = {
 ground_level = display_height - 20
 
 level_manager.load_scene(0, display_width, display_height,physics_engine)
-
 game_state = "menu"
 
 
@@ -160,7 +156,7 @@ while running:
                         gjk.find_contact_features(gjk.shape1,gjk.shape2,stuff)
                         gjk.resolve(stuff,dt)
 
-        physics_engine.update(dt)  
+        physics_engine.update(dt)
 
 
     # Draw frame (display of the game)
@@ -175,7 +171,8 @@ while running:
         for elements in physics_engine.objects:
             if (elements.name != "RightPanel" and elements.name != "LeftPanel") :
                 elements.shape.draw(screen,(255,0,0)) # Draws the shape of the objects in red
-        
+        level_manager.sprite_manager.update(screen, physics_engine.objects) # Update the sprite manager with the current objects in the physics engine
+
         # to delete (?)
         # for elements in physics_engine.objects:
         #     if (elements.name != "RightPanel" and elements.name != "LeftPanel") :

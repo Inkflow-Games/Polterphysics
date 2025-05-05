@@ -22,6 +22,8 @@ from utils.vector_utils import *
 # Dictionary storing level numbers as keys and lists of objects as values
 import pygame
 from core.sound import play_music
+from objects.key import Key
+from core.sprite_manager import SpriteManager
 
 class Button:
     """
@@ -208,6 +210,8 @@ def load_scene(n: int, screen_width, screen_height,object_list):
     global background
     global text_list
     global tries
+    global sprite_manager
+    key = None
 
     current_scene = n
     button_list = []
@@ -233,10 +237,13 @@ def load_scene(n: int, screen_width, screen_height,object_list):
             for button in buttons["{}".format(n-1)].values():
                button_list.append(load_button(button, screen_width, screen_height))
             for object in levels["{}".format(n-1)].keys() :
-                if object != "background":
+                if (object != "background") and (object != "key") :
                     object_list.add_object(load_objects(levels["{}".format(n-1)][object]))
-                else :
+                elif object == "background" :
                     background = pygame.image.load(levels["{}".format(n-1)][object])
+                elif object == "key" :
+                    key = Key(coordinates=levels["{}".format(n-1)][object]["coordinates"], detection_radius=levels["{}".format(n-1)][object]["detection_radius"], end_object_name=levels["{}".format(n-1)][object]["end_object_name"])
+                sprite_manager = SpriteManager(key)
             if playing_music != f"data/Music/level{n-1}.mp3":
                 play_music(f"data/Music/level{n-1}.mp3")
                 playing_music = f"data/Music/level{n-1}.mp3"
@@ -247,4 +254,3 @@ def load_scene(n: int, screen_width, screen_height,object_list):
             number_of_tries = font.render("TRY NUMBER : {}".format(tries), True, (255, 255, 255))
             text_list.append(index_of_the_level)
             text_list.append(number_of_tries)
-
