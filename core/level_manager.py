@@ -17,6 +17,7 @@ import pygame
 from objects.object import *
 import json
 from data import *
+from utils import vector_utils
 from utils.vector_utils import *
 # Dictionary storing level numbers as keys and lists of objects as values
 import pygame
@@ -94,6 +95,25 @@ class Button:
             case "Option":
                 self.game_state = "options"
                 load_scene(-1, screen_width, screen_height,object_list)
+            case "Ballman" :
+                for obj in object_list.objects :
+                    if obj.name == "Ballman" : 
+                        vector_utils.update_mouse(obj)
+                        vector_utils.update_vector(obj)
+                self.game_state = "paused"
+            case "Polter" :
+                for obj in object_list.objects :
+                    if obj.name == "Polter" : 
+                        vector_utils.update_mouse(obj)
+                        vector_utils.update_vector(obj)
+                self.game_state = "paused"
+            case "Rospirit" :
+                for obj in object_list.objects :
+                    if obj.name == "Rospirit" : 
+                        vector_utils.update_mouse(obj)
+                        vector_utils.update_vector(obj)
+                self.game_state = "paused"
+                        
 
 
     def hover(self, screen): # The function which changes the sprite when hovered

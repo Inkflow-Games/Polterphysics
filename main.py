@@ -68,8 +68,8 @@ pictureOption = pygame.transform.scale(pictureOption, (display_width, display_he
 
 # Initialize physics engine
 physics_engine = PhysicsEngine()
-bounding_box = RectangleQ(-100,-100,3400,2200)
-quadtree = Quadtree(bounding_box,4)
+bounding_box = RectangleQ(-1000,-1000,3400,2200)
+quadtree = Quadtree(bounding_box,7)
 # Clock to control frame rate
 clock = pygame.time.Clock()
 running = True
