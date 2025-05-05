@@ -191,7 +191,7 @@ def load_objects(object_infos):
     Returns:
     Object: The object now turned into a object.
     """
-    new = Object(polygon=object_infos["polygon"], grabable=object_infos["grabable"], mass=object_infos["mass"], restitution_coefficient=object_infos["restitution_coefficient"], radius=object_infos["radius"], mouse=object_infos["mouse"], applied_coords=object_infos["applied_coords"], applied_angle=object_infos["applied_angle"], simulated=object_infos["simulated"], name=object_infos["name"], centroid=transform_Vector2(object_infos["centroid"])[0], vertices=transform_Vector2(object_infos["vertices"]))
+    new = Object(polygon=object_infos["polygon"], grabable=object_infos["grabable"], mass=object_infos["mass"], restitution_coefficient=object_infos["restitution_coefficient"], radius=object_infos["radius"], mouse=object_infos["mouse"], applied_coords=object_infos["applied_coords"], applied_angle=object_infos["applied_angle"], simulated=object_infos["simulated"], name=object_infos["name"], centroid=transform_Vector2(object_infos["centroid"])[0], vertices=transform_Vector2(object_infos["vertices"]), zone=object_infos["zone"])
     return new
 
 current_scene = 0

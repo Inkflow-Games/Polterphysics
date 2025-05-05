@@ -138,9 +138,15 @@ while running:
         # Apply all the vectors entered by the user during transition from "paused" state to "running" state --> prevent vector stacking 
         if vectors_applied == False :
             for obj in physics_engine.objects :
-                if (obj.applied_coords != [0,0]) and (obj.grabable == True) :
-                    obj.shape.velocity += (Vector2(obj.applied_coords) /  obj.shape.mass) # Instant increase of the speed of the object   
+                if (obj.applied_coords != [0,0]) and (obj.grabable == True) : # general application of the forces
+                    obj.shape.velocity += (Vector2(obj.applied_coords) /  obj.shape.mass) # Instant increase of the speed of the object 
             vectors_applied = True
+        
+        for obj in physics_engine.objects :
+            if (obj.grabable == True) and (len(obj.zone) == 8) : # A zone is entered
+                if obj.zone[0] == "wind" :
+                    if obj.shape.centroid[0] <= obj.zone[4] and obj.shape.centroid[0] >= obj.zone[3] and obj.shape.centroid[1] >= obj.zone[5] and obj.shape.centroid[1] <= obj.zone[6] :
+                        obj.shape.velocity += (Vector2(obj.zone[1]) / obj.shape.mass)
         
         
         # Reset the vectors info and mouse position for all the objects loaded in the physics engine
