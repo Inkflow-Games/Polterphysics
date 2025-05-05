@@ -5,23 +5,25 @@ A script that provides utility functions to obtain information on vectors / make
 
 Features include:
 - Compute the angle between a vector and the regular frame of reference (x,y) with x to the right and y upwards --> (in our simulation, y is DOWNWARDS)
-(- From inertia and the new vector applied : consider them as 2 vectors and computes the norm and the angle of their vectorial sum
- - Computes the norm of a vector and divide it by dt) 
+- Display the info of an objects
+- Update "applied_coords", "applied_angle" and "mouse" of objects
+- Reset these info
+- Simulate positions ( (not) realistically) after a vector application
+- Draw on the main window (screen) the vectors applied and the computed positions
 
 Author: Maxime Noudelberg
-Last Updated: Feb 2025
+Last Updated: May 2025
 Python Version: 3.12.9
-Dependencies: json
-              math : degrees, sqrt, atan2
+Dependencies: math : degrees, sqrt, atan2
+              newton_to_force in maths_utils
               pygame.math : Vector2
 """
 
-from math import degrees, sqrt, atan2
+from math import degrees, atan2
 from utils.math_utils import newton_to_force
 import core.physics_engine
 import pygame
 from pygame.math import Vector2
-import json
 
 
 
@@ -40,25 +42,7 @@ def compute_angle(coord1, coord2):
     return -degrees(atan2(coord2, coord1))
 
 
-# (NOT USED) (to delete) : only used in the trajectory simulation based on vectorial sum
-def norm_and_angle_computation(x_before =0 , y_before =0, x_now =0 , y_now =0, force_vector = Vector2(0,0), dt = 1/120) : # before <=> dt-1  and now <=> actual position
-    vx = (x_now - x_before)/dt
-    vy = (y_now - y_before)/dt  # if vy is positive <=> the object is going down
-    
-    v0 = Vector2(vx + force_vector[0] , vy + force_vector[1])
-    norm_vector = sqrt(v0[0]**2 + v0[1]**2)     # give the norm in pixels
-    angle = compute_angle(v0[0], v0[1])
-    return norm_vector, angle
-
-
-
-#currently not used (to delete)
-def initial_speed_computation(x_before = 0, y_before = 0, x_now = 0, y_now = 0, dt = 1/120) :
-    return (sqrt((x_now - x_before)**2 + (y_now - y_before)**2))/dt
-
-
-
-# to comment
+# to change : comments needed for its utility
 def objects_running_info(test_object, second_object, vector_applied1 = False, vector_applied2 = False) :
         vector_applied1 = False #reset the vectors applied to our object
         vector_applied2 = False
@@ -123,8 +107,6 @@ def computes_positions(obj, realistic = False,simulation_steps=20, dt_sim=0.1):
         simulation_steps (int) : number of positions to compute (Default = 20)
         dt_sim (float) : time difference between 2 positions (Default = 0.1)
     """
-    
-    realistic = False
     v0 = obj.shape.velocity  # Initial velocity of the object : pixels.dt^-1
     force_applied = Vector2(obj.applied_coords)
     # acceleration vector = obj.shape.mass * (sum)forces vectors
@@ -157,7 +139,7 @@ def computes_positions(obj, realistic = False,simulation_steps=20, dt_sim=0.1):
 
 
 
-def lines_and_positions(objects_list, screen, game_state="running"):
+def lines_and_positions(objects_list, screen, game_state="running", realistic = False):
     """
     Draws the vectors applied and the simulated positions
 
@@ -165,12 +147,13 @@ def lines_and_positions(objects_list, screen, game_state="running"):
         objects_list: list of all the initialized objects of a scene
         screen (pygame display): reference to the window where the game is taking place
         game_state (str): the name of the game state --> set to != "menu" for us here
+        realistic (bool) : defines if the trajectories will be compute realistically or not (Default = False)
     """
     if game_state == "paused":
         for obj in objects_list:
-            if (obj.applied_coords != [0, 0]) and obj.grabable:
+            if (obj.applied_coords != [0, 0]) and obj.grabable == True:
                 # Recalculate positions on each frame, allowing dynamic updates
-                computes_positions(obj)
+                computes_positions(obj, realistic)
 
                 # Draw applied force line (white)
                 pygame.draw.line(screen, (255, 255, 255), obj.shape.centroid, obj.mouse, 5)

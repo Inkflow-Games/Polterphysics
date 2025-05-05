@@ -1,44 +1,6 @@
 {
   "1": {
     "background": "data\\background\\back2.png",
-    "LeftPanel": {
-      "polygon": true,
-      "grabable": false,
-      "mass": 40000000000000,
-      "restitution_coefficient": 0.8,
-      "radius": 5,
-      "mouse": [ 0, 0 ],
-      "applied_coords": [ 0, 0 ],
-      "applied_angle": 0,
-      "simulated": [],
-      "centroid": [ [ 0, 0 ] ],
-      "vertices": [
-        [ 0, 0 ],
-        [ 360, 0 ],
-        [ 360, 1080 ],
-        [ 0, 1080 ]
-      ],
-      "name": "LeftPanel"
-    },
-    "RightPanel": {
-      "polygon": true,
-      "grabable": false,
-      "mass": 40000000000000,
-      "restitution_coefficient": 0.8,
-      "radius": 5,
-      "mouse": [ 0, 0 ],
-      "applied_coords": [ 0, 0 ],
-      "applied_angle": 0,
-      "simulated": [],
-      "centroid": [ [ 0, 0 ] ],
-      "vertices": [
-        [ 1560, 0 ],
-        [ 1920, 0 ],
-        [ 1920, 1080 ],
-        [ 1560, 1080 ]
-      ],
-      "name": "RightPanel"
-    },
     "Bloc1": {
       "polygon": true,
       "grabable": false,
@@ -51,17 +13,17 @@
       "simulated": [],
       "centroid": [ [ 0, 0 ] ],
       "vertices": [
-        [ 500, 800 ],
+        [ 370, 800 ],
         [ 1000, 800 ],
         [ 1000, 900 ],
-        [ 500, 900 ]
+        [ 370, 900 ]
       ],
       "name": "Bloc1"
     },
     "Bloc2": {
       "polygon": true,
       "grabable": true,
-      "mass": 400,
+      "mass": 500,
       "restitution_coefficient": 0.8,
       "radius": 5,
       "mouse": [ 0, 0 ],
@@ -70,10 +32,10 @@
       "simulated": [],
       "centroid": [ [ 0, 0 ] ],
       "vertices": [
-        [ 360, 500 ],
+        [ 380, 500 ],
         [ 1000, 500 ],
         [ 1000, 600 ],
-        [ 360, 600 ]
+        [ 380, 600 ]
       ],
       "name": "Bloc2"
     },
@@ -99,7 +61,7 @@
     "Circle2": {
       "polygon": false,
       "grabable": true,
-      "mass": 400,
+      "mass": 10,
       "restitution_coefficient": 0.8,
       "radius": 50,
       "mouse": [ 0, 0 ],

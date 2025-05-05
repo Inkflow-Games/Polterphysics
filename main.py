@@ -35,17 +35,6 @@ from random import randint
 pygame.init()
 pygame.mixer.init() #to play music
 
-"""Must integrate it elsewhere in the program after debug"""
-#possibility to stack the minus vectors if called multiple times
-def reset_vectors_applied (vector1_cd, vector2_cd):# must give the Vector2 (=coordinates) of the vectors
-    if vector1_cd != Vector2(0,0) :
-        c.apply_force(-vector1_cd)
-        vector1_coords = Vector2(0,0)
-        c = Vector2(0,0)
-    if vector1_cd != Vector2(0,0) :
-        c.apply_force(-vector2_cd)
-        vector2_coords = Vector2(0,0)
-
 
 # Initialize physics engine
 physics_engine = PhysicsEngine()
@@ -54,8 +43,8 @@ physics_engine = PhysicsEngine()
 clock = pygame.time.Clock()
 running = True
 
-clicked_object = None # will stock the object that will receive the vector from the user
-vectors_applied = False 
+clicked_object = None # Will stock the object that will receive the vector from the user
+vectors_applied = False # Defines if all the vectors created by the user have been applied
 
 
 
@@ -85,13 +74,12 @@ quadtree = Quadtree(bounding_box,4)
 clock = pygame.time.Clock()
 running = True
 
-# Dictionary to track key states for the second object (ZQSD control)
+# Dictionary to track key states : ONLY "SPACE" to pause the game
 key_state = {
     pygame.K_SPACE: False,
-    pygame.K_a: False,
 }
 
-# Ground level (just above the bottom of the window)
+# Ground level (just above the bottom of the window) --> Pass ground_level as display_height - 20 (or whatever your ground level is)
 ground_level = display_height - 20
 
 level_manager.load_scene(0, display_width, display_height,physics_engine)
@@ -134,7 +122,6 @@ while running:
         
         vectors_applied = False # Allows for the application of the vectors at the moment game_state = "running"
         
-        #to change : object detection incorrect when intersection with a "grabable" = False object
         # Main mechanic : application of the vectors by the user
         clicked_object = vector_application(event, physics_engine.objects, clicked_object, quadtree)
 
@@ -142,13 +129,13 @@ while running:
     if game_state == "running" : # Define the state when the physics engine is active
         dt = clock.get_time() / 100.0  # Convert milliseconds to a suitable scale'
         
-        # Need comments from Cl�ment
+        # to change : Need comments from Clement
         for elements in physics_engine.objects:
             quadtree.insert(elements)        
         interactions = quadtree.searchelements(physics_engine.objects)
         
         
-        # Apply all the vectors entered by the user during transition from "paused" state to "running" state --> prevent from vector stacking 
+        # Apply all the vectors entered by the user during transition from "paused" state to "running" state --> prevent vector stacking 
         if vectors_applied == False :
             for obj in physics_engine.objects :
                 if (obj.applied_coords != [0,0]) and (obj.grabable == True) :
@@ -162,7 +149,7 @@ while running:
             update_mouse(elements, Vector2(0,0))
 
 
-        # Need comments from Clément
+        # to change : Need comments from Clement
         for interaction in interactions:
             if len(interaction) >= 2:
                 for elms in interaction[1:]:
@@ -173,11 +160,7 @@ while running:
                         gjk.find_contact_features(gjk.shape1,gjk.shape2,stuff)
                         gjk.resolve(stuff,dt)
 
-
-        # to delete
-        #physics_engine.objects[0].shape.velocity = Vector2(0,0)
-        #physics_engine.objects[0].shape.angular_velocity = 0
-        physics_engine.update(dt)  # Pass ground_level as display_height - 20 (or whatever your ground level is)
+        physics_engine.update(dt)  
 
 
     # Draw frame (display of the game)
@@ -192,23 +175,19 @@ while running:
         for elements in physics_engine.objects:
             if (elements.name != "RightPanel" and elements.name != "LeftPanel") :
                 elements.shape.draw(screen,(255,0,0)) # Draws the shape of the objects in red
+        
+        # to delete (?)
         # for elements in physics_engine.objects:
         #     if (elements.name != "RightPanel" and elements.name != "LeftPanel") :
         #         pygame.draw.circle(screen,(50,50,50),Vector2(elements.mincircle.x,elements.mincircle.y),elements.mincircle.radius,2) # Draws the outline of these objects  
         screen.blit(level_manager.text_list[0], (0.03 * display_width, 0.15 * display_height))
         screen.blit(level_manager.text_list[1], (0.03 * display_width, 0.25 * display_height))
 
-
-        #to change (bugged as hell)
-        # Draws the vectors applied by the user, and display (at the moment) 20 positions at intervals of 0.1s
-        
-        lines_and_positions(physics_engine.objects,screen, game_state)
-        
-        # to change : temporary script to just draw the vectors representation
+        # Draws the vectors applied by the user, and display (at the moment) 20 positions at intervals of 0.1s :
+        # change "False" in lines_and_positions by "True" in order to give the realistic equations for the movements of the objects
         if game_state == "paused" : 
             for obj in physics_engine.objects :
-                if (obj.applied_coords != [0,0]) and (obj.grabable == True): # If a vector is applied
-                    pygame.draw.line(screen, (255, 255, 255), obj.shape.centroid, obj.mouse, 5)
+                lines_and_positions(physics_engine.objects,screen, game_state, False)
 
 
     # Draw all buttons in the correct order depending on the current scene, it loads the button as well
