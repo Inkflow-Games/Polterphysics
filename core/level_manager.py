@@ -156,7 +156,7 @@ object_list = []
 current_scene = 0
 max_scene = 4
 playing_music = ""
-tries = 0
+tries = 1
 
 def load_button(button, screen_width, screen_height):
     """
