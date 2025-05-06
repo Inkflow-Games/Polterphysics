@@ -281,6 +281,11 @@
   },
   "3": {
     "background": "data\\background\\back10.png",
+    "key": {
+      "coordinates": [ 600, 500],
+      "detection_radius": 50,
+      "end_object_name": "Polter"
+    },
     "LeftPanel": {
       "polygon": true,
       "grabable": false,

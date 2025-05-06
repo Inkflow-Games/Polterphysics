@@ -58,13 +58,13 @@ def vector_application(
     mouse_position = Vector2(pygame.mouse.get_pos())
     
     if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and clicked_object == None: # left click + when no object is clicked 
-        print("click detected")
+        #print("click detected")
         for elements in objects_list:
             quadtree.insert(elements) 
         potential = []
         mini = float("inf")
         quadtree.query(Object(False,False,1,1,[],1,mouse_position, "mouse", False), potential) #creates a circle of radius 1 to detect intersection with objects around the area
-        print(f"potential {potential}")
+        #print(f"potential {potential}")
         for elements in potential :
             if elements.polygon == False : # If the object is a circle
                 if elements.shape.centroid.distance_squared_to(mouse_position) < mini :
@@ -75,7 +75,7 @@ def vector_application(
                     if elements.shape.vertices[i].distance_squared_to(mouse_position) < mini and elements.shape.centroid.distance_squared_to(mouse_position) < 5000:
                         mini = elements.shape.vertices[i].distance_squared_to(mouse_position)  # obtain the distance between mouse and nearest centroid
                         clicked_object = elements
-        print(f"clicked object is : {clicked_object}")
+        #print(f"clicked object is : {clicked_object}")
         for elements in objects_list :
             quadtree.delpoint(elements)
         return clicked_object
@@ -86,7 +86,7 @@ def vector_application(
         (mouse_position[0] - clicked_object.shape.centroid[0])*5,
         (mouse_position[1] - clicked_object.shape.centroid[1])*5
         ) #modify the multiplication coeff if needed
-        print(f"force_vector holding {force_vector}")
+        #print(f"force_vector holding {force_vector}")
         vector_angle = compute_angle(force_vector.x, force_vector.y) #need revisions because it gives stupid values sometimes
         update_vector(clicked_object, force_vector, vector_angle)
     
@@ -96,8 +96,8 @@ def vector_application(
         (mouse_position[0] - clicked_object.shape.centroid[0])*5,
         (mouse_position[1] - clicked_object.shape.centroid[1])*5
         ) #modify the multiplication coeff if needed --> give more/less precision with the norm of the vector
-        print(f"force_vector {force_vector}")
-        print(f"velocity {clicked_object.shape.velocity}")
+        #print(f"force_vector {force_vector}")
+        #print(f"velocity {clicked_object.shape.velocity}")
         vector_angle = compute_angle(force_vector.x, force_vector.y) #need revisions because it gives stupid values sometimes
         update_vector(clicked_object, force_vector, vector_angle)
         

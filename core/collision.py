@@ -1,4 +1,5 @@
 """
+Polterphysics
 collision.py
 
 A script that provides functions for detecting and resolving collisions 
@@ -122,7 +123,7 @@ class GJK2D:
             supportB = find_furthests(-mtd, polyB)
             #supportA = find_furthests(polyA, mtd)
             #supportB = find_furthests(polyB,-mtd)
-            print(supportA,supportB)
+            #print(supportA,supportB)
 
 
             # Classify contact type
@@ -183,7 +184,7 @@ class GJK2D:
         end_t = min(t_A2,t_B2)
         start_point = A1 + (start_t - A1.dot(D)) * D
         end_point = A1 + (end_t - A1.dot(D)) * D
-        print(start_point,end_point)
+        #print(start_point,end_point)
         #pygame.draw.line(screen,(200,200,200),start_point,end_point,5)
         #pygame.draw.circle(screen,(150,150,150),(end_point + start_point)/2,3)
         return (end_point + start_point)/2
