@@ -19,7 +19,7 @@ Dependencies: math : degrees, sqrt, atan2
               pygame.math : Vector2
 """
 
-from math import degrees, atan2, sqrt
+from math import degrees, atan2, radians, cos, sin
 from utils.math_utils import newton_to_force
 import core.physics_engine
 import pygame
@@ -191,6 +191,43 @@ def computes_positions(obj, realistic = False,simulation_steps=20, dt_sim=0.1):
 
 
 
+def draw_arrow(screen, color, start, end, width, head_length, head_angle):
+    """
+    Draws the arrow that represents the vector
+
+    Parameters:
+        screen (pygame display): reference to the window where the game is taking place
+        color (tuple int : in 0-255) : color of the arrow
+        start (int/float) : center of the object
+        end (int/float) : mouse position
+        width (int) : of the line
+        head_length (int) : of the arrow
+        head_angle (int) : orientation
+    """
+    # Draw the line
+    pygame.draw.line(screen, color, start, end, width)
+
+    # Computes arrow direction
+    dx = end[0] - start[0]
+    dy = end[1] - start[1]
+    angle = atan2(dy, dx)
+
+    # Computes left and right points of the arrow 
+    left = (
+        end[0] - head_length * cos(angle - radians(head_angle)),
+        end[1] - head_length * sin(angle - radians(head_angle))
+    )
+    right = (
+        end[0] - head_length * cos(angle + radians(head_angle)),
+        end[1] - head_length * sin(angle + radians(head_angle))
+    )
+
+    # Draw the triangle
+    pygame.draw.polygon(screen, color, [end, left, right])
+
+
+
+
 def lines_and_positions(objects_list, screen, game_state="running", realistic = False):
     """
     Draws the vectors applied and the simulated positions
@@ -208,7 +245,7 @@ def lines_and_positions(objects_list, screen, game_state="running", realistic = 
                 computes_positions(obj, realistic)
 
                 # Draw applied force line (white)
-                pygame.draw.line(screen, (255, 255, 255), obj.shape.centroid, obj.mouse, 5)
+                draw_arrow(screen, (255, 255, 255), obj.shape.centroid, obj.mouse, 5, 20, 25)
 
                 # Draw simulated positions as a trajectory (yellow points)
                 for i in range(len(obj.simulated)):
