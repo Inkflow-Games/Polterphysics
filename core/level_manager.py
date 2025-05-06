@@ -130,6 +130,18 @@ class Button:
                         update_mouse(obj)
                         update_vector(obj)
                 self.game_state = "paused"
+            case "Fathome" :
+                for obj in object_list.objects :
+                    if obj.name == "Fathome" : 
+                        vector_utils.update_mouse(obj)
+                        vector_utils.update_vector(obj)
+                self.game_state = "paused"
+            case "Trickandle" :
+                for obj in object_list.objects :
+                    if obj.name == "Trickandle" : 
+                        vector_utils.update_mouse(obj)
+                        vector_utils.update_vector(obj)
+                self.game_state = "paused"
 
 
     def hover(self, screen):
