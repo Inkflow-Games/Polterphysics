@@ -23,6 +23,7 @@ from core.force_calculator import *
 from objects.object import *
 from utils.math_utils import *
 from utils.vector_utils import *
+from utils.sprites_utils import *
 from core.input_handler import *
 from objects.mincircle import welzl
 from objects.Quadtree import RectangleQ,Quadtree
@@ -174,7 +175,11 @@ while running:
         screen.blit(level_manager.background, (360,0))
         for elements in physics_engine.objects:
             if (elements.name != "RightPanel" and elements.name != "LeftPanel") :
-                elements.shape.draw(screen,(255,0,0)) # Draws the shape of the objects in red
+                
+                if elements.name in phantoms_names:
+                    elements.shape.draw(screen,phantoms_color[elements.name])
+                else : 
+                    elements.shape.draw(screen,(255,0,0)) # Draws the shape of the objects in red
         
         # to delete (?)
         # for elements in physics_engine.objects:
@@ -209,10 +214,11 @@ while running:
                 click = False
         elif "data\\Phantoms\\" in  button.image:
             for elem in range (len(physics_engine.objects)) :
-                if (physics_engine.objects[elem].name == button.action) and physics_engine.objects[elem].applied_coords != [0,0]:
-                    button.hover(screen)
-                elif  "data\\Phantoms\\" not in  button.image or physics_engine.objects[elem].applied_coords == [0,0]: 
-                    button.draw(screen)
+                if (physics_engine.objects[elem].name == button.action):
+                    if (physics_engine.objects[elem].applied_coords != [0,0]) :
+                        button.hover(screen)
+                    else : 
+                        button.draw(screen)
 
         else :
             button.draw(screen)

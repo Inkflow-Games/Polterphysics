@@ -96,7 +96,7 @@
       ],
       "name": "Trickandle"
     },
-    "Polter": {
+    "Ballman": {
       "polygon": false,
       "grabable": true,
       "mass": 10,
@@ -113,7 +113,7 @@
         [ 1300, 900 ],
         [ 0, 900 ]
       ],
-      "name": "Polter"
+      "name": "Ballman"
     }
   },
   "2": {
@@ -228,7 +228,7 @@
       "applied_coords": [ 0, 0 ],
       "applied_angle": 0,
       "simulated": [],
-      "centroid": [ [ 500, 0 ] ],
+      "centroid": [ [ 600, 50 ] ],
       "vertices": [
         [
           0,
@@ -249,24 +249,24 @@
       ],
       "name": "Ballman"
     },
-    "Polter": {
+    "Trickandle": {
       "polygon": false,
       "grabable": true,
-      "mass": 10,
+      "mass": 4,
       "restitution_coefficient": 0.8,
-      "radius": 50,
+      "radius": 30,
       "mouse": [ 0, 0 ],
       "applied_coords": [ 0, 0 ],
       "applied_angle": 0,
       "simulated": [],
-      "centroid": [ [ 800, 0 ] ],
+      "centroid": [ [ 500, 0 ] ],
       "vertices": [
         [ 0, 800 ],
-        [ 1300, 800 ],
-        [ 1300, 900 ],
+        [ 1000, 800 ],
+        [ 1000, 900 ],
         [ 0, 900 ]
       ],
-      "name": "Polter"
+      "name": "Trickandle"
     }
   },
   "3": {
