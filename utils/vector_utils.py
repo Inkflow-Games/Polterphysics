@@ -19,7 +19,7 @@ Dependencies: math : degrees, sqrt, atan2
               pygame.math : Vector2
 """
 
-from math import degrees, atan2
+from math import degrees, atan2, radians, cos, sin
 from utils.math_utils import newton_to_force
 import core.physics_engine
 import pygame
@@ -107,6 +107,7 @@ def computes_positions(obj, realistic = False,simulation_steps=20, dt_sim=0.1):
         simulation_steps (int) : number of positions to compute (Default = 20)
         dt_sim (float) : time difference between 2 positions (Default = 0.1)
     """
+    obj.simulated = [] # Reset the field if a zone have been entered (in case, simulation_steps + 1 positions in the field != simulation_steps)
     v0 = obj.shape.velocity  # Initial velocity of the object : pixels.dt^-1
     force_applied = Vector2(obj.applied_coords)
     # acceleration vector = obj.shape.mass * (sum)forces vectors
@@ -115,27 +116,115 @@ def computes_positions(obj, realistic = False,simulation_steps=20, dt_sim=0.1):
     original = obj.shape.centroid  # Starting position
     simulated_position = original.copy()  # Copy for simulation steps
     
+    """
+    Use the necessary fields depending on the type of zone
+    
+    
+    if len(obj.zone) == 8 : # If there is a zone for the object
+        vector_zone = Vector2(obj.zone[1])
+        center_zone = Vector2(obj.zone[2])
+        x_left = obj.zone[3]
+        x_right = obj.zone[4]
+        y_up = obj.zone[5]
+        y_down = obj.zone[6]
+        radius = obj.zone[7]
+    """
+    
     # Realistic equations models
     if realistic == True : 
         for i in range(1, simulation_steps + 1):
+            """
+            Need to implement the realistic equations if a potential zone is met 
+            --> we need to take the new v0 each time the object is touched by the vector of a zone + update the original position at the same time
+            --> when exiting a zone, take v0 and the original position as the new v0 and original for the computations (until entering a zone, ...) 
+            
+            
+            if obj.zone[0] != "magnetism" : # Wind zone --> no : vector_zone, center_zone, radius
+                if simulated_position[0] <= x_right and simulated_position[0] >= x_left and simulated_position[1] <= y_up and simulated_position[1] >= y_down: # If on the zone
+                    
+                    x = 0.5*( (force_applied.x + vector_zone.x) / obj.shape.mass )*((dt_sim*i)**2)) + v0[0]*dt_sim*i + simulated_position[0]
+                    y = 0.5*((force_applied.y + vector_zone.y ) /obj.shape.mass + 9.81 )*((dt_sim*i)**2)) + v0[1]*dt_sim*i + simulated_position[1]
+            """
+                
             x = 0.5*(force_applied.x*((dt_sim*i)**2))/obj.shape.mass + v0[0]*dt_sim*i + simulated_position[0]
             y = 0.5*((force_applied.y/obj.shape.mass + 9.81)*((dt_sim*i)**2)) + v0[1]*dt_sim*i + simulated_position[1]
             predicted_positions.append([int(x), int(y)])
     
     else : 
-        acceleration = Vector2(obj.applied_coords) / obj.shape.mass
+        # Initial speed = inertia + applied velocity by the vector
+        # The applied vector is NOT a CONTINUOUS force
+        simulated_velocity = obj.shape.velocity + (Vector2(obj.applied_coords) / obj.shape.mass)
 
-        predicted_velocity = v0 + acceleration
-        simulated_velocity = predicted_velocity.copy()  # Copie pour éviter les références
+        predicted_positions = [simulated_position.copy()] # Copy the initial position at the beginning of the list 
 
-        for _ in range(simulation_steps): # Simulate on 50 frames 
-            simulated_velocity.y += newton_to_force(9.81) * dt_sim  # Add gravity each frame
+        # If there is a field "zone" = ["wind", ...] in the object
+        if len(obj.zone) == 8 and obj.zone[0] == "wind":
+            vector_zone = Vector2(obj.zone[1])
+            x_left = obj.zone[3]
+            x_right = obj.zone[4]
+            y_up = obj.zone[5]
+            y_down = obj.zone[6]
+        else:
+            vector_zone = Vector2(0, 0)  # No zone defined for this object
+
+        for _ in range(simulation_steps):
+            # If the centroid position of an object is inside a rectangle zone
+            if (
+                len(obj.zone) == 8 and
+                x_left <= simulated_position.x <= x_right and
+                y_up <= simulated_position.y <= y_down
+            ):
+                # Add the vector of the zone to the speed of the object (this force is CONTINUOUS)
+                simulated_velocity += vector_zone / obj.shape.mass
+
+            # Application of the gravity
+            simulated_velocity.y += newton_to_force(9.81) * dt_sim
+
+            # Computation of a position
             simulated_position.x += newton_to_force(simulated_velocity.x) * dt_sim
             simulated_position.y += newton_to_force(simulated_velocity.y) * dt_sim
+
             predicted_positions.append(simulated_position.copy())
-    
+            
     # Store simulated positions for later use
     obj.simulated = predicted_positions
+
+
+
+def draw_arrow(screen, color, start, end, width, head_length, head_angle):
+    """
+    Draws the arrow that represents the vector
+
+    Parameters:
+        screen (pygame display): reference to the window where the game is taking place
+        color (tuple int : in 0-255) : color of the arrow
+        start (int/float) : center of the object
+        end (int/float) : mouse position
+        width (int) : of the line
+        head_length (int) : of the arrow
+        head_angle (int) : orientation
+    """
+    # Draw the line
+    pygame.draw.line(screen, color, start, end, width)
+
+    # Computes arrow direction
+    dx = end[0] - start[0]
+    dy = end[1] - start[1]
+    angle = atan2(dy, dx)
+
+    # Computes left and right points of the arrow 
+    left = (
+        end[0] - head_length * cos(angle - radians(head_angle)),
+        end[1] - head_length * sin(angle - radians(head_angle))
+    )
+    right = (
+        end[0] - head_length * cos(angle + radians(head_angle)),
+        end[1] - head_length * sin(angle + radians(head_angle))
+    )
+
+    # Draw the triangle
+    pygame.draw.polygon(screen, color, [end, left, right])
+
 
 
 
@@ -156,7 +245,7 @@ def lines_and_positions(objects_list, screen, game_state="running", realistic = 
                 computes_positions(obj, realistic)
 
                 # Draw applied force line (white)
-                pygame.draw.line(screen, (255, 255, 255), obj.shape.centroid, obj.mouse, 5)
+                draw_arrow(screen, (255, 255, 255), obj.shape.centroid, obj.mouse, 5, 20, 25)
 
                 # Draw simulated positions as a trajectory (yellow points)
                 for i in range(len(obj.simulated)):

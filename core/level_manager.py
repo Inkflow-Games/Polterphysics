@@ -207,7 +207,8 @@ def load_objects(object_infos):
         simulated=object_infos["simulated"],
         name=object_infos["name"],
         centroid=transform_Vector2(object_infos["centroid"])[0],
-        vertices=transform_Vector2(object_infos["vertices"])
+        vertices=transform_Vector2(object_infos["vertices"]),
+        zone=object_infos["zone"]
     )
     return new
 
