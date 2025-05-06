@@ -135,7 +135,7 @@ while running:
         physics_engine.update(dt)
 
     # === Drawing ===
-    screen.fill((170, 170, 170))
+    screen.fill((20, 20, 20))
     if game_state == "menu":
         screen.blit(pictureBackground, (0, 0))
     elif game_state == "options":
@@ -143,6 +143,8 @@ while running:
     else:
         screen.blit(level_manager.background, (360, 0))
         level_manager.sprite_manager.update(screen, physics_engine.objects)
+        screen.blit(pygame.image.load("data//background//left_panel.png"), (0,0))
+        screen.blit(pygame.image.load("data//background//right_panel.png"), (1560,0))
 
 
         screen.blit(level_manager.background, (360,0))
