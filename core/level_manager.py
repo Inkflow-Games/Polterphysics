@@ -79,7 +79,7 @@ class Button:
         self.game_state = ""
 
 
-    def is_pressed(self, display_width, display_height, object_list):
+    def is_pressed(self, display_width, display_height, object_list, screen):
         """
         Handles the action associated with a button click.
         Uses a match-case to select the corresponding behavior.
@@ -105,10 +105,10 @@ class Button:
                 for obj in object_list.objects:
                     update_mouse(obj, position = Vector2(0,0)) # Reset mouse vector
                 if (attempts_left == 0) :
-                    game_over(screen_width, screen_height, object_list)
+                    game_over(screen_width, screen_height, object_list, screen)
                     self.game_state = "game_over"
                 else :
-                    load_scene(current_scene, screen_width, screen_height, object_list)
+                    load_scene(current_scene, screen_width, screen_height, object_list, screen)
 
             case "Next Level" :
                 attempts_left = 3
@@ -116,24 +116,24 @@ class Button:
                 for obj in object_list.objects:
                     update_mouse(obj, position = Vector2(0,0)) # Reset mouse vector
                 if (current_scene + 1 > max_scene) : 
-                    load_scene(-2, screen_width, screen_height, object_list)
+                    load_scene(-2, screen_width, screen_height, object_list, screen)
                     self.game_state = "win"
                 else :
                     self.game_state = "paused"
-                    load_scene(current_scene + 1, screen_width, screen_height, object_list)
+                    load_scene(current_scene + 1, screen_width, screen_height, object_list ,screen)
 
             case "Load Main Menu" :
                 self.game_state = "menu"
-                load_scene(0, screen_width, screen_height, object_list)
+                load_scene(0, screen_width, screen_height, object_list,screen)
 
             case "1" | "2" | "3" :
                 self.game_state = "paused"
                 attempts_left = 3
-                load_scene(int(self.action) + 1, screen_width, screen_height, object_list)
+                load_scene(int(self.action) + 1, screen_width, screen_height, object_list,screen)
 
             case "Option":
                 self.game_state = "options"
-                load_scene(-1, screen_width, screen_height, object_list)
+                load_scene(-1, screen_width, screen_height, object_list,screen)
 
             case "Ballman" | "Polter" | "Rospirit" :
                 for obj in object_list.objects :
@@ -243,7 +243,7 @@ def transform_Vector2(infos):
         arr.append(Vector2(*elem))
     return arr
 
-def game_over(screen_width, screen_height, object_list):
+def game_over(screen_width, screen_height, object_list, screen):
     """
     End the try and display the game over screen
 
@@ -254,10 +254,10 @@ def game_over(screen_width, screen_height, object_list):
 
     Returns:
     """
-    load_scene(-3, screen_width, screen_height, object_list)
+    load_scene(-3, screen_width, screen_height, object_list, screen)
 
 
-def load_scene(n: int, screen_width, screen_height, object_list):
+def load_scene(n: int, screen_width, screen_height, object_list, screen):
     """
     Load a scene by its index and update global objects/buttons accordingly.
 
@@ -282,6 +282,15 @@ def load_scene(n: int, screen_width, screen_height, object_list):
     button_list = []
     text_list = []
 
+    fade = pygame.Surface((screen_width, screen_height))
+    fade.fill((0, 0, 0))
+    for alpha in range(0, 50, 1):
+        fade.set_alpha(alpha)
+        screen.blit(fade, (0, 0))
+        pygame.display.flip()
+        pygame.time.delay(15)
+
+        
     match n:
         case -3:  # Game over menu
             for button in game_over_buttons.values():  
@@ -343,3 +352,6 @@ def load_scene(n: int, screen_width, screen_height, object_list):
             text_list.append(index_of_the_level)
             text_list.append(number_of_tries)
             text_list.append(number_of_tries2)
+        
+            
+            

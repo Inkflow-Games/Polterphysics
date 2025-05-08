@@ -67,7 +67,7 @@ key_state = {
 }
 
 # Load first level/scene
-level_manager.load_scene(0, display_width, display_height, physics_engine)
+level_manager.load_scene(0, display_width, display_height, physics_engine, screen)
 game_state = "menu"
 
 
@@ -170,10 +170,10 @@ while running:
             for obj in physics_engine.objects:
                 update_mouse(obj, position = Vector2(0,0)) # Reset mouse vector
             if level_manager.current_scene + 1 > level_manager.max_scene:
-                level_manager.load_scene(-2, display_width, display_height, physics_engine)
+                level_manager.load_scene(-2, display_width, display_height, physics_engine,screen)
                 game_state  = "win"
             else:
-                level_manager.load_scene(level_manager.current_scene + 1, display_width, display_height, physics_engine)
+                level_manager.load_scene(level_manager.current_scene + 1, display_width, display_height, physics_engine,screen)
 
         # Display text elements
         if game_state == "paused" or game_state == "running" :
@@ -196,7 +196,7 @@ while running:
             button.hover(screen)
             if click:
                 play_sound_fx("data/Music/pwomp.wav" if randint(0, 50) == 30 else "data/Music/click.wav")
-                button.is_pressed(display_width, display_height, physics_engine)
+                button.is_pressed(display_width, display_height, physics_engine,screen)
                 game_state = button.game_state
                 click = False
         elif "data\\Phantoms\\" in  button.image:
