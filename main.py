@@ -53,8 +53,6 @@ pictureBackground = pygame.transform.scale(pygame.image.load("data/background/ba
 pictureOption = pygame.transform.scale(pygame.image.load("data/background/back1-tuto.png"), (display_width, display_height))
 win = pygame.transform.scale(pygame.image.load("data/background/win_back.png"), (display_width, display_height))
 game_over = pygame.transform.scale(pygame.image.load("data/background/game_over_back.png"), (display_width, display_height))
-leftPanel = pygame.image.load("data//background//right_panel.png")
-rightPanel = pygame.image.load("data//background//left_panel.png")
 
 # Physics engine and spatial partitioning
 physics_engine = PhysicsEngine()
@@ -150,10 +148,8 @@ while running:
     elif game_state == "win" :
         screen.blit(win, (0,0))
     else:
-        screen.blit(level_manager.background, (360, 0))
+        screen.blit(level_manager.background, (0, 0))
         level_manager.sprite_manager.update(screen, physics_engine.objects)
-        screen.blit(leftPanel, (0,0))
-        screen.blit(rightPanel, (1560,0))
 
         for elements in physics_engine.objects:
             if (elements.name != "RightPanel" and elements.name != "LeftPanel") :
