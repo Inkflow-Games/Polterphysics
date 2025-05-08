@@ -51,6 +51,8 @@ pygame.display.set_caption("Physics Engine Test")
 # Backgrounds
 pictureBackground = pygame.transform.scale(pygame.image.load("data/background/back1.png"), (display_width, display_height))
 pictureOption = pygame.transform.scale(pygame.image.load("data/background/back1-tuto.png"), (display_width, display_height))
+win = pygame.transform.scale(pygame.image.load("data/background/win_back.png"), (display_width, display_height))
+game_over = pygame.transform.scale(pygame.image.load("data/background/game_over_back.png"), (display_width, display_height))
 leftPanel = pygame.image.load("data//background//right_panel.png")
 rightPanel = pygame.image.load("data//background//left_panel.png")
 
@@ -143,6 +145,10 @@ while running:
         screen.blit(pictureBackground, (0, 0))
     elif game_state == "options":
         screen.blit(pictureOption, (0, 0))
+    elif game_state == "game_over":
+        screen.blit(game_over, (0,0))
+    elif game_state == "win" :
+        screen.blit(win, (0,0))
     else:
         screen.blit(level_manager.background, (360, 0))
         level_manager.sprite_manager.update(screen, physics_engine.objects)
@@ -161,15 +167,20 @@ while running:
         if level_manager.sprite_manager.detected:
             level_manager.sprite_manager.detected = False
             game_state = "paused"
-            level_manager.tries = 0
+            level_manager.attempts_left = 3
+            reset_level_vectors(physics_engine.objects)
+            for obj in physics_engine.objects:
+                update_mouse(obj, position = Vector2(0,0)) # Reset mouse vector
             if level_manager.current_scene + 1 > level_manager.max_scene:
-                level_manager.load_scene(level_manager.current_scene, display_width, display_height, physics_engine)
+                level_manager.load_scene(-2, display_width, display_height, physics_engine)
+                game_state  = "win"
             else:
                 level_manager.load_scene(level_manager.current_scene + 1, display_width, display_height, physics_engine)
 
         # Display text elements
-        screen.blit(level_manager.text_list[0], (0.03 * display_width, 0.15 * display_height))
-        screen.blit(level_manager.text_list[1], (0.03 * display_width, 0.25 * display_height))
+        if game_state == "paused" or game_state == "running" :
+            screen.blit(level_manager.text_list[0], (0.03 * display_width, 0.15 * display_height))
+            screen.blit(level_manager.text_list[1], (0.03 * display_width, 0.25 * display_height))
 
         # Display user-applied vectors and trajectory prediction
         if game_state == "paused":

@@ -29,6 +29,8 @@ with open("data/buttons.json", "r") as file:
     buttons = json.load(file)
     main_menu_buttons = buttons["main_menu"]
     tutorial_menu_buttons = buttons["tutorial_menu"]
+    game_over_buttons = buttons["game_over"]
+    win_buttons = buttons["win"]
 
 with open("data/levels.json", "r") as f:
     levels = json.load(f)
@@ -83,7 +85,7 @@ class Button:
         """
         max_scene = 4
         screen_width, screen_height = display_width, display_height
-        global tries
+        global attempts_left
 
         match self.action :
             case "Play" :
@@ -97,18 +99,26 @@ class Button:
 
             case "Restart Level":
                 self.game_state = "paused"
-                tries += 1
+                attempts_left -= 1
                 reset_level_vectors(object_list.objects)
                 for obj in object_list.objects:
                     update_mouse(obj, position = Vector2(0,0)) # Reset mouse vector
-                load_scene(current_scene, screen_width, screen_height, object_list)
+                if (attempts_left == 0) :
+                    game_over(screen_width, screen_height, object_list)
+                    self.game_state = "game_over"
+                else :
+                    load_scene(current_scene, screen_width, screen_height, object_list)
 
             case "Next Level" :
-                self.game_state = "paused"
-                tries = 0
+                attempts_left = 3
+                reset_level_vectors(object_list.objects)
+                for obj in object_list.objects:
+                    update_mouse(obj, position = Vector2(0,0)) # Reset mouse vector
                 if (current_scene + 1 > max_scene) : 
-                    load_scene(current_scene, screen_width, screen_height, object_list)
+                    load_scene(-2, screen_width, screen_height, object_list)
+                    self.game_state = "win"
                 else :
+                    self.game_state = "paused"
                     load_scene(current_scene + 1, screen_width, screen_height, object_list)
 
             case "Load Main Menu" :
@@ -117,7 +127,7 @@ class Button:
 
             case "1" | "2" | "3" :
                 self.game_state = "paused"
-                tries = 0
+                attempts_left = 3
                 load_scene(int(self.action) + 1, screen_width, screen_height, object_list)
 
             case "Option":
@@ -228,6 +238,19 @@ def transform_Vector2(infos):
         arr.append(Vector2(*elem))
     return arr
 
+def game_over(screen_width, screen_height, object_list):
+    """
+    End the try and display the game over screen
+
+    Parameters:
+    screen_width (int): Width of the screen.
+    screen_height (int): Height of the screen.
+    object_list (ObjectList): Container for game objects from the physics engine.
+
+    Returns:
+    """
+    load_scene(-3, screen_width, screen_height, object_list)
+
 
 def load_scene(n: int, screen_width, screen_height, object_list):
     """
@@ -237,7 +260,7 @@ def load_scene(n: int, screen_width, screen_height, object_list):
     n (int): Scene index.
     screen_width (int): Width of the screen.
     screen_height (int): Height of the screen.
-    object_list (ObjectList): Container for game objects.
+    object_list (ObjectList): Container for game objects from the physics engine.
     """
     object_list.objects = []
     global current_scene 
@@ -254,6 +277,20 @@ def load_scene(n: int, screen_width, screen_height, object_list):
     text_list = []
 
     match n:
+        case -3:  # Game over menu
+            for button in game_over_buttons.values():  
+                button_list.append(load_button(button, screen_width, screen_height))
+            if playing_music != "data/Music/menu.mp3":
+                play_music("data/Music/menu.mp3")
+                playing_music = "data/Music/menu.mp3"
+
+        case -2:  # Win screen
+            for button in win_buttons.values():  
+                button_list.append(load_button(button, screen_width, screen_height))
+            if playing_music != "data/Music/menu.mp3":
+                play_music("data/Music/menu.mp3")
+                playing_music = "data/Music/menu.mp3"
+
         case -1:  # Tutorial menu
             for button in tutorial_menu_buttons.values():  
                 button_list.append(load_button(button, screen_width, screen_height))
@@ -292,6 +329,6 @@ def load_scene(n: int, screen_width, screen_height, object_list):
             font = pygame.font.SysFont("Calibri", 40)
             font.set_bold(True)
             index_of_the_level = font.render("LEVEL : {}".format(n-1), True, (255, 255, 255))
-            number_of_tries = font.render("TRY NUMBER : {}".format(tries), True, (255, 255, 255))
+            number_of_tries = font.render("ATTEMPT LEFT : {}".format(attempts_left), True, (255, 255, 255))
             text_list.append(index_of_the_level)
             text_list.append(number_of_tries)
