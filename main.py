@@ -108,8 +108,9 @@ while running:
         # Apply all the vectors entered by the user during transition from "paused" state to "running" state --> prevent vector stacking 
         if vectors_applied == False :
             for obj in physics_engine.objects :
-                if (obj.applied_coords != [0,0]) and (obj.grabable == True) : # general application of the forces
+                if (obj.applied_coords != [0,0]) and (obj.grabable == True) and (obj.playable == True): # general application of the forces
                     obj.shape.velocity += (Vector2(obj.applied_coords) /  obj.shape.mass) # Instant increase of the speed of the object 
+                    obj.playable = False # Allow for only 1 vector applied per object
             vectors_applied = True
         
         for obj in physics_engine.objects :
@@ -155,7 +156,10 @@ while running:
             if (elements.name != "RightPanel" and elements.name != "LeftPanel") :
                 
                 if elements.name in phantoms_names:
-                    elements.shape.draw(screen,phantoms_color[elements.name])
+                    if elements.playable == True : 
+                        elements.shape.draw(screen,phantoms_color[elements.name])
+                    else : # If a vector has already been applied, then it is drawn in gray
+                        elements.shape.draw(screen,(170,170,170))
                 else : 
                     elements.shape.draw(screen,(255,0,0))
 
