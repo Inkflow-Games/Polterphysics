@@ -149,8 +149,6 @@ while running:
         screen.blit(leftPanel, (0,0))
         screen.blit(rightPanel, (1560,0))
 
-
-        screen.blit(level_manager.background, (360,0))
         for elements in physics_engine.objects:
             if (elements.name != "RightPanel" and elements.name != "LeftPanel") :
                 
