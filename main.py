@@ -179,8 +179,9 @@ while running:
 
         # Display text elements
         if game_state == "paused" or game_state == "running" :
-            screen.blit(level_manager.text_list[0], (0.03 * display_width, 0.15 * display_height))
-            screen.blit(level_manager.text_list[1], (0.03 * display_width, 0.25 * display_height))
+            screen.blit(level_manager.text_list[0], (0.02 * display_width, 0.15 * display_height))
+            screen.blit(level_manager.text_list[1], (0.02 * display_width, 0.30 * display_height))
+            screen.blit(level_manager.text_list[2], (0.02 * display_width, 0.35 * display_height))
 
         # Display user-applied vectors and trajectory prediction
         if game_state == "paused":

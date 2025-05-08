@@ -326,9 +326,11 @@ def load_scene(n: int, screen_width, screen_height, object_list):
                 playing_music = f"data/Music/level{n-1}.mp3"
 
             # Setup text overlays for level and tries
-            font = pygame.font.SysFont("Calibri", 40)
-            font.set_bold(True)
+            font = pygame.font.SysFont("Snap itc", 40)
+            font.set_bold(False)
             index_of_the_level = font.render("LEVEL : {}".format(n-1), True, (255, 255, 255))
-            number_of_tries = font.render("ATTEMPT LEFT : {}".format(attempts_left), True, (255, 255, 255))
+            number_of_tries = font.render("ATTEMPTS", True, (255, 255, 255))
+            number_of_tries2 = font.render("LEFT : {}".format(attempts_left), True, (255, 255, 255))
             text_list.append(index_of_the_level)
             text_list.append(number_of_tries)
+            text_list.append(number_of_tries2)
