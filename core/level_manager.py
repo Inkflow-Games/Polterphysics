@@ -18,6 +18,7 @@ import json
 
 from objects.object import *
 from data import *
+from utils import sprites_utils
 from utils.vector_utils import *
 from core.sound import play_music
 from objects.key import Key
@@ -159,7 +160,10 @@ class Button:
         Draws the hover image of the button on the screen.
         """
         img = pygame.image.load(self.imageHover)
-        screen.blit(img, (self.position.x - (self.width)/2, self.position.y - (self.height)/2))
+        if self.action in sprites_utils.phantoms_names :
+            screen.blit(img, (self.position.x - (self.width)/1.5, self.position.y - (self.height)/1.5))
+        else :
+            screen.blit(img, (self.position.x - (self.width)/2, self.position.y - (self.height)/2))
 
 
     def draw(self, screen):

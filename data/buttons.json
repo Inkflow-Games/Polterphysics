@@ -17,6 +17,15 @@
       "height": 80,
       "width": 240,
       "action": "Option"
+    },
+    "Quit": {
+      "size": 1,
+      "image": "data\\ButtonsImages\\OptionButton.png",
+      "imageHover": "data\\ButtonsImages\\OptionButtonPressed.png",
+      "position": [ 0.8, 0.85 ],
+      "height": 80,
+      "width": 240,
+      "action": "Stop"
     }
   },
 
