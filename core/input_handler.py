@@ -81,26 +81,29 @@ def vector_application(
     elif ((event.type == pygame.MOUSEBUTTONDOWN and event.button == 1) or (event.type == pygame.MOUSEMOTION)) and clicked_object != None: # left click + object clicked
         if 360<=mouse_position.x<=1560 and 0<=mouse_position.y<=1080 :
             update_mouse(clicked_object, mouse_position)
-            force_vector = Vector2(
-            (mouse_position[0] - clicked_object.shape.centroid[0])*5,
-            (mouse_position[1] - clicked_object.shape.centroid[1])*5
-            ) #modify the multiplication coeff if needed
-            if -1300<=force_vector.x<=1300 and -1300<=force_vector.y<=1300 : 
-                vector_angle = compute_angle(force_vector.x, force_vector.y) #need revisions because it gives stupid values sometimes
-                update_vector(clicked_object, force_vector, vector_angle)
+            direction_vector = Vector2(
+                mouse_position[0] - clicked_object.shape.centroid[0],
+                mouse_position[1] - clicked_object.shape.centroid[1]
+            )
+            # Cap the force vector if too large
+            capped_vector = direction_vector.normalize() * min(direction_vector.length(), 260) * 5  # Same effect as (direction * coeff), 260*5=1300
+            if -1300<=capped_vector.x<=1300 and -1300<=capped_vector.y<=1300 : 
+                vector_angle = compute_angle(capped_vector.x, capped_vector.y) # Not used anywhere for now
+                update_vector(clicked_object, capped_vector, vector_angle)
     
     elif event.type == pygame.MOUSEBUTTONUP and event.button == 1 and clicked_object != None: # when click is released
         if 360<=mouse_position.x<=1560 and 0<=mouse_position.y<=1080 :
             update_mouse(clicked_object, mouse_position)
-            force_vector = Vector2(
-            (mouse_position[0] - clicked_object.shape.centroid[0])*5,
-            (mouse_position[1] - clicked_object.shape.centroid[1])*5
-            ) #modify the multiplication coeff if needed --> give more/less precision with the norm of the vector
-            if -1300<=force_vector.x<=1300 and -1300<=force_vector.y<=1300 : 
-                vector_angle = compute_angle(force_vector.x, force_vector.y) #need revisions because it gives stupid values sometimes
-                update_vector(clicked_object, force_vector, vector_angle)
+            direction_vector = Vector2(
+                mouse_position[0] - clicked_object.shape.centroid[0],
+                mouse_position[1] - clicked_object.shape.centroid[1]
+            )
+            # Cap the force vector if too large
+            capped_vector = direction_vector.normalize() * min(direction_vector.length(), 260) * 5  # max 1300 norm
+            if -1300<=capped_vector.x<=1300 and -1300<=capped_vector.y<=1300 : 
+                vector_angle = compute_angle(capped_vector.x, capped_vector.y) 
+                update_vector(clicked_object, capped_vector, vector_angle)
             
-            # to change : move the centroid of circles and not coherent positions given
             computes_positions(clicked_object, simulation_steps=20, dt_sim=0.1)
             
             clicked_object = None
