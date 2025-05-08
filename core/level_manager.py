@@ -316,7 +316,7 @@ def load_scene(n: int, screen_width, screen_height, object_list):
                 button_list.append(load_button(button, screen_width, screen_height))
             for object in levels["{}".format(n-1)].keys():
                 if object == "background":
-                    background = pygame.image.load(levels["{}".format(n-1)][object])
+                    background = pygame.image.load(levels["{}".format(n-1)][object]).convert()
                 elif object == "key":
                     key = Key(
                         coordinates=levels["{}".format(n-1)][object]["coordinates"],

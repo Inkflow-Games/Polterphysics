@@ -139,7 +139,6 @@ while running:
         physics_engine.update(dt)
 
     # === Drawing ===
-    screen.fill((20, 20, 20))
     if game_state == "menu":
         screen.blit(pictureBackground, (0, 0))
     elif game_state == "options":
