@@ -275,6 +275,7 @@ def load_scene(n: int, screen_width, screen_height, object_list):
     global text_list
     global tries
     global sprite_manager
+    global sprites
     key = None
 
     current_scene = n
@@ -314,9 +315,7 @@ def load_scene(n: int, screen_width, screen_height, object_list):
             for button in buttons["{}".format(n-1)].values():
                 button_list.append(load_button(button, screen_width, screen_height))
             for object in levels["{}".format(n-1)].keys():
-                if (object != "background") and (object != "key"):
-                    object_list.add_object(load_objects(levels["{}".format(n-1)][object]))
-                elif object == "background":
+                if object == "background":
                     background = pygame.image.load(levels["{}".format(n-1)][object])
                 elif object == "key":
                     key = Key(
@@ -324,6 +323,11 @@ def load_scene(n: int, screen_width, screen_height, object_list):
                         detection_radius=levels["{}".format(n-1)][object]["detection_radius"],
                         end_object_name=levels["{}".format(n-1)][object]["end_object_name"]
                     )
+                elif object == "sprites" :
+                    sprites = levels["{}".format(n-1)][object]
+                else:
+                    object_list.add_object(load_objects(levels["{}".format(n-1)][object]))
+
                 sprite_manager = SpriteManager(key)
 
             if playing_music != f"data/Music/level{n-1}.mp3":
