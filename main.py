@@ -38,8 +38,8 @@ pygame.mixer.init()
 clock = pygame.time.Clock()
 running = True
 
-clicked_object = None        # Object that will receive the user-applied vector
-vectors_applied = False      # Prevents repeated vector application
+clicked_object = None # Object that will receive the user-applied vector
+vectors_applied = False # Prevents repeated vector application
 
 # Screen configuration
 display_info = pygame.display.Info()
@@ -94,7 +94,7 @@ while running:
             key_state[key] = False
 
     if game_state == "paused":
-        vectors_applied = False  # Allow applying vectors again
+        vectors_applied = False # Allow applying vectors again
         clicked_object = vector_application(event, physics_engine.objects, clicked_object, quadtree)
 
     if game_state == "running":
@@ -150,7 +150,6 @@ while running:
         screen.blit(win, (0,0))
     else:
         screen.blit(level_manager.background, (0, 0))
-        level_manager.sprite_manager.update(screen, physics_engine.objects)
 
         for elements in physics_engine.objects:
             if (elements.name != "RightPanel" and elements.name != "LeftPanel") :
@@ -163,7 +162,7 @@ while running:
                 else : 
                     elements.shape.draw(screen,(255,0,0))
 
-        level_manager.sprite_manager.update(screen, physics_engine.objects)
+        level_manager.sprite_manager.update(screen, physics_engine.objects, level_manager.sprites)
         if level_manager.sprite_manager.detected:
             level_manager.sprite_manager.detected = False
             game_state = "paused"
