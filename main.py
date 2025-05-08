@@ -15,6 +15,7 @@ Python Version: 3.12.9
 Dependencies: pygame, core.physics_engine, objects.object, etc.
 """
 
+from turtle import left
 import pygame
 from pygame.math import Vector2
 from random import randint
@@ -50,6 +51,8 @@ pygame.display.set_caption("Physics Engine Test")
 # Backgrounds
 pictureBackground = pygame.transform.scale(pygame.image.load("data/background/back1.png"), (display_width, display_height))
 pictureOption = pygame.transform.scale(pygame.image.load("data/background/back1-tuto.png"), (display_width, display_height))
+leftPanel = pygame.image.load("data//background//right_panel.png")
+rightPanel = pygame.image.load("data//background//left_panel.png")
 
 # Physics engine and spatial partitioning
 physics_engine = PhysicsEngine()
@@ -143,8 +146,8 @@ while running:
     else:
         screen.blit(level_manager.background, (360, 0))
         level_manager.sprite_manager.update(screen, physics_engine.objects)
-        screen.blit(pygame.image.load("data//background//left_panel.png"), (0,0))
-        screen.blit(pygame.image.load("data//background//right_panel.png"), (1560,0))
+        screen.blit(leftPanel, (0,0))
+        screen.blit(rightPanel, (1560,0))
 
 
         screen.blit(level_manager.background, (360,0))
