@@ -15,7 +15,6 @@ Python Version: 3.12.9
 Dependencies: pygame, core.physics_engine, objects.object, etc.
 """
 
-from turtle import left
 import pygame
 from pygame.math import Vector2
 from random import randint
@@ -87,8 +86,9 @@ while running:
     # Toggle pause with spacebar
     if keys[pygame.K_SPACE] and not key_state[pygame.K_SPACE]:
         key_state[pygame.K_SPACE] = True
-        game_state = "running" if game_state == "paused" else "paused"
-
+        if (game_state == "running" or game_state == "paused") :
+            game_state = "running" if game_state == "paused" else "paused"
+            
     for key in key_state:
         if not keys[key]:
             key_state[key] = False
