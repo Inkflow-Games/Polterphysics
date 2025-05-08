@@ -204,12 +204,27 @@ def draw_arrow(screen, color, start, end, width, head_length, head_angle):
         head_length (int) : of the arrow
         head_angle (int) : orientation
     """
-    # Draw the line
-    pygame.draw.line(screen, color, start, end, width)
 
     # Computes arrow direction
     dx = end[0] - start[0]
     dy = end[1] - start[1]
+
+    # Limit the vector to a norm
+    norm_max = 300  # Radius of the circle zone of limitation
+    norm_vector = (dx**2 + dy**2)**0.5
+
+    if norm_vector > norm_max:
+        facteur = norm_max / norm_vector
+        end = (
+            start[0] + dx * facteur,
+            start[1] + dy * facteur
+        )
+        dx = end[0] - start[0]
+        dy = end[1] - start[1]
+
+    # Draw the line
+    pygame.draw.line(screen, color, start, end, width)
+
     angle = atan2(dy, dx)
 
     # Computes left and right points of the arrow 
