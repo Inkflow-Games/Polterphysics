@@ -64,15 +64,16 @@ def vector_application(
         mini = float("inf")
         quadtree.query(Object(False,False,1,1,[],1,mouse_position, "mouse", False), potential) #creates a circle of radius 1 to detect intersection with objects around the area
         for elements in potential :
-            if elements.polygon == False : # If the object is a circle
-                if elements.shape.centroid.distance_squared_to(mouse_position) < mini :
-                    mini = elements.shape.centroid.distance_squared_to(mouse_position)  # obtain the distance between mouse and nearest centroid
-                    clicked_object = elements  #obtain the object that is the closest to the mouse
-            elif elements.polygon == True : # If object is a polygon
-                for i in range(len(elements.shape.vertices)) :
-                    if elements.shape.vertices[i].distance_squared_to(mouse_position) < mini and elements.shape.centroid.distance_squared_to(mouse_position) < 5000:
-                        mini = elements.shape.vertices[i].distance_squared_to(mouse_position)  # obtain the distance between mouse and nearest centroid
-                        clicked_object = elements
+            if elements.playable == True :
+                if elements.polygon == False : # If the object is a circle
+                    if elements.shape.centroid.distance_squared_to(mouse_position) < mini :
+                        mini = elements.shape.centroid.distance_squared_to(mouse_position)  # obtain the distance between mouse and nearest centroid
+                        clicked_object = elements  #obtain the object that is the closest to the mouse
+                elif elements.polygon == True : # If object is a polygon
+                    for i in range(len(elements.shape.vertices)) :
+                        if elements.shape.vertices[i].distance_squared_to(mouse_position) < mini and elements.shape.centroid.distance_squared_to(mouse_position) < 5000:
+                            mini = elements.shape.vertices[i].distance_squared_to(mouse_position)  # obtain the distance between mouse and nearest centroid
+                            clicked_object = elements
         for elements in objects_list :
             quadtree.delpoint(elements)
         return clicked_object

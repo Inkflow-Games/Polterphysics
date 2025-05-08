@@ -222,7 +222,8 @@ def load_objects(object_infos):
         name=object_infos["name"],
         centroid=transform_Vector2(object_infos["centroid"])[0],
         vertices=transform_Vector2(object_infos["vertices"]),
-        zone=object_infos["zone"]
+        zone=object_infos["zone"],
+        playable=True
     )
     return new
 
