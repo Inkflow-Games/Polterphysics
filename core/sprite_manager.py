@@ -30,32 +30,27 @@ class SpriteManager:
         Parameters:
         key (Key, optional): A key object to be updated alongside the sprite group.
         """
-        self.group = pygame.sprite.Group()
         self.key = key
         self.detected = False
 
-    def add_image(self, image_path, position, size=(32, 32)):
+
+    def draw_sprites(self, sprites, screen):
         """
-        Loads an image, scales it, creates a sprite, and adds it to the group.
+        Loads and draws sprites on the given screen based on the provided sprite data.
 
         Parameters:
-        image_path (str): File path to the image.
-        position (tuple): Top-left (x, y) position for placing the sprite.
-        size (tuple): Width and height to scale the image to (default: (32, 32)).
+        sprites (dict): Dictionary containing sprite data with keys as sprite names and values as dictionaries
+        screen (pygame.Surface): Surface on which to render the sprites.
         """
-        # Load and scale the image
-        image = pygame.image.load(image_path).convert_alpha()
-        image = pygame.transform.scale(image, size)
-        
-        # Create a basic Sprite object and assign the image and position
-        sprite = pygame.sprite.Sprite()
-        sprite.image = image
-        sprite.rect = image.get_rect(topleft=position)
-        
-        # Add the sprite to the group for rendering
-        self.group.add(sprite)
+        for sprite_name, data in sprites.items():
+            image = pygame.image.load(data["path"]).convert_alpha()
+            image = pygame.transform.scale(image, tuple(data["size"]))
+            rotated_image = pygame.transform.rotate(image, data.get("rotation", 0))
+            rect = rotated_image.get_rect(center=tuple(data["coordinates"]))
+            screen.blit(rotated_image, rect)
 
-    def update(self, surface, objects):
+
+    def update(self, surface, objects, sprites):
         """
         Draws all sprites in the group on the surface and updates the key if present.
         If the key becomes detected during the update, sets the manager's `detected` flag.
@@ -65,7 +60,7 @@ class SpriteManager:
         objects (list): List of game objects passed to the key's update method.
         """
         # Draw all managed sprites
-        self.group.draw(surface)
+        self.draw_sprites(sprites, surface)
 
         # Update key detection logic if key is assigned
         if self.key:

@@ -6,6 +6,14 @@
       "detection_radius": 100,
       "end_object_name": "Ballman"
     },
+    "sprites" : {
+      "door" :  {
+        "path": "data/Decor/door.png",
+        "size": [100, 100],
+        "rotation": 0,
+        "coordinates": [ 600, 500 ]
+      }
+    },
     "LeftPanel": {
       "polygon": true,
       "grabable": false,
@@ -133,6 +141,14 @@
       "coordinates": [ 600, 500],
       "detection_radius": 50,
       "end_object_name": "Ballman"
+    },
+    "sprites" : {
+      "door" :  {
+        "path": "data/Decor/door.png",
+        "size": [100, 100],
+        "rotation": 0,
+        "coordinates": [ 600, 500 ]
+      }
     },
     "LeftPanel": {
       "polygon": true,
@@ -297,6 +313,14 @@
       "coordinates": [ 600, 500],
       "detection_radius": 50,
       "end_object_name": "Polter"
+    },
+    "sprites" : {
+      "door" :  {
+        "path": "data/Decor/door.png",
+        "size": [100, 100],
+        "rotation": 0,
+        "coordinates": [ 600, 500 ]
+      }
     },
     "LeftPanel": {
       "polygon": true,
