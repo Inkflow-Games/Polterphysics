@@ -320,6 +320,7 @@ def load_scene(n: int, screen_width, screen_height, object_list, screen):
                 play_music("data/Music/menu.mp3")
                 playing_music = "data/Music/menu.mp3"
 
+
         case _:  # Gameplay levels
             for button in buttons["{}".format(n-1)].values():
                 button_list.append(load_button(button, screen_width, screen_height))
@@ -348,7 +349,7 @@ def load_scene(n: int, screen_width, screen_height, object_list, screen):
             font.set_bold(False)
             index_of_the_level = font.render("LEVEL : {}".format(n-1), True, (255, 255, 255))
             number_of_tries = font.render("ATTEMPTS", True, (255, 255, 255))
-            number_of_tries2 = font.render("LEFT : {}".format(attempts_left), True, (255, 255, 255))
+            number_of_tries2 = font.render("LEFT : {}".format(attempts_left-1), True, (255, 255, 255))
             text_list.append(index_of_the_level)
             text_list.append(number_of_tries)
             text_list.append(number_of_tries2)
