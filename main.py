@@ -15,6 +15,7 @@ Python Version: 3.12.9
 Dependencies: pygame, core.physics_engine, objects.object, etc.
 """
 
+from tkinter import BUTT
 import pygame
 from pygame.math import Vector2
 from random import randint
@@ -197,7 +198,13 @@ while running:
             if click:
                 play_sound_fx("data/Music/pwomp.wav" if randint(0, 50) == 30 else "data/Music/click.wav")
                 button.is_pressed(display_width, display_height, physics_engine,screen)
-                game_state = button.game_state
+                #check the gamestate for the button play/pause
+                if (button.action == "Play" and game_state == "running" ) :
+                    game_state = "paused"
+                elif (button.action == "Play" and game_state == "paused" ) :
+                    game_state = "running"
+                else :
+                    game_state = button.game_state
                 click = False
         elif "data\\Phantoms\\" in  button.image:
             for elem in range (len(physics_engine.objects)) :

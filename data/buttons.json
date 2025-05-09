@@ -111,16 +111,8 @@
       "height": 100,
       "width": 100,
       "action": "Ballman"
-    },
-    "Trickandle": {
-      "size": 1,
-      "image": "data\\Phantoms\\trickandle.png",
-      "imageHover": "data\\Phantoms\\trickandle_hover.png",
-      "position": [ 0.05, 0.6 ],
-      "height": 100,
-      "width": 100,
-      "action": "Trickandle"
     }
+
   },
 
   "2": {

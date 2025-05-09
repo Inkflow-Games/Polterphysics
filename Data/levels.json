@@ -2,14 +2,14 @@
   "1": {
     "background": "data\\background\\back2.png",
     "key": {
-      "coordinates": [ 600, 500],
+      "coordinates": [ 550, 600 ],
       "detection_radius": 100,
       "end_object_name": "Ballman"
     },
-    "sprites" : {
-      "door" :  {
+    "sprites": {
+      "door": {
         "path": "data/Decor/door.png",
-        "size": [100, 100],
+        "size": [ 100, 100 ],
         "rotation": 0,
         "coordinates": [ 600, 500 ]
       }
@@ -31,7 +31,7 @@
         [ 360, 1080 ],
         [ 0, 1080 ]
       ],
-      "zone" : [],
+      "zone": [],
       "name": "LeftPanel"
     },
     "RightPanel": {
@@ -51,10 +51,10 @@
         [ 1920, 1080 ],
         [ 1560, 1080 ]
       ],
-      "zone" : [],
+      "zone": [],
       "name": "RightPanel"
     },
-    "Bloc1": {
+    "Triangle1": {
       "polygon": true,
       "grabable": false,
       "mass": 50000000000000,
@@ -66,18 +66,17 @@
       "simulated": [],
       "centroid": [ [ 0, 0 ] ],
       "vertices": [
-        [ 380, 800 ],
-        [ 700, 800 ],
-        [ 700, 1000 ],
-        [ 380, 1000 ]
+        [ 1559, 0 ],
+        [ 1559, 400 ],
+        [ 1000, 175 ]
       ],
       "zone": [],
       "name": "Bloc2"
     },
-    "Bloc2": {
+    "Triangle2": {
       "polygon": true,
-      "grabable": true,
-      "mass": 500,
+      "grabable": false,
+      "mass": 50000000000000,
       "restitution_coefficient": 0.8,
       "radius": 5,
       "mouse": [ 0, 0 ],
@@ -86,33 +85,65 @@
       "simulated": [],
       "centroid": [ [ 0, 0 ] ],
       "vertices": [
-        [ 380, 500 ],
-        [ 1000, 500 ],
-        [ 1000, 600 ],
-        [ 380, 600 ]
+        [ 1559, 500 ],
+        [ 1559, 880 ],
+        [ 1000, 740 ]
       ],
-      "zone" : [],
+      "zone": [],
       "name": "Bloc2"
     },
-    "Trickandle": {
-      "polygon": false,
-      "grabable": true,
-      "mass": 4,
+    "Bloc3": {
+      "polygon": true,
+      "grabable": false,
+      "mass": 50000000000000,
       "restitution_coefficient": 0.8,
-      "radius": 30,
+      "radius": 5,
       "mouse": [ 0, 0 ],
       "applied_coords": [ 0, 0 ],
       "applied_angle": 0,
       "simulated": [],
-      "centroid": [ [ 500, 0 ] ],
+      "centroid": [ [ 0, 0 ] ],
       "vertices": [
-        [ 0, 800 ],
-        [ 1000, 800 ],
-        [ 1000, 900 ],
-        [ 0, 900 ]
+        [ 361, 250 ],
+        [ 900, 350 ],
+        [ 1200, 450 ],
+        [ 900, 550 ],
+        [ 361, 550 ]
       ],
-      "zone" : ["wind", [0,-8], [0,0], 300, 1200, 0, 1080, 0],
-      "name": "Trickandle"
+      "zone": [],
+      "name": "Bloc2"
+    },
+    "Bloc2": {
+      "polygon": true,
+      "grabable": false,
+      "mass": 40000000000000,
+      "restitution_coefficient": 0.3,
+      "radius": 5,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [
+          400,
+          900
+        ],
+        [
+          900,
+          900
+        ],
+        [
+          900,
+          1000
+        ],
+        [
+          400,
+          1000
+        ]
+      ],
+      "zone": [],
+      "name": "Bloc1"
     },
     "Ballman": {
       "polygon": false,
@@ -124,14 +155,14 @@
       "applied_coords": [ 0, 0 ],
       "applied_angle": 0,
       "simulated": [],
-      "centroid": [ [ 400, 200 ] ],
+      "centroid": [ [ 700, 200 ] ],
       "vertices": [
         [ 0, 800 ],
         [ 1300, 800 ],
         [ 1300, 900 ],
         [ 0, 900 ]
       ],
-      "zone" : ["wind", [20,0], [0,0], 300, 1200, 0, 1080, 0],
+      "zone": [],
       "name": "Ballman"
     }
   },
