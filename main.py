@@ -134,7 +134,7 @@ while running:
                     gjk = GJK2D(group[0], other)
                     collision = gjk.detection()
                     resolution = gjk.EPA(collision)
-                    if collision is not None:
+                    if collision is not None and not (group[0].grabable == other.grabable == False):
                         gjk.find_contact_features(gjk.shape1, gjk.shape2, resolution)
                         gjk.resolve(resolution, dt)
 
