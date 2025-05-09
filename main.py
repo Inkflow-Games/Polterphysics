@@ -163,7 +163,8 @@ while running:
                 else : 
                     elements.shape.draw(screen,(194,86,63))
 
-        level_manager.sprite_manager.update(screen, physics_engine.objects, level_manager.sprites)
+
+        level_manager.sprite_manager.update(screen, physics_engine.objects, level_manager.sprites, game_state)
         if level_manager.sprite_manager.keydetected:
             level_manager.sprite_manager.keydetected = False
             game_state = "paused"

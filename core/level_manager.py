@@ -113,7 +113,7 @@ class Button:
                     load_scene(current_scene, screen_width, screen_height, object_list, screen)
 
             case "Next Level" :
-                attempts_left = 3
+                attempts_left = 6
                 reset_level_vectors(object_list.objects)
                 for obj in object_list.objects:
                     update_mouse(obj, position = Vector2(0,0)) # Reset mouse vector
@@ -133,7 +133,7 @@ class Button:
 
             case "1" | "2" | "3" :
                 self.game_state = "paused"
-                attempts_left = 3
+                attempts_left = 6
                 load_scene(int(self.action) + 1, screen_width, screen_height, object_list,screen)
 
             case "Option":

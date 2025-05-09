@@ -36,7 +36,7 @@ class SpriteManager:
         self.bonusdetected = False
 
 
-    def draw_sprites(self, sprites, screen):
+    def draw_sprites(self, sprites, screen, game_state):
         """
         Loads and draws sprites on the given screen based on the provided sprite data.
 
@@ -44,15 +44,21 @@ class SpriteManager:
         sprites (dict): Dictionary containing sprite data with keys as sprite names and values as dictionaries
         screen (pygame.Surface): Surface on which to render the sprites.
         """
-        for sprite_name, data in sprites.items():
-            image = pygame.image.load(data["path"]).convert_alpha()
-            image = pygame.transform.scale(image, tuple(data["size"]))
-            rotated_image = pygame.transform.rotate(image, data.get("rotation", 0))
-            rect = rotated_image.get_rect(center=tuple(data["coordinates"]))
-            screen.blit(rotated_image, rect)
+        # for sprite_name, data in sprites.items():
+        #     if (game_state == "running" and sprite_name == "Play") :
+        #         image = pygame.image.load("data/Decor/wood1.png").convert_alpha()
+        #         rotated_image = pygame.transform.rotate(image, data.get("rotation", 0))
+        #         rect = rotated_image.get_rect(center=tuple(data["coordinates"]))
+        #         screen.blit(rotated_image, rect)
+        #     elif(game_state == "paused" and sprite_name == "Paused") :
+        #         image = pygame.image.load("data/Decor/wood2.png").convert_alpha()
+        #         rotated_image = pygame.transform.rotate(image, data.get("rotation", 0))
+        #         rect = rotated_image.get_rect(center=tuple(data["coordinates"]))
+        #         screen.blit(rotated_image, rect)
+            
 
 
-    def update(self, surface, objects, sprites):
+    def update(self, surface, objects, sprites, game_state):
         """
         Draws all sprites in the group on the surface and updates the key if present.
         If the key becomes detected during the update, sets the manager's `detected` flag.
@@ -62,7 +68,7 @@ class SpriteManager:
         objects (list): List of game objects passed to the key's update method.
         """
         # Draw all managed sprites
-        self.draw_sprites(sprites, surface)
+        self.draw_sprites(sprites, surface, game_state)
 
         # Update key detection logic if key is assigned
         if self.key:

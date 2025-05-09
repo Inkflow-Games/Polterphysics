@@ -71,7 +71,7 @@
       "size": 1,
       "image": "data\\ButtonsImages\\RestartButton.png",
       "imageHover": "data\\ButtonsImages\\RestartButtonPressed.png",
-      "position": [ 0.93, 0.2 ],
+      "position": [ 0.915, 0.2 ],
       "height": 80,
       "width": 240,
       "action": "Restart Level"
@@ -89,7 +89,7 @@
       "size": 1,
       "image": "data\\ButtonsImages\\PlayButton.png",
       "imageHover": "data\\ButtonsImages\\PlayButtonPressed.png",
-      "position": [ 0.93, 0.1 ],
+      "position": [ 0.915, 0.1 ],
       "height": 80,
       "width": 240,
       "action": "Play"
@@ -98,7 +98,7 @@
       "size": 1,
       "image": "data\\ButtonsImages\\HomeButton.png",
       "imageHover": "data\\ButtonsImages\\HomeButtonPressed.png",
-      "position": [ 0.93, 0.8 ],
+      "position": [ 0.915, 0.8 ],
       "height": 80,
       "width": 240,
       "action": "Load Main Menu"
@@ -120,7 +120,7 @@
       "size": 1,
       "image": "data\\ButtonsImages\\RestartButton.png",
       "imageHover": "data\\ButtonsImages\\RestartButtonPressed.png",
-      "position": [ 0.93, 0.2 ],
+      "position": [ 0.915, 0.2 ],
       "height": 80,
       "width": 240,
       "action": "Restart Level"
@@ -138,7 +138,7 @@
       "size": 1,
       "image": "data\\ButtonsImages\\PlayButton.png",
       "imageHover": "data\\ButtonsImages\\PlayButtonPressed.png",
-      "position": [ 0.93, 0.1 ],
+      "position": [ 0.915, 0.1 ],
       "height": 80,
       "width": 240,
       "action": "Play"
@@ -147,7 +147,7 @@
       "size": 1,
       "image": "data\\ButtonsImages\\HomeButton.png",
       "imageHover": "data\\ButtonsImages\\HomeButtonPressed.png",
-      "position": [ 0.93, 0.8 ],
+      "position": [ 0.915, 0.8 ],
       "height": 80,
       "width": 240,
       "action": "Load Main Menu"
@@ -177,7 +177,7 @@
       "size": 1,
       "image": "data\\ButtonsImages\\RestartButton.png",
       "imageHover": "data\\ButtonsImages\\RestartButtonPressed.png",
-      "position": [ 0.93, 0.2 ],
+      "position": [ 0.915, 0.2 ],
       "height": 80,
       "width": 240,
       "action": "Restart Level"
@@ -195,7 +195,7 @@
       "size": 1,
       "image": "data\\ButtonsImages\\PlayButton.png",
       "imageHover": "data\\ButtonsImages\\PlayButtonPressed.png",
-      "position": [ 0.93, 0.1 ],
+      "position": [ 0.915, 0.1 ],
       "height": 80,
       "width": 240,
       "action": "Play"
@@ -204,7 +204,7 @@
       "size": 1,
       "image": "data\\ButtonsImages\\HomeButton.png",
       "imageHover": "data\\ButtonsImages\\HomeButtonPressed.png",
-      "position": [ 0.93, 0.8 ],
+      "position": [ 0.915, 0.8 ],
       "height": 80,
       "width": 240,
       "action": "Load Main Menu"
@@ -217,6 +217,15 @@
       "height": 100,
       "width": 100,
       "action": "Polter"
+    },
+    "Trickandle": {
+      "size": 1,
+      "image": "data\\Phantoms\\trickandle.png",
+      "imageHover": "data\\Phantoms\\trickandle_hover.png",
+      "position": [ 0.1, 0.62 ],
+      "height": 100,
+      "width": 100,
+      "action": "Trickandle"
     }
   },
 
@@ -225,7 +234,7 @@
       "size": 1,
       "image": "data\\ButtonsImages\\RestartButton.png",
       "imageHover": "data\\ButtonsImages\\RestartButtonPressed.png",
-      "position": [ 0.93, 0.2 ],
+      "position": [ 0.915, 0.2 ],
       "height": 80,
       "width": 240,
       "action": "Restart Level"
@@ -243,7 +252,7 @@
       "size": 1,
       "image": "data\\ButtonsImages\\PlayButton.png",
       "imageHover": "data\\ButtonsImages\\PlayButtonPressed.png",
-      "position": [ 0.93, 0.1 ],
+      "position": [ 0.915, 0.1 ],
       "height": 80,
       "width": 240,
       "action": "Play"
@@ -252,7 +261,7 @@
       "size": 1,
       "image": "data\\ButtonsImages\\HomeButton.png",
       "imageHover": "data\\ButtonsImages\\HomeButtonPressed.png",
-      "position": [ 0.93, 0.8 ],
+      "position": [ 0.915, 0.8 ],
       "height": 80,
       "width": 240,
       "action": "Load Main Menu"
@@ -284,7 +293,7 @@
       "size": 1,
       "image": "data\\ButtonsImages\\RestartButton.png",
       "imageHover": "data\\ButtonsImages\\RestartButtonPressed.png",
-      "position": [ 0.93, 0.2 ],
+      "position": [ 0.915, 0.2 ],
       "height": 80,
       "width": 240,
       "action": "Restart Level"
@@ -302,7 +311,7 @@
       "size": 1,
       "image": "data\\ButtonsImages\\PlayButton.png",
       "imageHover": "data\\ButtonsImages\\PlayButtonPressed.png",
-      "position": [ 0.93, 0.1 ],
+      "position": [ 0.915, 0.1 ],
       "height": 80,
       "width": 240,
       "action": "Play"
@@ -311,7 +320,7 @@
       "size": 1,
       "image": "data\\ButtonsImages\\HomeButton.png",
       "imageHover": "data\\ButtonsImages\\HomeButtonPressed.png",
-      "position": [ 0.93, 0.8 ],
+      "position": [ 0.915, 0.8 ],
       "height": 80,
       "width": 240,
       "action": "Load Main Menu"
@@ -332,7 +341,7 @@
       "size": 1,
       "image": "data\\ButtonsImages\\RestartButton.png",
       "imageHover": "data\\ButtonsImages\\RestartButtonPressed.png",
-      "position": [ 0.93, 0.2 ],
+      "position": [ 0.915, 0.2 ],
       "height": 80,
       "width": 240,
       "action": "Restart Level"
@@ -350,7 +359,7 @@
       "size": 1,
       "image": "data\\ButtonsImages\\PlayButton.png",
       "imageHover": "data\\ButtonsImages\\PlayButtonPressed.png",
-      "position": [ 0.93, 0.1 ],
+      "position": [ 0.915, 0.1 ],
       "height": 80,
       "width": 240,
       "action": "Play"
@@ -359,7 +368,7 @@
       "size": 1,
       "image": "data\\ButtonsImages\\HomeButton.png",
       "imageHover": "data\\ButtonsImages\\HomeButtonPressed.png",
-      "position": [ 0.93, 0.8 ],
+      "position": [ 0.915, 0.8 ],
       "height": 80,
       "width": 240,
       "action": "Load Main Menu"

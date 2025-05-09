@@ -11,7 +11,20 @@
       "detection_radius": 100,
       "target": "Ballman"
     },
-    "sprites": {},
+    "sprites": {
+      "Play": {
+        "path": "data/Decor/data/Decor/wood1.png",
+        "size": [ 100, 100 ],
+        "rotation": 0,
+        "coordinates": [ 1600, 500 ]
+      },
+      "Paused": {
+        "path": "data/Decor/data/Decor/wood2.png",
+        "size": [ 100, 100 ],
+        "rotation": 0,
+        "coordinates": [ 1600, 500 ]
+      }
+    },
     "LeftPanel": {
       "polygon": true,
       "grabable": false,
@@ -174,7 +187,18 @@
       "end_object_name": "Ballman"
     },
     "sprites": {
-      
+      "Play": {
+        "path": "data/Decor/data/Decor/wood1.png",
+        "size": [ 100, 100 ],
+        "rotation": 0,
+        "coordinates": [ 1600, 500 ]
+      },
+      "Paused": {
+        "path": "data/Decor/data/Decor/wood2.png",
+        "size": [ 100, 100 ],
+        "rotation": 0,
+        "coordinates": [ 1600, 500 ]
+      }
     },
     "LeftPanel": {
       "polygon": true,
@@ -390,6 +414,18 @@
       "end_object_name": "Polter"
     },
     "sprites": {
+      "Play": {
+        "path": "data/Decor/data/Decor/wood1.png",
+        "size": [ 100, 100 ],
+        "rotation": 0,
+        "coordinates": [ 1600, 500 ]
+      },
+      "Paused": {
+        "path": "data/Decor/data/Decor/wood2.png",
+        "size": [ 100, 100 ],
+        "rotation": 0,
+        "coordinates": [ 1600, 500 ]
+      }
     },
     "LeftPanel": {
       "polygon": true,
@@ -755,6 +791,20 @@
       "detection_radius": 50,
       "end_object_name": "Polter"
     },
+    "sprites": {
+      "Play": {
+        "path": "data/Decor/data/Decor/wood1.png",
+        "size": [ 100, 100 ],
+        "rotation": 0,
+        "coordinates": [ 1600, 500 ]
+      },
+      "Paused": {
+        "path": "data/Decor/data/Decor/wood2.png",
+        "size": [ 100, 100 ],
+        "rotation": 0,
+        "coordinates": [ 1600, 500 ]
+      }
+    },
     "LeftPanel": {
       "polygon": true,
       "grabable": false,
@@ -1065,6 +1115,20 @@
       "detection_radius": 50,
       "end_object_name": "Rospirit"
     },
+    "sprites": {
+      "Play": {
+        "path": "data/Decor/data/Decor/wood1.png",
+        "size": [ 100, 100 ],
+        "rotation": 0,
+        "coordinates": [ 1600, 500 ]
+      },
+      "Paused": {
+        "path": "data/Decor/data/Decor/wood2.png",
+        "size": [ 100, 100 ],
+        "rotation": 0,
+        "coordinates": [ 1600, 500 ]
+      }
+    },
     "LeftPanel": {
       "polygon": true,
       "grabable": false,
@@ -1265,14 +1329,12 @@
       "name": "Down Bloc"
 
     },
-
     "bonus": {
       "coordinates": [ 500, 100 ],
       "detection_radius": 100,
       "target": "Rospirit"
 
     },
-
     "Rospirit": {
       "polygon": false,
       "grabable": true,
@@ -1415,6 +1477,20 @@
       "coordinates": [ 1200, 700 ],
       "detection_radius": 50,
       "end_object_name": "Polter"
+    },
+    "sprites": {
+      "Play": {
+        "path": "data/Decor/data/Decor/wood1.png",
+        "size": [ 100, 100 ],
+        "rotation": 0,
+        "coordinates": [ 1600, 500 ]
+      },
+      "Paused": {
+        "path": "data/Decor/data/Decor/wood2.png",
+        "size": [ 100, 100 ],
+        "rotation": 0,
+        "coordinates": [ 1600, 500 ]
+      }
     },
     "LeftPanel": {
       "polygon": true,
