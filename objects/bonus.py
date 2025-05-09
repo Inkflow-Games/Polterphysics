@@ -11,6 +11,7 @@ Dependencies: pygame.math (Vector2), math
 
 import pygame
 from pygame.math import Vector2
+from utils import sprites_utils
 
 class Bonus:
     """
@@ -32,12 +33,14 @@ class Bonus:
         self.coordinates = Vector2(coordinates)
         self.detection_radius = detection_radius
         self.target = target
-        self.sprite_path = "data/Decor/wood1.png"
+        self.sprite_path = ["data/Decor/polter_bonus.png","data/Decor/ballman_bonus.png" ,"data/Decor/rospirit_bonus.png" ,"data/Decor/trickandle_bonus.png" ,"data/Decor/fathome_bonus.png" ]
         self.enabled = True
         
         # Load and scale the Bonus image
-        self.image = pygame.image.load(self.sprite_path).convert_alpha()
-        self.image = pygame.transform.scale(self.image, (100, 100))
+        for i in range (0, len(sprites_utils.phantoms_names)):
+            if (sprites_utils.phantoms_names[i] == target) :
+                self.image = pygame.image.load(self.sprite_path[i]).convert_alpha()
+                self.image = pygame.transform.scale(self.image, (100, 100))
         
         # Define the position of the image on screen
         self.rect = self.image.get_rect(topleft=self.coordinates)

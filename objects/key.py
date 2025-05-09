@@ -11,6 +11,7 @@ Dependencies: pygame.math (Vector2), math
 
 import pygame
 from pygame.math import Vector2
+from utils import sprites_utils
 
 class Key:
     """
@@ -31,11 +32,12 @@ class Key:
         self.coordinates = Vector2(coordinates)
         self.detection_radius = detection_radius
         self.end_object_name = end_object_name
-        self.sprite_path = "data/Decor/key.png"
-        
+        self.sprite_path = ["data/Decor/polter_key.png","data/Decor/ballman_key.png" ,"data/Decor/rospirit_key.png" ,"data/Decor/trickandle_key.png" ,"data/Decor/fathome_key.png" ]
         # Load and scale the key image
-        self.image = pygame.image.load(self.sprite_path).convert_alpha()
-        self.image = pygame.transform.scale(self.image, (100, 100))
+        for i in range (0, len(sprites_utils.phantoms_names)):
+            if (sprites_utils.phantoms_names[i] == end_object_name) :
+                self.image = pygame.image.load(self.sprite_path[i]).convert_alpha()
+                self.image = pygame.transform.scale(self.image, (100, 100))
         
         # Define the position of the image on screen
         self.rect = self.image.get_rect(topleft=self.coordinates)

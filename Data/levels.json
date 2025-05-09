@@ -174,12 +174,7 @@
       "end_object_name": "Ballman"
     },
     "sprites": {
-      "door": {
-        "path": "data/Decor/door.png",
-        "size": [ 100, 100 ],
-        "rotation": 0,
-        "coordinates": [ 600, 500 ]
-      }
+      
     },
     "LeftPanel": {
       "polygon": true,
