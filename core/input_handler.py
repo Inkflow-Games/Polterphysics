@@ -34,10 +34,10 @@ def GetMouseInput(event) :
 def vector_application(
     event,
     objects_list,
-    clicked_object=None,
-    quadtree=Quadtree(RectangleQ(-100,-100,3400,2200),4),
-    vector_applied=False
-):
+    clicked_object = Object,
+    quadtree = Quadtree(RectangleQ(-100,-100,3400,2200),4),
+    
+) :
     """
     Handles the inputs from the user to apply vectors
 
@@ -56,7 +56,6 @@ def vector_application(
     """
     
     mouse_position = Vector2(pygame.mouse.get_pos())
-    mouse_buttons = pygame.mouse.get_pressed()
     
     if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and clicked_object == None: # left click + when no object is clicked 
         for elements in objects_list:
@@ -79,23 +78,34 @@ def vector_application(
             quadtree.delpoint(elements)
         return clicked_object
     
-    elif mouse_buttons[0] and clicked_object != None: # left click + object clicked
+    elif event.type == pygame.MOUSEMOTION and pygame.mouse.get_pressed()[0] and clicked_object != None: # left click + object clicked
         if 360<=mouse_position.x<=1560 and 0<=mouse_position.y<=1080 :
             update_mouse(clicked_object, mouse_position)
             direction_vector = Vector2(
                 mouse_position[0] - clicked_object.shape.centroid[0],
                 mouse_position[1] - clicked_object.shape.centroid[1]
             )
+            # Cap the force vector if too large
             capped_vector = direction_vector.normalize() * min(direction_vector.length(), 260) * 5  # Same effect as (direction * coeff), 260*5=1300
             if -1300<=capped_vector.x<=1300 and -1300<=capped_vector.y<=1300 : 
                 vector_angle = compute_angle(capped_vector.x, capped_vector.y) # Not used anywhere for now
                 update_vector(clicked_object, capped_vector, vector_angle)
-                vector_applied = True
     
-    elif event.type == pygame.MOUSEBUTTONUP and event.button == 1 and clicked_object != None and vector_applied: # when click is released
+    elif event.type == pygame.MOUSEBUTTONUP and event.button == 1 and clicked_object != None: # when click is released
         if 360<=mouse_position.x<=1560 and 0<=mouse_position.y<=1080 :
+            update_mouse(clicked_object, mouse_position)
+            direction_vector = Vector2(
+                mouse_position[0] - clicked_object.shape.centroid[0],
+                mouse_position[1] - clicked_object.shape.centroid[1]
+            )
+            # Cap the force vector if too large
+            capped_vector = direction_vector.normalize() * min(direction_vector.length(), 260) * 5  # max 1300 norm
+            if -1300<=capped_vector.x<=1300 and -1300<=capped_vector.y<=1300 : 
+                vector_angle = compute_angle(capped_vector.x, capped_vector.y) 
+                update_vector(clicked_object, capped_vector, vector_angle)
+            
             computes_positions(clicked_object, simulation_steps=20, dt_sim=0.1)
+            
             clicked_object = None
-            vector_applied = False
             return clicked_object
     return clicked_object
