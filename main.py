@@ -164,8 +164,8 @@ while running:
                     elements.shape.draw(screen,(255,0,0))
 
         level_manager.sprite_manager.update(screen, physics_engine.objects, level_manager.sprites)
-        if level_manager.sprite_manager.detected:
-            level_manager.sprite_manager.detected = False
+        if level_manager.sprite_manager.keydetected:
+            level_manager.sprite_manager.keydetected = False
             game_state = "paused"
             level_manager.attempts_left = 3
             reset_level_vectors(physics_engine.objects)
@@ -176,7 +176,9 @@ while running:
                 game_state  = "win"
             else:
                 level_manager.load_scene(level_manager.current_scene + 1, display_width, display_height, physics_engine,screen)
-
+        if level_manager.sprite_manager.bonusdetected:
+            level_manager.sprite_manager.bonusdetected = False
+            
         # Display text elements
         if game_state == "paused" or game_state == "running" :
             screen.blit(level_manager.text_list[0], (0.02 * display_width, 0.15 * display_height))

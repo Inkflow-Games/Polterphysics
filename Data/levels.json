@@ -6,6 +6,11 @@
       "detection_radius": 100,
       "end_object_name": "Ballman"
     },
+    "bonus": {
+      "coordinates": [ 400, 100 ],
+      "detection_radius": 100,
+      "target": "Ballman"
+    },
     "sprites": {
       "door": {
         "path": "data/Decor/door.png",
@@ -162,7 +167,9 @@
         [ 1300, 900 ],
         [ 0, 900 ]
       ],
-      "zone": [],
+      "zone": [
+
+      ],
       "name": "Ballman"
     }
   },

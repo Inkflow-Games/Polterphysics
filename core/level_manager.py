@@ -16,6 +16,7 @@ Dependencies: pygame, core.sound, data, objects.object
 import pygame
 import json
 
+from objects.bonus import Bonus
 from objects.object import *
 from data import *
 from utils import sprites_utils
@@ -277,6 +278,7 @@ def load_scene(n: int, screen_width, screen_height, object_list, screen):
     global sprite_manager
     global sprites
     key = None
+    bonus = None
 
     current_scene = n
     button_list = []
@@ -333,12 +335,19 @@ def load_scene(n: int, screen_width, screen_height, object_list, screen):
                         detection_radius=levels["{}".format(n-1)][object]["detection_radius"],
                         end_object_name=levels["{}".format(n-1)][object]["end_object_name"]
                     )
+                elif object == "bonus":
+                    bonus = Bonus(
+                        coordinates=levels["{}".format(n-1)][object]["coordinates"],
+                        detection_radius=levels["{}".format(n-1)][object]["detection_radius"],
+                        target=levels["{}".format(n-1)][object]["target"]
+                    )
                 elif object == "sprites" :
                     sprites = levels["{}".format(n-1)][object]
                 else:
                     object_list.add_object(load_objects(levels["{}".format(n-1)][object]))
 
-                sprite_manager = SpriteManager(key)
+                sprite_manager = SpriteManager(key=key, bonus=bonus)
+
 
             if playing_music != f"data/Music/level{n-1}.mp3":
                 play_music(f"data/Music/level{n-1}.mp3")
