@@ -58,7 +58,7 @@ game_over = pygame.transform.scale(pygame.image.load("data/background/game_over_
 # Physics engine and spatial partitioning
 physics_engine = PhysicsEngine()
 bounding_box = RectangleQ(-1000, -1000, 3400, 2200)
-quadtree = Quadtree(bounding_box, 7)
+quadtree = Quadtree(bounding_box, 20)
 
 # Ground level (used for collisions if needed)
 ground_level = display_height - 20
