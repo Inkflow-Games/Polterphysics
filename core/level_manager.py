@@ -103,8 +103,13 @@ class Button:
                 self.game_state = "paused"
                 attempts_left -= 1
                 reset_level_vectors(object_list.objects)
+
                 for obj in object_list.objects:
                     update_mouse(obj, position = Vector2(0,0)) # Reset mouse vector
+                    obj.shape.velocity = Vector2(0,0)
+                    update_vector(obj, coords = Vector2(0,0), angle = 0.0)
+                    obj.simulated = []
+                    obj.shape.centroid = [0,0]
                 if (attempts_left == 0) :
                     game_over(screen_width, screen_height, object_list, screen)
                     self.game_state = "game_over"
@@ -125,6 +130,10 @@ class Button:
 
             case "Load Main Menu" :
                 self.game_state = "menu"
+                reset_level_vectors(object_list.objects)
+                for obj in object_list.objects:
+                    update_mouse(obj, position = Vector2(0,0)) # Reset mouse vector
+                    obj.shape.velocity = Vector2(0,0)
                 load_scene(0, screen_width, screen_height, object_list,screen)
 
             case "1" | "2" | "3" :
@@ -284,6 +293,7 @@ def load_scene(n: int, screen_width, screen_height, object_list, screen):
     button_list = []
     text_list = []
 
+    #Fade in during level transition
     fade = pygame.Surface((screen_width, screen_height))
     fade.fill((0, 0, 0))
     for alpha in range(0, 50, 1):

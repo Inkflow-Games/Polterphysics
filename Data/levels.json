@@ -11,14 +11,7 @@
       "detection_radius": 100,
       "target": "Ballman"
     },
-    "sprites": {
-      "door": {
-        "path": "data/Decor/door.png",
-        "size": [ 100, 100 ],
-        "rotation": 0,
-        "coordinates": [ 600, 500 ]
-      }
-    },
+    "sprites": {},
     "LeftPanel": {
       "polygon": true,
       "grabable": false,
@@ -82,7 +75,7 @@
       "polygon": true,
       "grabable": false,
       "mass": 50000000000000,
-      "restitution_coefficient": 0.8,
+      "restitution_coefficient": 0.7,
       "radius": 5,
       "mouse": [ 0, 0 ],
       "applied_coords": [ 0, 0 ],

@@ -32,7 +32,7 @@ class Bonus:
         self.coordinates = Vector2(coordinates)
         self.detection_radius = detection_radius
         self.target = target
-        self.sprite_path = "data/Decor/door.png"
+        self.sprite_path = "data/Decor/wood1.png"
         self.enabled = True
         
         # Load and scale the Bonus image
