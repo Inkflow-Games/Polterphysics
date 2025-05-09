@@ -95,7 +95,7 @@ class GJK2D:
     def __init__(self, Object1, Object2):
         self.vertices = []
         self.res1 = Object1.restitution_coefficient
-        self.res2 = Object1.restitution_coefficient
+        self.res2 = Object2.restitution_coefficient
         self.shape1 = Object1.shape
         self.shape2 = Object2.shape
         self.typecol = None
