@@ -201,7 +201,7 @@ class Polygon:
         """
         centerpos = self.centroid
         pygame.draw.polygon(surface,color,self.vertices)
-        pygame.draw.circle(surface,(0,255,0),self.center(),3)
+        #pygame.draw.circle(surface,(0,255,0),self.center(),3)
         return
             
     def support(self, direction):

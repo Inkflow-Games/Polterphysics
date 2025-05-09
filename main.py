@@ -161,7 +161,7 @@ while running:
                     else : # If a vector has already been applied, then it is drawn in gray
                         elements.shape.draw(screen,(170,170,170))
                 else : 
-                    elements.shape.draw(screen,(255,0,0))
+                    elements.shape.draw(screen,(80,0,0))
 
         level_manager.sprite_manager.update(screen, physics_engine.objects, level_manager.sprites)
         if level_manager.sprite_manager.keydetected:

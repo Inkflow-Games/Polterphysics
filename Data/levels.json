@@ -386,12 +386,6 @@
       "end_object_name": "Polter"
     },
     "sprites" : {
-      "door" :  {
-        "path": "data/Decor/door.png",
-        "size": [100, 100],
-        "rotation": 0,
-        "coordinates": [ 600, 500 ]
-      }
     },
     "LeftPanel": {
       "polygon": true,
@@ -862,7 +856,7 @@
       "name": "Bloc2"
 
     },
-    "Bloc3" : {
+    "Bloc3": {
       "polygon": true,
       "grabable": false,
       "mass": 40000000000000,
@@ -891,10 +885,11 @@
           1080
         ]
       ],
-      "zone" : [],
+      "zone": [],
       "name": "Bloc3"
 
-    },"Bloc4" : {
+    },
+    "Bloc4": {
       "polygon": true,
       "grabable": false,
       "mass": 40000000000000,
@@ -923,10 +918,11 @@
           1080
         ]
       ],
-      "zone" : [],
+      "zone": [],
       "name": "Bloc4"
 
-    },"Bloc5" : {
+    },
+    "Bloc5": {
       "polygon": true,
       "grabable": false,
       "mass": 40000000000000,
@@ -955,10 +951,11 @@
           699
         ]
       ],
-      "zone" : [],
+      "zone": [],
       "name": "Bloc5"
 
-    },"Bloc6" : {
+    },
+    "Bloc6" : {
       "polygon": true,
       "grabable": false,
       "mass": 40000000000000,
