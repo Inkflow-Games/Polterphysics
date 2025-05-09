@@ -168,7 +168,7 @@ while running:
         if level_manager.sprite_manager.keydetected:
             level_manager.sprite_manager.keydetected = False
             game_state = "paused"
-            level_manager.attempts_left = 3
+            level_manager.attempts_left = 6
             reset_level_vectors(physics_engine.objects)
             for obj in physics_engine.objects:
                 update_mouse(obj, position = Vector2(0,0)) # Reset mouse vector

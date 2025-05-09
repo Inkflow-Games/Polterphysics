@@ -754,7 +754,7 @@
     "Polter": {
       "polygon": false,
       "grabable": true,
-      "mass": 9,
+      "mass": 12,
       "restitution_coefficient": 0.4,
       "radius": 40,
       "mouse": [ 0, 0 ],
