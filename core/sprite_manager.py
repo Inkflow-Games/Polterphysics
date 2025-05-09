@@ -23,15 +23,17 @@ class SpriteManager:
     detected (bool): Flag set to True if the associated key is detected.
     """
 
-    def __init__(self, key=None):
+    def __init__(self, key=None, bonus=None):
         """
         Initializes the sprite manager.
 
         Parameters:
-        key (Key, optional): A key object to be updated alongside the sprite group.
+        key (Key, Bonus, optional): A key object and a bonus to be updated alongside the sprite group.
         """
         self.key = key
-        self.detected = False
+        self.bonus = bonus
+        self.keydetected = False
+        self.bonusdetected = False
 
 
     def draw_sprites(self, sprites, screen):
@@ -67,4 +69,10 @@ class SpriteManager:
             self.key.update(objects, surface)
             if self.key.detected:
                 self.key.detected = False
-                self.detected = True
+                self.keydetected = True
+        if self.bonus and self.bonus.enabled:
+            self.bonus.update(objects, surface)
+            if self.bonus.detected:
+                self.bonus.detected = False
+                self.bonusdetected = True
+
