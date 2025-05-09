@@ -411,6 +411,281 @@
           800
         ],
         [
+          800,
+          800
+        ],
+        [
+          800,
+          900
+        ],
+        [
+          0,
+          900
+        ]
+      ],
+      "zone" : [],
+      "name": "Polter"
+    }
+  },
+  "4": {
+    "background": "data\\background\\back6.png",
+    "key": {
+      "coordinates": [ 520, 250],
+      "detection_radius": 50,
+      "end_object_name": "Polter"
+    },
+    "LeftPanel": {
+      "polygon": true,
+      "grabable": false,
+      "mass": 40000000000000,
+      "restitution_coefficient": 0.8,
+      "radius": 5,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [ 0, 0 ],
+        [ 360, 0 ],
+        [ 360, 1080 ],
+        [ 0, 1080 ]
+      ],
+      "zone" : [],
+      "name": "LeftPanel"
+    },
+    "RightPanel": {
+      "polygon": true,
+      "grabable": false,
+      "mass": 40000000000000,
+      "restitution_coefficient": 0.8,
+      "radius": 5,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [ 1560, 0 ],
+        [ 1920, 0 ],
+        [ 1920, 1080 ],
+        [ 1560, 1080 ]
+      ],
+      "zone" : [],
+      "name": "RightPanel"
+    },
+    "Bloc1": {
+      "polygon": true,
+      "grabable": false,
+      "mass": 40000000000000,
+      "restitution_coefficient": 0.8,
+      "radius": 5,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [
+          361,
+          0
+        ],
+        [
+          1559,
+          0
+        ],
+        [
+          1559,
+          200
+        ],
+        [
+          361,
+          200
+        ]
+      ],
+      "zone" : [],
+      "name": "Bloc1"
+    },
+    "Bloc2" : {
+      "polygon": true,
+      "grabable": false,
+      "mass": 40000000000000,
+      "restitution_coefficient": 0.8,
+      "radius": 5,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [
+          361,
+          700
+        ],
+        [
+          500,
+          700
+        ],
+        [
+          500,
+          900
+        ],
+        [
+          361,
+          900
+        ]
+      ],
+      "zone" : [],
+      "name": "Bloc2"
+
+    },
+    "Bloc3" : {
+      "polygon": true,
+      "grabable": false,
+      "mass": 40000000000000,
+      "restitution_coefficient": 0.8,
+      "radius": 5,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [
+          361,
+          901
+        ],
+        [
+          1559,
+          901
+        ],
+        [
+          1559,
+          1080
+        ],
+        [
+          361,
+          1080
+        ]
+      ],
+      "zone" : [],
+      "name": "Bloc3"
+
+    },"Bloc4" : {
+      "polygon": true,
+      "grabable": false,
+      "mass": 40000000000000,
+      "restitution_coefficient": 0.8,
+      "radius": 5,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [
+          620,
+          700
+        ],
+        [
+          1559,
+          700
+        ],
+        [
+          1559,
+          1080
+        ],
+        [
+          620,
+          1080
+        ]
+      ],
+      "zone" : [],
+      "name": "Bloc4"
+
+    },"Bloc5" : {
+      "polygon": true,
+      "grabable": false,
+      "mass": 40000000000000,
+      "restitution_coefficient": 0.8,
+      "radius": 5,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [
+          361,
+          201
+        ],
+        [
+          450,
+          201
+        ],
+        [
+          450,
+          699
+        ],
+        [
+          361,
+          699
+        ]
+      ],
+      "zone" : [],
+      "name": "Bloc5"
+
+    },"Bloc6" : {
+      "polygon": true,
+      "grabable": false,
+      "mass": 40000000000000,
+      "restitution_coefficient": 0.8,
+      "radius": 5,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [
+          1000,
+          201
+        ],
+        [
+          1559,
+          201
+        ],
+        [
+          1559,
+          575
+        ],
+        [
+          1000,
+          575
+        ]
+      ],
+      "zone" : [],
+      "name": "Bloc6"
+
+    },
+    
+    "Polter": {
+      "polygon": false,
+      "grabable": true,
+      "mass": 9,
+      "restitution_coefficient": 0.8,
+      "radius": 40,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 1500, 660 ] ],
+      "vertices": [
+        [
+          0,
+          800
+        ],
+        [
          800,
           800
         ],
@@ -425,6 +700,38 @@
       ],
       "zone" : [],
       "name": "Polter"
+    },
+    "Ballman": {
+      "polygon": false,
+      "grabable": true,
+      "mass": 9,
+      "restitution_coefficient": 0.8,
+      "radius": 40,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 550, 850 ] ],
+      "vertices": [
+        [
+          0,
+          800
+        ],
+        [
+          800,
+          800
+        ],
+        [
+          800,
+          900
+        ],
+        [
+          0,
+          900
+        ]
+      ],
+      "zone" : [],
+      "name": "Ballman"
     }
   }
 }

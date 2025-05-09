@@ -40,7 +40,7 @@ with open("data/levels.json", "r") as f:
 button_list = []
 object_list = []
 current_scene = 0
-max_scene = 4
+max_scene = 5
 playing_music = ""
 tries = 0
 
@@ -84,7 +84,7 @@ class Button:
         Handles the action associated with a button click.
         Uses a match-case to select the corresponding behavior.
         """
-        max_scene = 4
+        max_scene = 5
         screen_width, screen_height = display_width, display_height
         global attempts_left
 
