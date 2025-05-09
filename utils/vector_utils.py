@@ -24,6 +24,7 @@ from utils.math_utils import newton_to_force
 import core.physics_engine
 import pygame
 from pygame.math import Vector2
+import random 
 
 
 
@@ -255,7 +256,7 @@ def lines_and_positions(objects_list, screen, game_state="running", realistic = 
     """
     if game_state == "paused":
         for obj in objects_list:
-            if (obj.applied_coords != [0, 0]) and obj.grabable == True:
+            if (obj.applied_coords != [0, 0]) and obj.grabable == True and obj.playable == True:
                 # Recalculate positions on each frame, allowing dynamic updates
                 computes_positions(obj, realistic)
 
@@ -265,3 +266,56 @@ def lines_and_positions(objects_list, screen, game_state="running", realistic = 
                 # Draw simulated positions as a trajectory (yellow points)
                 for i in range(len(obj.simulated)):
                     pygame.draw.circle(screen, (255, 255, 0), (int(obj.simulated[i][0]), int(obj.simulated[i][1])), 3)
+
+
+
+
+def draw_wind_particles(surface, particles, vector, x_min, x_max, y_up, y_down, dt,
+                        density=30, particle_length=8):
+    """
+    Represents speed lines to draw wind zones
+
+    Parameters:
+        surface = screen 
+        particles (array of int) : stock the particles generated to not create them each time (only keep particles still alive inside)
+        vector (array of int) : the vector applied by the zone
+        x_min, x_max, y_up, y_down (int) : the coordinates of the rectangle 
+        dt (float) : determine how much the lifetime of a particle decreases each frame
+        density (int) : maximum number of particles at the same time in the zone
+        particle_length (int) : the base length of the lines
+    """
+    bounds = pygame.Rect(x_min, y_up, x_max - x_min, y_down - y_up)
+    vector = pygame.math.Vector2(vector)
+    speed = vector.length()
+
+    # Security if vector_zone = [0,0]
+    if speed == 0:
+        return
+
+    velocity = vector.normalize() * speed  # Vector speed and direction
+
+    # Update the particle list (creation/deletion)
+    while len(particles) < density:
+        pos = pygame.Vector2(random.uniform(x_min, x_max), random.uniform(y_up, y_down))
+        lifespan = random.uniform(1.5, 4.0)
+        particles.append([pos, lifespan, lifespan])
+
+    # Update their status and draw them
+    for p in particles:
+        pos, life, max_life = p
+        pos += velocity * dt * 60  # Speed proportional to the vector
+        life -= dt
+
+        length = particle_length * speed
+        end_pos = pos - velocity.normalize() * length
+        pygame.draw.line(surface, (210, 230, 255), pos, end_pos, 1)
+
+        p[0], p[1] = pos, life
+
+    # Recycling
+    for i in range(len(particles) - 1, -1, -1):
+        pos, life, max_life = particles[i]
+        if life <= 0 or not bounds.collidepoint(pos):
+            new_pos = pygame.Vector2(random.uniform(x_min, x_max), random.uniform(y_up, y_down))
+            new_life = random.uniform(1.5, 4.0)
+            particles[i] = [new_pos, new_life, new_life]

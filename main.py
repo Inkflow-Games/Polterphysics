@@ -40,6 +40,7 @@ running = True
 
 clicked_object = None # Object that will receive the user-applied vector
 vectors_applied = False # Prevents repeated vector application
+particles = []
 
 # Screen configuration
 display_info = pygame.display.Info()
@@ -209,7 +210,19 @@ while running:
 
         else :
             button.draw(screen)
-
+    
+    # Allow for the drawing of the single zone of wind
+    vector_zone = Vector2(0,0)
+    for obj in physics_engine.objects :
+        if len(obj.zone) == 8 and obj.zone[0] == "wind":
+            vector_zone = Vector2(obj.zone[1])
+            x_left = obj.zone[3]
+            x_right = obj.zone[4]
+            y_up = obj.zone[5]
+            y_down = obj.zone[6]
+    if vector_zone != Vector2(0,0) :
+        draw_wind_particles(screen, particles, vector_zone, x_left, x_right, y_up, y_down, 1/120,
+                        density=30, particle_length=8)
     pygame.display.flip()
     clock.tick(120)
 

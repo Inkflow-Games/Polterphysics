@@ -111,7 +111,7 @@
         [ 1000, 900 ],
         [ 0, 900 ]
       ],
-      "zone" : ["wind", [0,-8], [0,0], 300, 1200, 0, 1080, 0],
+      "zone" : ["wind", [0,-8], [0,0], 360, 1200, 0, 1080, 0],
       "name": "Trickandle"
     },
     "Ballman": {
@@ -131,7 +131,7 @@
         [ 1300, 900 ],
         [ 0, 900 ]
       ],
-      "zone" : ["wind", [20,0], [0,0], 300, 1200, 0, 1080, 0],
+      "zone" : ["wind", [20,0], [0,0], 360, 1200, 0, 1080, 0],
       "name": "Ballman"
     }
   },
@@ -398,7 +398,7 @@
       "polygon": false,
       "grabable": true,
       "mass": 400,
-      "restitution_coefficient": 0.8,
+      "restitution_coefficient": 0.001,
       "radius": 40,
       "mouse": [ 0, 0 ],
       "applied_coords": [ 0, 0 ],
