@@ -44,6 +44,7 @@ current_scene = 0
 max_scene = 11
 playing_music = ""
 tries = 0
+realisticTrajectory = False
 
 
 class Button:
@@ -88,6 +89,7 @@ class Button:
         max_scene = 11
         screen_width, screen_height = display_width, display_height
         global attempts_left
+        global realisticTrajectory
 
         match self.action :
             case "Play" :
@@ -139,6 +141,11 @@ class Button:
             case "Option":
                 self.game_state = "options"
                 load_scene(-1, screen_width, screen_height, object_list,screen)
+
+            case "RealisticTrajectory":
+                if (realisticTrajectory): realisticTrajectory = False
+                else : realisticTrajectory = True
+                self.game_state = "menu"
 
             case "Ballman" | "Polter" | "Rospirit" :
                 for obj in object_list.objects :

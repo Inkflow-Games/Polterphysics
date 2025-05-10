@@ -187,7 +187,7 @@ def main() :
             # Display user-applied vectors and trajectory prediction
             if game_state == "paused":
                 for obj in physics_engine.objects:
-                    lines_and_positions(physics_engine.objects, screen, game_state, False)
+                    lines_and_positions(physics_engine.objects, screen, game_state, level_manager.realisticTrajectory)
 
         # === Buttons ===
         for button in level_manager.button_list:

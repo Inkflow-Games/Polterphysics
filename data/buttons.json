@@ -18,6 +18,15 @@
       "width": 240,
       "action": "Option"
     },
+    "RealisticTrajectory": {
+      "size": 1,
+      "image": "data\\ButtonsImages\\RealisticTrajectory.png",
+      "imageHover": "data\\ButtonsImages\\RealisticTrajectoryPressed.png",
+      "position": [ 0.5, 0.85 ],
+      "height": 80,
+      "width": 240,
+      "action": "RealisticTrajectory"
+    },
     "Quit": {
       "size": 1,
       "image": "data\\ButtonsImages\\ExitButton.png",
