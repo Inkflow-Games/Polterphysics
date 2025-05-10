@@ -1575,7 +1575,7 @@
     "background": "data\\background\\back7.png",
     "key": {
       "coordinates": [ 1200, 700 ],
-      "detection_radius": 50,
+      "detection_radius": 100,
       "end_object_name": "Polter"
     },
     "sprites": {
@@ -1930,6 +1930,267 @@
       ],
       "zone": [],
       "name": "Small Bloc"
+    }
+  },
+  "7": {
+    "background": "data\\background\\back7.png",
+    "key": {
+      "coordinates": [ 375, 100 ],
+      "detection_radius": 50,
+      "end_object_name": "Polter"
+    },
+    "sprites": {
+      "Play": {
+        "path": "data/Decor/data/Decor/wood1.png",
+        "size": [ 100, 100 ],
+        "rotation": 0,
+        "coordinates": [ 1750, 550 ]
+      },
+      "Paused": {
+        "path": "data/Decor/data/Decor/wood2.png",
+        "size": [ 100, 100 ],
+        "rotation": 0,
+        "coordinates": [ 1750, 550 ]
+      }
+    },
+    "bonus": {
+      "coordinates": [ 925, 850 ],
+      "detection_radius": 100,
+      "target": "Polter"
+    },
+    "Roof": {
+      "polygon": true,
+      "grabable": false,
+      "mass": 40000000000000,
+      "restitution_coefficient": 0.8,
+      "radius": 5,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [ 0, -2 ],
+        [ 1600, -2 ],
+        [ 1600, -1 ],
+        [ 0, -1 ]
+      ],
+      "zone": [],
+      "name": "Roof"
+    },
+    "LeftPanel": {
+      "polygon": true,
+      "grabable": false,
+      "mass": 40000000000000,
+      "restitution_coefficient": 0.8,
+      "radius": 5,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [ 0, 0 ],
+        [ 360, 0 ],
+        [ 360, 1080 ],
+        [ 0, 1080 ]
+      ],
+      "zone": [],
+      "name": "LeftPanel"
+    },
+    "RightPanel": {
+      "polygon": true,
+      "grabable": false,
+      "mass": 40000000000000,
+      "restitution_coefficient": 0.8,
+      "radius": 5,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [ 1560, 0 ],
+        [ 1920, 0 ],
+        [ 1920, 1080 ],
+        [ 1560, 1080 ]
+      ],
+      "zone": [],
+      "name": "RightPanel"
+    },
+    "Bloc1": {
+      "polygon": true,
+      "grabable": false,
+      "mass": 50000000000000000,
+      "restitution_coefficient": 0.8,
+      "radius": 0,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [ 500, 0 ],
+        [ 550, 0 ],
+        [ 550, 200 ],
+        [ 500, 200 ]
+      ],
+      "zone": [],
+      "name": "Bloc1"
+    },
+    "Bloc2": {
+      "polygon": true,
+      "grabable": false,
+      "mass": 50000000000000000,
+      "restitution_coefficient": 0.8,
+      "radius": 0,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [ 500, 200 ],
+        [ 1000, 200 ],
+        [ 1000, 250 ],
+        [ 500, 250 ]
+      ],
+      "zone": [],
+      "name": "Bloc2"
+    },
+    "Bloc3": {
+      "polygon": true,
+      "grabable": false,
+      "mass": 50000000000000000,
+      "restitution_coefficient": 0.8,
+      "radius": 0,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [ 950, 250 ],
+        [ 1000, 250 ],
+        [ 1000, 750 ],
+        [ 950, 750 ]
+      ],
+      "zone": [],
+      "name": "Bloc3"
+    },
+    "Triangle": {
+      "polygon": true,
+      "grabable": false,
+      "mass": 50000000000000000,
+      "restitution_coefficient": 0.8,
+      "radius": 0,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [ 1560, 1080 ],
+        [ 1560, 650 ],
+        [ 1400, 1080 ]
+      ],
+      "zone": [],
+      "name": "Triangle"
+    },
+    "Bloc4": {
+      "polygon": true,
+      "grabable": false,
+      "mass": 50000000000000,
+      "restitution_coefficient": 0.8,
+      "radius": 0,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [ 585, 1080 ],
+        [ 615, 1080 ],
+        [ 615, 880 ],
+        [ 585, 880 ]
+      ],
+      "zone": [],
+      "name": "Bloc4"
+    },
+    "Bloc5": {
+      "polygon": true,
+      "grabable": false,
+      "mass": 50000000000000,
+      "restitution_coefficient": 0.8,
+      "radius": 0,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [ 950, 0 ],
+        [ 1000, 0 ],
+        [ 1000, 100 ],
+        [ 950, 100 ]
+      ],
+      "zone": [],
+      "name": "Bloc5"
+    },
+    "Ground": {
+      "polygon": true,
+      "grabable": false,
+      "mass": 50000000000000,
+      "restitution_coefficient": 0,
+      "radius": 0,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [ 360, 1075 ],
+        [ 585, 1075 ],
+        [ 585, 1090 ],
+        [ 360, 1090 ]
+      ],
+      "zone": [],
+      "name": "Ground"
+    },
+    "Polter": {
+      "polygon": false,
+      "grabable": true,
+      "mass": 5,
+      "restitution_coefficient": 0.8,
+      "radius": 30,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 700, 169 ] ],
+      "vertices": [],
+      "zone": [],
+      "name": "Polter"
+    },
+    "Trickandle": {
+      "polygon": true,
+      "grabable": true,
+      "mass": 10,
+      "restitution_coefficient": 0.8,
+      "radius": 0,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [ 365, 1000 ],
+        [ 580, 1000 ],
+        [ 580, 1070 ],
+        [ 365, 1070 ]
+      ],
+      "zone": [],
+      "name": "Trickandle"
     }
   },
   "8": {
