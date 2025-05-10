@@ -25,6 +25,26 @@
         "coordinates": [ 1750, 550 ]
       }
     },
+    "Roof": {
+      "polygon": true,
+      "grabable": false,
+      "mass": 40000000000000,
+      "restitution_coefficient": 0.8,
+      "radius": 5,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [ 0, -2 ],
+        [ 1600, -2 ],
+        [ 1600, -1 ],
+        [ 0, -1 ]
+      ],
+      "zone": [],
+      "name": "Roof"
+    },
     "LeftPanel": {
       "polygon": true,
       "grabable": false,
@@ -199,6 +219,26 @@
         "rotation": 0,
         "coordinates": [ 1750, 550 ]
       }
+    },
+    "Roof": {
+      "polygon": true,
+      "grabable": false,
+      "mass": 40000000000000,
+      "restitution_coefficient": 0.8,
+      "radius": 5,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [ 0, -2 ],
+        [ 1600, -2 ],
+        [ 1600, -1 ],
+        [ 0, -1 ]
+      ],
+      "zone": [],
+      "name": "Roof"
     },
     "LeftPanel": {
       "polygon": true,
@@ -426,6 +466,26 @@
         "rotation": 0,
         "coordinates": [ 1750, 550 ]
       }
+    },
+    "Roof": {
+      "polygon": true,
+      "grabable": false,
+      "mass": 40000000000000,
+      "restitution_coefficient": 0.8,
+      "radius": 5,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [ 0, -2 ],
+        [ 1600, -2 ],
+        [ 1600, -1 ],
+        [ 0, -1 ]
+      ],
+      "zone": [],
+      "name": "Roof"
     },
     "LeftPanel": {
       "polygon": true,
@@ -805,6 +865,26 @@
         "coordinates": [ 1750, 550 ]
       }
     },
+    "Roof": {
+      "polygon": true,
+      "grabable": false,
+      "mass": 40000000000000,
+      "restitution_coefficient": 0.8,
+      "radius": 5,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [ 0, -2 ],
+        [ 1600, -2 ],
+        [ 1600, -1 ],
+        [ 0, -1 ]
+      ],
+      "zone": [],
+      "name": "Roof"
+    },
     "LeftPanel": {
       "polygon": true,
       "grabable": false,
@@ -1128,6 +1208,26 @@
         "rotation": 0,
         "coordinates": [ 1750, 550 ]
       }
+    },
+    "Roof": {
+      "polygon": true,
+      "grabable": false,
+      "mass": 40000000000000,
+      "restitution_coefficient": 0.8,
+      "radius": 5,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [ 0, -2 ],
+        [ 1600, -2 ],
+        [ 1600, -1 ],
+        [ 0, -1 ]
+      ],
+      "zone": [],
+      "name": "Roof"
     },
     "LeftPanel": {
       "polygon": true,
@@ -1491,6 +1591,26 @@
         "rotation": 0,
         "coordinates": [ 1750, 550 ]
       }
+    },
+    "Roof": {
+      "polygon": true,
+      "grabable": false,
+      "mass": 40000000000000,
+      "restitution_coefficient": 0.8,
+      "radius": 5,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [ 0, -2 ],
+        [ 1600, -2 ],
+        [ 1600, -1 ],
+        [ 0, -1 ]
+      ],
+      "zone": [],
+      "name": "Roof"
     },
     "LeftPanel": {
       "polygon": true,

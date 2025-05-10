@@ -86,7 +86,10 @@ def vector_application(
                 mouse_position[1] - clicked_object.shape.centroid[1]
             )
             # Cap the force vector if too large
-            capped_vector = direction_vector.normalize() * min(direction_vector.length(), 260) * 5  # Same effect as (direction * coeff), 260*5=1300
+            if direction_vector == Vector2(0,0) : 
+                capped_vector = Vector2(0,0)
+            else : 
+                capped_vector = direction_vector.normalize() * min(direction_vector.length(), 260) * 5  # Same effect as (direction * coeff), 260*5=1300
             if -1300<=capped_vector.x<=1300 and -1300<=capped_vector.y<=1300 : 
                 vector_angle = compute_angle(capped_vector.x, capped_vector.y) # Not used anywhere for now
                 update_vector(clicked_object, capped_vector, vector_angle)
@@ -99,7 +102,10 @@ def vector_application(
                 mouse_position[1] - clicked_object.shape.centroid[1]
             )
             # Cap the force vector if too large
-            capped_vector = direction_vector.normalize() * min(direction_vector.length(), 260) * 5  # max 1300 norm
+            if direction_vector == Vector2(0,0) : 
+                capped_vector = Vector2(0,0)
+            else : 
+                capped_vector = direction_vector.normalize() * min(direction_vector.length(), 260) * 5  # max 1300 norm
             if -1300<=capped_vector.x<=1300 and -1300<=capped_vector.y<=1300 : 
                 vector_angle = compute_angle(capped_vector.x, capped_vector.y) 
                 update_vector(clicked_object, capped_vector, vector_angle)
