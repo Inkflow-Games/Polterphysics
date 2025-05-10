@@ -1931,5 +1931,131 @@
       "zone": [],
       "name": "Small Bloc"
     }
+  },
+  "8": {
+    "background": "data\\background\\back7.png",
+    "key": {
+      "coordinates": [ 1300, 250 ],
+      "detection_radius": 100,
+      "end_object_name": "Trickandle"
+    },
+    "bonus": {
+      "coordinates": [ 900, 500 ],
+      "detection_radius": 100,
+      "target": "Trickandle"
+    },
+    "sprites": {
+      "Play": {
+        "path": "data/Decor/data/Decor/wood1.png",
+        "size": [ 100, 100 ],
+        "rotation": 0,
+        "coordinates": [ 1750, 550 ]
+      },
+      "Paused": {
+        "path": "data/Decor/data/Decor/wood2.png",
+        "size": [ 100, 100 ],
+        "rotation": 0,
+        "coordinates": [ 1750, 550 ]
+      }
+    },
+    "LeftPanel": {
+      "polygon": true,
+      "grabable": false,
+      "mass": 40000000000000,
+      "restitution_coefficient": 0.8,
+      "radius": 5,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [ 0, 0 ],
+        [ 360, 0 ],
+        [ 360, 1080 ],
+        [ 0, 1080 ]
+      ],
+      "zone": [],
+      "name": "LeftPanel"
+    },
+    "RightPanel": {
+      "polygon": true,
+      "grabable": false,
+      "mass": 40000000000000,
+      "restitution_coefficient": 0.8,
+      "radius": 5,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [ 1560, 0 ],
+        [ 1920, 0 ],
+        [ 1920, 1080 ],
+        [ 1560, 1080 ]
+      ],
+      "zone": [],
+      "name": "RightPanel"
+    },
+    "Trickandle": {
+      "polygon": true,
+      "grabable": true,
+      "mass": 15,
+      "restitution_coefficient": 0.1,
+      "radius": 5,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [
+          400,
+          200
+        ],
+        [
+          500,
+          150
+        ],
+        [
+          600,
+          300
+        ]
+      ],
+      "zone": [],
+      "name": "Trickandle"
+
+    },
+    "Slope": {
+      "polygon": true,
+      "grabable": false,
+      "mass": 40000000000000,
+      "restitution_coefficient": 0,
+      "radius": 5,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [
+          360,
+          250
+        ],
+        [
+          900,
+          800
+        ],
+        [
+          360,
+          800
+        ]
+
+      ],
+      "zone": [],
+      "name": "Slope"
+
+    }
   }
 }
