@@ -61,9 +61,6 @@ def main() :
     bounding_box = RectangleQ(-1000, -1000, 3400, 2200)
     quadtree = Quadtree(bounding_box, 20)
 
-    # Ground level (used for collisions if needed)
-    ground_level = display_height - 20
-
     # Keyboard states (e.g. pause key)
     key_state = {
         pygame.K_SPACE: False,
