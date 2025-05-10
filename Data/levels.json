@@ -1634,7 +1634,7 @@
       "polygon": true,
       "grabable": true,
       "mass": 10,
-      "restitution_coefficient": 0.7,
+      "restitution_coefficient": 0.01,
       "radius": 5,
       "mouse": [ 0, 0 ],
       "applied_coords": [ 0, 0 ],

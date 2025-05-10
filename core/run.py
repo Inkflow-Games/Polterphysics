@@ -47,7 +47,7 @@ def main() :
     # Screen configuration
     display_info = pygame.display.Info()
     display_width, display_height = display_info.current_w, display_info.current_h
-    screen = pygame.display.set_mode((display_width, display_height - 10))
+    screen = pygame.display.set_mode((display_width, display_height))
     pygame.display.set_caption("Physics Engine Test")
 
     # Backgrounds
