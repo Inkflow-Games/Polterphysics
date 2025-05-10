@@ -848,7 +848,7 @@
     "background": "data\\background\\back6.png",
     "key": {
       "coordinates": [ 520, 250 ],
-      "detection_radius": 50,
+      "detection_radius": 75,
       "end_object_name": "Polter"
     },
     "sprites": {
