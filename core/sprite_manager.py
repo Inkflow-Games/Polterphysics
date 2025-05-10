@@ -44,17 +44,17 @@ class SpriteManager:
         sprites (dict): Dictionary containing sprite data with keys as sprite names and values as dictionaries
         screen (pygame.Surface): Surface on which to render the sprites.
         """
-        # for sprite_name, data in sprites.items():
-        #     if (game_state == "running" and sprite_name == "Play") :
-        #         image = pygame.image.load("data/Decor/wood1.png").convert_alpha()
-        #         rotated_image = pygame.transform.rotate(image, data.get("rotation", 0))
-        #         rect = rotated_image.get_rect(center=tuple(data["coordinates"]))
-        #         screen.blit(rotated_image, rect)
-        #     elif(game_state == "paused" and sprite_name == "Paused") :
-        #         image = pygame.image.load("data/Decor/wood2.png").convert_alpha()
-        #         rotated_image = pygame.transform.rotate(image, data.get("rotation", 0))
-        #         rect = rotated_image.get_rect(center=tuple(data["coordinates"]))
-        #         screen.blit(rotated_image, rect)
+        for sprite_name, data in sprites.items():
+            if (game_state == "running" and sprite_name == "Play") :
+                image = pygame.image.load("data/Decor/PlayIcon.png").convert_alpha()
+                rotated_image = pygame.transform.rotate(image, data.get("rotation", 0))
+                rect = rotated_image.get_rect(center=tuple(data["coordinates"]))
+                screen.blit(rotated_image, rect)
+            elif(game_state == "paused" and sprite_name == "Paused") :
+                image = pygame.image.load("data/Decor/PauseIcon.png").convert_alpha()
+                rotated_image = pygame.transform.rotate(image, data.get("rotation", 0))
+                rect = rotated_image.get_rect(center=tuple(data["coordinates"]))
+                screen.blit(rotated_image, rect)
             
 
 
