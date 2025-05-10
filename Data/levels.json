@@ -2526,8 +2526,8 @@
   "10": {
     "background": "data\\background\\back10.png",
     "key": {
-      "coordinates": [ 1370, 950 ],
-      "detection_radius": 60,
+      "coordinates": [ 1370, 955 ],
+      "detection_radius": 100,
       "end_object_name": "Polter"
     },
     "sprites": {
@@ -2616,10 +2616,10 @@
       "simulated": [],
       "centroid": [ [ 0, 0 ] ],
       "vertices": [
-        [ 360, 275 ],
+        [ 363, 275 ],
         [ 760, 275 ],
         [ 760, 305 ],
-        [ 360, 305]
+        [ 363, 305 ]
       ],
       "zone": [],
       "name": "Start_platform"
@@ -2639,7 +2639,7 @@
         [ 730, 0 ],
         [ 760, 0 ],
         [ 760, 200 ],
-        [ 730, 200]
+        [ 730, 200 ]
       ],
       "zone": [],
       "name": "Top_wall"
@@ -2659,7 +2659,7 @@
         [ 900, 305 ],
         [ 1400, 580 ],
         [ 1400, 620 ],
-        [ 900, 620]
+        [ 900, 620 ]
       ],
       "zone": [],
       "name": "Bottom_slope"
@@ -2679,7 +2679,7 @@
         [ 900, 190 ],
         [ 1350, 180 ],
         [ 1400, 200 ],
-        [ 1400, 505]
+        [ 1400, 505 ]
       ],
       "zone": [],
       "name": "Top_slope"
@@ -2717,9 +2717,9 @@
       "centroid": [ [ 0, 0 ] ],
       "vertices": [
         [ 1480, 0 ],
-        [ 1560, 0 ],
-        [ 1560, 1080 ],
-        [ 1480, 1080 ]
+        [ 1555, 0 ],
+        [ 1550, 1070 ],
+        [ 1480, 1070 ]
       ],
       "zone": [],
       "name": "Right_wall"
@@ -2728,18 +2728,18 @@
       "polygon": true,
       "grabable": false,
       "mass": 50000000000000,
-      "restitution_coefficient": 0.2,
-      "radius": 5,
+      "restitution_coefficient": 0,
+      "radius": 0,
       "mouse": [ 0, 0 ],
       "applied_coords": [ 0, 0 ],
       "applied_angle": 0,
       "simulated": [],
       "centroid": [ [ 0, 0 ] ],
       "vertices": [
-        [ 360, 1080 ],
-        [ 1560, 1080 ],
-        [ 1560, 1081 ],
-        [ 360, 1081 ]
+        [ 360, 1085 ],
+        [ 1500, 1085 ],
+        [ 1500, 1100 ],
+        [ 360, 1100 ]
       ],
       "zone": [],
       "name": "Ground"
@@ -2756,12 +2756,9 @@
       "simulated": [],
       "centroid": [ [ 400, 245 ] ],
       "vertices": [
-        [ 0, 800 ],
-        [ 1300, 800 ],
-        [ 1300, 900 ],
-        [ 0, 900 ]
       ],
-      "zone": ["wind",
+      "zone": [
+        "wind",
         [ -15, 0 ],
         [ 0, 0 ],
         1380,
@@ -2783,12 +2780,12 @@
       "applied_coords": [ 0, 0 ],
       "applied_angle": 0,
       "simulated": [],
-      "centroid": [ [ 960, 210 ] ],
+      "centroid": [ [ 0, 0 ] ],
       "vertices": [
-        [ 1401, 580 ],
-        [ 1479, 580 ],
-        [ 1479, 619 ],
-        [ 1401, 619 ]
+        [ 1403, 580 ],
+        [ 1477, 580 ],
+        [ 1477, 619 ],
+        [ 1403, 619 ]
       ],
       "zone": [
 
@@ -2805,7 +2802,7 @@
       "applied_coords": [ 0, 0 ],
       "applied_angle": 0,
       "simulated": [],
-      "centroid": [ [ 960, 210 ] ],
+      "centroid": [ [ 0, 0 ] ],
       "vertices": [
         [ 365, 580 ],
         [ 560, 580 ],
