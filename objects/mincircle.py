@@ -211,6 +211,7 @@ def convert(shape):
     dy = mec.c.y - shape.centroid.y
     r = math.hypot(dx,dy)
     theta = math.atan2(dy,dx)
+    #returns the relative distance to the centroid of the object and the angle relative to the centroid of the object
     return (mec,r,theta)
 
 
