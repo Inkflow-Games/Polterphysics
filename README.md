@@ -2,15 +2,14 @@
 
 ## General presentation
 
-**Project title**: Polterphysics  
-**Contributors**:
-- Clément Moussy (Otherbug)
-- Maël Prouteau (Astrion20)
-- Maxime Noudelberg (MrThonChan)
-- Mathias Gomes (mathias-46)
-- Rafael Véclin (Meta122)
+**Project title**: Polterphysics
 
-*See "Task distribution" section for more detailed information.*
+**Contributors**:
+- **Clément Moussy** (Otherbug) : Core physics and object interactions
+- **Maël Prouteau** (Astrion20) : UI/UX design and level management
+- **Maxime Noudelberg** (MrThonChan) : Interaction with the player, trajectory equations
+- **Mathias Gomes** (mathias-46) : Asset design and level layouts
+- **Rafael Véclin** (Meta122) : Project structure, sprite management and documentation
 
 ## Description
 
@@ -84,15 +83,6 @@ Polterphysics/
 
 #### utils/
 - `placeholder.py` :
-
-## Task distribution
-
-- `Core physics and object interactions` : Clément Moussy, Rafael Véclin
-- `UI and menu system` : Maël Prouteau, Mathias Gomes
-- `Asset design and level layouts` : Mathias Gomes, Maxime Noudelberg
-- `Interaction with the player` : Maxime Noudelberg
-- `Level management` : Maël Prouteau, Rafael Véclin
-- `Structure, review and documentation` : Rafael Véclin
 
 ## Known bugs
 

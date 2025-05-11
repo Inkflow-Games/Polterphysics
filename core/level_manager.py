@@ -15,7 +15,7 @@ Dependencies: pygame, core.sound, data, objects.object
 
 import pygame
 import json
-
+import sys
 from objects.bonus import Bonus
 from objects.object import *
 from data import *
@@ -41,7 +41,7 @@ with open("data/levels.json", "r") as f:
 button_list = []
 object_list = []
 current_scene = 0
-max_scene = 11
+max_scene = 13
 playing_music = ""
 tries = 0
 realisticTrajectory = False
@@ -86,7 +86,7 @@ class Button:
         Handles the action associated with a button click.
         Uses a match-case to select the corresponding behavior.
         """
-        max_scene = 11
+        max_scene = 13
         screen_width, screen_height = display_width, display_height
         global attempts_left
         global realisticTrajectory
@@ -100,6 +100,7 @@ class Button:
 
             case "Stop" :
                 pygame.quit()
+                sys.exit()
 
             case "Restart Level":
                 self.game_state = "paused"
@@ -138,8 +139,8 @@ class Button:
                 attempts_left = 6
                 load_scene(int(self.action) + 1, screen_width, screen_height, object_list,screen)
 
-            case "Option":
-                self.game_state = "options"
+            case "Tuto":
+                self.game_state = "tuto"
                 load_scene(-1, screen_width, screen_height, object_list,screen)
 
             case "RealisticTrajectory":
@@ -333,6 +334,7 @@ def load_scene(n: int, screen_width, screen_height, object_list, screen):
             if playing_music != "data/Music/menu.mp3":
                 play_music("data/Music/menu.mp3")
                 playing_music = "data/Music/menu.mp3"
+            sprite_manager = SpriteManager(key=key, bonus=bonus)
 
 
         case _:  # Gameplay levels

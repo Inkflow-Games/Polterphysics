@@ -9,14 +9,14 @@
       "width": 488,
       "action": "1"
     },
-    "option_menu": {
+    "tuto_menu": {
       "size": 1,
       "image": "data\\ButtonsImages\\TutoButton.png",
       "imageHover": "data\\ButtonsImages\\TutoButtonPressed.png",
       "position": [ 0.5, 0.75 ],
       "height": 80,
       "width": 240,
-      "action": "Option"
+      "action": "Tuto"
     },
     "RealisticTrajectory": {
       "size": 1,
@@ -625,6 +625,129 @@
       "height": 100,
       "width": 100,
       "action": "Trickandle"
+    }
+  },
+  "11": {
+    "Restart": {
+      "size": 1,
+      "image": "data\\ButtonsImages\\RestartButton.png",
+      "imageHover": "data\\ButtonsImages\\RestartButtonPressed.png",
+      "position": [ 0.915, 0.2 ],
+      "height": 80,
+      "width": 240,
+      "action": "Restart Level"
+    },
+    "NextLevel": {
+      "size": 1,
+      "image": "data\\ButtonsImages\\PlayButton.png",
+      "imageHover": "data\\ButtonsImages\\PlayButtonPressed.png",
+      "position": [ 0.08, 0.8 ],
+      "height": 80,
+      "width": 240,
+      "action": "Next Level"
+    },
+    "Play": {
+      "size": 1,
+      "image": "data\\ButtonsImages\\PlayButton.png",
+      "imageHover": "data\\ButtonsImages\\PlayButtonPressed.png",
+      "position": [ 0.915, 0.1 ],
+      "height": 80,
+      "width": 240,
+      "action": "Play"
+    },
+    "Exit": {
+      "size": 1,
+      "image": "data\\ButtonsImages\\HomeButton.png",
+      "imageHover": "data\\ButtonsImages\\HomeButtonPressed.png",
+      "position": [ 0.915, 0.8 ],
+      "height": 80,
+      "width": 240,
+      "action": "Load Main Menu"
+    },
+    "Trickandle": {
+      "size": 1,
+      "image": "data\\Phantoms\\trickandle.png",
+      "imageHover": "data\\Phantoms\\trickandle_hover.png",
+      "position": [ 0.05, 0.57 ],
+      "height": 100,
+      "width": 100,
+      "action": "Trickandle"
+    },
+    "Fathome": {
+      "size": 1,
+      "image": "data\\Phantoms\\fathome.png",
+      "imageHover": "data\\Phantoms\\fathome_hover.png",
+      "position": [ 0.1, 0.65 ],
+      "height": 100,
+      "width": 100,
+      "action": "Fathome"
+    },
+
+    "Rospirit": {
+      "size": 1,
+      "image": "data\\Phantoms\\rospirit.png",
+      "imageHover": "data\\Phantoms\\rospirit_hover.png",
+      "position": [ 0.04, 0.70 ],
+      "height": 100,
+      "width": 100,
+      "action": "Rospirit"
+    }
+
+  },
+  "12": {
+    "Restart": {
+      "size": 1,
+      "image": "data\\ButtonsImages\\RestartButton.png",
+      "imageHover": "data\\ButtonsImages\\RestartButtonPressed.png",
+      "position": [ 0.915, 0.2 ],
+      "height": 80,
+      "width": 240,
+      "action": "Restart Level"
+    },
+    "NextLevel": {
+      "size": 1,
+      "image": "data\\ButtonsImages\\SkipButton.png",
+      "imageHover": "data\\ButtonsImages\\SkipButtonPressed.png",
+      "position": [ 0.08, 0.8 ],
+      "height": 80,
+      "width": 240,
+      "action": "Next Level"
+    },
+    "Play": {
+      "size": 1,
+      "image": "data\\ButtonsImages\\PlayButton.png",
+      "imageHover": "data\\ButtonsImages\\PlayButtonPressed.png",
+      "position": [ 0.915, 0.1 ],
+      "height": 80,
+      "width": 240,
+      "action": "Play"
+    },
+    "Exit": {
+      "size": 1,
+      "image": "data\\ButtonsImages\\HomeButton.png",
+      "imageHover": "data\\ButtonsImages\\HomeButtonPressed.png",
+      "position": [ 0.915, 0.8 ],
+      "height": 80,
+      "width": 240,
+      "action": "Load Main Menu"
+    },
+    "Polter": {
+      "size": 1,
+      "image": "data\\Phantoms\\polter.png",
+      "imageHover": "data\\Phantoms\\polter_hover.png",
+      "position": [ 0.05, 0.57 ],
+      "height": 100,
+      "width": 100,
+      "action": "Polter"
+    },
+    "Rospirit": {
+      "size": 1,
+      "image": "data\\Phantoms\\rospirit.png",
+      "imageHover": "data\\Phantoms\\rospirit_hover.png",
+      "position": [ 0.13, 0.47 ],
+      "height": 100,
+      "width": 100,
+      "action": "Rospirit"
     }
   }
 }

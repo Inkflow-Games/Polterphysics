@@ -2415,7 +2415,7 @@
         [ 870, 250 ],
         [ 1050, 250 ],
         [ 1050, 300 ],
-        [ 870, 300]
+        [ 870, 300 ]
       ],
       "zone": [],
       "name": "Start_platform"
@@ -2435,7 +2435,7 @@
         [ 870, 230 ],
         [ 890, 230 ],
         [ 890, 300 ],
-        [ 870, 300]
+        [ 870, 300 ]
       ],
       "zone": [],
       "name": "Corner_left"
@@ -2455,7 +2455,7 @@
         [ 1030, 230 ],
         [ 1050, 230 ],
         [ 1050, 300 ],
-        [ 1030, 300]
+        [ 1030, 300 ]
       ],
       "zone": [],
       "name": "Corner_right"
@@ -2475,7 +2475,7 @@
         [ 360, 300 ],
         [ 910, 600 ],
         [ 910, 1080 ],
-        [ 360, 1080]
+        [ 360, 1080 ]
       ],
       "zone": [],
       "name": "Left_wall"
@@ -2526,8 +2526,8 @@
   "10": {
     "background": "data\\background\\back10.png",
     "key": {
-      "coordinates": [ 1370, 950 ],
-      "detection_radius": 60,
+      "coordinates": [ 1370, 955 ],
+      "detection_radius": 70,
       "end_object_name": "Polter"
     },
     "sprites": {
@@ -2616,10 +2616,10 @@
       "simulated": [],
       "centroid": [ [ 0, 0 ] ],
       "vertices": [
-        [ 360, 275 ],
+        [ 363, 275 ],
         [ 760, 275 ],
         [ 760, 305 ],
-        [ 360, 305]
+        [ 363, 305 ]
       ],
       "zone": [],
       "name": "Start_platform"
@@ -2639,7 +2639,7 @@
         [ 730, 0 ],
         [ 760, 0 ],
         [ 760, 200 ],
-        [ 730, 200]
+        [ 730, 200 ]
       ],
       "zone": [],
       "name": "Top_wall"
@@ -2657,9 +2657,9 @@
       "centroid": [ [ 0, 0 ] ],
       "vertices": [
         [ 900, 305 ],
-        [ 1400, 580 ],
-        [ 1400, 620 ],
-        [ 900, 620]
+        [ 1395, 580 ],
+        [ 1395, 620 ],
+        [ 900, 620 ]
       ],
       "zone": [],
       "name": "Bottom_slope"
@@ -2678,8 +2678,8 @@
       "vertices": [
         [ 900, 190 ],
         [ 1350, 180 ],
-        [ 1400, 200 ],
-        [ 1400, 505]
+        [ 1395, 200 ],
+        [ 1395, 505 ]
       ],
       "zone": [],
       "name": "Top_slope"
@@ -2717,9 +2717,9 @@
       "centroid": [ [ 0, 0 ] ],
       "vertices": [
         [ 1480, 0 ],
-        [ 1560, 0 ],
-        [ 1560, 1080 ],
-        [ 1480, 1080 ]
+        [ 1555, 0 ],
+        [ 1550, 1070 ],
+        [ 1480, 1070 ]
       ],
       "zone": [],
       "name": "Right_wall"
@@ -2728,18 +2728,18 @@
       "polygon": true,
       "grabable": false,
       "mass": 50000000000000,
-      "restitution_coefficient": 0.2,
-      "radius": 5,
+      "restitution_coefficient": 0,
+      "radius": 0,
       "mouse": [ 0, 0 ],
       "applied_coords": [ 0, 0 ],
       "applied_angle": 0,
       "simulated": [],
       "centroid": [ [ 0, 0 ] ],
       "vertices": [
-        [ 360, 1080 ],
-        [ 1560, 1080 ],
-        [ 1560, 1081 ],
-        [ 360, 1081 ]
+        [ 360, 1085 ],
+        [ 1500, 1085 ],
+        [ 1500, 1100 ],
+        [ 360, 1100 ]
       ],
       "zone": [],
       "name": "Ground"
@@ -2756,12 +2756,9 @@
       "simulated": [],
       "centroid": [ [ 400, 245 ] ],
       "vertices": [
-        [ 0, 800 ],
-        [ 1300, 800 ],
-        [ 1300, 900 ],
-        [ 0, 900 ]
       ],
-      "zone": ["wind",
+      "zone": [
+        "wind",
         [ -15, 0 ],
         [ 0, 0 ],
         1380,
@@ -2776,19 +2773,19 @@
     "Fathome": {
       "polygon": true,
       "grabable": true,
-      "mass": 5,
+      "mass": 15,
       "restitution_coefficient": 0.9,
       "radius": 25,
       "mouse": [ 0, 0 ],
       "applied_coords": [ 0, 0 ],
       "applied_angle": 0,
       "simulated": [],
-      "centroid": [ [ 960, 210 ] ],
+      "centroid": [ [ 0, 0 ] ],
       "vertices": [
-        [ 1401, 580 ],
-        [ 1479, 580 ],
-        [ 1479, 619 ],
-        [ 1401, 619 ]
+        [ 1403, 580 ],
+        [ 1477, 580 ],
+        [ 1477, 619 ],
+        [ 1403, 619 ]
       ],
       "zone": [
 
@@ -2805,7 +2802,7 @@
       "applied_coords": [ 0, 0 ],
       "applied_angle": 0,
       "simulated": [],
-      "centroid": [ [ 960, 210 ] ],
+      "centroid": [ [ 0, 0 ] ],
       "vertices": [
         [ 365, 580 ],
         [ 560, 580 ],
@@ -2816,6 +2813,582 @@
 
       ],
       "name": "Trickandle"
+    }
+  },
+  "11": {
+    "background": "data\\background\\back5.png",
+    "key": {
+      "coordinates": [ 1000, 600 ],
+      "detection_radius": 100,
+      "end_object_name": "Trickandle"
+    },
+    "bonus": {
+      "coordinates": [ 666, 666 ],
+      "detection_radius": 100,
+      "target": "Trickandle"
+    },
+    "sprites": {
+      "Play": {
+        "path": "data/Decor/data/Decor/wood1.png",
+        "size": [ 100, 100 ],
+        "rotation": 0,
+        "coordinates": [ 1750, 550 ]
+      },
+      "Paused": {
+        "path": "data/Decor/data/Decor/wood2.png",
+        "size": [ 100, 100 ],
+        "rotation": 0,
+        "coordinates": [ 1750, 550 ]
+      }
+    },
+    "LeftPanel": {
+      "polygon": true,
+      "grabable": false,
+      "mass": 40000000000000,
+      "restitution_coefficient": 0.8,
+      "radius": 5,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [ 0, -1080 ],
+        [ 360, -1080 ],
+        [ 360, 1080 ],
+        [ 0, 1080 ]
+      ],
+      "zone": [],
+      "name": "LeftPanel"
+    },
+    "RightPanel": {
+      "polygon": true,
+      "grabable": false,
+      "mass": 40000000000000,
+      "restitution_coefficient": 0.8,
+      "radius": 5,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [ 1560, -1080 ],
+        [ 1920, -1080 ],
+        [ 1920, 1080 ],
+        [ 1560, 1080 ]
+      ],
+      "zone": [],
+      "name": "RightPanel"
+    },
+    "Slope1": {
+      "polygon": true,
+      "grabable": false,
+      "mass": 15000000000000000000,
+      "restitution_coefficient": 0,
+      "radius": 5,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [
+          400,
+          200
+        ],
+        [
+          500,
+          150
+        ],
+        [
+          600,
+          300
+        ]
+      ],
+      "zone": [],
+      "name": "Slope1"
+
+    },
+    "Fathome": {
+      "polygon": true,
+      "grabable": true,
+      "mass": 18,
+      "restitution_coefficient": 1.2,
+      "radius": 5,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [
+          700,
+          400
+        ],
+        [
+          900,
+          400
+        ],
+        [
+          900,
+          500
+        ],
+        [
+          700,
+          500
+        ]
+
+      ],
+      "zone": [
+        "wind",
+        [ 0, -80 ],
+        [ 0, 0 ],
+        690,
+        910,
+        300,
+        700,
+        0
+      ],
+      "name": "Fathome"
+
+    },
+    "Slope2": {
+      "polygon": true,
+      "grabable": false,
+      "mass": 40000000000000,
+      "restitution_coefficient": 0,
+      "radius": 5,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [
+          1560,
+          150
+        ],
+        [
+          1476,
+          300
+        ],
+        [
+          1560,
+          500
+        ]
+
+      ],
+      "zone": [],
+      "name": "Slope2"
+
+    },
+    "Trickandle": {
+      "polygon": false,
+      "grabable": true,
+      "mass": 900,
+      "restitution_coefficient": 1.2,
+      "radius": 30,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 500, 10 ] ],
+      "vertices": [
+        [
+          700,
+          500
+        ],
+        [
+          900,
+          500
+        ],
+        [
+          900,
+          600
+        ],
+        [
+          700,
+          600
+        ]
+
+      ],
+      "zone": [],
+      "name": "Trickandle"
+    },
+
+    "Floor": {
+      "polygon": true,
+      "grabable": false,
+      "mass": 9000000000,
+      "restitution_coefficient": 1,
+      "radius": 30,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 500, 10 ] ],
+      "vertices": [
+        [
+          360,
+          990
+        ],
+        [
+          1560,
+          990
+        ],
+        [
+          1560,
+          1080
+        ],
+        [
+          360,
+          1080
+        ]
+
+      ],
+      "zone": [],
+      "name": "Floor"
+    },
+
+    "Rospirit": {
+      "polygon": true,
+      "grabable": true,
+      "mass": 23,
+      "restitution_coefficient": 1.2,
+      "radius": 30,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 500, 10 ] ],
+      "vertices": [
+        [
+          700,
+          900
+        ],
+        [
+          800,
+          900
+
+        ],
+        [
+          750,
+          978
+        ]
+
+      ],
+      "zone": [],
+      "name": "Rospirit"
+    },
+
+    "Keyguard1": {
+      "polygon": true,
+      "grabable": false,
+      "mass": 900000000000000000000000,
+      "restitution_coefficient": 1.2,
+      "radius": 30,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 500, 10 ] ],
+      "vertices": [
+        [
+          930,
+          550
+        ],
+        [
+          950,
+          550
+
+        ],
+        [
+          950,
+          750
+        ],
+        [
+          930,
+          750
+        ]
+
+      ],
+      "zone": [],
+      "name": "Keyguard1"
+    },
+    "Keyguard2": {
+      "polygon": true,
+      "grabable": false,
+      "mass": 900000000000000000000000,
+      "restitution_coefficient": 1.2,
+      "radius": 30,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 500, 10 ] ],
+      "vertices": [
+        [
+          950,
+          730
+        ],
+        [
+          1150,
+          730
+
+        ],
+        [
+          1150,
+          750
+        ],
+        [
+          950,
+          750
+        ]
+
+      ],
+      "zone": [],
+      "name": "Keyguard2"
+    },
+
+    "LittleRoof": {
+      "polygon": true,
+      "grabable": false,
+      "mass": 900000000000000000000000,
+      "restitution_coefficient": 1.2,
+      "radius": 30,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 500, 10 ] ],
+      "vertices": [
+        [
+          800,
+          300
+        ],
+        [
+          960,
+          300
+
+        ],
+        [
+          960,
+          345
+        ],
+        [
+          800,
+          316
+        ]
+
+      ],
+      "zone": [],
+      "name": "LittleRoof"
+    }
+
+  },
+  "12": {
+    "background": "data\\background\\back9.png",
+    "key": {
+      "coordinates": [ 400, 30 ],
+      "detection_radius": 100,
+      "end_object_name": "Polter"
+    },
+    "sprites": {
+      "Play": {
+        "path": "data/Decor/data/Decor/wood1.png",
+        "size": [ 100, 100 ],
+        "rotation": 0,
+        "coordinates": [ 1750, 550 ]
+      },
+      "Paused": {
+        "path": "data/Decor/data/Decor/wood2.png",
+        "size": [ 100, 100 ],
+        "rotation": 0,
+        "coordinates": [ 1750, 550 ]
+      }
+    },
+    "Roof": {
+      "polygon": true,
+      "grabable": false,
+      "mass": 40000000000000,
+      "restitution_coefficient": 0.8,
+      "radius": 5,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [ 0, -2 ],
+        [ 1600, -2 ],
+        [ 1600, -1 ],
+        [ 0, -1 ]
+      ],
+      "zone": [],
+      "name": "Roof"
+    },
+    "LeftPanel": {
+      "polygon": true,
+      "grabable": false,
+      "mass": 40000000000000,
+      "restitution_coefficient": 0.8,
+      "radius": 5,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [ 0, 0 ],
+        [ 360, 0 ],
+        [ 360, 1080 ],
+        [ 0, 1080 ]
+      ],
+      "zone": [],
+      "name": "LeftPanel"
+    },
+    "RightPanel": {
+      "polygon": true,
+      "grabable": false,
+      "mass": 40000000000000,
+      "restitution_coefficient": 0.8,
+      "radius": 5,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [ 1560, 0 ],
+        [ 1920, 0 ],
+        [ 1920, 1080 ],
+        [ 1560, 1080 ]
+      ],
+      "zone": [],
+      "name": "RightPanel"
+    },
+    "Start_platform": {
+      "polygon": true,
+      "grabable": false,
+      "mass": 5000000000000000,
+      "restitution_coefficient": 0.8,
+      "radius": 5,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [ 1100, 400 ],
+        [ 1555, 400 ],
+        [ 1555, 500 ],
+        [ 1100, 500 ]
+      ],
+      "zone": [],
+      "name": "Start_platform"
+    },
+    "Ground": {
+      "polygon": true,
+      "grabable": false,
+      "mass": 50000000000000,
+      "restitution_coefficient": 0,
+      "radius": 0,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [ 360, 1075 ],
+        [ 800, 1075 ],
+        [ 800, 1090 ],
+        [ 360, 1090 ]
+      ],
+      "zone": [],
+      "name": "Ground"
+    },
+    "Plateform2": {
+      "polygon": true,
+      "grabable": false,
+      "mass": 500000000000000000,
+      "restitution_coefficient": 0.8,
+      "radius": 5,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [ 750, 400 ],
+        [ 850, 400 ],
+        [ 850, 500 ],
+        [ 750, 500 ]
+      ],
+      "zone": [],
+      "name": "Plateform2"
+    },
+    "Left_wall": {
+      "polygon": true,
+      "grabable": false,
+      "mass": 50000000000000,
+      "restitution_coefficient": 0.7,
+      "radius": 5,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [ 500, 0 ],
+        [ 600, 0 ],
+        [ 600, 800 ],
+        [ 500, 800 ]
+      ],
+      "zone": [],
+      "name": "Left_wall"
+    },
+    "Rospirit": {
+      "polygon": true,
+      "grabable": true,
+      "mass": 15,
+      "restitution_coefficient": 0.7,
+      "radius": 5,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [ 1200, 150 ],
+        [ 1400, 150 ],
+        [ 1400, 350 ],
+        [ 1200, 350 ]
+      ],
+      "zone": [],
+      "name": "Rospirit"
+    },
+    "Polter": {
+      "polygon": false,
+      "grabable": true,
+      "mass": 5,
+      "restitution_coefficient": 0.8,
+      "radius": 40,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 800, 350 ] ],
+      "vertices": [
+        [ 0, 800 ],
+        [ 1300, 800 ],
+        [ 1300, 900 ],
+        [ 0, 900 ]
+      ],
+      "zone": [
+
+      ],
+      "name": "Polter"
     }
   }
 }

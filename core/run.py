@@ -18,7 +18,7 @@ Dependencies: pygame, core.physics_engine, objects.object, etc.
 import pygame
 from pygame.math import Vector2
 from random import randint
-
+import sys
 from core.physics_engine import PhysicsEngine
 from core.collision import *
 from core.force_calculator import *
@@ -141,7 +141,8 @@ def main() :
         # === Drawing ===
         if game_state == "menu":
             screen.blit(pictureBackground, (0, 0))
-        elif game_state == "options":
+            level_manager.sprite_manager.draw_sprites(screen = screen, game_state = game_state)
+        elif game_state == "tuto":
             screen.blit(pictureOption, (0, 0))
         elif game_state == "game_over":
             screen.blit(game_over, (0,0))
@@ -235,3 +236,4 @@ def main() :
         clock.tick(120)
 
     pygame.quit()
+    sys.exit()
