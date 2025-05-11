@@ -110,6 +110,7 @@ class GJK2D:
         polyB (Shape): Second shape.
         mtd (Vector2): Minimum translation direction.
         """
+        #checks if its a circle or not, applies different collision points
         if hasattr(polyA,'radius'):
             self.colpoint = polyA.support(mtd)
             #pygame.draw.circle(screen,(50,50,50),self.colpoint,3)
@@ -117,14 +118,12 @@ class GJK2D:
             self.colpoint = polyB.support(mtd)
             #pygame.draw.circle(screen,(50,50,50),self.colpoint,3)
         else:
+            
             polyA = self.shape1.vertices
             polyB = self.shape2.vertices
             supportA = find_furthests(mtd, polyA)
             supportB = find_furthests(-mtd, polyB)
-            #supportA = find_furthests(polyA, mtd)
-            #supportB = find_furthests(polyB,-mtd)
-            #print(supportA,supportB)
-
+            #computes the support functions for both shapes for the detection of collision type
 
             # Classify contact type
             if len(supportA) == 1 and len(supportB) == 2:
@@ -139,7 +138,8 @@ class GJK2D:
                 self.typecol = (supportA, supportB, "edge-edge")
                 self.colpoint = self.edgetoedge(self.shape1.vertices[supportA[0]],self.shape1.vertices[supportA[1]],self.shape2.vertices[supportB[0]],self.shape2.vertices[supportB[1]])
 
-            else : self.typecol = (None, None, "unknown")
+            else : 
+                self.typecol = (None, None, "unknown")
 
     def vertextoedge(self,SegmentA,SegmentB,vertex):
         """
@@ -222,25 +222,29 @@ class GJK2D:
         Returns:
         list of Vector2 or None: Simplex if collision detected; else None.
         """
+        #starts in a pseudo-random direction to start searching for the simplex
         direction = self.shape1.centroid
         a = self.calcsupport(direction)
         direction = -direction
         b = self.calcsupport(direction)
+        # If the dot product is not positive, the origin is outside the Minkowski difference
         if b.dot(direction) <= 0: return None
-
+        #Compute AB and the perpendicular direction toward the origin using triple product
         ab = b-a
         direction = self.TripleProduct(ab,-a,ab)
 
         for i in range(20):
+            #Add a new support point in the current search direction
             c = self.calcsupport(direction)
             if c.dot(direction) <=0 : return None
-
+            #Shift simplex to origin for next iteration logic
             c0 = -c
             cb = b - c
             ca = a - c
+             #Generate new perpendicular directions toward the origin
             cbnorm = self.TripleProduct(ca,cb,cb)
             canorm = self.TripleProduct(cb,ca,ca)
-
+            #Choose the next edge to keep and update direction accordingly
             if canorm.dot(c0) > 0:
                 b = c
                 direction = canorm
@@ -248,6 +252,7 @@ class GJK2D:
                 a = c
                 direction = cbnorm
             else: 
+                # Origin is inside the triangle (simplex encloses it)
                 self.vertices = [a,b,c]
                 return [a,b,c]
      
@@ -280,9 +285,11 @@ class GJK2D:
         Returns:
         Vector2: Penetration vector.
         """
+         # Only proceed if a collision was confirmed by GJK
         if self.detection() is not None:
             minIndex = 0
             minDistance = float("inf")
+            # Continue expanding the polytope until the new support point is very close to an existing edge
             while (minDistance == float("inf")):
                 for i in range(len(polyptote)):
                     j = (i+1)%len(polyptote)
@@ -292,23 +299,27 @@ class GJK2D:
                     normal = Vector2(ij.y,-ij.x).normalize()
                     distance = normal.dot(vertexI)
 
+                    # If the normal is pointing toward the origin, flip it
                     if (distance < 0):
                         distance *= -1
                         normal = -normal
-                    
+
+                    # Track the edge that is closest to the origin
                     if (distance < minDistance):
                         minDistance = distance
                         minNormal = normal
                         minIndex = j
-            
+
+                # Get a new support point in the direction of the closest edge's normal
                 support = self.calcsupport(minNormal)
                 sDistance = minNormal.dot(support)
-                #print(sDistance,support,minDistance,minIndex,minNormal)
 
+                # If the new point is not close enough to the current edge, add it to the polytope
                 if abs(sDistance - minDistance) > 0.001:
                     minDistance = float("inf")
                     polyptote.insert(minIndex,support)
-                    #print(polyptote)
+
+            # Return the final penetration vector, slightly extended to avoid numerical issues
             return minNormal * (minDistance + 0.001)
         return Vector2(0,0)
        
@@ -320,19 +331,12 @@ class GJK2D:
         penetrationvector (Vector2): Minimum translation vector.
         dt (float): Time step.
         """
-        #print(self.A.vertices,self.B.vertices,self.typecol)
-        #pygame.draw.polygon(screen,(255,255,225),self.A.vertices)
-        #pygame.draw.polygon(screen,(255,255,225),self.B.vertices)
-        #print(self.A.centroid,self.B.centroid)
-        #print("ae",self.A.velocity,self.A.inertia,self.A.angular_velocity)
-        #print("be",self.B.velocity,self.B.inertia,self.B.angular_velocity)
         contact_point = self.colpoint
         restitution = min(self.res1,self.res2)
         # Coulomb's law: μ = friction coefficient (can be per-object or global)
-        mu = 0.4  # You can tweak or get this from object properties
-        #pygame.draw.line(screen,(120,20,100),contact_point,(contact_point+penetrationvector)*10)
+        mu = 0.4
         normal = penetrationvector.normalize()
-        #pygame.draw.line(screen,(50,50,50),contact_point,(contact_point-normal)*10)
+        # Compute rA and rB, the contact point relative to the centers of mass
         rA = contact_point - self.shape1.centroid
         rB = contact_point - self.shape2.centroid
         vA = self.shape1.velocity + Vector2(-self.shape1.angular_velocity * rA.y, self.shape1.angular_velocity * rA.x)
@@ -350,10 +354,13 @@ class GJK2D:
         inv_I1 = 1 / self.shape1.inertia if self.shape1.inertia > 0 else 0
         inv_I2 = 1 / self.shape2.inertia if self.shape2.inertia > 0 else 0
 
+        # Calculate the rotational effects (torque response) at the contact point
         rA_cross_N = rA.cross(normal)
         rB_cross_N = rB.cross(normal)
         denominator = inv_mass1 + inv_mass2 + (rA_cross_N ** 2) * inv_I1 + (rB_cross_N ** 2) * inv_I2
+        # Impulse scalar (normal impulse magnitude)
         j = -(1 + restitution) * vel_along_normal / denominator
+        # Apply Baumgarte stabilization: bias impulse to reduce sinking
         bias = max(0,penetrationvector.magnitude() - 0.05) * (0.2 / dt)
         j += bias
 
@@ -364,35 +371,13 @@ class GJK2D:
 
         self.shape1.angular_velocity -= rA.cross(impulse) * inv_I1
         self.shape2.angular_velocity += rB.cross(impulse) * inv_I2
-        # --- Friction impulse ---
-        """
-        tangent = (relative_velocity - normal * relative_velocity.dot(normal))
-        if tangent.length_squared() > 0:
-            tangent = tangent.normalize()
-
-        # Calculate magnitude of friction impulse
-        jt = -relative_velocity.dot(tangent)
-        jt /= denominator  # Same denominator as normal impulse
-        jt = max(-j * mu, min(jt, j * mu))  # Clamp it
-
-        # Clamp friction impulse
-        friction_impulse = jt * tangent
-        if friction_impulse.length() > j * mu:
-            friction_impulse = j * mu * tangent
-
-        # Apply linear friction impulse
-        self.shape1.velocity -= friction_impulse * inv_mass1
-        self.shape2.velocity += friction_impulse * inv_mass2
-
-        # Apply angular friction impulse
-        self.shape1.angular_velocity -= rA.cross(friction_impulse) * inv_I1
-        self.shape2.angular_velocity += rB.cross(friction_impulse) * inv_I2
-        """
-        
+       
+       #Compute friction impulse
         if relative_velocity.length() > 0:
             tangent = relative_velocity - (relative_velocity.dot(normal)) * normal
             if tangent.length() > 0:
                 tangent = tangent.normalize()
+                # Compute tangential impulse magnitude
                 jt = -relative_velocity.dot(tangent)  # Friction force along the tangent direction
                 jt = max(min(jt, j * mu), -j * mu)  # Clamp to Coulomb friction
                 friction_impulse = jt * tangent
@@ -402,10 +387,9 @@ class GJK2D:
                 self.shape2.velocity += friction_impulse * inv_mass2
                 self.shape1.angular_velocity -= rA.cross(friction_impulse) * inv_I1
                 self.shape2.angular_velocity += rB.cross(friction_impulse) * inv_I2
-        #print("a",self.A.velocity,self.A.inertia,self.A.angular_velocity)
-        #print("b",self.B.velocity,self.B.inertia,self.B.angular_velocity)
-        percent = 0.6
-        slop = 0.03
+        #Another position correction to also prevent sinking
+        percent = 0.6 # Penetration percentage to correct (60%)
+        slop = 0.03 # Allow small overlap tolerance
         correction_mag = max(penetrationvector.length() - slop, 0) / (inv_mass1 + inv_mass2)
         correction = correction_mag * percent * normal
         self.shape1.add(-(correction * inv_mass1))
