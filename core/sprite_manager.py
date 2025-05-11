@@ -10,6 +10,7 @@ Dependencies: pygame.math (Vector2), math
 """
 
 import pygame
+import core.level_manager as level_manager
 
 class SpriteManager:
     """
@@ -36,7 +37,7 @@ class SpriteManager:
         self.bonusdetected = False
 
 
-    def draw_sprites(self, sprites, screen, game_state):
+    def draw_sprites(self, sprites = None, screen = None, game_state = None):
         """
         Loads and draws sprites on the given screen based on the provided sprite data.
 
@@ -44,17 +45,25 @@ class SpriteManager:
         sprites (dict): Dictionary containing sprite data with keys as sprite names and values as dictionaries
         screen (pygame.Surface): Surface on which to render the sprites.
         """
-        for sprite_name, data in sprites.items():
-            if (game_state == "running" and sprite_name == "Play") :
-                image = pygame.image.load("data/Decor/PlayIcon.png").convert_alpha()
-                rotated_image = pygame.transform.rotate(image, data.get("rotation", 0))
-                rect = rotated_image.get_rect(center=tuple(data["coordinates"]))
-                screen.blit(rotated_image, rect)
-            elif(game_state == "paused" and sprite_name == "Paused") :
-                image = pygame.image.load("data/Decor/PauseIcon.png").convert_alpha()
-                rotated_image = pygame.transform.rotate(image, data.get("rotation", 0))
-                rect = rotated_image.get_rect(center=tuple(data["coordinates"]))
-                screen.blit(rotated_image, rect)
+        if sprites == None :
+            if level_manager.realisticTrajectory :
+                image = pygame.image.load("data/Decor/Box.png").convert_alpha()
+                screen.blit(image, (1101, 858))
+            else :
+                image = pygame.image.load("data/Decor/BoxTicked.png").convert_alpha()
+                screen.blit(image, (1100, 850))
+        else :
+            for sprite_name, data in sprites.items():
+                if (game_state == "running" and sprite_name == "Play") :
+                    image = pygame.image.load("data/Decor/PlayIcon.png").convert_alpha()
+                    rotated_image = pygame.transform.rotate(image, data.get("rotation", 0))
+                    rect = rotated_image.get_rect(center=tuple(data["coordinates"]))
+                    screen.blit(rotated_image, rect)
+                elif(game_state == "paused" and sprite_name == "Paused") :
+                    image = pygame.image.load("data/Decor/PauseIcon.png").convert_alpha()
+                    rotated_image = pygame.transform.rotate(image, data.get("rotation", 0))
+                    rect = rotated_image.get_rect(center=tuple(data["coordinates"]))
+                    screen.blit(rotated_image, rect)
             
 
 

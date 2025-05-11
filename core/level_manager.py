@@ -139,8 +139,8 @@ class Button:
                 attempts_left = 6
                 load_scene(int(self.action) + 1, screen_width, screen_height, object_list,screen)
 
-            case "Option":
-                self.game_state = "options"
+            case "Tuto":
+                self.game_state = "tuto"
                 load_scene(-1, screen_width, screen_height, object_list,screen)
 
             case "RealisticTrajectory":
@@ -334,6 +334,7 @@ def load_scene(n: int, screen_width, screen_height, object_list, screen):
             if playing_music != "data/Music/menu.mp3":
                 play_music("data/Music/menu.mp3")
                 playing_music = "data/Music/menu.mp3"
+            sprite_manager = SpriteManager(key=key, bonus=bonus)
 
 
         case _:  # Gameplay levels

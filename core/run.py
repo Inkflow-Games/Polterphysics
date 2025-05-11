@@ -141,7 +141,8 @@ def main() :
         # === Drawing ===
         if game_state == "menu":
             screen.blit(pictureBackground, (0, 0))
-        elif game_state == "options":
+            level_manager.sprite_manager.draw_sprites(screen = screen, game_state = game_state)
+        elif game_state == "tuto":
             screen.blit(pictureOption, (0, 0))
         elif game_state == "game_over":
             screen.blit(game_over, (0,0))
