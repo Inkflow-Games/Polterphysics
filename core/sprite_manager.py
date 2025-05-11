@@ -46,7 +46,7 @@ class SpriteManager:
         screen (pygame.Surface): Surface on which to render the sprites.
         """
         if sprites == None :
-            if level_manager.realisticTrajectory :
+            if level_manager.realisticTrajectory == False :
                 image = pygame.image.load("data/Decor/Box.png").convert_alpha()
                 screen.blit(image, (1101, 858))
             else :
