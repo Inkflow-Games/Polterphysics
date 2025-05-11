@@ -1,12 +1,12 @@
 """
-Polterphysics
+POLTERPHYSICS
 key.py
 
 A script that defines a Key class used for switching to the next in-game level.
 
-Last Updated: Feb 2025
-Python Version: 3.12.9
-Dependencies: pygame.math (Vector2), math
+Last Updated: May 2025
+Python Version: 3.12+
+Dependencies: pygame.math (Vector2), math, utils.sprites_utils
 """
 
 import pygame

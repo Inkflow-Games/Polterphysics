@@ -1,5 +1,5 @@
 """
-QUADTREE SPATIAL PARTITIONING MODULE  
+POLTERPHYSICS
 quadtree.py  
 
 Implements a quadtree structure for efficient spatial partitioning and query of circular objects.  
@@ -9,10 +9,9 @@ Features include:
 - Object insertion, deletion, and spatial querying  
 - Recursive subdivision of space for dynamic density  
 
-Author: Clément Moussy  
-Last Updated: April 2025  
-Python Version: 3.11.0  
-Dependencies: None  
+Last Updated: May 2025
+Python Version: 3.12+
+Dependencies: None
 """
 
 class RectangleQ:

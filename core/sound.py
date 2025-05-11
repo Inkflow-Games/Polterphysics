@@ -1,5 +1,5 @@
 """
-Polterphysics
+POLTERPHYSICS
 sound.py
 
 Main script for handling sound effects and background music in the game.
@@ -10,7 +10,7 @@ Features :
 
 Last Updated: May 2025
 Python Version: 3.12+
-Dependencies: pygame, core.physics_engine, objects.object, etc.
+Dependencies: pygame
 """
 
 import pygame

@@ -1,5 +1,5 @@
 """
-Polterphysics
+POLTERPHYSICS
 level_manager.py
 
 A script that handles the different scenes and transitions between them.
@@ -10,7 +10,7 @@ Features include:
 
 Last Updated: May 2025
 Python Version: 3.12+
-Dependencies: pygame, core.sound, data, objects.object
+Dependencies: pygame, json, sys, objects.bonus, objects.object, data, utils.sprites_utils, utils.vector_utils, core.sound, core.sprite_manager, objects.key
 """
 
 import pygame

@@ -1,6 +1,6 @@
 """
-MINIMUM ENCLOSING CIRCLE (MEC) MODULE  
-mec.py  
+POLTERPHYSICS
+mincircle.py  
 
 A module for computing the Minimum Enclosing Circle (MEC) using Welzl's algorithm.  
 Features include:  
@@ -9,9 +9,8 @@ Features include:
 - Recursive randomized algorithm (Welzl's) for larger sets  
 - Output in polar coordinates relative to a shape's centroid  
 
-Author: Clément Moussy
-Last Updated: April 2025  
-Python Version: 3.11.0 
+Last Updated: May 2025
+Python Version: 3.12+
 Dependencies: math, random  
 """
 
@@ -211,7 +210,7 @@ def convert(shape):
     dy = mec.c.y - shape.centroid.y
     r = math.hypot(dx,dy)
     theta = math.atan2(dy,dx)
-    #returns the relative distance to the centroid of the object and the angle relative to the centroid of the object
+    # Returns the relative distance to the centroid of the object and the angle relative to the centroid of the object
     return (mec,r,theta)
 
 

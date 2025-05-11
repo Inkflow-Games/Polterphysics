@@ -1,5 +1,5 @@
 """
-Polterphysics
+POLTERPHYSICS
 physics_engine.py
 
 A simple physics engine that manages a collection of objects and handles collisions.
@@ -10,8 +10,9 @@ Features include:
 
 Last Updated: May 2025
 Python Version: 3.12+
-Dependencies: None
+Dependencies: pygame.math (Vector2)
 """
+
 from pygame import Vector2
 
 class PhysicsEngine:

@@ -1,5 +1,5 @@
 """
-Polterphysics
+POLTERPHYSICS
 run.py
 
 Main loop for Polterphysics game.
@@ -12,7 +12,7 @@ Features:
 
 Last Updated: May 2025
 Python Version: 3.12+
-Dependencies: pygame, core.physics_engine, objects.object, etc.
+Dependencies: pygame, pygame.math, random, sys, core.physics_engine, core.collision, objects.object, utils.math_utils, utils.vector_utils, utils.sprites_utils, core.input_handler, objects.Quadtree, core.level_manager, core.sound
 """
 
 import pygame

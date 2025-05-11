@@ -1,5 +1,5 @@
 """
-Polterphysics
+POLTERPHYSICS
 sprite_manager.py
 
 A script that defines a SpriteManager class used for updating objects sprites and the Key object.
@@ -12,7 +12,7 @@ Features:
 
 Last Updated: May 2025
 Python Version: 3.12+
-Dependencies: pygame.math (Vector2), math
+Dependencies: pygame, core.level_manager
 """
 
 import pygame

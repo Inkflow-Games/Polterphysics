@@ -1,4 +1,5 @@
 """
+POLTERPHYSICS
 vector_utils.py
 
 A script that provides utility functions to obtain information on vectors / make computations with them.
@@ -11,17 +12,13 @@ Features include:
 - Simulate positions ( (not) realistically) after a vector application
 - Draw on the main window (screen) the vectors applied and the computed positions
 
-Author: Maxime Noudelberg
 Last Updated: May 2025
-Python Version: 3.12.9
-Dependencies: math : degrees, sqrt, atan2
-              newton_to_force in maths_utils
-              pygame.math : Vector2
+Python Version: 3.12+
+Dependencies: math, utils.maths_utils, pygame.math, pygame, random
 """
 
 from math import degrees, atan2, radians, cos, sin
 from utils.math_utils import newton_to_force
-import core.physics_engine
 import pygame
 from pygame.math import Vector2
 import random 
