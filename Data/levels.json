@@ -2527,7 +2527,7 @@
     "background": "data\\background\\back10.png",
     "key": {
       "coordinates": [ 1370, 955 ],
-      "detection_radius": 100,
+      "detection_radius": 70,
       "end_object_name": "Polter"
     },
     "sprites": {
@@ -2657,8 +2657,8 @@
       "centroid": [ [ 0, 0 ] ],
       "vertices": [
         [ 900, 305 ],
-        [ 1400, 580 ],
-        [ 1400, 620 ],
+        [ 1395, 580 ],
+        [ 1395, 620 ],
         [ 900, 620 ]
       ],
       "zone": [],
@@ -2678,8 +2678,8 @@
       "vertices": [
         [ 900, 190 ],
         [ 1350, 180 ],
-        [ 1400, 200 ],
-        [ 1400, 505 ]
+        [ 1395, 200 ],
+        [ 1395, 505 ]
       ],
       "zone": [],
       "name": "Top_slope"
