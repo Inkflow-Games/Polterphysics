@@ -78,7 +78,7 @@ def main() :
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-            elif GetMouseInput(event):  # Mouse click detection
+            elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:  # Mouse click detection
                 click = True
 
         keys = pygame.key.get_pressed()
