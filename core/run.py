@@ -21,7 +21,6 @@ from random import randint
 import sys
 from core.physics_engine import PhysicsEngine
 from core.collision import *
-from core.force_calculator import *
 from objects.object import *
 from utils.math_utils import *
 from utils.vector_utils import *
