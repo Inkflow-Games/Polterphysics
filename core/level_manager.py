@@ -15,7 +15,7 @@ Dependencies: pygame, core.sound, data, objects.object
 
 import pygame
 import json
-
+import sys
 from objects.bonus import Bonus
 from objects.object import *
 from data import *
@@ -100,6 +100,7 @@ class Button:
 
             case "Stop" :
                 pygame.quit()
+                sys.exit()
 
             case "Restart Level":
                 self.game_state = "paused"
