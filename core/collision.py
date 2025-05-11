@@ -115,7 +115,7 @@ class GJK2D:
             self.colpoint = polyA.support(mtd)
             #pygame.draw.circle(screen,(50,50,50),self.colpoint,3)
         elif hasattr(polyB,'radius'):
-            self.colpoint = polyB.support(mtd)
+            self.colpoint = polyB.support(-mtd)
             #pygame.draw.circle(screen,(50,50,50),self.colpoint,3)
         else:
             
