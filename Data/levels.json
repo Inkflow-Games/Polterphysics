@@ -2773,7 +2773,7 @@
     "Fathome": {
       "polygon": true,
       "grabable": true,
-      "mass": 5,
+      "mass": 15,
       "restitution_coefficient": 0.9,
       "radius": 25,
       "mouse": [ 0, 0 ],

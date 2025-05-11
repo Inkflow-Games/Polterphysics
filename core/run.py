@@ -18,7 +18,7 @@ Dependencies: pygame, core.physics_engine, objects.object, etc.
 import pygame
 from pygame.math import Vector2
 from random import randint
-
+import sys
 from core.physics_engine import PhysicsEngine
 from core.collision import *
 from core.force_calculator import *
@@ -235,3 +235,4 @@ def main() :
         clock.tick(120)
 
     pygame.quit()
+    sys.exit()
