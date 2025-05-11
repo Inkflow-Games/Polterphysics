@@ -105,5 +105,5 @@ Polterphysics/
 
 ## Credits
 
-- `Audio` : Yo-kai Watch OST, Stardust Crusaders OST, Bayonetta OST, Hollow Knight OST, New Super Mario Bros OST, Edgy Truck on YouTube, Super Mario sound effects
+- `Audio` : Yo-kai Watch OST, Stardust Crusaders OST, Bayonetta OST, Hollow Knight OST, New Super Mario Bros OST, Edgy Truck on YouTube, Super Mario sound effects.
 - `Graphics` : itch.io, Sora, and us !
