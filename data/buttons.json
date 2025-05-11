@@ -9,14 +9,14 @@
       "width": 488,
       "action": "1"
     },
-    "option_menu": {
+    "tuto_menu": {
       "size": 1,
       "image": "data\\ButtonsImages\\TutoButton.png",
       "imageHover": "data\\ButtonsImages\\TutoButtonPressed.png",
       "position": [ 0.5, 0.75 ],
       "height": 80,
       "width": 240,
-      "action": "Option"
+      "action": "Tuto"
     },
     "RealisticTrajectory": {
       "size": 1,
