@@ -56,6 +56,7 @@ class RectangleQ:
         Returns:
             bool: True if circle intersects the rectangle.
         """
+        # Check if the circle's center lies within the rectangle's bounds.
         circle_distance_x = abs(rang.x - (self.x + self.w / 2))
         circle_distance_y = abs(rang.y - (self.y + self.h / 2))
         if circle_distance_x > self.w / 2 + rang.radius:
@@ -132,6 +133,7 @@ class Quadtree:
         """
         Splits the current region into four smaller quadrants.
         """
+        # Split the rectangle into 4 quadrants and create child quads.
         x = self.boundary.x
         y = self.boundary.y
         w = self.boundary.w
@@ -153,21 +155,24 @@ class Quadtree:
         Parameters:
             Object: An object with a .mincircle attribute representing its bounds.
         """
+        # If the object is not within the boundary, don't insert.
         if not self.boundary.contains(Object.mincircle):
             return
+        # If the node isn't subdivided and has space, insert the object.
         if not self.divided:
             if len(self.points) < self.capacity:
                 self.points.append(Object)
             else:
                 self.subdivide()
                 self.points.append(Object)
-                for pnt in self.points:
+                for pnt in self.points: # Re-insert existing objects into children
                     self.northeast.insert(pnt)
                     self.northwest.insert(pnt)
                     self.southeast.insert(pnt)
                     self.southwest.insert(pnt)
                 self.points = []
         else:
+            # If subdivided, insert into respective quadrant
             self.northeast.insert(Object)
             self.northwest.insert(Object)
             self.southeast.insert(Object)
@@ -206,10 +211,12 @@ class Quadtree:
         if not self.boundary.intersect(Object.mincircle):
             return
         else:
+            # Add objects in this node that intersect with the query circle
             for p in self.points:
                 if Object.mincircle.contains(p.mincircle):
                     found.append(p)
         if self.divided:
+            # Recursively query child quadrants if subdivided
             self.northeast.query(Object, found)
             self.northwest.query(Object, found)
             self.southeast.query(Object, found)
@@ -243,6 +250,15 @@ class Quadtree:
             self.insert(elements)
 
     def searchelements(self,elements):
+        """
+        Queries and removes all elements from the quadtree.
+
+        Parameters:
+            elements (list): List of objects to query.
+
+        Returns:
+            list: List of interactions for every object, for a given frame
+        """
         interactions = []
         for i in range(len(elements)):
             temp = []
