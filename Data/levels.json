@@ -2818,13 +2818,13 @@
   "11": {
     "background": "data\\background\\back5.png",
     "key": {
-      "coordinates": [ 1000, 600 ],
-      "detection_radius": 100,
+      "coordinates": [ 1400, 100 ],
+      "detection_radius": 120,
       "end_object_name": "Trickandle"
     },
     "bonus": {
-      "coordinates": [ 666, 666 ],
-      "detection_radius": 100,
+      "coordinates": [ 466, 500 ],
+      "detection_radius": 120,
       "target": "Trickandle"
     },
     "sprites": {
@@ -2913,18 +2913,18 @@
       "simulated": [],
       "centroid": [ [ 360, 1060 ] ],
       "vertices": [
-         [360, 860 ],
-        [ 1560, 960 ],
-        [ 1560, 980 ],
-        [ 360, 980 ]
+        [ 360, 1080 ],
+        [ 1560, 1080 ],
+        [ 1560, 1100 ],
+        [ 360, 1100 ]
       ],
       "zone": [],
       "name": "Floor"
     },
-    "Trickandle": {
+    "Start_platform": {
       "polygon": true,
-      "grabable": true,
-      "mass": 40,
+      "grabable": false,
+      "mass": 5000000000,
       "restitution_coefficient": 0.8,
       "radius": 5,
       "mouse": [ 0, 0 ],
@@ -2933,14 +2933,34 @@
       "simulated": [],
       "centroid": [ [ 0, 0 ] ],
       "vertices": [
-        [ 700, 600 ],
-        [ 671, 671 ],
+        [ 1100, 400 ],
+        [ 1555, 400 ],
+        [ 1555, 500 ],
+        [ 1100, 500 ]
+      ],
+      "zone": [],
+      "name": "Start_platform"
+    },
+    "Trickandle": {
+      "polygon": true,
+      "grabable": true,
+      "mass": 20,
+      "restitution_coefficient": 0.8,
+      "radius": 5,
+      "mouse": [ 0, 0 ],
+      "applied_coords": [ 0, 0 ],
+      "applied_angle": 0,
+      "simulated": [],
+      "centroid": [ [ 0, 0 ] ],
+      "vertices": [
+        [ 700, 800 ],
+        [ 671, 871 ],
+        [ 600, 900 ],
+        [ 529, 871 ],
+        [ 500, 800 ],
+        [ 529, 729 ],
         [ 600, 700 ],
-        [ 529, 671 ],
-        [ 500, 600 ],
-        [ 529, 529 ],
-        [ 600, 500 ],
-        [ 671, 529 ]
+        [ 671, 729 ]
       ],
       "zone": [],
       "name": "Trickandle"

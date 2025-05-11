@@ -672,25 +672,6 @@
       "height": 100,
       "width": 100,
       "action": "Trickandle"
-    },
-    "Fathome": {
-      "size": 1,
-      "image": "data\\Phantoms\\fathome.png",
-      "imageHover": "data\\Phantoms\\fathome_hover.png",
-      "position": [ 0.1, 0.65 ],
-      "height": 100,
-      "width": 100,
-      "action": "Fathome"
-    },
-
-    "Rospirit": {
-      "size": 1,
-      "image": "data\\Phantoms\\rospirit.png",
-      "imageHover": "data\\Phantoms\\rospirit_hover.png",
-      "position": [ 0.04, 0.70 ],
-      "height": 100,
-      "width": 100,
-      "action": "Rospirit"
     }
 
   },
