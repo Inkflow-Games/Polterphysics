@@ -8,8 +8,8 @@ Features include:
 - Handling button behaviour
 - Loading the objects corresponding to each scene
 
-Last Updated: Apr 2025
-Python Version: 3.12.9
+Last Updated: May 2025
+Python Version: 3.12+
 Dependencies: pygame, core.sound, data, objects.object
 """
 

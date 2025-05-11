@@ -10,8 +10,8 @@ Features:
 - Object drawing with optional debug vectors
 - Button UI and audio feedback
 
-Last Updated: Feb 2025
-Python Version: 3.12.9
+Last Updated: May 2025
+Python Version: 3.12+
 Dependencies: pygame, core.physics_engine, objects.object, etc.
 """
 

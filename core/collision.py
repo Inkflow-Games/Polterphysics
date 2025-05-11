@@ -13,15 +13,13 @@ Features include:
 - Resolve collisions using impulses with restitution and friction  
 - Apply positional correction to prevent overlap  
 
-Author: Clément Moussy
-Last Updated: Feb 2025
-Python Version: 3.12.9
+Last Updated: May 2025
+Python Version: 3.12+
 Dependencies: pygame.math (Vector2), math
 """
 
 from pygame.math import Vector2
 from math import *
-import pygame
 
 def find_furthest(D, vertices):
     """
