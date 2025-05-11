@@ -199,7 +199,7 @@ def main() :
             ):
                 button.hover(screen)
                 if click:
-                    play_sound_fx("data/Music/pwomp.wav" if randint(0, 50) == 30 else "data/Music/click.wav")
+                    play_sound_fx("data/Music/pwomp.mp3" if randint(0, 50) == 30 else "data/Music/click.mp3")
                     button.is_pressed(display_width, display_height, physics_engine,screen)
                     #check the gamestate for the button play/pause
                     if (button.action == "Play" and game_state == "running" ) :
