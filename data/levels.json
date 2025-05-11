@@ -3021,7 +3021,7 @@
     "background": "data\\background\\back5.png",
     "key": {
       "coordinates": [ 1400, 100 ],
-      "detection_radius": 120,
+      "detection_radius": 140,
       "end_object_name": "Trickandle"
     },
     "bonus": {
