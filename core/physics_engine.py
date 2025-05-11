@@ -2,7 +2,7 @@
 POLTERPHYSICS
 physics_engine.py
 
-A simple physics engine that manages a collection of objects and handles collisions.
+A simple physics engine that manages a collection of objects and handles physics updates.
 
 Features include:
 - Adding and removing objects from the simulation

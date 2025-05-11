@@ -23,13 +23,14 @@
 
 ## Technologies used
 
-- **Programming language**: Python 3.10+  
+- **Programming language**: Python 3.12+  
 - **Libraries**:  
   - Standard Python libraries (`math`, `random`, etc.)
   - External `Pygame` library
 - **Tools**:
   - Git for version control  
-  - Visual Studio / VSCode / PyCharm for development  
+  - Visual Studio / VSCode / PyCharm for development
+  - Discord for communication
   - A bit of ChatGPT for readability/documentation
   - Paint for most of the sprites, Sora and itch.io for some of them
 
@@ -44,7 +45,7 @@ cd Polterphysics
 
 ### Set up the environment
 
-1. Ensure Python 3.10+ is installed  
+1. Ensure Python 3.12+ is installed  
 2. (If needed) Install external libraries
 
 ## How to use
@@ -73,23 +74,36 @@ Polterphysics/
 ### Key modules and functionalities
 
 #### core/
-- `placeholder.py` :
+- `collision.py` : Provides functions for detecting and resolving collisions between objects using physics-based calculations.
+- `input_handler.py` : Library of functions that handle the possible actions of the user.
+- `level_manager.py` : Handles the different scenes and transitions between them.
+- `physics_engine.py` : Dimple physics engine that manages a collection of objects and handles physics updates.
+- `run.py` : Main loop for the Polterphysics game.
+- `sound.py` : Main script for handling sound effects and background music in the game.
+- `sprite_manager.py` : Defines a SpriteManager class used for updating objects sprites and the Key object.
 
 #### data/
-- `placeholder.py` :
+- `buttons.json` : File containing all the necessary data for buttons, linked to each level.
+- `levels.json` : File containing all the level data (objects and their properties, static sprites, etc.)
 
 #### objects/
-- `placeholder.py` :
+- `bonus.py` : Defines a Bonus class used for giving the player extra launch.
+- `key.py` : Defines a Key class used for switching to the next in-game level.
+- `mincircle.py` : Module for computing the Minimum Enclosing Circle (MEC) using Welzl's algorithm.  
+- `object.py` : Defines a physical object with mass, position, velocity, and interactions such as forces, spin, and collisions.
+- `Quadtree.py` : Quadtree structure for efficient spatial partitioning and query of circular objects.
 
 #### utils/
-- `placeholder.py` :
+- `math_utils.py` : Provides utility functions for force conversions.
+- `sprites_utils.py` : Provides utility sprites rendering.
+- `vector_utils.py` : Provides utility functions to obtain information on vectors / make computations with them.
 
 ## Known bugs
 
 - Some precision errors with collision, unfortunately hard to fix because they are caused by Pygame's lack of execution speed.
-- Sometimes the input detection is a little grumpy.
+- Sometimes the input detection on objects is a little grumpy.
 
 ## Credits
 
-- Sons : `PLACEHOLDER` 
-- Graphismes : `PLACEHOLDER` 
+- `Sons` : Yo-kai Watch OST, Stardust Crusaders OST, Bayonetta OST, Hollow Knight OST, New Super Mario Bros OST, Edgy Truck on YouTube, Super Mario sound effects
+- `Graphismes` : itch.io, Sora, and us !

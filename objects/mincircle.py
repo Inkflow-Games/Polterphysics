@@ -2,8 +2,9 @@
 POLTERPHYSICS
 mincircle.py  
 
-A module for computing the Minimum Enclosing Circle (MEC) using Welzl's algorithm.  
-Features include:  
+A module for computing the Minimum Enclosing Circle (MEC) using Welzl's algorithm.
+
+Features :  
 - Support for points and circles in 2D space  
 - Computation of exact MEC for 1-3 points  
 - Recursive randomized algorithm (Welzl's) for larger sets  
@@ -97,7 +98,7 @@ def circleFrom(a, b, c):
     Returns:
         Circle: The circle passing through all three points.
     """
-    #computes a circle that has as center the vertex
+    # Computes a circle that has as center the vertex
     i = getCircleCenter(b.x - a.x, b.y - a.y, c.x - a.x, c.y - a.y)
     i.x += a.x
     i.y += a.y

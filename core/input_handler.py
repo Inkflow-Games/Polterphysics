@@ -19,6 +19,7 @@ from utils.vector_utils import *
 from core.collision import *
 from objects.Quadtree import RectangleQ, Quadtree
 from objects.object import *
+
 pygame.init()
 
 def GetMouseInput(event) :

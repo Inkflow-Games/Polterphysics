@@ -6,7 +6,7 @@ A script that defines a Bonus class used for giving the player extra launch.
 
 Last Updated: May 2025
 Python Version: 3.12+
-Dependencies: pygame.math, math, utils.sprites_utils
+Dependencies: pygame, pygame.math, utils.sprites_utils
 """
 
 import pygame

@@ -2,8 +2,9 @@
 POLTERPHYSICS
 quadtree.py  
 
-Implements a quadtree structure for efficient spatial partitioning and query of circular objects.  
-Features include:  
+Implements a quadtree structure for efficient spatial partitioning and query of circular objects.
+
+Features :  
 - Axis-aligned rectangular boundaries (RectangleQ)  
 - Circular range queries (CircleQ)  
 - Object insertion, deletion, and spatial querying  
@@ -185,7 +186,7 @@ class Quadtree:
             Object: Object to remove.
         """
         if self.divided:
-            #recursively searches for the point to destroy
+            # Recursively searches for the point to destroy
             self.northwest.delpoint(Object)
             self.northeast.delpoint(Object)
             self.southwest.delpoint(Object)
@@ -248,7 +249,7 @@ class Quadtree:
             temp = []
             self.query(elements[i],temp)
             interactions.append(temp)
-            #deletes the element since the interactions with every other object is already calculated
+            # Deletes the element since the interactions with every other object is already calculated
             self.delpoint(elements[i])
         return interactions
     

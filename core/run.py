@@ -2,7 +2,7 @@
 POLTERPHYSICS
 run.py
 
-Main loop for Polterphysics game.
+Main loop for the Polterphysics game.
 Features:
 - Scene handling and transitions
 - Physics updates with user vector interaction

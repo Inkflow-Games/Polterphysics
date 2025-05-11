@@ -1,5 +1,5 @@
 """
-Polterphysics
+POLTERPHYSICS
 collision.py
 
 A script that provides functions for detecting and resolving collisions 
@@ -108,19 +108,18 @@ class GJK2D:
         polyB (Shape): Second shape.
         mtd (Vector2): Minimum translation direction.
         """
-        #checks if its a circle or not, applies different collision points
+        # Checks if its a circle or not, applies different collision points
         if hasattr(polyA,'radius'):
             self.colpoint = polyA.support(mtd)
         elif hasattr(polyB,'radius'):
             self.colpoint = polyB.support(-mtd)
-            #pygame.draw.circle(screen,(50,50,50),self.colpoint,3)
         else:
             
             polyA = self.shape1.vertices
             polyB = self.shape2.vertices
             supportA = find_furthests(mtd, polyA)
             supportB = find_furthests(-mtd, polyB)
-            #computes the support functions for both shapes for the detection of collision type
+            # Computes the support functions for both shapes for the detection of collision type
 
             # Classify contact type
             if len(supportA) == 1 and len(supportB) == 2:
@@ -214,29 +213,29 @@ class GJK2D:
         Returns:
         list of Vector2 or None: Simplex if collision detected; else None.
         """
-        #starts in a pseudo-random direction to start searching for the simplex
+        # Starts in a pseudo-random direction to start searching for the simplex
         direction = self.shape1.centroid
         a = self.calcsupport(direction)
         direction = -direction
         b = self.calcsupport(direction)
         # If the dot product is not positive, the origin is outside the Minkowski difference
         if b.dot(direction) <= 0: return None
-        #Compute AB and the perpendicular direction toward the origin using triple product
+        # Compute AB and the perpendicular direction toward the origin using triple product
         ab = b-a
         direction = self.TripleProduct(ab,-a,ab)
 
         for i in range(20):
-            #Add a new support point in the current search direction
+            # Add a new support point in the current search direction
             c = self.calcsupport(direction)
             if c.dot(direction) <=0 : return None
-            #Shift simplex to origin for next iteration logic
+            # Shift simplex to origin for next iteration logic
             c0 = -c
             cb = b - c
             ca = a - c
-             #Generate new perpendicular directions toward the origin
+             # Generate new perpendicular directions toward the origin
             cbnorm = self.TripleProduct(ca,cb,cb)
             canorm = self.TripleProduct(cb,ca,ca)
-            #Choose the next edge to keep and update direction accordingly
+            # Choose the next edge to keep and update direction accordingly
             if canorm.dot(c0) > 0:
                 b = c
                 direction = canorm
@@ -364,7 +363,7 @@ class GJK2D:
         self.shape1.angular_velocity -= rA.cross(impulse) * inv_I1
         self.shape2.angular_velocity += rB.cross(impulse) * inv_I2
        
-       #Compute friction impulse
+       # Compute friction impulse
         if relative_velocity.length() > 0:
             tangent = relative_velocity - (relative_velocity.dot(normal)) * normal
             if tangent.length() > 0:
