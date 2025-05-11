@@ -56,7 +56,7 @@ class RectangleQ:
         Returns:
             bool: True if circle intersects the rectangle.
         """
-        # Check if the circle's center lies within the rectangle's bounds.
+        # Check if the circle lies within the rectangle's bounds.
         circle_distance_x = abs(rang.x - (self.x + self.w / 2))
         circle_distance_y = abs(rang.y - (self.y + self.h / 2))
         if circle_distance_x > self.w / 2 + rang.radius:
@@ -186,6 +186,7 @@ class Quadtree:
             Object: Object to remove.
         """
         if self.divided:
+            #recursively searches for the point to destroy
             self.northwest.delpoint(Object)
             self.northeast.delpoint(Object)
             self.southwest.delpoint(Object)
@@ -223,22 +224,6 @@ class Quadtree:
             self.southwest.query(Object, found)
             return found
         
-    def draw(self,drawing):
-        """
-        Appends this node's boundary to a drawing list for visualization.
-
-        Parameters:
-            drawing (list): A list to store drawing rectangles [x, y, w, h].
-        """
-        drawing.append([self.boundary.x,self.boundary.y, self.boundary.w, self.boundary.h])
-        #pyxel.rect(self.boundary.x,self.boundary.y, self.boundary.w, self.boundary.h,2)
-
-        if self.divided:
-            self.northeast.draw(drawing)
-            self.northwest.draw(drawing)
-            self.southeast.draw(drawing)
-            self.southwest.draw(drawing)
-
     def insertall(self,listofobjects):
         """
         Inserts all elements from a list into the quadtree.
@@ -264,6 +249,7 @@ class Quadtree:
             temp = []
             self.query(elements[i],temp)
             interactions.append(temp)
+            #deletes the element since the interactions with every other object is already calculated
             self.delpoint(elements[i])
         return interactions
     

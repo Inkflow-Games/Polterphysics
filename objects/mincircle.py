@@ -98,6 +98,7 @@ def circleFrom(a, b, c):
     Returns:
         Circle: The circle passing through all three points.
     """
+    #computes a circle that has as center the vertex
     i = getCircleCenter(b.x - a.x, b.y - a.y, c.x - a.x, c.y - a.y)
     i.x += a.x
     i.y += a.y
@@ -171,10 +172,11 @@ def welzlHelper(p, r, n):
     if n == 0 or len(r) == 3:
         return minCircleTrivial(r[:])  # Ensure we pass a copy
 
+    # Randomly select a point to exclude
     idx = random.randint(0, n - 1)
     pnt = p[idx]
     p[idx], p[n - 1] = p[n - 1], p[idx]
-
+    # Recurse without pnt
     d = welzlHelper(p, r, n - 1)
 
     if isInside(d, pnt):

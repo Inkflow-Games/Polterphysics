@@ -113,10 +113,8 @@ class GJK2D:
         #checks if its a circle or not, applies different collision points
         if hasattr(polyA,'radius'):
             self.colpoint = polyA.support(mtd)
-            #pygame.draw.circle(screen,(50,50,50),self.colpoint,3)
         elif hasattr(polyB,'radius'):
             self.colpoint = polyB.support(mtd)
-            #pygame.draw.circle(screen,(50,50,50),self.colpoint,3)
         else:
             
             polyA = self.shape1.vertices
@@ -153,12 +151,10 @@ class GJK2D:
         Returns:
         Vector2: Closest point on segment to vertex.
         """
-        #pygame.draw.line(screen,(200,200,200),SegmentA,SegmentB,5)
         AB = SegmentA - SegmentB
         AP = vertex - SegmentA
         t = Vector2.dot(AP,AB) / Vector2.dot(AB,AB)
         contact = SegmentA + (t * AB)
-        #pygame.draw.circle(screen,(100,100,100),contact,10)
         return contact
     
     def edgetoedge(self,A1,A2,B1,B2):
@@ -184,9 +180,6 @@ class GJK2D:
         end_t = min(t_A2,t_B2)
         start_point = A1 + (start_t - A1.dot(D)) * D
         end_point = A1 + (end_t - A1.dot(D)) * D
-        #print(start_point,end_point)
-        #pygame.draw.line(screen,(200,200,200),start_point,end_point,5)
-        #pygame.draw.circle(screen,(150,150,150),(end_point + start_point)/2,3)
         return (end_point + start_point)/2
    
     def calcsupport(self,direction):
