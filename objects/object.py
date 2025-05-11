@@ -1,4 +1,5 @@
 """
+POLTERPHYSICS
 object.py
 
 A script that defines a physical object with mass, position, velocity, and interactions such as forces, spin, and collisions.
@@ -8,10 +9,9 @@ Features include:
 - Handling of damping and velocity limits
 - Collision detection with a ground level and bounce effect
 
-Author: Rafael Véclin
-Last Updated: Feb 2025
-Python Version: 3.12.9
-Dependencies: math, pygame.math.Vector2
+Last Updated: May 2025
+Python Version: 3.12+
+Dependencies: math, pygame.math.Vector2, core.collision, objects.mincircle, objects.Quadtree
 """
 
 import pygame

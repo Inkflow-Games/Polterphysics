@@ -1,12 +1,12 @@
 """
-Polterphysics
+POLTERPHYSICS
 main.py
 
-Main file for the Polterphysics game/
+Main file for the Polterphysics game.
 
-Last Updated: Feb 2025
-Python Version: 3.12.9
-Dependencies: pygame, core.run
+Last Updated: May 2025
+Python Version: 3.12+
+Dependencies: core.run
 """
 
 

@@ -1,4 +1,5 @@
 """
+POLTERPHYSICS
 math_utils.py
 
 A script that provides utility functions for force conversions.
@@ -7,9 +8,8 @@ Features include:
 - Conversion of force values to Newtons
 - Conversion of Newtons back to force units
 
-Author: Rafael Véclin
-Last Updated: Feb 2025
-Python Version: 3.12.9
+Last Updated: May 2025
+Python Version: 3.12+
 Dependencies: None
 """
 

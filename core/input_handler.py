@@ -1,4 +1,5 @@
 """
+POLTERPHYSICS
 input_handler.py
 
 Library of functions that handle the possible actions of the user.
@@ -7,10 +8,9 @@ Features include:
 - Define if left click is pressed
 - Vector application during paused game script
 
-Author: Maxime Noudelberg
 Last Updated: May 2025
-Python Version: 3.12.10
-Dependencies: pygame, pygame.math, utils.vector_utils
+Python Version: 3.12+
+Dependencies: pygame, pygame.math, utils.vector_utils, core.collision, objects.Quadtree, objects.object
 """
 
 import pygame 

@@ -13,15 +13,13 @@ Features include:
 - Resolve collisions using impulses with restitution and friction  
 - Apply positional correction to prevent overlap  
 
-Author: Clément Moussy
-Last Updated: Feb 2025
-Python Version: 3.12.9
+Last Updated: May 2025
+Python Version: 3.12+
 Dependencies: pygame.math (Vector2), math
 """
 
 from pygame.math import Vector2
 from math import *
-import pygame
 
 def find_furthest(D, vertices):
     """
@@ -114,7 +112,8 @@ class GJK2D:
         if hasattr(polyA,'radius'):
             self.colpoint = polyA.support(mtd)
         elif hasattr(polyB,'radius'):
-            self.colpoint = polyB.support(mtd)
+            self.colpoint = polyB.support(-mtd)
+            #pygame.draw.circle(screen,(50,50,50),self.colpoint,3)
         else:
             
             polyA = self.shape1.vertices

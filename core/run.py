@@ -1,5 +1,5 @@
 """
-Polterphysics
+POLTERPHYSICS
 run.py
 
 Main loop for Polterphysics game.
@@ -10,9 +10,9 @@ Features:
 - Object drawing with optional debug vectors
 - Button UI and audio feedback
 
-Last Updated: Feb 2025
-Python Version: 3.12.9
-Dependencies: pygame, core.physics_engine, objects.object, etc.
+Last Updated: May 2025
+Python Version: 3.12+
+Dependencies: pygame, pygame.math, random, sys, core.physics_engine, core.collision, objects.object, utils.math_utils, utils.vector_utils, utils.sprites_utils, core.input_handler, objects.Quadtree, core.level_manager, core.sound
 """
 
 import pygame
@@ -21,7 +21,6 @@ from random import randint
 import sys
 from core.physics_engine import PhysicsEngine
 from core.collision import *
-from core.force_calculator import *
 from objects.object import *
 from utils.math_utils import *
 from utils.vector_utils import *
@@ -199,7 +198,7 @@ def main() :
             ):
                 button.hover(screen)
                 if click:
-                    play_sound_fx("data/Music/pwomp.wav" if randint(0, 50) == 30 else "data/Music/click.wav")
+                    play_sound_fx("data/Music/pwomp.mp3" if randint(0, 50) == 30 else "data/Music/click.mp3")
                     button.is_pressed(display_width, display_height, physics_engine,screen)
                     #check the gamestate for the button play/pause
                     if (button.action == "Play" and game_state == "running" ) :

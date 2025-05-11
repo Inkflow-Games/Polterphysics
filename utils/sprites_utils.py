@@ -1,13 +1,14 @@
 """
-Sprites_utils.py 
+POLTERPHYSICS
+sprites_utils.py
+
 A script that provides utility sprites rendering.
 
 Features include:
 - Dictionnary for colors for phantoms
 
-Author: Prouteau Mael
 Last Updated: May 2025
-Python Version: 3.12.9
+Python Version: 3.12+
 Dependencies: None
 """
 

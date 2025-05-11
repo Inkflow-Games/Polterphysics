@@ -1,12 +1,18 @@
 """
-Polterphysics
+POLTERPHYSICS
 sprite_manager.py
 
 A script that defines a SpriteManager class used for updating objects sprites and the Key object.
+Features:
+- Draws static sprites on the screen.
+- Updates a key object if assigned.
+- Detects if the key is detected during the update phase.
+- Optionally manages a bonus object.
 
-Last Updated: Feb 2025
-Python Version: 3.12.9
-Dependencies: pygame.math (Vector2), math
+
+Last Updated: May 2025
+Python Version: 3.12+
+Dependencies: pygame, core.level_manager
 """
 
 import pygame
@@ -46,6 +52,7 @@ class SpriteManager:
         screen (pygame.Surface): Surface on which to render the sprites.
         """
         if sprites == None :
+            # Draw default background image based on realisticTrajectory setting
             if level_manager.realisticTrajectory == False :
                 image = pygame.image.load("data/Decor/Box.png").convert_alpha()
                 screen.blit(image, (1101, 858))
@@ -54,6 +61,7 @@ class SpriteManager:
                 screen.blit(image, (1100, 850))
         else :
             for sprite_name, data in sprites.items():
+                # Draw Play or Pause icon based on game state
                 if (game_state == "running" and sprite_name == "Play") :
                     image = pygame.image.load("data/Decor/PlayIcon.png").convert_alpha()
                     rotated_image = pygame.transform.rotate(image, data.get("rotation", 0))
